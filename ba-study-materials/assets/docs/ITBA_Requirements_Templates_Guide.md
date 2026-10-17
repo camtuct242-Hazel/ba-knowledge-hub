@@ -1,4 +1,4 @@
-# IT BUSINESS ANALYSIS REQUIREMENTS TEMPLATES & SPECIFICATION GUIDE
+# BUSINESS ANALYSIS REQUIREMENTS TEMPLATES & SPECIFICATION GUIDE
 **Author & Curator**: Nguyễn Đăng Cẩm Tú (Hazel)  
 **Standard Alignment**: IIBA BABOK v3 | Agile Alliance | ISO/IEC/IEEE 29148  
 **Scope**: Generic Industry-Standard Templates for Requirements Engineering  
