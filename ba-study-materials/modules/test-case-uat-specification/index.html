@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Đặc tả Test Case & UAT Form (Test Case & UAT Specification) | Hazel BA Hub</title>
+  <title class="lang-en">Test Case & UAT Form Specification Masterclass | Hazel BA Hub</title>
+  <meta name="description" content="Hướng dẫn chuyên sâu thiết kế Test Case và biểu mẫu UAT dành cho Business Analyst: Kỹ thuật phân vùng tương đương, phân tích giá trị biên, bảng quyết định, ma trận truy vết RTM và thủ tục nghiệm thu kinh doanh thực chiến.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/lesson.css">
+  <!-- Core i18n -->
+  <script src="../../assets/js/i18n.js"></script>
+  <style>
+    .test-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-pass { background-color: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-fail { background-color: rgba(239, 68, 68, 0.15); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-blocked { background-color: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-critical { background-color: rgba(220, 38, 38, 0.15); color: #b91c1c; border: 1px solid rgba(220, 38, 38, 0.3); }
+    .badge-major { background-color: rgba(234, 88, 12, 0.15); color: #c2410c; border: 1px solid rgba(234, 88, 12, 0.3); }
+    .badge-minor { background-color: rgba(59, 130, 246, 0.15); color: #2563eb; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .test-case-box {
+      border: 1px solid var(--border-card, #e2e8f0);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface, #ffffff);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .test-case-header {
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-surface-warm, #f8fafc);
+      border-bottom: 1px solid var(--border-warm, #e2e8f0);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .test-case-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .test-case-body {
+      padding: 1.25rem;
+    }
+    .tc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    .tc-meta-item strong {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.2rem;
+    }
+    .tc-steps-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+    }
+    .tc-steps-table th {
+      background: var(--bg-surface-warm, #f1f5f9);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border-warm, #e2e8f0);
+    }
+    .tc-steps-table td {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border-warm, #e2e8f0);
+      vertical-align: top;
+    }
+    .interactive-solution {
+      border: 1px solid var(--border-card, #e2e8f0);
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+    .solution-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-surface-warm, #f8fafc);
+      border: none;
+      font-weight: 600;
+      color: var(--color-primary-dark, #b58428);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .solution-trigger:hover {
+      background: var(--bg-surface-hover, #f6f0df);
+    }
+    .solution-content {
+      padding: 1.25rem;
+      display: none;
+      background: var(--bg-surface, #ffffff);
+      border-top: 1px solid var(--border-warm, #e2e8f0);
+    }
+    .solution-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../../knowledge-map/" class="nav-link"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../../study-guide/" class="nav-link active"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container lesson-page">
+    <!-- Breadcrumb & Hero -->
+    <div class="lesson-hero">
+      <div class="lesson-breadcrumb">
+        <a href="../../"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a>
+        <span>/</span>
+        <a href="../../study-guide/"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a>
+        <span>/</span>
+        <span class="lang-vi">Biểu mẫu 4: Đặc tả Test Case & Biểu mẫu UAT</span>
+        <span class="lang-en">Template 4: Test Case & UAT Specification</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-explicit">Domain 8 • Masterclass</span>
+        <span class="badge badge-inferred">Quality Assurance / ISTQB CTFL 4.0</span>
+        <span class="badge badge-illustrative">Author: Nguyễn Đăng Cẩm Tú (Hazel)</span>
+      </div>
+
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">
+        <span class="lang-vi">Thiết Kế Test Case Kỹ Thuật & Biểu Mẫu Nghiệm Thu Người Dùng (UAT Form)</span>
+        <span class="lang-en">Technical Test Case Design & User Acceptance Testing (UAT) Specification</span>
+      </h1>
+      <p style="font-size: 1.05rem; max-width: 880px; color: var(--text-muted); margin-bottom: 0;">
+        <span class="lang-vi">Cầu nối vững chắc giữa Tiêu chí Chấp nhận (Acceptance Criteria) và Chất lượng Thực tế: Nắm vững kỹ thuật phân vùng tương đương (EP), phân tích giá trị biên (BVA), bảng quyết định, ma trận truy vết (RTM) và điều phối chiến dịch UAT doanh nghiệp.</span>
+        <span class="lang-en">The definitive bridge between Acceptance Criteria and Production Quality: Master Equivalence Partitioning (EP), Boundary Value Analysis (BVA), Decision Tables, Requirements Traceability Matrix (RTM), and Enterprise UAT orchestration.</span>
+      </p>
+    </div>
+
+    <!-- Lesson Layout Grid: Sidebar + Main Content -->
+    <div class="lesson-layout">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="lesson-sidebar">
+        <div class="sidebar-title">
+          <span class="lang-vi">Mục lục chuyên khảo</span>
+          <span class="lang-en">Lesson Contents</span>
+        </div>
+        <ul class="toc-list">
+          <li><a href="#sec-objectives" class="toc-link"><span class="lang-vi">A. Mục Tiêu Học Tập (Bloom)</span><span class="lang-en">A. Learning Objectives</span></a></li>
+          <li><a href="#sec-foundations" class="toc-link"><span class="lang-vi">B. Bản Chất: Test Case & UAT</span><span class="lang-en">B. Test Case & UAT Foundations</span></a></li>
+          <li><a href="#sec-methodology" class="toc-link"><span class="lang-vi">C. Quy Trình 6 Bước Dành Cho BA</span><span class="lang-en">C. 6-Step BA Quality Workflow</span></a></li>
+          <li><a href="#sec-enterprise-suite" class="toc-link"><span class="lang-vi">D. Bộ Test Case & Biểu Mẫu UAT Mẫu</span><span class="lang-en">D. Enterprise Test Suite & UAT Form</span></a></li>
+          <li><a href="#sec-anti-patterns" class="toc-link"><span class="lang-vi">E. 3 Sai Lầm Chí Mạng & Cách Tránh</span><span class="lang-en">E. 3 Critical Anti-Patterns</span></a></li>
+          <li><a href="#sec-exercises" class="toc-link"><span class="lang-vi">F. Bài Tập Tình Huống Thực Chiến</span><span class="lang-en">F. Hands-on Practicum</span></a></li>
+          <li><a href="#sec-interviews" class="toc-link"><span class="lang-vi">G. Phỏng Vấn Chuyên Sâu (STAR)</span><span class="lang-en">G. Technical Interview Q&A</span></a></li>
+          <li><a href="#sec-references" class="toc-link"><span class="lang-vi">H. Thuật Ngữ & Nguồn Uy Tín</span><span class="lang-en">H. Glossary & References</span></a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Lesson Content Area -->
+      <article class="lesson-content">
+<section id="sec-objectives" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">A</span>
+          <h2>
+            <span class="lang-vi">Mục Tiêu Học Tập Chuẩn Hóa (Bloom's Taxonomy)</span>
+            <span class="lang-en">Standardized Learning Objectives (Bloom's Taxonomy)</span>
+          </h2>
+        </div>
+        <p class="lang-vi">
+          Nghiệm thu phần mềm không đơn thuần là việc "bấm thử các nút xem có chạy không". Đối với Business Analyst, đảm bảo chất lượng là bước kiểm chứng tối hậu xem phần mềm xây dựng có <strong>đúng theo đặc tả kỹ thuật (Verification)</strong> và <strong>giải quyết đúng nỗi đau kinh doanh (Validation)</strong> hay không. Hoàn thành mô-đun này, bạn sẽ làm chủ các năng lực:
+        </p>
+        <p class="lang-en">
+          Software acceptance is far more than clicking buttons to see if they work. For a Business Analyst, quality assurance is the ultimate proof that the delivered system is both <strong>built according to technical specification (Verification)</strong> and <strong>solves the genuine business problem (Validation)</strong>. Upon completing this masterclass, you will achieve:
+        </p>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Cấp độ Bloom</span><span class="lang-en">Bloom Level</span></th>
+                <th><span class="lang-vi">Hành vi Cụ thể Sau Khóa học</span><span class="lang-en">Target Behavioral Competency</span></th>
+                <th><span class="lang-vi">Thước đo Thành thạo (Assessment Criteria)</span><span class="lang-en">Mastery Evidence</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Hiểu (Understand)</strong></td>
+                <td>
+                  <span class="lang-vi">Phân biệt chính xác giữa Test Scenario, Test Case, Test Script, Defect Severity vs Priority, và ranh giới trách nhiệm giữa QA Tester và BA trong UAT.</span>
+                  <span class="lang-en">Precisely distinguish Test Scenarios, Test Cases, Test Scripts, Defect Severity vs Priority, and the boundary of accountability between QA and BA during UAT.</span>
+                </td>
+                <td><span class="lang-vi">Không nhầm lẫn giữa lỗi kỹ thuật (Defect) và yêu cầu thay đổi mới (Change Request).</span><span class="lang-en">Zero confusion between technical defects and scope change requests.</span></td>
+              </tr>
+              <tr>
+                <td><strong>2. Áp dụng (Apply)</strong></td>
+                <td>
+                  <span class="lang-vi">Áp dụng thành thạo kỹ thuật Hộp Đen: Phân vùng tương đương (EP) và Phân tích giá trị biên (BVA 2-value/3-value) để thiết kế bộ ca kiểm thử tối ưu.</span>
+                  <span class="lang-en">Skillfully apply Black-box testing techniques: Equivalence Partitioning (EP) and Boundary Value Analysis (BVA 2-value/3-value) to craft optimized test suites.</span>
+                </td>
+                <td><span class="lang-vi">Xác định đầy đủ các điểm biên min, max, min-1, max+1 mà không sinh thừa test case trùng lặp.</span><span class="lang-en">Accurately derive boundary data points (min, max, min-1, max+1) without redundant test duplication.</span></td>
+              </tr>
+              <tr>
+                <td><strong>3. Phân tích (Analyze)</strong></td>
+                <td>
+                  <span class="lang-vi">Xây dựng Bảng quyết định (Decision Table) cho các quy tắc kinh doanh đa điều kiện và lập Ma trận truy vết hai chiều (Bidirectional RTM).</span>
+                  <span class="lang-en">Construct combinatorial Decision Tables for complex multi-condition business rules and establish a Bidirectional Requirements Traceability Matrix (RTM).</span>
+                </td>
+                <td><span class="lang-vi">100% yêu cầu trong BRD và SFS được gán ánh xạ trực tiếp đến các Test Case kiểm chứng.</span><span class="lang-en">100% of functional requirements in BRD/SFS mapped to verifiable Test Cases.</span></td>
+              </tr>
+              <tr>
+                <td><strong>4. Đánh giá (Evaluate)</strong></td>
+                <td>
+                  <span class="lang-vi">Chủ trì các phiên sàng lọc lỗi (Defect Triage Meeting), đánh giá mức độ nghiêm trọng đối với hoạt động vận hành, và đưa ra khuyến nghị Go/No-Go Release.</span>
+                  <span class="lang-en">Lead Defect Triage sessions, assess operational impact on business continuity, and deliver objective Go/No-Go release recommendations.</span>
+                </td>
+                <td><span class="lang-vi">Tiêu chí nghiệm thu rõ ràng, phân loại đúng Severity 1-4 ngăn ngừa phát hành hệ thống có lỗi nguy kịch.</span><span class="lang-en">Rigorous acceptance criteria and accurate Sev 1-4 classification preventing critical escapes to production.</span></td>
+              </tr>
+              <tr>
+                <td><strong>5. Sáng tạo (Create)</strong></td>
+                <td>
+                  <span class="lang-vi">Biên soạn bộ Kế hoạch Nghiệm thu Người dùng (UAT Plan) và Kịch bản UAT trực quan dành riêng cho người dùng doanh nghiệp (Business End-Users).</span>
+                  <span class="lang-en">Author comprehensive User Acceptance Testing (UAT) Plans and intuitive business-centric UAT scripts tailored for non-technical stakeholders.</span>
+                </td>
+                <td><span class="lang-vi">Tài liệu UAT chuẩn hóa giúp người dùng nghiệm thu độc lập và ký biên bản Sign-off không tranh chấp.</span><span class="lang-en">Standardized UAT documentation enabling autonomous user execution and uncontested sign-off.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION B: CONCEPTUAL FOUNDATIONS -->
+      <section id="sec-foundations" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">B</span>
+          <h2>
+            <span class="lang-vi">Bản Chất: Test Case Kỹ Thuật, Kiểm Thử UAT & Vai Trò Của BA</span>
+            <span class="lang-en">Foundations: Technical Test Cases, UAT & The BA's Distinct Quality Mandate</span>
+          </h2>
+        </div>
+
+        <div class="callout callout-info">
+          <div class="callout-title">
+            <span class="lang-vi">💡 Nguyên Lý Cốt Lõi: Verification vs. Validation</span>
+            <span class="lang-en">💡 Core Principle: Verification vs. Validation</span>
+          </div>
+          <p class="lang-vi">
+            Theo tiêu chuẩn quốc tế ISO/IEC/IEEE 29119:<br>
+            • <strong>Verification (Xác minh):</strong> <em>"Are we building the product right?"</em> — Phần mềm có thỏa mãn chính xác các yêu cầu kỹ thuật và quy tắc dữ liệu đã ghi trong SFS không? (Nhiệm vụ trọng tâm của đội ngũ QA/QC).<br>
+            • <strong>Validation (Thẩm định/Nghiệm thu):</strong> <em>"Are we building the right product?"</em> — Phần mềm có thực sự giúp người dùng hoàn thành công việc kinh doanh trong môi trường thực tế không? (Nhiệm vụ trọng tâm của BA và Khách hàng/End-User trong UAT).
+          </p>
+          <p class="lang-en">
+            Per ISO/IEC/IEEE 29119 international standards:<br>
+            • <strong>Verification:</strong> <em>"Are we building the product right?"</em> — Does the software strictly satisfy the functional rules, data constraints, and interface specifications written in the SFS? (Primary mandate of QA/QC engineers).<br>
+            • <strong>Validation:</strong> <em>"Are we building the right product?"</em> — Does the delivered solution genuinely empower business users to achieve their operational goals in real production-like scenarios? (Primary mandate of BA and Business Users during UAT).
+          </p>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">
+          <span class="lang-vi">1. Phân Tầng Khái Niệm Trong Đảm Bảo Chất Lượng</span>
+          <span class="lang-en">1. Hierarchical Taxonomy of Testing Artifacts</span>
+        </h3>
+        <p class="lang-vi">
+          Trong dự án phần mềm chuyên nghiệp, các tài liệu kiểm thử được tổ chức theo cấp bậc từ vĩ mô đến vi mô:
+        </p>
+        <p class="lang-en">
+          In mature software engineering organizations, testing artifacts are organized in a disciplined structural hierarchy from strategic to granular:
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Khái niệm (Artifact)</span><span class="lang-en">Artifact</span></th>
+                <th><span class="lang-vi">Bản chất & Định nghĩa</span><span class="lang-en">Definition & Purpose</span></th>
+                <th><span class="lang-vi">Ví dụ Thực tế (Dự án OmniLogix)</span><span class="lang-en">Concrete Project Example (OmniLogix)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Test Scenario (Kịch bản kiểm thử)</strong></td>
+                <td>
+                  <span class="lang-vi">Một câu tuyên bố tổng quan về tính năng cần kiểm tra (<em>"Kiểm tra cái gì?"</em>). Một Scenario có thể bao gồm hàng chục Test Case chi tiết.</span>
+                  <span class="lang-en">A high-level declaration of functionality to test (<em>"What to test?"</em>). A single scenario encompasses multiple granular test cases.</span>
+                </td>
+                <td><code>TS-INV-01: Kiểm tra quy trình phê duyệt Đơn Đặt Hàng (PO) theo hạn mức ngân sách và phân quyền.</code></td>
+              </tr>
+              <tr>
+                <td><strong>Test Case (Ca kiểm thử kỹ thuật)</strong></td>
+                <td>
+                  <span class="lang-vi">Tập hợp điều kiện tiên quyết, dữ liệu đầu vào, các bước thực hiện tuần tự và kết quả kỳ vọng chi tiết (<em>"Kiểm tra như thế nào?"</em>) nhằm xác minh một tiêu chí chấp nhận cụ thể.</span>
+                  <span class="lang-en">A formalized set of preconditions, input values, chronological steps, and expected outcomes (<em>"How to test?"</em>) validating an explicit acceptance criterion.</span>
+                </td>
+                <td><code>TC-INV-002: Xác minh PO giá trị đúng 50,000,000 VNĐ chỉ yêu cầu 1 cấp duyệt duy nhất của Trưởng phòng Mua hàng.</code></td>
+              </tr>
+              <tr>
+                <td><strong>Test Data (Dữ liệu kiểm thử)</strong></td>
+                <td>
+                  <span class="lang-vi">Dữ liệu đầu vào giả lập có chủ đích (hợp lệ hoặc không hợp lệ) được nạp vào hệ thống để kích hoạt các nhánh logic phần mềm.</span>
+                  <span class="lang-en">Deliberately curated input datasets (valid or invalid) injected into the system to exercise targeted code branches and state transitions.</span>
+                </td>
+                <td><code>Item: 'SKU-LOG-09', UnitPrice: 5,000,000 VNĐ, Qty: 10, Total: 50,000,000 VNĐ, UserRole: 'PROCUREMENT_OFFICER'.</code></td>
+              </tr>
+              <tr>
+                <td><strong>UAT Script (Kịch bản Nghiệm thu)</strong></td>
+                <td>
+                  <span class="lang-vi">Hướng dẫn từng bước bằng ngôn ngữ nghiệp vụ hướng dẫn End-User thực hiện một chu trình công việc hoàn chỉnh (End-to-End Business Flow) để nghiệm thu hệ thống.</span>
+                  <span class="lang-en">Step-by-step guidance written in business terminology instructing end-users to execute end-to-end operational workflows for system sign-off.</span>
+                </td>
+                <td><code>UAT-SCRIPT-01: Quy trình Lập PO khẩn cấp, Duyệt ngân sách, và Tiếp nhận xác nhận từ Nhà cung cấp nước ngoài.</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">
+          <span class="lang-vi">2. Các Kỹ Thuật Thiết Kế Ca Kiểm Thử Hộp Đen (Black-Box Test Techniques)</span>
+          <span class="lang-en">2. Essential Black-Box Test Design Techniques for BAs</span>
+        </h3>
+        <p class="lang-vi">
+          Business Analyst không đọc mã nguồn (code) mà thiết kế ca kiểm thử dựa trên đặc tả yêu cầu. Dưới đây là 4 kỹ thuật nền tảng theo chuẩn quốc tế ISTQB:
+        </p>
+        <p class="lang-en">
+          Business Analysts test against specifications rather than source code. The following 4 black-box techniques from ISTQB standards are essential for robust test coverage:
+        </p>
+
+        <div class="grid-2-col" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+              <span class="lang-vi">1. Phân Vùng Tương Đương (Equivalence Partitioning - EP)</span>
+              <span class="lang-en">1. Equivalence Partitioning (EP)</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">
+              Chia miền giá trị đầu vào thành các phân vùng hợp lệ (Valid) và không hợp lệ (Invalid). Hệ thống được giả định xử lý mọi giá trị trong cùng một phân vùng theo cùng một cách thức logic. Chọn đại diện 1 giá trị từ mỗi phân vùng là đủ để kiểm thử.
+            </p>
+            <p class="lang-en" style="font-size: 0.9rem;">
+              Divides input domains into valid and invalid partitions where the system is expected to process all values within a partition identically. Testing one representative value per partition provides sufficient coverage.
+            </p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+              <span class="lang-vi">2. Phân Tích Giá Trị Biên (Boundary Value Analysis - BVA)</span>
+              <span class="lang-en">2. Boundary Value Analysis (BVA)</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">
+              Kinh nghiệm cho thấy phần lớn lỗi lập trình xuất hiện tại các ranh giới so sánh (`<` thay vì `<=`, `>` thay vì `>=`). BVA kiểm tra giá trị tại chính ranh giới và ngay sát ranh giới: Giá trị biên dưới, biên trên, và giá trị ngay bên ngoài biên.
+            </p>
+            <p class="lang-en" style="font-size: 0.9rem;">
+              Historical defect data proves flaws cluster at relational boundaries (`<` vs `<=`). BVA tests exact boundary thresholds and immediate adjacent values: lower bound, upper bound, boundary - 1, and boundary + 1.
+            </p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+              <span class="lang-vi">3. Bảng Quyết Định (Decision Table Testing)</span>
+              <span class="lang-en">3. Decision Table Testing</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">
+              Áp dụng cho các quy tắc kinh doanh phức tạp kết hợp nhiều điều kiện (Booleans: True/False). Lập bảng liệt kê tất cả các tổ hợp đầu vào khả dĩ ($2^n$) và chỉ định rõ hành động (Action/Output) tương ứng cho từng cột quy tắc (Rule Column).
+            </p>
+            <p class="lang-en" style="font-size: 0.9rem;">
+              Ideal for complex business rules driven by multiple boolean combinations ($2^n$). Lists all condition permutations and maps exact required actions for every rule column, leaving zero logical gaps.
+            </p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+              <span class="lang-vi">4. Chuyển Đổi Trạng Thái (State Transition Testing)</span>
+              <span class="lang-en">4. State Transition Testing</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">
+              Kiểm tra các thực thể kinh doanh có vòng đời (như PO, Invoice, Ticket). Kiểm tra các chuyển đổi trạng thái hợp lệ do sự kiện kích hoạt (Valid Transitions) và xác minh hệ thống ngăn chặn các chuyển đổi trái phép (Invalid Transitions).
+            </p>
+            <p class="lang-en" style="font-size: 0.9rem;">
+              Validates stateful business entities (e.g., POs, Invoices, Orders). Verifies valid transitions triggered by legitimate business events and confirms system blocks illegal transitions (e.g., transitioning from `CANCELLED` directly to `SETTLED`).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION C: 6-STEP PRACTICAL METHOD -->
+      <section id="sec-methodology" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">C</span>
+          <h2>
+            <span class="lang-vi">Quy Trình 6 Bước Thiết Kế Test Suite & Quản Lý UAT Dành Cho BA</span>
+            <span class="lang-en">The BA's 6-Step Workflow for Test Suite Design & UAT Execution</span>
+          </h2>
+        </div>
+
+        <div class="timeline" style="margin-top: 1.5rem;">
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 1: Trích Xuất Tiêu Chí Chấp Nhận & Quy Tắc Nghiệp Vụ</span><span class="lang-en">Step 1: Extract Acceptance Criteria & Business Rules</span></h4>
+            <p class="lang-vi">Đọc kỹ tài liệu SFS và User Story. Bóc tách từng quy tắc kinh doanh (Business Rules), ràng buộc dữ liệu (Data Constraints) và các luồng ngoại lệ thành danh sách các hành vi độc lập có thể kiểm chứng được.</p>
+            <p class="lang-en">Meticulously analyze the SFS and User Stories. Deconstruct each business rule, validation constraint, and exception flow into an atomic list of testable behaviors.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 2: Thiết Kế Bộ Dữ Liệu Kiểm Thử (EP & BVA)</span><span class="lang-en">Step 2: Engineer Test Datasets using EP & BVA</span></h4>
+            <p class="lang-vi">Xác định các ngưỡng ranh giới số học, định dạng ký tự, và phân quyền người dùng. Tạo các bộ dữ liệu mẫu (Positive Data) và dữ liệu độc hại/sai lệch (Negative Data) chuẩn bị sẵn trước khi test.</p>
+            <p class="lang-en">Identify numerical boundaries, string regex constraints, and RBAC roles. Prepare paired test fixtures containing clean positive data and deliberate invalid/negative edge cases.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 3: Biên Soạn Test Case Kỹ Thuật (Verification Test Cases)</span><span class="lang-en">Step 3: Author Granular Verification Test Cases</span></h4>
+            <p class="lang-vi">Viết từng Test Case với mã định danh duy nhất (ID), Tiền điều kiện (Preconditions), Các bước hành động rõ ràng không mơ hồ, và Kết quả mong đợi (Expected Results) có thể đo lường định lượng được.</p>
+            <p class="lang-en">Draft structured test cases featuring unique IDs, explicit preconditions, unambiguous procedural steps, and quantitative, measurable expected outcomes.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 4: Thiết Lập Ma Trận Truy Vết Hai Chiều (RTM)</span><span class="lang-en">Step 4: Establish Bidirectional Requirements Traceability (RTM)</span></h4>
+            <p class="lang-vi">Ánh xạ từng Test Case ID ngược về SFS Requirement ID và BRD Business Objective. Đảm bảo 100% yêu cầu được bao phủ bởi kiểm thử (Test Coverage) và không có test case mồ côi (Orphan Tests).</p>
+            <p class="lang-en">Map every Test Case ID back to its originating SFS requirement and BRD objective. Ensure 100% test coverage and eliminate orphan tests that lack business justification.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 5: Soạn Thảo Bộ Kịch Bản UAT Thân Thiện Với Người Dùng</span><span class="lang-en">Step 5: Author Business-Centric UAT Scripts</span></h4>
+            <p class="lang-vi">Chuyển hóa các ca kiểm thử kỹ thuật thành Kịch bản Nghiệm thu thực tế. Loại bỏ biệt ngữ kỹ thuật (không yêu cầu người dùng inspect HTTP header hay gõ SQL), tập trung vào hành trình tác nghiệp hàng ngày của nhân viên.</p>
+            <p class="lang-en">Translate technical test cases into contextual business journey scripts. Strip away technical jargon (never ask end-users to inspect JSON payloads), focusing squarely on real daily operational flows.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 6: Điều Phối UAT, Sàng Lọc Lỗi (Defect Triage) & Ký Biên Bản Sign-Off</span><span class="lang-en">Step 6: Facilitate UAT, Triage Defects & Secure Executive Sign-Off</span></h4>
+            <p class="lang-vi">Tổ chức các buổi hỗ trợ người dùng chạy UAT, phân loại lỗi theo mức độ nghiêm trọng (Severity 1-4), thẩm định lỗi kỹ thuật so với yêu cầu phát sinh mới, và hoàn thiện Biên bản Nghiệm thu có chữ ký của Product Owner/Sponsor.</p>
+            <p class="lang-en">Facilitate hands-on UAT testing rooms, lead daily defect triage meetings, adjudicate bugs vs change requests, and finalize formal sign-off declarations signed by the Product Owner and Executive Sponsor.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION D: WORKED ENTERPRISE SUITE & UAT FORM -->
+      <section id="sec-enterprise-suite" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">D</span>
+          <h2>
+            <span class="lang-vi">Bộ Tài Liệu Thực Chiến Mẫu: Test Suite & Biểu Mẫu UAT Dự Án OmniLogix</span>
+            <span class="lang-en">Worked Enterprise Artifact: Test Suite & Formal UAT Form for OmniLogix AIR-VIP</span>
+          </h2>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">
+            <span class="lang-vi">📌 Bối Cảnh Nghiệm Thu (OmniLogix PRJ-OLX-2026)</span>
+            <span class="lang-en">📌 Verification Context (OmniLogix PRJ-OLX-2026)</span>
+          </div>
+          <p class="lang-vi">
+            Bộ ca kiểm thử này nghiệm thu trực tiếp phân hệ <strong>SFS-INV-001 (Automated PO Dispatch & Vendor Acknowledgment)</strong> đã được đặc tả trong Template 3, nhằm kiểm chứng các quy tắc cốt lõi: Ngưỡng đặt hàng lại ROP (<code>BR-INV-01</code>), Thẩm quyền duyệt phân tầng (<code>BR-INV-02</code>), Cam kết SLA 24h (<code>BR-INV-03</code>), và Dung sai giao hàng &plusmn;2% (<code>BR-INV-04</code>).
+          </p>
+          <p class="lang-en">
+            This test suite executes direct acceptance verification of module <strong>SFS-INV-001 (Automated PO Dispatch & Vendor Acknowledgment)</strong> authored in Template 3, verifying core rules: Reorder Point calculation (<code>BR-INV-01</code>), Tiered approval thresholds (<code>BR-INV-02</code>), 24h SLA acknowledgment (<code>BR-INV-03</code>), and &plusmn;2% receiving tolerance (<code>BR-INV-04</code>).
+          </p>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">
+          <span class="lang-vi">1. Ma Trận Phân Vùng Tương Đương & Phân Tích Giá Trị Biên (EP & BVA Matrix)</span>
+          <span class="lang-en">1. Equivalence Partitioning & Boundary Value Analysis Matrix</span>
+        </h3>
+        <p class="lang-vi">
+          Phân tích các điểm dữ liệu biên cho Quy tắc duyệt ngân sách PO (<code>BR-INV-02</code>):
+        </p>
+        <p class="lang-en">
+          Boundary value analysis for Tiered PO Budget Approval thresholds (<code>BR-INV-02</code>):
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Tham Số Kiểm Thử</span><span class="lang-en">Input Parameter</span></th>
+                <th><span class="lang-vi">Phân Vùng Hợp Lệ (Valid Partitions)</span><span class="lang-en">Valid Partitions</span></th>
+                <th><span class="lang-vi">Phân Vùng Không Hợp Lệ (Invalid)</span><span class="lang-en">Invalid Partitions</span></th>
+                <th><span class="lang-vi">Giá Trị Biên Cần Kiểm Thử (BVA Points)</span><span class="lang-en">Exact Boundary Points to Test</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Giá trị PO (VNĐ)</strong><br><em>Quy tắc: Cấp 1 &le; 50M, Cấp 2: 50M &lt; PO &le; 200M, Cấp 3: &gt; 200M</em></td>
+                <td>
+                  • Phân vùng 1: [1, 50,000,000]<br>
+                  • Phân vùng 2: [50,000,001, 200,000,000]<br>
+                  • Phân vùng 3: [200,000,001, 10,000,000,000]
+                </td>
+                <td>
+                  • Giá trị âm (&le; 0)<br>
+                  • Vượt trần (&gt; 10,000,000,000)<br>
+                  • Ký tự phi số (String/NaN)
+                </td>
+                <td>
+                  <code>0 VNĐ</code> (Invalid - Bị chặn)<br>
+                  <code>1 VNĐ</code> (Min Valid Cấp 1)<br>
+                  <code>50,000,000 VNĐ</code> (Max Valid Cấp 1 - 1 cấp duyệt)<br>
+                  <code>50,000,001 VNĐ</code> (Min Valid Cấp 2 - 2 cấp duyệt)<br>
+                  <code>200,000,000 VNĐ</code> (Max Valid Cấp 2)<br>
+                  <code>200,000,001 VNĐ</code> (Min Valid Cấp 3 - 3 cấp duyệt)
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Dung sai Giao hàng (%)</strong><br><em>Quy tắc: &plusmn;2.00% số lượng PO</em></td>
+                <td>
+                  • Phân vùng hợp lệ: [-2.00%, +2.00%] so với số lượng đặt hàng
+                </td>
+                <td>
+                  • Giao thiếu nghiêm trọng: &lt; -2.00%<br>
+                  • Giao vượt định mức: &gt; +2.00%
+                </td>
+                <td>
+                  <code>-2.01%</code> (Invalid - Từ chối nhận kho)<br>
+                  <code>-2.00%</code> (Valid - Nhận đủ dung sai âm)<br>
+                  <code>0.00%</code> (Valid - Khớp 100%)<br>
+                  <code>+2.00%</code> (Valid - Nhận đủ dung sai dương)<br>
+                  <code>+2.01%</code> (Invalid - Báo lỗi vượt hạn mức)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 2rem;">
+          <span class="lang-vi">2. Bộ Ca Kiểm Thử Kỹ Thuật Chi Tiết (Granular Test Case Suite: TC-INV-001 đến 008)</span>
+          <span class="lang-en">2. Enterprise Test Case Suite (TC-INV-001 through TC-INV-008)</span>
+        </h3>
+
+        <!-- TC-INV-001 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-001</code>
+              <span class="lang-vi">Happy Path: Phát hành PO tự động và Nhà cung cấp xác nhận trong 24h SLA</span>
+              <span class="lang-en">Happy Path: Automated PO Dispatch & Vendor Acknowledgment within 24h SLA</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-minor">Priority: P1</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>BR-INV-01</code>, <code>BR-INV-03</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Chức năng (Functional) / Happy Path</span><span class="lang-en">Functional / Happy Path</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                Tồn kho SKU-001 giảm chạm mức 195 units (&lt; ROP 200). Nhà cung cấp VEND-001 đang ở trạng thái <code>ACTIVE</code>.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Kích hoạt tiến trình quét ROP định kỳ (hoặc gọi trigger giả lập).</td>
+                  <td><code>SKU_ID: 'SKU-001', CurrentStock: 195, ROP: 200, EOQ: 500</code></td>
+                  <td>Hệ thống tự động sinh bản ghi Đơn mua hàng dự thảo với mã <code>PO-202610-0089</code> ở trạng thái <code>PENDING_APPROVAL</code>.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Đăng nhập tài khoản Trưởng phòng Mua hàng và phê duyệt PO.</td>
+                  <td><code>User: 'thao.nguyen@omnilogix.vn', Role: 'PROCUREMENT_MANAGER'</code></td>
+                  <td>Trạng thái PO chuyển sang <code>APPROVED</code>; hệ thống đẩy Webhook và Email thông báo kèm Token truy cập tới Portal Nhà cung cấp.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Đăng nhập Cổng thông tin Nhà cung cấp, bấm "Xác Nhận Đơn Hàng" và nhập ngày giao hàng dự kiến.</td>
+                  <td><code>Vendor: 'VEND-001', PromisedDate: '2026-10-25' (trong vòng 7 ngày)</code></td>
+                  <td>Trạng thái chuyển thành <code>ACKNOWLEDGED</code>; cờ <code>sla_breached</code> là <code>FALSE</code>; gửi email xác nhận cho Procurement.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-002 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-002</code>
+              <span class="lang-vi">BVA Phân tầng 1: Giá trị PO chính xác 50,000,000 VNĐ chỉ yêu cầu 1 cấp duyệt</span>
+              <span class="lang-en">BVA Tier 1 Boundary: PO value exact 50,000,000 VND requires 1-level approval only</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-minor">Priority: P2</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>BR-INV-02</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Giá trị biên (BVA) / Phân quyền (RBAC)</span><span class="lang-en">Boundary Value Analysis / RBAC</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                Tài khoản Procurement Manager có hạn mức duyệt đến 50,000,000 VNĐ.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Tạo đơn hàng PO với tổng số tiền chính xác 50,000,000 VNĐ.</td>
+                  <td><code>Quantity: 10, UnitPrice: 5,000,000 VNĐ, Total: 50,000,000 VNĐ</code></td>
+                  <td>Hệ thống gán routing level là <code>APPROVAL_TIER_1</code> (Single Approver).</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Procurement Manager thực hiện phê duyệt đơn hàng.</td>
+                  <td><code>User: 'thao.nguyen@omnilogix.vn', Action: 'APPROVE'</code></td>
+                  <td>Đơn hàng chuyển thẳng sang <code>APPROVED</code> và sẵn sàng gửi nhà cung cấp. Không yêu cầu chuyển tiếp lên Giám đốc Vận hành (Operations Director).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-003 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-003</code>
+              <span class="lang-vi">BVA Phân tầng 2: Giá trị PO 50,000,001 VNĐ kích hoạt bắt buộc Phê duyệt kép (Dual-Approval)</span>
+              <span class="lang-en">BVA Tier 2 Boundary: PO value 50,000,001 VND triggers mandatory Dual-Approval</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-critical">Priority: P1</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>BR-INV-02</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Giá trị biên (BVA) / Luồng phê duyệt</span><span class="lang-en">Boundary Value Analysis / Approval Workflow</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                Đơn hàng vượt ngưỡng 50,000,000 VNĐ dù chỉ 1 đồng.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Tạo đơn hàng PO với tổng số tiền 50,000,001 VNĐ.</td>
+                  <td><code>Quantity: 1, UnitPrice: 50,000,001 VNĐ</code></td>
+                  <td>Hệ thống gán routing level là <code>APPROVAL_TIER_2</code> (Dual Approval).</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Procurement Manager thực hiện duyệt bước 1.</td>
+                  <td><code>User: 'thao.nguyen@omnilogix.vn', Action: 'APPROVE'</code></td>
+                  <td>Trạng thái PO là <code>PENDING_TIER_2_APPROVAL</code>. Chưa gửi email hay mở cổng cho Vendor.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Operations Director đăng nhập và thực hiện duyệt bước 2.</td>
+                  <td><code>User: 'duc.tran@omnilogix.vn', Role: 'OPERATIONS_DIRECTOR'</code></td>
+                  <td>Trạng thái PO chính thức chuyển sang <code>APPROVED</code>; lúc này hệ thống mới dispatch dữ liệu sang Vendor Portal.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-004 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-004</code>
+              <span class="lang-vi">BVA Dung sai Giao hàng: Giao vượt định mức +2.01% bị hệ thống tự động chặn tiếp nhận</span>
+              <span class="lang-en">BVA Receiving Tolerance: Delivery exceeding +2.01% rejected by warehouse receiving gate</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-major">Priority: P1</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>BR-INV-04</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Kiểm thử Tiêu cực (Negative BVA)</span><span class="lang-en">Negative BVA / Warehouse Gatekeeper</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                PO đặt số lượng 1,000 units. Dung sai tối đa cho phép là &plusmn;2% (980 đến 1,020 units).
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Thủ kho nhập số lượng thực giao là 1,020 units (+2.00%).</td>
+                  <td><code>ReceivedQuantity: 1020, PO_Ordered: 1000</code></td>
+                  <td>Hệ thống chấp nhận, hiển thị thông báo dung sai hợp lệ và cho phép in phiếu nhập kho (GRN).</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Thủ kho nhập số lượng thực giao là 1,021 units (+2.01% - vượt ngưỡng).</td>
+                  <td><code>ReceivedQuantity: 1021, PO_Ordered: 1000</code></td>
+                  <td>Hệ thống chặn tạo phiếu, báo lỗi <code>ERR-WH-TOLERANCE-EXCEEDED</code>: "Số lượng giao vượt quá dung sai 2.0% cho phép. Vui lòng yêu cầu lập Biên bản Bất thường hoặc trả lại hàng thừa."</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-005 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-005</code>
+              <span class="lang-vi">Kiểm thử Trùng lặp (Idempotency): Gửi 2 yêu cầu xác nhận cùng lúc không sinh duplicate</span>
+              <span class="lang-en">Negative Idempotency: Duplicate acknowledgment submissions return cached state</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-critical">Priority: P1</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> Section D.4 | API <code>POST /api/v1/purchase-orders/{id}/ack</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Kỹ thuật API / Idempotency</span><span class="lang-en">API Concurrency / Resilience</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                PO đang ở trạng thái <code>DISPATCHED</code>.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Gửi request xác nhận đầu tiên kèm header Idempotency-Key.</td>
+                  <td><code>Header 'Idempotency-Key: uuid-v4-9988-1122'</code></td>
+                  <td>Trả về HTTP 200 OK; PO cập nhật sang <code>ACKNOWLEDGED</code>.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Gửi lại chính xác request thứ hai cùng Idempotency-Key trong vòng 5 giây (mô phỏng click đúp chuột hoặc lag mạng).</td>
+                  <td><code>Header 'Idempotency-Key: uuid-v4-9988-1122' (identical)</code></td>
+                  <td>Hệ thống trả về HTTP 200 từ Cache, không thực hiện update DB lần 2, không gửi 2 email xác nhận, giữ nguyên tính toàn vẹn dữ liệu.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-006 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-006</code>
+              <span class="lang-vi">Luồng Ngoại Lệ: Đồng bộ ERP thất bại (&gt;5000ms) kích hoạt Circuit Breaker & Retry Queue</span>
+              <span class="lang-en">Exception Flow: ERP sync timeout (&gt;5000ms) triggers Circuit Breaker & Retry Queue</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-major">Priority: P2</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>EXC-01</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Độ bền tích hợp (Integration Fault Tolerance)</span><span class="lang-en">Fault Tolerance / Circuit Breaker</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                Giả lập dịch vụ SAP ERP phản hồi chậm &gt; 5000ms.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Thực hiện dispatch đơn PO khi cổng API ERP bị nghẽn mạch (delay 6500ms).</td>
+                  <td><code>Mock ERP Latency: 6500ms</code></td>
+                  <td>Hệ thống ngắt kết nối đúng 5,000ms, không treo luồng người dùng (Thread hang). Lưu đơn vào bảng <code>po_sync_retry_queue</code> với cờ <code>status: 'PENDING_RETRY', retry_count: 0</code>.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Kiểm tra job worker ngầm quét sau 5 phút.</td>
+                  <td><code>Scheduled Cron Retry</code></td>
+                  <td>Worker tự động đẩy lại bản tin khi ERP phục hồi; cập nhật <code>erp_sync_status: 'SYNCED'</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-007 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-007</code>
+              <span class="lang-vi">Luồng Thay Thế: Nhà cung cấp từ chối ngày giao hàng và mở Khiếu nại (Dispute)</span>
+              <span class="lang-en">Alternative Flow: Vendor disputes delivery schedule with negotiation remarks</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-minor">Priority: P2</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>ALT-01</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Quy trình nghiệp vụ (Business Workflow)</span><span class="lang-en">Business Exception Workflow</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                Vendor nhận đơn nhưng không thể đáp ứng ngày giao yêu cầu của OmniLogix.
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Vendor chọn "Khiếu nại/Đề xuất ngày mới", nhập lý do và ngày đề xuất.</td>
+                  <td><code>ProposedDate: '2026-11-05', Reason: 'Thiếu linh kiện vi mạch từ chuỗi cung ứng toàn cầu'</code></td>
+                  <td>Hệ thống chuyển trạng thái đơn sang <code>DISPUTED</code>; kích hoạt notification khẩn cho Chuyên viên Thu mua OmniLogix; dừng đếm đồng hồ vi phạm SLA 24h.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TC-INV-008 -->
+        <div class="test-case-box">
+          <div class="test-case-header">
+            <div class="test-case-title">
+              <code>TC-INV-008</code>
+              <span class="lang-vi">Vi Phạm SLA: Quá 24h không phản hồi tự động kích hoạt Cảnh báo Leo thang Cấp 2</span>
+              <span class="lang-en">SLA Breach: Exceeding 24h without acknowledgment triggers Level-2 Escalation</span>
+            </div>
+            <div>
+              <span class="test-badge badge-pass"><span class="lang-vi">Passed</span><span class="lang-en">Passed</span></span>
+              <span class="test-badge badge-critical">Priority: P1</span>
+            </div>
+          </div>
+          <div class="test-case-body">
+            <div class="tc-grid">
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Mô-đun / Traceability:</span><span class="lang-en">Module / Traceability:</span></strong>
+                <code>SFS-INV-001</code> | <code>BR-INV-03</code>, <code>EXC-03</code>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Loại Kiểm thử:</span><span class="lang-en">Test Type:</span></strong>
+                <span class="lang-vi">Thời gian thực / Tự động hóa SLA</span><span class="lang-en">Time-based Event / SLA Escalation</span>
+              </div>
+              <div class="tc-meta-item">
+                <strong><span class="lang-vi">Tiền điều kiện:</span><span class="lang-en">Preconditions:</span></strong>
+                PO gửi đi từ <code>2026-10-15 08:00:00</code>. Hiện tại hệ thống chạm mốc <code>2026-10-16 08:00:01</code> (quá 24 giờ).
+              </div>
+            </div>
+            <table class="tc-steps-table">
+              <thead>
+                <tr>
+                  <th style="width: 8%;">Step</th>
+                  <th style="width: 32%;"><span class="lang-vi">Thao tác Thực hiện</span><span class="lang-en">Test Steps</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Dữ liệu Đầu vào (Test Data)</span><span class="lang-en">Input Test Data</span></th>
+                  <th style="width: 30%;"><span class="lang-vi">Kết quả Kỳ vọng (Expected Result)</span><span class="lang-en">Expected Result</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Cron job định kỳ mỗi giờ quét các đơn hàng có <code>dispatched_at &lt; NOW() - INTERVAL 24 HOUR</code> và <code>status = 'DISPATCHED'</code>.</td>
+                  <td><code>CurrentTimestamp: '2026-10-16 08:05:00'</code></td>
+                  <td>Hệ thống tự động bật cờ <code>sla_breached = TRUE</code>, chuyển trạng thái đơn sang <code>SLA_BREACHED</code>, và bắn cảnh báo đỏ tới Teams/Slack của Procurement Lead.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">
+          <span class="lang-vi">3. Ma Trận Truy Vết Hai Chiều (Bidirectional Requirements Traceability Matrix - RTM)</span>
+          <span class="lang-en">3. Bidirectional Requirements Traceability Matrix (RTM)</span>
+        </h3>
+        <p class="lang-vi">
+          RTM là bằng chứng pháp lý kỹ thuật đảm bảo không một yêu cầu nào bị bỏ sót trong quá trình phát triển và kiểm thử:
+        </p>
+        <p class="lang-en">
+          The RTM is the definitive audit proof confirming zero requirements are orphaned or left unverified:
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Mục tiêu BRD</span><span class="lang-en">BRD Objective</span></th>
+                <th><span class="lang-vi">Đặc tả SFS</span><span class="lang-en">SFS Spec ID</span></th>
+                <th><span class="lang-vi">Quy tắc Nghiệp vụ</span><span class="lang-en">Business Rule</span></th>
+                <th><span class="lang-vi">Mã Test Case Kiểm Chứng</span><span class="lang-en">Verification Test Case</span></th>
+                <th><span class="lang-vi">Kịch bản UAT Người Dùng</span><span class="lang-en">End-User UAT Script</span></th>
+                <th><span class="lang-vi">Trạng thái</span><span class="lang-en">Status</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>OB-01: Giảm 90% lỗi thiếu hụt tồn kho</code></td>
+                <td><code>SFS-INV-001 §D.1</code></td>
+                <td><code>BR-INV-01 (ROP Formula)</code></td>
+                <td><code>TC-INV-001</code></td>
+                <td><code>UAT-SCRIPT-01 (Auto-PO Creation)</code></td>
+                <td><span class="test-badge badge-pass">Verified</span></td>
+              </tr>
+              <tr>
+                <td><code>OB-02: Kiểm soát ngân sách mua hàng</code></td>
+                <td><code>SFS-INV-001 §D.5</code></td>
+                <td><code>BR-INV-02 (Tiered Approval)</code></td>
+                <td><code>TC-INV-002, TC-INV-003</code></td>
+                <td><code>UAT-SCRIPT-02 (Dual-Approval Workflow)</code></td>
+                <td><span class="test-badge badge-pass">Verified</span></td>
+              </tr>
+              <tr>
+                <td><code>OB-03: Cam kết SLA phản hồi nhà cung cấp</code></td>
+                <td><code>SFS-INV-001 §D.2</code></td>
+                <td><code>BR-INV-03 (24h SLA)</code></td>
+                <td><code>TC-INV-001, TC-INV-008</code></td>
+                <td><code>UAT-SCRIPT-03 (Vendor Portal SLA Tracker)</code></td>
+                <td><span class="test-badge badge-pass">Verified</span></td>
+              </tr>
+              <tr>
+                <td><code>OB-04: Ngăn chặn thất thoát nhập kho</code></td>
+                <td><code>SFS-INV-001 §D.3</code></td>
+                <td><code>BR-INV-04 (Tolerance &plusmn;2%)</code></td>
+                <td><code>TC-INV-004</code></td>
+                <td><code>UAT-SCRIPT-04 (Warehouse Receiving Gate)</code></td>
+                <td><span class="test-badge badge-pass">Verified</span></td>
+              </tr>
+              <tr>
+                <td><code>NFR-SEC: Tính toàn vẹn giao dịch tài chính</code></td>
+                <td><code>SFS-INV-001 §D.4</code></td>
+                <td><code>Idempotency & Resilience</code></td>
+                <td><code>TC-INV-005, TC-INV-006</code></td>
+                <td><code>UAT-SCRIPT-05 (System Robustness Check)</code></td>
+                <td><span class="test-badge badge-pass">Verified</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 2rem;">
+          <span class="lang-vi">4. Biểu Mẫu Nghiệm Thu Người Dùng Chuẩn Doanh Nghiệp (Official Enterprise UAT Form)</span>
+          <span class="lang-en">4. Official Enterprise User Acceptance Testing (UAT) Form</span>
+        </h3>
+        <p class="lang-vi">
+          Biểu mẫu pháp lý được Product Owner và đại diện người dùng ký duyệt trước khi phát hành sản phẩm ra môi trường Production:
+        </p>
+        <p class="lang-en">
+          The formal legal sign-off declaration executed by the Product Owner and business stakeholders prior to production deployment:
+        </p>
+
+        <div style="border: 2px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; background: var(--card-bg); margin-top: 1rem;">
+          <div style="text-align: center; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.25rem;">
+            <h3 style="margin-bottom: 0.25rem; font-size: 1.25rem;">BIÊN BẢN NGHIỆM THU NGƯỜI DÙNG (USER ACCEPTANCE TESTING SIGN-OFF)</h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">DỰ ÁN: OMNILOGIX AIR-VIP (PRJ-OLX-2026) | GIAI ĐOẠN 1: TỰ ĐỘNG HÓA CHUỖI CUNG ỨNG</p>
+          </div>
+
+          <div class="tc-grid">
+            <div class="tc-meta-item">
+              <strong>Mã Biên Bản (Document Ref):</strong>
+              <code>UAT-SIGNOFF-2026-001</code>
+            </div>
+            <div class="tc-meta-item">
+              <strong>Môi Trường Kiểm Thử (Environment):</strong>
+              <code>UAT Staging (https://uat-portal.omnilogix.vn)</code>
+            </div>
+            <div class="tc-meta-item">
+              <strong>Phiên Bản Phần Mềm (Release Build):</strong>
+              <code>Build v2.4.0-RC3</code>
+            </div>
+            <div class="tc-meta-item">
+              <strong>Thời Gian Kiểm Thử (UAT Window):</strong>
+              10/10/2026 - 15/10/2026
+            </div>
+          </div>
+
+          <h4 style="margin-top: 1.25rem; margin-bottom: 0.5rem; font-size: 1rem;">1. Báo Cáo Tổng Hợp Kết Quả Thực Thi (Execution Summary)</h4>
+          <div class="table-responsive">
+            <table class="data-table" style="font-size: 0.85rem;">
+              <thead>
+                <tr>
+                  <th>Tổng Số Kịch Bản</th>
+                  <th>Passed</th>
+                  <th>Failed</th>
+                  <th>Blocked</th>
+                  <th>Tỷ Lệ Đạt (Pass Rate)</th>
+                  <th>Số Lỗi Nghiêm Trọng (Sev 1-2) Còn Tồn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>35 Kịch bản</strong></td>
+                  <td style="color: #059669; font-weight: 700;">34</td>
+                  <td style="color: #dc2626; font-weight: 700;">1 (Sev 4 - Giao diện)</td>
+                  <td>0</td>
+                  <td style="font-weight: 700;">97.14%</td>
+                  <td style="font-weight: 700; color: #059669;">0 (Đạt tiêu chuẩn Go-Live)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 style="margin-top: 1.25rem; margin-bottom: 0.5rem; font-size: 1rem;">2. Bảng Theo Dõi Khiếm Khuyết Tồn Đọng (Defect Disposition Log)</h4>
+          <div class="table-responsive">
+            <table class="data-table" style="font-size: 0.85rem;">
+              <thead>
+                <tr>
+                  <th>Defect ID</th>
+                  <th>Mô Tả Lỗi</th>
+                  <th>Mức Độ (Severity)</th>
+                  <th>Độ Ưu Tiên (Priority)</th>
+                  <th>Hướng Xử Lý Đã Thống Nhất (Disposition)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>DEF-UAT-03</code></td>
+                  <td>Trên màn hình Safari di động, nút "Xác Nhận Đơn" bị lệch 4px khỏi căn giữa khung hình.</td>
+                  <td><span class="test-badge badge-minor">Sev 4 (Cosmetic)</span></td>
+                  <td>Low (P4)</td>
+                  <td>Chấp thuận Go-live; Fix trong bản cập nhật bảo trì Sprint tiếp theo (v2.4.1).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 style="margin-top: 1.25rem; margin-bottom: 0.5rem; font-size: 1rem;">3. Tuyên Bố Nghiệm Thu & Phê Duyệt Phát Hành (Sign-Off Declarations)</h4>
+          <p style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;">
+            Căn cứ vào kết quả kiểm thử trên môi trường UAT Staging, đại diện các bên liên quan xác nhận phần mềm đáp ứng đầy đủ các tiêu chí chấp nhận nghiệp vụ đã thỏa thuận trong BRD và SFS. Đại diện Khách hàng chính thức phê duyệt việc triển khai hệ thống lên môi trường Production.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed var(--border-color); text-align: center;">
+            <div>
+              <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2.5rem;">Đại Diện Người Dùng (Business Lead)</p>
+              <p style="font-weight: 700; margin: 0;">Nguyễn Thị Lan Anh</p>
+              <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 0;">Trưởng Bộ Phận Mua Hàng</p>
+            </div>
+            <div>
+              <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2.5rem;">Chủ Quản Sản Phẩm (Product Owner)</p>
+              <p style="font-weight: 700; margin: 0;">Trần Hoàng Nam</p>
+              <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 0;">Giám Đốc Sản Phẩm Số</p>
+            </div>
+            <div>
+              <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2.5rem;">Chuyên Viên Phân Tích (Lead BA)</p>
+              <p style="font-weight: 700; margin: 0;">Nguyễn Đăng Cẩm Tú (Hazel)</p>
+              <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 0;">Lead Business Analyst</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION E: 3 CRITICAL ANTI-PATTERNS -->
+      <section id="sec-anti-patterns" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">E</span>
+          <h2>
+            <span class="lang-vi">3 Sai Lầm Chí Mạng Khi Làm Test Case & UAT (Anti-Patterns)</span>
+            <span class="lang-en">3 Critical Anti-Patterns in Test Design & UAT Orchestration</span>
+          </h2>
+        </div>
+
+        <!-- Anti-pattern 1 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 1: "Happy Path Syndrome" (Hội chứng Chỉ Kiểm Thử Luồng Thuận)</span>
+            <span class="lang-en">🚨 Anti-Pattern 1: "Happy Path Syndrome" (Neglecting Negative Testing)</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> BA và Tester chỉ viết các test case mà người dùng nhập đúng thông tin, mạng thông suốt, và hệ thống luôn trả về dữ liệu chuẩn. Đến khi lên Production, người dùng vô tình bấm đúp nút Submit, mất kết nối WiFi giữa chừng, hoặc nhập số âm dẫn đến crash hệ thống.<br>
+            <strong>Chuẩn mực khắc phục:</strong> Áp dụng nguyên tắc tỷ lệ vàng <strong>60/40</strong>: Tối thiểu 40% test case trong suite phải là các kịch bản kiểm thử biên (Boundary), giá trị sai lệch (Negative Input), timeout mạng và vi phạm phân quyền.
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> Writing test cases solely for ideal conditions where users type pristine inputs, network connections never waver, and APIs always respond instantaneously. In production, users double-click submit buttons, lose cell signals, or submit negative quantities, triggering crashes.<br>
+            <strong>The Antidote:</strong> Enforce the <strong>60/40 Golden Ratio</strong>: At least 40% of test suites must rigorously stress boundary limits, malicious negative inputs, asynchronous timeouts, and RBAC authorization violations.
+          </p>
+        </div>
+
+        <!-- Anti-pattern 2 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 2: Nhầm Lẫn Mức Độ Nghiêm Trọng (Severity) và Độ Ưu Tiên (Priority)</span>
+            <span class="lang-en">🚨 Anti-Pattern 2: Conflating Defect Severity with Defect Priority</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> Đánh đồng một lỗi hiển thị sai chính tả logo công ty thành Severity 1 vì "Tổng Giám đốc sắp xem", hoặc hạ thấp một lỗi tính toán sai số lẻ tiền thuế thành Severity 4 vì "mỗi đơn chỉ lệch 100 đồng".<br>
+            <strong>Chuẩn mực khắc phục:</strong> Phân định rõ ràng hai chiều độc lập:<br>
+            • <em>Severity (Kỹ thuật/Hệ thống):</em> Đo lường mức độ phá hủy hệ thống (Crash, mất dữ liệu, lộ thông tin mật). Do QA/BA thẩm định khách quan.<br>
+            • <em>Priority (Kinh doanh/Thị trường):</em> Đo lường mức độ cấp bách cần sửa chữa (ảnh hưởng bao nhiêu khách hàng, có ảnh hưởng sự kiện ra mắt không). Do Product Owner/Business Sponsor quyết định.
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> Labeling a misaligned hero logo as Severity 1 because "the CEO is visiting", or downgrading a penny-rounding tax calculation bug to Severity 4 because "it only misses by 1 cent per order".<br>
+            <strong>The Antidote:</strong> Decouple the two orthogonal dimensions:<br>
+            • <em>Severity (Technical Impact):</em> Assesses degree of system destruction (crashes, data loss, security exposure). Objectively evaluated by QA/BA.<br>
+            • <em>Priority (Business Urgency):</em> Determines schedule urgency for patching (customer visibility, launch event impact). Decided by Product Owner/Business Sponsor.
+          </p>
+        </div>
+
+        <!-- Anti-pattern 3 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 3: "Technical Test Step Trap" Trong Kịch Bản UAT</span>
+            <span class="lang-en">🚨 Anti-Pattern 3: The "Technical Jargon Trap" in UAT User Scripts</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> Giao cho người dùng kế toán hoặc nhân viên kho một tài liệu UAT ghi: <em>"Mở Postman, gửi POST payload JSON, kiểm tra status 201 và mở DBeaver xem bảng tbl_inventory_ledger có bản ghi mới không"</em>. Người dùng lập tức hoang mang, bỏ cuộc hoặc ký bừa.<br>
+            <strong>Chuẩn mực khắc phục:</strong> Kịch bản UAT phải được viết hoàn toàn bằng <strong>ngôn ngữ hành trình nghiệp vụ</strong>: <em>"Đăng nhập màn hình Lập Phiếu Thu, bấm nút Gửi Phê Duyệt, mở hòm thư Outlook kiểm tra email thông báo đã nhận được mã phiếu hay chưa"</em>. Mọi thao tác kiểm tra DB ngầm do BA/QA hỗ trợ quan sát từ hậu trường.
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> Handing warehouse or accounting users a UAT script instructing them to: <em>"Open Postman, dispatch a JSON POST request, verify HTTP 201, and query DBeaver to confirm a row in tbl_inventory_ledger"</em>. Users get confused, disengaged, or rubber-stamp sign-offs blindly.<br>
+            <strong>The Antidote:</strong> UAT scripts must be authored in 100% <strong>business workflow language</strong>: <em>"Log into the Procurement Portal, click Submit for Approval, open your corporate Outlook inbox, and verify that the approval notification email contains the correct PO number"</em>. Behind-the-scenes DB validations are facilitated unobtrusively by the BA/QA team.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION F: PRACTICUM EXERCISES -->
+      <section id="sec-exercises" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">F</span>
+          <h2>
+            <span class="lang-vi">Bài Tập Tình Huống Thực Chiến (Hands-on Practicum)</span>
+            <span class="lang-en">Hands-on Practicum Exercises with Interactive Solutions</span>
+          </h2>
+        </div>
+
+        <!-- Exercise 1 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 1: Phân Tích Giá Trị Biên (BVA) Cho Chính Sách Hạng Thành Viên & Chiết Khấu</span>
+            <span class="lang-en">Exercise 1: Boundary Value Analysis for Tiered Loyalty Membership & Discounts</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Một ứng dụng bán lẻ quy định chính sách tích lũy điểm trong năm:<br>
+            • Hạng Đồng (Bronze): Chi tiêu từ 0 đến dưới 5,000,000 VNĐ (Chiết khấu 0%).<br>
+            • Hạng Bạc (Silver): Chi tiêu từ 5,000,000 VNĐ đến dưới 20,000,000 VNĐ (Chiết khấu 5%).<br>
+            • Hạng Vàng (Gold): Chi tiêu từ 20,000,000 VNĐ đến 50,000,000 VNĐ (Chiết khấu 10%).<br>
+            • Hạng Kim Cương (Diamond): Chi tiêu trên 50,000,000 VNĐ (Chiết khấu 15%).<br>
+            <strong>Nhiệm vụ:</strong> Áp dụng kỹ thuật BVA 2 giá trị và phân vùng tương đương, hãy xác định danh sách các điểm dữ liệu kiểm thử (VNĐ) tối thiểu nhưng bao phủ toàn bộ các ranh giới chuyển hạng.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> A retail app defines the following annual spend tiers:<br>
+            • Bronze: Spend from 0 to under 5,000,000 VND (0% discount).<br>
+            • Silver: Spend from 5,000,000 VND to under 20,000,000 VND (5% discount).<br>
+            • Gold: Spend from 20,000,000 VND to 50,000,000 VND (10% discount).<br>
+            • Diamond: Spend over 50,000,000 VND (15% discount).<br>
+            <strong>Task:</strong> Apply 2-value BVA and Equivalence Partitioning to determine the minimal yet comprehensive test dataset (in VND) covering all tier transition boundaries.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Ma Trận Phân Tích Biên Chuẩn</span><span class="lang-en">👉 View Expert Solution & Boundary Matrix</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <h4 style="margin-bottom: 0.75rem;"><span class="lang-vi">Bộ Dữ Liệu Kiểm Thử Biên Khuyến Nghị:</span><span class="lang-en">Recommended Boundary Test Fixture:</span></h4>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>1. Biên Hạng Đồng vs Hạng Bạc:</strong><br>
+                • <code>4,999,999 VNĐ</code> &rarr; Kỳ vọng: Hạng Đồng (Chiết khấu 0%).<br>
+                • <code>5,000,000 VNĐ</code> &rarr; Kỳ vọng: Hạng Bạc (Chiết khấu 5%).<br>
+                <strong>2. Biên Hạng Bạc vs Hạng Vàng:</strong><br>
+                • <code>19,999,999 VNĐ</code> &rarr; Kỳ vọng: Hạng Bạc (Chiết khấu 5%).<br>
+                • <code>20,000,000 VNĐ</code> &rarr; Kỳ vọng: Hạng Vàng (Chiết khấu 10%).<br>
+                <strong>3. Biên Hạng Vàng vs Hạng Kim Cương:</strong><br>
+                • <code>50,000,000 VNĐ</code> &rarr; Kỳ vọng: Hạng Vàng (Chiết khấu 10%).<br>
+                • <code>50,000,001 VNĐ</code> &rarr; Kỳ vọng: Hạng Kim Cương (Chiết khấu 15%).<br>
+                <strong>4. Các ca kiểm thử bất thường (Negative Cases):</strong><br>
+                • <code>-1 VNĐ</code> &rarr; Bị từ chối, báo lỗi dữ liệu tài chính không hợp lệ.<br>
+                • <code>100,000,000,000 VNĐ</code> &rarr; Vẫn giữ Hạng Kim Cương, kiểm tra tràn số học (Integer Overflow).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>1. Bronze vs Silver Boundary:</strong><br>
+                • <code>4,999,999 VND</code> &rarr; Expected: Bronze Tier (0% discount).<br>
+                • <code>5,000,000 VND</code> &rarr; Expected: Silver Tier (5% discount).<br>
+                <strong>2. Silver vs Gold Boundary:</strong><br>
+                • <code>19,999,999 VND</code> &rarr; Expected: Silver Tier (5% discount).<br>
+                • <code>20,000,000 VND</code> &rarr; Expected: Gold Tier (10% discount).<br>
+                <strong>3. Gold vs Diamond Boundary:</strong><br>
+                • <code>50,000,000 VND</code> &rarr; Expected: Gold Tier (10% discount).<br>
+                • <code>50,000,001 VND</code> &rarr; Expected: Diamond Tier (15% discount).<br>
+                <strong>4. Negative & Anomaly Cases:</strong><br>
+                • <code>-1 VND</code> &rarr; Rejected with financial validation error.<br>
+                • <code>100,000,000,000 VND</code> &rarr; Retains Diamond Tier; verifies numeric resistance against integer overflow.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 2: Thiết Kế Bảng Quyết Định (Decision Table) Cho Chấm Điểm Gian Lận Thanh Toán Thẻ</span>
+            <span class="lang-en">Exercise 2: Decision Table Design for Credit Card Payment Fraud Scoring</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Hệ thống Cổng thanh toán áp dụng 3 điều kiện thẩm định rủi ro:<br>
+            • C1: Giao dịch từ địa chỉ IP quốc gia có nguy cơ cao (True / False).<br>
+            • C2: Giá trị giao dịch vượt 300% mức trung bình lịch sử 30 ngày của chủ thẻ (True / False).<br>
+            • C3: Nhập sai mã CVV/OTP từ 2 lần trở lên (True / False).<br>
+            Quy định xử lý:<br>
+            - Nếu cả 3 điều kiện đều True &rarr; Khóa thẻ khẩn cấp và Hủy giao dịch (Block & Decline).<br>
+            - Nếu có 2 điều kiện True &rarr; Tạm giữ đơn hàng và chuyển nhân viên Chống gian lận thẩm định thủ công (Hold for Manual Review).<br>
+            - Nếu chỉ có 1 điều kiện True &rarr; Bắt buộc xác thực thêm bước Sinh trắc học/Smart OTP (Challenge Step-up Auth).<br>
+            - Nếu không có điều kiện nào True &rarr; Cho phép giao dịch thành công (Auto-Approve).<br>
+            <strong>Nhiệm vụ:</strong> Lập Bảng quyết định hoàn chỉnh với $2^3 = 8$ quy tắc và xác định các Test Case tương ứng.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> A payment gateway evaluates 3 risk conditions:<br>
+            • C1: Transaction originates from a high-risk sanctioned country IP (True / False).<br>
+            • C2: Transaction value exceeds 300% of the cardholder's 30-day historical average (True / False).<br>
+            • C3: Incorrect CVV/OTP entered 2 or more times (True / False).<br>
+            Business Rules:<br>
+            - If all 3 conditions True &rarr; Block Card & Decline Transaction.<br>
+            - If exactly 2 conditions True &rarr; Hold transaction for Manual Fraud Analyst Review.<br>
+            - If exactly 1 condition True &rarr; Challenge with Step-up Biometric / Smart OTP Auth.<br>
+            - If 0 conditions True &rarr; Auto-Approve transaction instantly.<br>
+            <strong>Task:</strong> Build a complete Decision Table with $2^3 = 8$ combinatorial rules and derive target test cases.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Bảng Quyết Định 8 Cột Chuẩn</span><span class="lang-en">👉 View Decision Table Solution (8 Combinatorial Rules)</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <div class="table-responsive">
+                <table class="data-table" style="font-size: 0.85rem;">
+                  <thead>
+                    <tr>
+                      <th>Điều kiện / Hành động</th>
+                      <th>R1</th>
+                      <th>R2</th>
+                      <th>R3</th>
+                      <th>R4</th>
+                      <th>R5</th>
+                      <th>R6</th>
+                      <th>R7</th>
+                      <th>R8</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>C1: IP Nguy cơ cao</strong></td><td>T</td><td>T</td><td>T</td><td>T</td><td>F</td><td>F</td><td>F</td><td>F</td></tr>
+                    <tr><td><strong>C2: Chi tiêu &gt; 300%</strong></td><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>F</td></tr>
+                    <tr><td><strong>C3: Sai OTP &ge; 2 lần</strong></td><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td></tr>
+                    <tr style="background: var(--bg-secondary);">
+                      <td colspan="9"><strong>HÀNH ĐỘNG HỆ THỐNG (SYSTEM ACTIONS)</strong></td>
+                    </tr>
+                    <tr><td><strong>A1: Auto-Approve</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>✅</td></tr>
+                    <tr><td><strong>A2: Step-up Challenge (OTP)</strong></td><td></td><td></td><td></td><td>✅</td><td></td><td>✅</td><td>✅</td><td></td></tr>
+                    <tr><td><strong>A3: Hold for Review</strong></td><td></td><td>✅</td><td>✅</td><td></td><td>✅</td><td></td><td></td><td></td></tr>
+                    <tr><td><strong>A4: Block & Decline</strong></td><td>✅</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="lang-vi" style="font-size: 0.9rem; margin-top: 0.75rem;">
+                <strong>Kết luận kiểm thử:</strong> Bảng quyết định trên giúp BA bao phủ 100% không gian biến mà không bao giờ bỏ sót tình huống ngoại lệ nào khi bàn giao cho đội phát triển và kiểm thử.
+              </p>
+              <p class="lang-en" style="font-size: 0.9rem; margin-top: 0.75rem;">
+                <strong>Testing Takeaway:</strong> This combinatorial decision table ensures 100% test coverage with zero blind spots when handing off specifications to dev and QA teams.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 3 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 3: Thiết Kế Kịch Bản UAT End-to-End Cho Quy Trình Đổi Trả & Hoàn Tiền (Return & Refund)</span>
+            <span class="lang-en">Exercise 3: Authoring an End-to-End UAT Business Script for e-Commerce Returns</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Bạn là Lead BA cho một sàn thương mại điện tử lớn. Tính năng mới cho phép khách hàng yêu cầu đổi trả trong vòng 7 ngày kể từ khi nhận hàng. Nếu sản phẩm lỗi do nhà sản xuất, sàn hoàn 100% tiền qua ví điện tử trong 24 giờ sau khi kho nhận lại kiện hàng.<br>
+            <strong>Nhiệm vụ:</strong> Hãy viết một kịch bản UAT (UAT Script) hoàn chỉnh dành cho đối tượng thực hiện là Trưởng bộ phận Chăm sóc khách hàng (CS Lead) và Trưởng kho (Warehouse Supervisor). Kịch bản phải dùng ngôn ngữ nghiệp vụ thuần túy, có chỉ dẫn dữ liệu và tiêu chí nghiệm thu rõ ràng.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> You are the Lead BA for an e-commerce platform launching a 7-day Return & Refund module. If goods have manufacturing defects, the platform issues a 100% refund to the customer's digital wallet within 24 hours of warehouse receipt.<br>
+            <strong>Task:</strong> Author an intuitive end-to-end UAT script tailored for the Customer Service Lead and Warehouse Supervisor. Use pure business terminology, clear test data parameters, and objective sign-off criteria.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Kịch Bản UAT Mẫu Hoàn Chỉnh</span><span class="lang-en">👉 View Complete Business UAT Script</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <h4 style="margin-bottom: 0.5rem;">KỊCH BẢN NGHIỆM THU: UAT-SCRIPT-RET-01</h4>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>Mục tiêu:</strong> Nghiệm thu chu trình xử lý yêu cầu đổi trả hàng do lỗi kỹ thuật và hoàn tiền ví điện tử tự động.<br>
+                <strong>Người thực hiện:</strong> CS Specialist (Nguyễn Thu Hà), Warehouse Officer (Lê Văn Mạnh).<br>
+                <strong>Dữ liệu chuẩn bị trước:</strong> Đơn hàng <code>ORD-2026-9901</code> ở trạng thái <code>DELIVERED</code> vào ngày hôm qua (chưa quá 7 ngày). Giá trị thanh toán ví Momo: 850,000 VNĐ.<br>
+                <br>
+                <strong>Các bước thực hiện & Tiêu chí nghiệm thu:</strong><br>
+                <strong>Bước 1 (CS Portal):</strong> Nhân viên CS mở ứng dụng Chăm sóc khách hàng, tra cứu mã đơn hàng <code>ORD-2026-9901</code>, bấm "Tạo Yêu Cầu Trả Hàng". Chọn lý do: "Lỗi kỹ thuật - Sản phẩm không lên nguồn". Tải lên 1 ảnh biên bản đồng kiểm.<br>
+                <em>&rarr; Kết quả đạt:</em> Hệ thống hiển thị thông báo "Yêu cầu đổi trả RET-0081 được tạo thành công", trạng thái đơn chuyển sang <code>AWAITING_RETURN_PICKUP</code>; SMS gửi đến số điện thoại khách hàng xác nhận lịch lấy hàng.<br>
+                <br>
+                <strong>Bước 2 (Warehouse App):</strong> Nhân viên kho nhận kiện hàng hoàn, mở màn hình Quét mã QR, quét mã vận đơn <code>RET-0081</code>, bấm "Kiểm tra chất lượng (QC Passed)".<br>
+                <em>&rarr; Kết quả đạt:</em> Nút "Hoàn Tất Nhập Kho & Kích Hoạt Hoàn Tiền" sáng lên; hệ thống ghi nhận tăng 1 tồn kho trong phân loại Hàng Lỗi Chờ Bảo Hành.<br>
+                <br>
+                <strong>Bước 3 (Customer App / Wallet):</strong> Đăng nhập tài khoản khách hàng test trên điện thoại, kiểm tra số dư ví Momo và lịch sử thông báo.<br>
+                <em>&rarr; Kết quả đạt:</em> Nhận thông báo "Bạn đã được hoàn tiền 850,000 VNĐ cho đơn hàng ORD-2026-9901"; số dư ví Momo tăng đúng 850,000 VNĐ trong vòng 10 giây; trạng thái đơn hàng trên sàn cập nhật thành <code>REFUNDED_CLOSED</code>.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>Objective:</strong> End-to-end validation of defective product return intake and automated digital wallet refund settlement.<br>
+                <strong>Actors:</strong> CS Specialist, Warehouse Officer.<br>
+                <strong>Pre-seeded Test Data:</strong> Order <code>ORD-2026-9901</code> in <code>DELIVERED</code> status completed yesterday (&lt; 7-day policy). Paid via Momo wallet: 850,000 VND.<br>
+                <br>
+                <strong>Action Steps & Pass Criteria:</strong><br>
+                <strong>Step 1 (CS Portal):</strong> CS specialist queries order <code>ORD-2026-9901</code>, clicks "Initiate Return", selects "Defective Unit - Device won't power on", uploads test proof image.<br>
+                <em>&rarr; Pass Criteria:</em> System displays "Return Ticket RET-0081 created successfully"; order state transitions to <code>AWAITING_RETURN_PICKUP</code>; SMS notification delivered to customer mobile.<br>
+                <br>
+                <strong>Step 2 (Warehouse App):</strong> Warehouse receiver receives package, scans return barcode <code>RET-0081</code>, selects "QC Inspection Passed".<br>
+                <em>&rarr; Pass Criteria:</em> "Receive Goods & Trigger Refund" button enables; inventory ledger increments defective quarantine stock by +1 unit.<br>
+                <br>
+                <strong>Step 3 (Customer App / Wallet):</strong> Log into test customer mobile app; inspect Momo wallet balance and notification feed.<br>
+                <em>&rarr; Pass Criteria:</em> Push notification received: "Refund of 850,000 VND processed for order ORD-2026-9901"; Momo wallet balance increments by exactly 850,000 VND within 10 seconds; final order lifecycle updates to <code>REFUNDED_CLOSED</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION G: TECHNICAL INTERVIEW PREPARATION -->
+      <section id="sec-interviews" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">G</span>
+          <h2>
+            <span class="lang-vi">Bộ Câu Hỏi Phỏng Vấn Kỹ Thuật Chuyên Sâu (Chuẩn STAR Method)</span>
+            <span class="lang-en">Technical BA Interview Questions & Calibrated STAR Responses</span>
+          </h2>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 1: Ranh giới trách nhiệm giữa BA và QA trong giai đoạn nghiệm thu hệ thống là gì? Khi nào một vấn đề được coi là Bug và khi nào là Change Request?</span>
+            <span class="lang-en">Question 1: What is the boundary of responsibility between BA and QA during acceptance? When is an issue classified as a Bug versus a Change Request?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation (Bối cảnh):</strong> Trong đợt nghiệm thu UAT cho một cổng tài chính, người dùng phàn nàn rằng hệ thống không cho phép tải lên chứng từ kích thước 25MB và đòi hỏi đội kỹ thuật phải sửa ngay trước khi nghiệm thu.<br>
+            • <strong>Task (Nhiệm vụ):</strong> Với vai trò Lead BA, tôi phải phân định xem đây là lỗi hệ thống (Bug) cần sửa trong phạm vi sprint hay là một Yêu cầu thay đổi (Change Request) để bảo vệ ngân sách và tiến độ dự án.<br>
+            • <strong>Action (Hành động):</strong> Tôi đối chiếu lại tài liệu SFS đã được ký duyệt (Baseline SFS v1.0). Mục Non-Functional Requirements quy định rõ: <em>"Kích thước file chứng từ tối đa là 10MB để tối ưu băng thông và lưu trữ"</em>. Tôi giải thích với người dùng rằng hệ thống hoạt động đúng 100% theo đặc tả đã ký kết. Sau đó, tôi phân tích tác động (Impact Analysis) nếu nâng lên 25MB (ảnh hưởng tới chi phí lưu trữ AWS S3 và thời gian upload). Tôi hướng dẫn người dùng lập một Change Request chính thức trình lên Hội đồng Quản trị Thay đổi (CCB).<br>
+            • <strong>Result (Kết quả):</strong> Đợt nghiệm thu UAT tiếp tục đúng hạn mà không bị tắc nghẽn; người dùng hiểu rõ quy trình quản trị phạm vi, và yêu cầu 25MB được đưa vào kế hoạch nâng cấp Phase 2 có ngân sách riêng.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> During UAT for a financial portal, business users lodged a complaint that the system rejected 25MB invoice uploads and demanded an immediate fix before sign-off.<br>
+            • <strong>Task:</strong> As Lead BA, I had to impartially arbitrate whether this constituted a Defect (within sprint scope) or a Scope Change Request (CR) to safeguard project timeline and budget.<br>
+            • <strong>Action:</strong> I traced back to the baselined SFS v1.0 signed off by stakeholders. Section NFR-04 explicitly specified: <em>"Maximum attachment file size is capped at 10MB to optimize network throughput and S3 storage"</em>. I demonstrated that the system strictly adhered to agreed requirements. I then facilitated an Impact Assessment examining cloud storage costs and API timeout implications, guiding the stakeholder to submit a formal Change Request to the Change Control Board (CCB).<br>
+            • <strong>Result:</strong> UAT proceeded on schedule without scope leakage; stakeholders respected the governance discipline, and the 25MB capability was scheduled for Phase 2 with dedicated budget allocation.
+          </p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 2: Bạn xử lý thế nào khi người dùng doanh nghiệp (Business Users) không chịu tham gia UAT vì bận công việc vận hành hàng ngày?</span>
+            <span class="lang-en">Question 2: How do you handle situations where business users refuse or neglect to participate in UAT due to daily operational overload?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Trong dự án ERP phân hệ Quản lý Kho, thủ kho và nhân viên mua hàng liên tục vắng mặt trong các buổi UAT với lý do phải tập trung xuất nhập hàng cuối quý.<br>
+            • <strong>Task:</strong> Tôi cần đảm bảo hệ thống được kiểm thử thực tế bởi đúng người dùng cuối trước ngày Go-live mà không gây gián đoạn hoạt động kinh doanh của doanh nghiệp.<br>
+            • <strong>Action:</strong> Tôi đã thực hiện 3 hành động chiến lược: (1) Chia nhỏ kịch bản UAT từ 1 buổi 4 tiếng thành các phiên mini 30 phút tập trung vào từng nghiệp vụ đơn lẻ (Micro-UAT Sessions); (2) Chuẩn bị sẵn 100% dữ liệu test mẫu (Pre-seeded Test Data) để người dùng chỉ cần đăng nhập và thực hiện thao tác nghiệp vụ thay vì tự gõ dữ liệu mồi; (3) Báo cáo lên Project Sponsor về rủi ro gián đoạn vận hành sau Go-live nếu thiếu UAT, từ đó Ban Giám đốc đồng ý điều động nhân sự hỗ trợ bán thời gian cho đội kho.<br>
+            • <strong>Result:</strong> Tỷ lệ tham gia UAT tăng từ 25% lên 92%; phát hiện sớm 6 lỗi luồng xử lý kho nguy cấp trước khi hệ thống chính thức vận hành.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> During an enterprise Warehouse ERP rollout, warehouse supervisors and procurement clerks repeatedly skipped scheduled UAT sessions citing month-end operational shipping demands.<br>
+            • <strong>Task:</strong> Secure rigorous validation from actual end-users before production cutover without sabotaging current business continuity.<br>
+            • <strong>Action:</strong> I executed a three-pronged strategy: (1) Restructured daunting 4-hour test windows into focused 30-minute "Micro-UAT" blocks; (2) Pre-seeded 100% of required test fixtures and accounts so users executed pure business actions rather than tedious data entry; (3) Quantified post-launch operational disruption risks to the Executive Sponsor, securing temporary staffing relief for key business testers.<br>
+            • <strong>Result:</strong> UAT participation surged from 25% to 92%, uncovering 6 critical workflow defects prior to cutover that would have otherwise crippled warehouse dispatches.
+          </p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 3: Làm thế nào để bạn đảm bảo bộ Test Case có độ bao phủ (Coverage) đầy đủ mà không bị dư thừa hàng trăm ca kiểm thử trùng lặp?</span>
+            <span class="lang-en">Question 3: How do you guarantee comprehensive test coverage without creating hundreds of redundant, low-value test cases?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Một nhóm dự án trước đây từng viết hơn 400 test case cho một mô-đun đăng ký tài khoản nhưng vẫn để lọt lỗi bảo mật nghiêm trọng lên môi trường thật.<br>
+            • <strong>Task:</strong> Tái cấu trúc bộ kiểm thử theo hướng tinh gọn (Lean Test Suite), tối ưu hóa thời gian thực thi nhưng tăng cường khả năng phát hiện lỗi.<br>
+            • <strong>Action:</strong> Tôi áp dụng triệt để kỹ thuật Phân vùng tương đương (EP) kết hợp Phân tích giá trị biên (BVA 2-value). Thay vì test 20 số điện thoại ngẫu nhiên, tôi chỉ chọn: 1 số đúng chuẩn 10 chữ số (Valid), 1 chuỗi 9 chữ số (Min-1), 1 chuỗi 11 chữ số (Max+1), 1 chuỗi chứa ký tự chữ (Invalid Type), và 1 đầu số mạng không tồn tại. Đồng thời, tôi lập Ma trận truy vết RTM đối chiếu từng tiêu chí chấp nhận với đúng 1 test case thuận và 1-2 test case nghịch.<br>
+            • <strong>Result:</strong> Giảm tổng số test case từ 400 xuống còn 65 test case chất lượng cao (giảm 83% thời gian thực thi thủ công), trong khi độ bao phủ yêu cầu đạt 100% và không có bug phát sinh lọt qua vòng UAT.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> A legacy project team maintained over 400 redundant test cases for a user registration module, yet high-severity security and format defects still leaked into production.<br>
+            • <strong>Task:</strong> Refactor into a Lean Test Suite optimizing execution velocity while maximizing defect detection potency.<br>
+            • <strong>Action:</strong> I instituted rigorous Equivalence Partitioning and 2-value Boundary Value Analysis. Instead of arbitrarily typing 20 random phone numbers, I curated exact boundary points: 1 valid 10-digit format, 1 9-digit boundary (Min-1), 1 11-digit boundary (Max+1), 1 alphanumeric string, and 1 non-existent telco prefix. Concurrently, I mapped every acceptance criterion against an RTM ensuring exactly one positive case and focused negative variants.<br>
+            • <strong>Result:</strong> Reduced the test suite from 400 down to 65 high-potency cases (an 83% reduction in manual execution overhead) while boosting requirement coverage to 100% with zero defect leakage in subsequent cycles.
+          </p>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 4: Hãy mô tả cách bạn điều phối một cuộc họp Sàng Lọc Lỗi (Defect Triage Meeting) khi ngày Go-Live chỉ còn 48 giờ?</span>
+            <span class="lang-en">Question 4: How do you orchestrate an emergency Defect Triage session 48 hours prior to an inflexible Go-Live deadline?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Trước giờ Go-live 48 tiếng, bảng quản lý lỗi ghi nhận còn tồn đọng 18 defects, gây tâm lý hoang mang giữa Tech Lead và Product Owner.<br>
+            • <strong>Task:</strong> Làm rõ mức độ rủi ro thực tế của 18 lỗi này và ra quyết định chính xác: Phát hành (Go), Hoãn (No-Go), hay Phát hành kèm giải pháp tạm thời (Workaround).<br>
+            • <strong>Action:</strong> Tôi triệu tập phiên Triage khẩn cấp kéo dài 45 phút gồm Tech Lead, QA Lead và Product Owner. Tôi phân loại 18 lỗi theo ma trận 4 góc:<br>
+            - 1 lỗi Crash khi xuất báo cáo PDF cuối năm &rarr; Xác định là Sev 2 nhưng Priority P3 (vì tháng 12 mới cần dùng đến). Thống nhất hoãn sửa sang Sprint sau.<br>
+            - 1 lỗi không gửi được SMS mã OTP &rarr; Sev 1, Priority P1. Đội dev tập trung 100% nguồn lực hotfix trong 4 giờ.<br>
+            - 16 lỗi giao diện chính tả và canh lề &rarr; Sev 4, chấp thuận phát hành kèm ghi chú bản vá (Known Issues).<br>
+            • <strong>Result:</strong> Hệ thống Go-live đúng hạn an toàn 100% cho tính năng cốt lõi; loại bỏ hoàn toàn căng thẳng tranh cãi giữa các bộ phận.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> 48 hours prior to a national public launch, the defect backlog registered 18 open bugs, creating panic between the Engineering Lead and the Product Owner.<br>
+            • <strong>Task:</strong> Objectively evaluate operational risk and establish a consensus decision: Go, No-Go, or Go with Workarounds.<br>
+            • <strong>Action:</strong> I convened a 45-minute emergency triage session with the Tech Lead, QA Lead, and Business Sponsor. We categorized the 18 items against a risk matrix:<br>
+            - 1 PDF export crash for annual tax summaries was Sev 2 but Priority P3 (only needed at calendar year-end). Deferred to Sprint 2.<br>
+            - 1 SMS OTP gateway delivery failure was Sev 1, Priority P1. Dedicated senior backend dev to hotfix within 4 hours.<br>
+            - 16 UI cosmetic and label typos were Sev 4, documented in release notes as Known Issues.<br>
+            • <strong>Result:</strong> Achieved an on-time, zero-incident launch of core transaction journeys while eliminating inter-departmental finger-pointing.
+          </p>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 5: Tiêu chí nào giúp bạn quyết định một buổi UAT đã đủ điều kiện để Ký Biên Bản Nghiệm Thu (Sign-off)?</span>
+            <span class="lang-en">Question 5: What objective exit criteria govern your recommendation to formally Sign-off on UAT?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Trong một dự án ngân hàng số, áp lực từ phía kinh doanh muốn ký nghiệm thu sớm để kịp KPI quý dù hệ thống chưa hoàn tất hết kịch bản test.<br>
+            • <strong>Task:</strong> Thiết lập bộ tiêu chuẩn đóng UAT (UAT Exit Criteria) rõ ràng, bảo vệ chất lượng sản phẩm và bảo vệ quyền lợi pháp lý của chính tổ chức.<br>
+            • <strong>Action:</strong> Tôi áp dụng bộ 4 tiêu chí nghiệm thu bất di bất dịch đã được quy định trong UAT Plan ban đầu:<br>
+            1. 100% kịch bản UAT cốt lõi (Core Business Workflows) phải được thực thi.<br>
+            2. Tỷ lệ Passed tổng thể đạt tối thiểu 95%.<br>
+            3. Không còn bất kỳ lỗi nào ở mức Độ Nghiêm Trọng 1 (Critical) hoặc Mức 2 (Major) chưa được giải quyết hoặc chưa có giải pháp thay thế an toàn.<br>
+            4. Toàn bộ lỗi Mức 3 và 4 còn tồn phải có kế hoạch khắc phục rõ ràng kèm chữ ký chấp thuận của Product Owner trong Bản ghi lỗi tồn đọng (Known Defects Log).<br>
+            • <strong>Result:</strong> Bản nghiệm thu UAT được ký kết dựa trên số liệu định lượng minh bạch, không ai có thể can thiệp bằng cảm tính cá nhân, giúp sản phẩm vận hành ổn định lâu dài.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> In a digital banking core migration, intense commercial pressures urged premature UAT sign-off to hit quarterly bonus milestones despite incomplete testing.<br>
+            • <strong>Task:</strong> Enforce objective, non-negotiable UAT Exit Criteria safeguarding software integrity and organizational governance.<br>
+            • <strong>Action:</strong> I upheld the 4 immutable exit gates formalized in our initial UAT Charter:<br>
+            1. 100% of core mission-critical business workflows fully executed.<br>
+            2. Overall test pass rate exceeding 95%.<br>
+            3. Zero open Severity 1 (Critical) or Severity 2 (Major) defects without verified automated workarounds.<br>
+            4. 100% of open Sev 3/4 minor anomalies explicitly cataloged in the Known Defects Register with target sprint fixes and signed by the Product Owner.<br>
+            • <strong>Result:</strong> Formal sign-off was executed upon verifiable quantitative benchmarks, eliminating emotional bias and ensuring zero post-release fiscal outages.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION H: GLOSSARY & REFERENCES -->
+      <section id="sec-references" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">H</span>
+          <h2>
+            <span class="lang-vi">Thuật Ngữ Chuyên Ngành & Nguồn Tài Liệu Uy Tín</span>
+            <span class="lang-en">Bilingual Quality Glossary & Authoritative References</span>
+          </h2>
+        </div>
+
+        <h3 style="margin-bottom: 0.75rem;"><span class="lang-vi">Thuật Ngữ Song Ngữ (Bilingual Quality Glossary)</span><span class="lang-en">Bilingual Quality Glossary</span></h3>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Thuật ngữ Tiếng Anh</span><span class="lang-en">English Term</span></th>
+                <th><span class="lang-vi">Thuật ngữ Tiếng Việt</span><span class="lang-en">Vietnamese Equivalent</span></th>
+                <th><span class="lang-vi">Định nghĩa Nghiệp vụ & Kỹ thuật</span><span class="lang-en">Technical Definition</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Verification</strong></td>
+                <td>Xác minh kỹ thuật</td>
+                <td><span class="lang-vi">Kiểm tra phần mềm có đáp ứng đúng đặc tả tài liệu SFS và kiến trúc kỹ thuật không.</span><span class="lang-en">Evaluating whether software conforms to technical specifications and design constraints.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Validation</strong></td>
+                <td>Thẩm định nghiệp vụ</td>
+                <td><span class="lang-vi">Kiểm tra phần mềm có giải quyết đúng bài toán và mang lại giá trị kinh doanh thực tế không.</span><span class="lang-en">Evaluating whether the product fulfills its intended operational business purpose.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Equivalence Partitioning (EP)</strong></td>
+                <td>Phân vùng tương đương</td>
+                <td><span class="lang-vi">Kỹ thuật chia miền dữ liệu thành các tập giá trị mà hệ thống xử lý hoàn toàn giống nhau.</span><span class="lang-en">Black-box technique dividing input domains into partitions assumed to be processed identically.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Boundary Value Analysis (BVA)</strong></td>
+                <td>Phân tích giá trị biên</td>
+                <td><span class="lang-vi">Kỹ thuật kiểm thử các giá trị tại ranh giới chuyển tiếp giữa các phân vùng dữ liệu.</span><span class="lang-en">Black-box technique testing minimum, maximum, and immediate adjacent threshold values.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Decision Table</strong></td>
+                <td>Bảng quyết định</td>
+                <td><span class="lang-vi">Bảng ma trận logic biểu diễn toàn bộ các tổ hợp điều kiện đầu vào và hành động đầu ra.</span><span class="lang-en">Tabular representation mapping combinatorial input conditions to corresponding system actions.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Requirements Traceability Matrix (RTM)</strong></td>
+                <td>Ma trận truy vết yêu cầu</td>
+                <td><span class="lang-vi">Bảng đối chiếu hai chiều liên kết từ BRD &rarr; SFS &rarr; Test Case &rarr; Kết quả UAT &rarr; Defect.</span><span class="lang-en">Bidirectional grid tracking requirements through specifications, test cases, and defects.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Defect Severity</strong></td>
+                <td>Mức độ nghiêm trọng của lỗi</td>
+                <td><span class="lang-vi">Mức độ ảnh hưởng kỹ thuật của lỗi đối với sự ổn định và an toàn dữ liệu của hệ thống.</span><span class="lang-en">The technical extent of damage a defect inflicts on system operation or data integrity.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Defect Priority</strong></td>
+                <td>Độ ưu tiên xử lý lỗi</td>
+                <td><span class="lang-vi">Thứ tự cấp bách cần sửa lỗi xét theo góc độ kinh doanh và lịch trình phát hành.</span><span class="lang-en">The business urgency dictating how rapidly an identified defect must be patched.</span></td>
+              </tr>
+              <tr>
+                <td><strong>User Acceptance Testing (UAT)</strong></td>
+                <td>Kiểm thử nghiệm thu người dùng</td>
+                <td><span class="lang-vi">Giai đoạn kiểm thử cuối cùng do người dùng kinh doanh thực hiện trước khi ký bàn giao sản phẩm.</span><span class="lang-en">Final testing phase where actual business end-users validate solution readiness for production.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Defect Triage</strong></td>
+                <td>Sàng lọc và phân loại lỗi</td>
+                <td><span class="lang-vi">Cuộc họp liên bộ phận giữa BA, QA, Dev và PO để thống nhất mức độ, giải pháp và thời điểm sửa lỗi.</span><span class="lang-en">Cross-functional review session to review, categorize, prioritize, and assign open defects.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem;"><span class="lang-vi">Nguồn Tài Liệu Uy Tín & Chuẩn Mực Quốc Tế</span><span class="lang-en">Authoritative Standards & References</span></h3>
+        <ul style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+          <li>
+            <strong>ISTQB Certified Tester Foundation Level (CTFL) Standard v4.0 (2023)</strong> — International Software Testing Qualifications Board.<br>
+            <em>Phạm vi:</em> Cung cấp chuẩn mực quốc tế về kỹ thuật thiết kế hộp đen (EP, BVA, Decision Tables, State Transitions) và quy trình quản lý defect.<br>
+            <span class="badge" style="background: #ecfdf5; color: #047857; font-size: 0.75rem; border: 1px solid #a7f3d0;">Free Open Access</span> • <a href="https://www.istqb.org" target="_blank" rel="noopener noreferrer">istqb.org</a>
+          </li>
+          <li>
+            <strong>ISO/IEC/IEEE 29119: Software and Systems Engineering — Software Testing (Parts 1-5)</strong> — International Organization for Standardization / IEEE Computer Society.<br>
+            <em>Phạm vi:</em> Bộ tiêu chuẩn quốc tế toàn diện nhất về thuật ngữ kiểm thử, quy trình kiểm thử tổ chức, kỹ thuật thiết kế test case và tài liệu nghiệm thu.<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Commercial / Academic Standard</span> • <a href="https://www.iso.org/standard/64408.html" target="_blank" rel="noopener noreferrer">iso.org / ieee.org</a>
+          </li>
+          <li>
+            <strong>IIBA BABOK Guide v3 (A Guide to the Business Analysis Body of Knowledge)</strong> — Chapter 7: Requirements Analysis and Design Definition & Chapter 8: Solution Evaluation.<br>
+            <em>Phạm vi:</em> Định nghĩa vai trò của Business Analyst trong việc xác minh (Verification), thẩm định (Validation) và đánh giá giải pháp (Solution Evaluation).<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Commercial Standard / IIBA Member</span> • <a href="https://www.iiba.org/babok-guide/" target="_blank" rel="noopener noreferrer">iiba.org</a>
+          </li>
+          <li>
+            <strong>Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</strong> — Jez Humble & David Farley (Addison-Wesley Signature Series).<br>
+            <em>Phạm vi:</em> Kiến trúc chiến lược kiểm thử tích hợp liên tục (CI/CD), tự động hóa kiểm thử chấp nhận (Automated Acceptance Testing) và quản lý rủi ro phát hành.<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Published Book</span> • ISBN 970-0321601919
+          </li>
+        </ul>
+      </section>
+
+      
+        <!-- NAVIGATION FOOTER -->
+        <nav class="lesson-footer-nav" style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-warm); flex-wrap: wrap;">
+          <a href="../sfs-software-functional-specification/" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span>&larr;</span>
+            <span><span class="lang-vi">Bài Trước: SFS Functional Module</span><span class="lang-en">Prev: SFS Functional Module</span></span>
+          </a>
+          <a href="../change-request-impact-analysis/" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span><span class="lang-vi">Bài Tiếp: Change Request & Đánh Giá Tác Động</span><span class="lang-en">Next: Change Request & Impact Analysis</span></span>
+            <span>&rarr;</span>
+          </a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">Thẻ ghi nhớ (48 thẻ)</span><span class="lang-en">Flashcards (48 Cards)</span></a></li>
+          <li><a href="../../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay & Biểu mẫu</span><span class="lang-en">Handbook & Templates</span></a></li>
+          <li><a href="../../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Kho Tải về</span><span class="lang-en">Downloads Hub</span></a></li>
+          <li><a href="../../about/" style="color: var(--text-muted);"><span class="lang-vi">Giới thiệu tác giả</span><span class="lang-en">About Author</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Chuẩn mực tham chiếu</span>
+          <span class="lang-en">Standard Frameworks</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          BABOK® Guide v3 (IIBA) • OMG BPMN™ 2.0 • OMG UML® 2.5 • Agile Alliance • ANSI/ISO SQL • IETF RFC Standards • ISTQB® Testing Principles.
+        </p>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        © 2026 <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>. All rights reserved.
+      </div>
+      <div>
+        <span class="lang-vi">Trang web cá nhân độc lập phục vụ học tập và nghiên cứu chuyên môn.</span>
+        <span class="lang-en">Independent personal knowledge platform for professional study and practice.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

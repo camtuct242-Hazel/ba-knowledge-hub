@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Bản Đồ 8 Miền Tri Thức & Ma Trận Năng Lực ITBA | Hazel BA Hub</title>
+  <title class="lang-en">ITBA 8-Domain Knowledge Map & Competency Matrix | Hazel BA Hub</title>
+  <meta name="description" content="Hệ thống hóa toàn diện 8 miền tri thức chuyên sâu, khung năng lực IT Business Analyst thực chiến, bài tập tình huống và câu hỏi phỏng vấn STAR - Biên soạn bởi Nguyễn Đăng Cẩm Tú (Hazel).">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/flashcards.css">
+  <style>
+    .domain-section {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: #ffffff;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .domain-header {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .domain-title-group h2 {
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+      font-size: 1.5rem;
+      color: var(--text-heading);
+    }
+    .domain-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .domain-subheading {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-primary, #1e3a8a);
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .domain-p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-body);
+      margin-bottom: 1rem;
+    }
+    .interactive-solution {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+    .solution-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      background: #f8fafc;
+      border: none;
+      font-weight: 600;
+      color: var(--color-primary, #1e3a8a);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .solution-trigger:hover {
+      background: #f1f5f9;
+    }
+    .solution-content {
+      padding: 1.25rem;
+      display: none;
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+    }
+    .solution-content.active {
+      display: block;
+    }
+    .masterclass-link-card {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .domain-nav-strip {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.75rem 0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 60px;
+      background: #ffffff;
+      z-index: 10;
+    }
+    .domain-nav-pill {
+      white-space: nowrap;
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-body);
+      background: #f1f5f9;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .domain-nav-pill:hover {
+      background: var(--color-primary, #1e3a8a);
+      color: #ffffff;
+    }
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+  </style>
+  <!-- Core i18n -->
+  <script src="../assets/js/i18n.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../knowledge-map/" class="nav-link active"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../study-guide/" class="nav-link"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 2.5rem 1.5rem;">
+    <!-- PAGE HERO -->
+    <div class="section-header">
+      <div>
+        <h1>
+          <span class="lang-vi">Bản Đồ 8 Miền Tri Thức & Ma Trận Năng Lực ITBA Chuyên Sâu</span>
+          <span class="lang-en">ITBA 8-Domain Comprehensive Knowledge Map & Competency Matrix</span>
+        </h1>
+        <p>
+          <span class="lang-vi">Bách khoa toàn thư phương pháp luận Phân tích Nghiệp vụ Phần mềm độc lập: Tích hợp đầy đủ lý thuyết cốt lõi, ma trận công cụ, ví dụ thực chiến doanh nghiệp, bài tập tình huống có lời giải và câu hỏi phỏng vấn chuẩn STAR.</span>
+          <span class="lang-en">An independent, exhaustive IT Business Analysis knowledge compendium: Integrating core theory, analytical tooling matrices, worked enterprise scenarios, hands-on practicums, and STAR interview mastery.</span>
+        </p>
+      </div>
+      <div>
+        <a href="../downloads/" class="btn btn-secondary btn-sm">
+          <span>📥</span>
+          <span class="lang-vi">Tải Tài Liệu Tổng Hợp</span>
+          <span class="lang-en">Download Study Docs</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- STANDARDS CALLOUT -->
+    <div class="callout" style="background: #FFFDF7; border-color: var(--color-primary); margin-bottom: 2rem;">
+      <div class="callout-header">
+        <span>📐</span>
+        <span class="lang-vi">Khung Chuẩn Mực Quốc Tế Mở Tích Hợp (Open Global Standards Alignment)</span>
+        <span class="lang-en">Integrated Open International Frameworks</span>
+      </div>
+      <div class="callout-body" style="font-size: 0.9rem; line-height: 1.8;">
+        <p style="margin-bottom: 0.75rem;">
+          <span class="lang-vi">Toàn bộ 8 miền tri thức được xây dựng độc lập dựa trên việc tích hợp 6 chuẩn mực công nghiệp mở hàng đầu thế giới:</span>
+          <span class="lang-en">All 8 knowledge domains are rigorously articulated upon 6 leading open international standards:</span>
+        </p>
+        <ul style="padding-left: 1.25rem;">
+          <li><strong>BABOK® Guide v3 (IIBA)</strong>: Khung năng lực phân tích nghiệp vụ, mô hình BACCM, 9 kỹ thuật khơi gợi và vòng đời quản trị yêu cầu.</li>
+          <li><strong>ISO/IEC/IEEE 29148:2018 & IEEE 830</strong>: Tiêu chuẩn quốc tế về kỹ nghệ yêu cầu, phân tầng đặc tả (BRD vs. SFS/SRS) và đường cơ sở.</li>
+          <li><strong>Agile Alliance & Scrum Guide 2020</strong>: Phương pháp luận phát triển thích ứng, các nghi thức Scrum, tiêu chí INVEST và BDD User Stories.</li>
+          <li><strong>OMG BPMN™ 2.0 & OMG UML® 2.5</strong>: Chuẩn mô hình hóa quy trình kinh doanh (Pools/Lanes) và sơ đồ kiến trúc hệ thống (Use Case, Sequence, State Machine).</li>
+          <li><strong>ANSI/ISO SQL (Codd's Relational Theory)</strong>: Mô hình dữ liệu quan hệ, đại số quan hệ và chuẩn hóa dữ liệu 1NF đến 3NF.</li>
+          <li><strong>ISTQB® CTFL 4.0 & IETF RFC HTTP Semantics</strong>: Kỹ thuật kiểm thử hộp đen (EP, BVA, Decision Tables), ma trận RTM và tiêu chuẩn REST API.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- STICKY DOMAIN QUICK NAV -->
+    <nav class="domain-nav-strip" aria-label="Quick jump to domain">
+      <a href="#domain-1" class="domain-nav-pill">Domain 1: SDLC & BACCM</a>
+      <a href="#domain-2" class="domain-nav-pill">Domain 2: Elicitation & Stakeholders</a>
+      <a href="#domain-3" class="domain-nav-pill">Domain 3: RCA & Problem Solving</a>
+      <a href="#domain-4" class="domain-nav-pill">Domain 4: Requirements & Scope</a>
+      <a href="#domain-5" class="domain-nav-pill">Domain 5: Documentation & Stories</a>
+      <a href="#domain-6" class="domain-nav-pill">Domain 6: BPMN & UML Modeling</a>
+      <a href="#domain-7" class="domain-nav-pill">Domain 7: Data & SQL Architecture</a>
+      <a href="#domain-8" class="domain-nav-pill">Domain 8: REST APIs & QA/UAT</a>
+    </nav>
+"""
+
+with open(r"C:\Users\asus\.gemini\antigravity\brain\1228ac6c-02c7-4591-80b5-ea22e436671f\scratch\km_part1.html", 'w', encoding='utf-8') as f:
+    f.write(part1)
+
+print("Part 1 written.")
+# Domain 1 & Domain 2
+part2 = """
+    <!-- ========================================== -->
+    <!-- DOMAIN 1: BA FUNDAMENTALS & SDLC -->
+    <!-- ========================================== -->
+    <section id="domain-1" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 1</span>
+          <h2>
+            <span class="lang-vi">Cơ Sở Phân Tích Nghiệp Vụ & Vòng Đời Phát Triển Phần Mềm (SDLC)</span>
+            <span class="lang-en">BA Fundamentals & Software Development Life Cycle (SDLC)</span>
+          </h2>
+          <div class="domain-meta">Standard: IIBA BABOK® v3 Ch. 2 & Agile Alliance Scrum Guide</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>📘</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Mô Hình BACCM & Vai Trò Cầu Nối Của BA</span>
+        <span class="lang-en">1. Conceptual Core: The BACCM Framework & The BA's Bridging Mandate</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Theo IIBA BABOK v3, <strong>Mô hình Khái niệm Cốt lõi của Phân tích Nghiệp vụ (BACCM - Business Analysis Core Concept Model)</strong> bao gồm 6 yếu tố tương tác hữu cơ với nhau: <strong>Change (Sự thay đổi)</strong>, <strong>Need (Nhu cầu cốt lõi)</strong>, <strong>Solution (Giải pháp đáp ứng)</strong>, <strong>Stakeholder (Bên liên quan)</strong>, <strong>Value (Giá trị mang lại)</strong>, và <strong>Context (Bối cảnh tổ chức)</strong>. Mọi phân tích của BA đều phải trả lời được câu hỏi: <em>"Giải pháp này tạo ra giá trị gì cho bên liên quan trong bối cảnh thay đổi hiện tại?"</em></span>
+        <span class="lang-en">According to IIBA BABOK v3, the <strong>Business Analysis Core Concept Model (BACCM)</strong> defines 6 mutually reinforcing pillars: <strong>Change</strong>, <strong>Need</strong>, <strong>Solution</strong>, <strong>Stakeholder</strong>, <strong>Value</strong>, and <strong>Context</strong>. Every analysis performed by a BA must answer: <em>"What value does this solution deliver to which stakeholders within this evolving organizational context?"</em></span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Khái niệm BACCM</span><span class="lang-en">BACCM Pillar</span></th>
+              <th><span class="lang-vi">Định nghĩa Nghiệp vụ</span><span class="lang-en">Business Definition</span></th>
+              <th><span class="lang-vi">Minh họa Thực tế (Chuyển đổi Bán lẻ Đa kênh)</span><span class="lang-en">Real-world Scenario (Omnichannel Retail)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Change (Thay đổi)</strong></td>
+              <td><span class="lang-vi">Hành động chuyển đổi tổ chức từ trạng thái hiện tại sang trạng thái tương lai.</span><span class="lang-en">The act of transforming an enterprise from current to future state.</span></td>
+              <td><span class="lang-vi">Chuyển đổi từ bán hàng tại quầy truyền thống sang hệ thống bán hàng đa kênh (Omnichannel).</span><span class="lang-en">Migrating brick-and-mortar sales into an integrated omnichannel engine.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Need (Nhu cầu)</strong></td>
+              <td><span class="lang-vi">Vấn đề hoặc cơ hội mà tổ chức cần giải quyết để tồn tại và phát triển.</span><span class="lang-en">A problem or opportunity of sufficient urgency to motivate action.</span></td>
+              <td><span class="lang-vi">Khách hàng muốn mua hàng trên web nhưng có thể đổi trả trực tiếp tại bất kỳ cửa hàng nào.</span><span class="lang-en">Customers demand buying online and returning items at any physical store.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Solution (Giải pháp)</strong></td>
+              <td><span class="lang-vi">Hệ thống hoặc quy trình được thiết kế nhằm thỏa mãn nhu cầu trong bối cảnh cụ thể.</span><span class="lang-en">A specific system or process engineered to satisfy the underlying need.</span></td>
+              <td><span class="lang-vi">Phát triển ứng dụng Order Management System (OMS) đồng bộ tồn kho thời gian thực.</span><span class="lang-en">Deploying a real-time cloud Order Management System (OMS) syncing inventory.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Stakeholder (Bên liên quan)</strong></td>
+              <td><span class="lang-vi">Cá nhân hoặc nhóm có quyền lợi, bị ảnh hưởng hoặc có khả năng tác động đến giải pháp.</span><span class="lang-en">Individuals or groups with an interest in, or impacted by, the solution.</span></td>
+              <td><span class="lang-vi">Khách hàng, nhân viên thu ngân quầy, thủ kho, kế toán trưởng và ban giám đốc.</span><span class="lang-en">Shoppers, retail cashiers, warehouse clerks, financial controllers, and executives.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Value (Giá trị)</strong></td>
+              <td><span class="lang-vi">Lợi ích hữu hình hoặc vô hình thu được từ giải pháp (tăng doanh thu, giảm chi phí).</span><span class="lang-en">Tangible or intangible gains unlocked by the solution (revenue, speed, NPS).</span></td>
+              <td><span class="lang-vi">Tăng 35% doanh thu bán chéo, giảm 80% thời gian xử lý đơn hàng đổi trả.</span><span class="lang-en">Boosting cross-sell revenue by 35% and slashing return turnaround by 80%.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Context (Bối cảnh)</strong></td>
+              <td><span class="lang-vi">Môi trường kinh doanh, công nghệ, văn hóa và luật pháp bao quanh sự thay đổi.</span><span class="lang-en">The environment, technological landscape, culture, and statutory regulations.</span></td>
+              <td><span class="lang-vi">Hạ tầng mạng tại các cửa hàng tỉnh lẻ chập chờn, yêu cầu hệ thống phải hỗ trợ chế độ Offline.</span><span class="lang-en">Unstable provincial store internet connectivity demanding robust offline-first POS caching.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🔄</span>
+        <span class="lang-vi">2. So Sánh Mô Hình Vòng Đời Phần Mềm: Waterfall vs. Agile Scrum vs. Kanban</span>
+        <span class="lang-en">2. Software Development Life Cycle (SDLC) Models Comparison</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Không có mô hình SDLC nào là "hoàn hảo cho mọi dự án". Lựa chọn mô hình phụ thuộc vào mức độ biến động của yêu cầu và rủi ro công nghệ:</span>
+        <span class="lang-en">No SDLC methodology is universally superior. Selection hinges upon requirement volatility and technical uncertainty:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Tiêu chí Đánh giá</span><span class="lang-en">Evaluation Dimension</span></th>
+              <th><span class="lang-vi">Mô hình Thác Nước (Waterfall)</span><span class="lang-en">Waterfall Model</span></th>
+              <th><span class="lang-vi">Agile Scrum (Sprint 2-4 tuần)</span><span class="lang-en">Agile Scrum</span></th>
+              <th><span class="lang-vi">Kanban (Luồng liên tục)</span><span class="lang-en">Kanban (Continuous Flow)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Đặc tính Phạm vi</strong></td>
+              <td><span class="lang-vi">Phạm vi cố định (Fixed Scope), tài liệu hóa đầy đủ trước khi bắt đầu lập trình.</span><span class="lang-en">Fixed scope, exhaustive upfront documentation prior to coding.</span></td>
+              <td><span class="lang-vi">Phạm vi linh hoạt (Flexible Scope), chia nhỏ thành các User Story trong Backlog.</span><span class="lang-en">Flexible scope, groomed into iterative User Stories in Product Backlog.</span></td>
+              <td><span class="lang-vi">Liên tục điều chỉnh theo công việc phát sinh (Just-in-Time).</span><span class="lang-en">Continuous task pull, prioritized just-in-time without fixed sprints.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Thời điểm Thử nghiệm</strong></td>
+              <td><span class="lang-vi">Kiểm thử ở giai đoạn cuối sau khi toàn bộ code đã hoàn thành (Big Bang Testing).</span><span class="lang-en">Testing happens at the tail-end post complete implementation.</span></td>
+              <td><span class="lang-vi">Kiểm thử liên tục trong từng Sprint (Sprint Testing & Acceptance).</span><span class="lang-en">Continuous testing in every sprint satisfying Definition of Done.</span></td>
+              <td><span class="lang-vi">Kiểm thử ngay khi từng thẻ công việc hoàn thành (WIP Limit).</span><span class="lang-en">Immediate verification per card within strict Work-In-Progress limits.</span></td>
+            </tr>
+            <tr>
+              <td><strong>Phù hợp nhất với</strong></td>
+              <td><span class="lang-vi">Dự án chính phủ, hạ tầng lõi Core Banking, dự án đấu thầu hợp đồng trọn gói (Fixed-Price).</span><span class="lang-en">Government contracts, Core Banking engines, fixed-price procurement tenders.</span></td>
+              <td><span class="lang-vi">Sản phẩm phần mềm SaaS, ứng dụng Mobile, Thương mại điện tử thay đổi nhanh.</span><span class="lang-en">SaaS platforms, consumer mobile apps, dynamic digital commerce.</span></td>
+              <td><span class="lang-vi">Đội ngũ Vận hành bảo trì (Maintenance, Support, DevOps Hotfixes).</span><span class="lang-en">Sustaining engineering, Tier-3 support, DevOps continuous maintenance.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Lựa Chọn Mô Hình SDLC Cho Dự Án</span>
+        <span class="lang-en">3. Hands-on Practicum: SDLC Model Selection Under Real Constraints</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống:</strong> Bạn là Lead BA tại một công ty công nghệ tài chính. Bạn được giao phụ trách 2 dự án đồng thời:<br>
+          • <em>Dự án Alpha:</em> Tích hợp phân hệ Báo cáo Thống kê Tuân thủ Thuế theo Thông tư mới của Ngân hàng Nhà nước, với ngày hiệu lực pháp lý bắt buộc là 01/01 năm sau. Mọi quy tắc tính thuế và định dạng file XML đã được quy định chi tiết trong văn bản luật.<br>
+          • <em>Dự án Beta:</em> Xây dựng ứng dụng Mua sắm Thông minh cho người tiêu dùng Gen Z với tính năng cốt lõi là gợi ý phong cách thời trang bằng AI, thị trường mục tiêu chưa từng có đối thủ cạnh tranh.<br>
+          <strong>Câu hỏi:</strong> Bạn sẽ đề xuất áp dụng mô hình SDLC nào cho từng dự án? Giải thích rõ lý do.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Luận Điểm Kiến Trúc Của Chuyên Gia</span><span class="lang-en">👉 View Expert Solution & Methodological Justification</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>1. Dự án Alpha &rarr; Áp dụng Mô hình Thác Nước (Waterfall hoặc V-Model):</strong><br>
+              <em>Lý do:</em> Yêu cầu tuân thủ luật định đã hoàn toàn đóng băng, không có yếu tố mơ hồ hay thay đổi liên tục; hạn chót pháp lý (01/01) là bất khả xâm phạm. Mô hình Waterfall giúp lập tài liệu đặc tả chi tiết và truy vết kiểm toán (Audit Trail) rõ ràng từ văn bản luật sang từng dòng mã nguồn và test case.
+            </p>
+            <p class="domain-p">
+              <strong>2. Dự án Beta &rarr; Áp dụng Mô hình Agile Scrum (Lean Discovery):</strong><br>
+              <em>Lý do:</em> Khách hàng Gen Z và thuật toán gợi ý AI có độ bất định cực kỳ cao (High Ambiguity & Market Risk). Cần áp dụng chu trình Scrum 2 tuần để liên tục tung ra các bản thử nghiệm nhỏ (MVP), đo lường chỉ số giữ chân người dùng (Retention Rate), và xoay trục sản phẩm (Pivot) dựa trên dữ liệu hành vi thực tế thay vì suy đoán trên giấy tờ.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Ranh Giới Giữa BA Và Product Owner</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): BA vs. Product Owner</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Trong một nhóm Agile Scrum, ranh giới trách nhiệm giữa Business Analyst (BA) và Product Owner (PO) được phân định như thế nào?"</span>
+          <span class="lang-en">Question: "In an Agile Scrum team, how do you define the exact division of responsibilities between a Business Analyst (BA) and a Product Owner (PO)?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong một dự án E-wallet lớn, nhóm phát triển thường xảy ra tranh chấp quyền quyết định giữa PO phía khách hàng và BA nội bộ.<br>
+          • <strong>Task:</strong> Tôi đã thiết lập một bảng thỏa thuận nguyên tắc vận hành (Team Working Agreement) phân định rõ vai trò hai bên.<br>
+          • <strong>Action:</strong> Tôi quy định rõ: Product Owner nắm quyền <strong>"What & Why"</strong> (Xác định tầm nhìn sản phẩm, độ ưu tiên backlog dựa trên giá trị kinh doanh ROI, và ký nghiệm thu tính năng). Trong khi đó, Business Analyst nắm quyền <strong>"How in Detail"</strong> (Đào sâu logic nghiệp vụ, khơi gợi ngoại lệ, thiết kế sơ đồ luồng quy trình, viết Acceptance Criteria bằng Gherkin, và làm rõ các ràng buộc kỹ thuật với đội Dev/QA).<br>
+          • <strong>Result:</strong> Loại bỏ hoàn toàn sự chồng chéo; PO yên tâm tập trung vào chiến lược thị trường, còn đội ngũ kỹ thuật có tài liệu đặc tả rõ ràng để triển khai Sprint mượt mà.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DOMAIN 2: STAKEHOLDER ENGAGEMENT & ELICITATION -->
+    <!-- ========================================== -->
+    <section id="domain-2" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 2</span>
+          <h2>
+            <span class="lang-vi">Tương Tác Bên Liên Quan & Kỹ Thuật Khơi Gợi Yêu Cầu Chuyên Nghiệp</span>
+            <span class="lang-en">Stakeholder Engagement & Elicitation Mastery</span>
+          </h2>
+          <div class="domain-meta">Standard: IIBA BABOK® v3 Ch. 3 (Planning) & Ch. 4 (Elicitation)</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>👥</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Ma Trận Quyền Lực - Lợi Ích & Trách Nhiệm RACI</span>
+        <span class="lang-en">1. Conceptual Core: Power-Interest Grid & Single-Accountable RACI Governance</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Quản lý các bên liên quan là kỹ năng sống còn của BA. <strong>Ma trận Quyền lực - Lợi ích (Power-Interest Grid)</strong> định hình 4 chiến lược giao tiếp chuẩn mực:</span>
+        <span class="lang-en">Stakeholder engagement dictates project survival. The <strong>Power-Interest Grid</strong> dictates 4 calibrated communication strategies:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Phân Nhóm Ma Trận</span><span class="lang-en">Grid Quadrant</span></th>
+              <th><span class="lang-vi">Đặc Điểm Bên Liên Quan</span><span class="lang-en">Stakeholder Archetype</span></th>
+              <th><span class="lang-vi">Chiến Lược Giao Tiếp Chuẩn</span><span class="lang-en">Communication Strategy</span></th>
+              <th><span class="lang-vi">Ví Dụ Trong Dự Án Doanh Nghiệp</span><span class="lang-en">Enterprise Project Persona</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Quyền Lực Cao - Lợi Ích Cao (High Power / High Interest)</strong></td>
+              <td><span class="lang-vi">Người tài trợ dự án, quyết định ngân sách và thụ hưởng trực tiếp thành công.</span><span class="lang-en">Project Sponsor, key decision-maker directly invested in solution success.</span></td>
+              <td><strong>Quản lý chặt chẽ (Manage Closely)</strong>: Họp 1-1 hàng tuần, xin ý kiến định hướng chiến lược.</td>
+              <td>Giám đốc Vận hành (COO), Giám đốc Chuỗi Cung ứng (VP of Supply Chain).</td>
+            </tr>
+            <tr>
+              <td><strong>Quyền Lực Cao - Lợi Ích Thấp (High Power / Low Interest)</strong></td>
+              <td><span class="lang-vi">Các phòng ban giám sát độc lập, có quyền phủ quyết dự án nếu vi phạm quy chế.</span><span class="lang-en">Regulatory or corporate oversight bodies with unilateral veto authority.</span></td>
+              <td><strong>Giữ hài lòng (Keep Satisfied)</strong>: Báo cáo định kỳ về an toàn bảo mật, pháp lý, tránh làm phiền việc nhỏ.</td>
+              <td>Trưởng ban Pháp chế (Legal Director), Giám đốc An ninh Thông tin (CISO).</td>
+            </tr>
+            <tr>
+              <td><strong>Quyền Lực Thấp - Lợi Ích Cao (Low Power / High Interest)</strong></td>
+              <td><span class="lang-vi">Người dùng cuối hàng ngày, chịu ảnh hưởng trực tiếp từ phần mềm mới nhưng không quyết định ngân sách.</span><span class="lang-en">Daily operational end-users heavily impacted but lacking budgetary authority.</span></td>
+              <td><strong>Cập nhật thông tin (Keep Informed)</strong>: Tham vấn nhu cầu qua workshop, thông báo tiến độ, hướng dẫn sử dụng.</td>
+              <td>Nhân viên thủ kho, chuyên viên mua hàng, nhân viên trực tổng đài chăm sóc khách hàng.</td>
+            </tr>
+            <tr>
+              <td><strong>Quyền Lực Thấp - Lợi Ích Thấp (Low Power / Low Interest)</strong></td>
+              <td><span class="lang-vi">Các bên chỉ liên quan gián tiếp hoặc hỗ trợ kỹ thuật phụ trợ.</span><span class="lang-en">Peripheral third parties or passive internal consumers.</span></td>
+              <td><strong>Giám sát tối thiểu (Monitor)</strong>: Gửi bản tin chung (Newsletter), cập nhật trên cổng thông tin nội bộ.</td>
+              <td>Đội ngũ hành chính lễ tân, các nhà cung cấp văn phòng phẩm phụ.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🔍</span>
+        <span class="lang-vi">2. 9 Kỹ Thuật Khơi Gợi Yêu Cầu Theo Chuẩn BABOK v3</span>
+        <span class="lang-en">2. The 9 BABOK Elicitation Techniques Compared</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">BA chuyên nghiệp không bao giờ chỉ dùng mỗi kỹ thuật phỏng vấn. Tùy thuộc vào bối cảnh, BA phải phối hợp linh hoạt 9 kỹ thuật:</span>
+        <span class="lang-en">Professional BAs never rely solely on interviews. Context dictates blending from this 9-technique repertoire:</span>
+      </p>
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Kỹ Thuật (Technique)</th>
+              <th>Thời Điểm Sử Dụng Phù Hợp Nhất</th>
+              <th>Ưu Điểm Cốt Lõi</th>
+              <th>Rủi Ro & Cạm Bẫy Cần Tránh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Phỏng Vấn (Interviews)</strong></td>
+              <td>Khởi đầu dự án để hiểu tầm nhìn lãnh đạo hoặc đào sâu vấn đề nhạy cảm 1-1.</td>
+              <td>Thu thập thông tin cá nhân hóa sâu sắc, xây dựng lòng tin trực tiếp.</td>
+              <td>Thiên vị cá nhân (Bias); tốn nhiều thời gian tổng hợp ý kiến trái chiều.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Hội Thảo JAD (Workshops)</strong></td>
+              <td>Khi cần thống nhất quy trình liên phòng ban hoặc giải quyết bất đồng quan điểm.</td>
+              <td>Đạt đồng thuận nhanh chóng trong thời gian ngắn, giảm độ trễ trao đổi.</td>
+              <td>Cuộc họp bị thao túng bởi người nói to nhất (HiPPO); cần kỹ năng điều phối mạnh.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Quan Sát (Job Shadowing)</strong></td>
+              <td>Khi người dùng khó diễn đạt công việc bằng lời (ví dụ: thao tác kho, bác sĩ khám bệnh).</td>
+              <td>Thấy được thực tế vận hành trần trụi (Workaround ngầm, lỗi nhập liệu thực tế).</td>
+              <td>Hiệu ứng Hawthorne (Người bị quan sát thay đổi hành vi chuẩn chỉ hơn bình thường).</td>
+            </tr>
+            <tr>
+              <td><strong>4. Khảo Sát (Surveys)</strong></td>
+              <td>Khi cần lấy ý kiến của hàng nghìn người dùng phân tán địa lý rộng rãi.</td>
+              <td>Thu thập số liệu định lượng lớn trong thời gian ngắn với chi phí thấp.</td>
+              <td>Tỷ lệ phản hồi thấp; câu hỏi không rõ ràng dẫn đến dữ liệu khảo sát sai lệch.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Nghiên Cứu Tài Liệu (Document Analysis)</strong></td>
+              <td>Khi tiếp nhận hệ thống cũ (Legacy) hoặc dự án có tài liệu quy chuẩn luật định sẵn có.</td>
+              <td>Nắm bắt kiến thức nền tảng mà không làm phiền thời gian của chuyên gia.</td>
+              <td>Tài liệu có thể đã lỗi thời, không còn phản ánh đúng thực tế đang chạy.</td>
+            </tr>
+            <tr>
+              <td><strong>6. Tạo Mẫu Nhanh (Prototyping)</strong></td>
+              <td>Khi yêu cầu về giao diện UI/UX còn mơ hồ hoặc xây dựng sản phẩm mới đột phá.</td>
+              <td>Người dùng nhìn thấy trực quan để phản hồi, tránh hiểu lầm chữ viết.</td>
+              <td>Khách hàng lầm tưởng phần mềm sắp hoàn thành xong mà không hiểu độ khó backend.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Xử Lý Tình Huống Xung Đột Trong Phỏng Vấn Khơi Gợi</span>
+        <span class="lang-en">3. Hands-on Practicum: Navigating Contradictory Domain Expert Demands</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống:</strong> Trong quá trình thiết kế tính năng Đặt xe giao hàng, Trưởng phòng Kinh doanh yêu cầu: <em>"Tài xế phải được phép nhận đơn hàng ngay cả khi điện thoại không bật định vị GPS để tối đa hóa số lượng tài xế trên đường"</em>. Ngay sau đó, Trưởng ban Kiểm soát Rủi ro khẳng định: <em>"Bắt buộc 100% tài xế phải bật GPS chính xác; nếu mất GPS quá 30 giây hệ thống phải ngắt đơn ngay lập tức để chống gian lận cuốc xe ảo"</em>. Cả hai đều từ chối nhượng bộ.<br>
+          <strong>Câu hỏi:</strong> Trong vai trò Lead BA, bạn sẽ điều phối giải quyết xung đột yêu cầu này như thế nào?
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Chiến Lược Hòa Giải Dựa Trên Dữ Liệu</span><span class="lang-en">👉 View Expert Resolution Strategy Based on Empirical Data</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>Chiến lược 4 bước giải quyết xung đột của Lead BA:</strong><br>
+              <strong>1. Bóc tách bản chất nhu cầu (Need vs. Solution):</strong> Nhu cầu của Kinh doanh là <em>không làm mất khách do rớt mạng tạm thời</em>. Nhu cầu của Rủi ro là <em>chống gian lận tài xế tạo cuốc khống</em>.<br>
+              <strong>2. Tìm kiếm điểm chạm kỹ thuật dung hòa (Graceful Degradation):</strong> Đề xuất cơ chế hybrid: Hệ thống cho phép tài xế nhận đơn khi có định vị GPS hợp lệ ban đầu. Nếu trong quá trình di chuyển GPS bị mất tín hiệu (ví dụ đi vào tầng hầm, đường hầm), hệ thống cho phép thời gian đệm 3 phút (Grace Period) sử dụng định vị qua trạm thu phát sóng di động (Cell-ID/WiFi Triangulation) thay vì ngắt đơn tức thì.<br>
+              <strong>3. Thiết lập cờ cảnh báo rủi ro (Risk Flagging):</strong> Các cuốc xe có đoạn mất GPS trên 60 giây vẫn hoàn thành bình thường nhưng được hệ thống gắn cờ <code>RISK_AUDIT_PENDING</code> để chuyển vào hàng đợi đối soát hậu kiểm của đội Fraud trước khi giải ngân tiền thưởng chuyến đi.<br>
+              <strong>4. Thuyết phục các bên bằng dữ liệu:</strong> Trình bày phương án này trong một phiên JAD ngắn có mặt cả hai bên; giải pháp đáp ứng 95% mục tiêu tăng trưởng của Kinh doanh và 100% mục tiêu kiểm soát gian lận của ban Rủi ro.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Kỹ Thuật Thuyết Phục Stakeholder Khó Tính</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): Engaging Resistant Stakeholders</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Hãy kể về một lần bạn làm việc với một Stakeholder rất bảo thủ, liên tục từ chối cung cấp yêu cầu hoặc phản đối phần mềm mới?"</span>
+          <span class="lang-en">Question: "Tell me about a time you worked with a highly resistant stakeholder who refused to provide requirements or actively opposed the new software?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong dự án số hóa quản lý tài sản, Trưởng phòng Kế toán kỳ cựu 20 năm kiên quyết không hợp tác, từ chối tham gia phỏng vấn vì lo sợ phần mềm tự động hóa sẽ làm giảm biên chế phòng kế toán.<br>
+          • <strong>Task:</strong> Tôi cần chuyển hóa sự chống đối này thành sự đồng thuận và thu thập chính xác các quy tắc tính khấu hao tài sản phức tạp.<br>
+          • <strong>Action:</strong> Thay vì gửi lịch họp yêu cầu cung cấp tài liệu cứng nhắc, tôi đã xin phép cùng ngồi làm việc trực tiếp (Job Shadowing) nửa ngày tại bàn kế toán. Tôi tận mắt chứng kiến cô phải nhập tay hàng trăm hóa đơn mỗi ngày và thường xuyên phải làm thêm đến 9h tối cuối tháng. Tôi đồng cảm và giải thích chân thành: <em>"Phần mềm mới được thiết kế để giải phóng cô khỏi 80% công việc gõ tay nhàm chán này để cô kịp về ăn cơm tối với gia đình, đồng thời nâng tầm vai trò của cô thành Chuyên viên Phân tích Chi phí Chiến lược cho Ban Giám đốc."</em> Tôi vẽ bản nháp giao diện màn hình tự động đọc hóa đơn PDF và hỏi ý kiến cô.<br>
+          • <strong>Result:</strong> Cô hoàn toàn mở lòng, trở thành người đóng góp nhiệt tình nhất cho dự án và chủ động hỗ trợ đào tạo phần mềm cho toàn bộ nhân viên trong phòng sau khi Go-live.
+        </p>
+      </div>
+    </section>
+"""
+
+with open(r"C:\Users\asus\.gemini\antigravity\brain\1228ac6c-02c7-4591-80b5-ea22e436671f\scratch\km_part2.html", 'w', encoding='utf-8') as f:
+    f.write(part2)
+
+print("Part 2 written.")
+# Domain 3 & Domain 4
+part3 = """
+    <!-- ========================================== -->
+    <!-- DOMAIN 3: PROBLEM SOLVING & RCA -->
+    <!-- ========================================== -->
+    <section id="domain-3" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 3</span>
+          <h2>
+            <span class="lang-vi">Giải Quyết Vấn Đề & Phân Tích Nguyên Nhân Gốc Rễ (RCA)</span>
+            <span class="lang-en">Problem Solving & Root Cause Analysis (RCA)</span>
+          </h2>
+          <div class="domain-meta">Standard: IIBA BABOK® v3 Strategy Analysis & Lean Six Sigma</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🧩</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Định Nghĩa Vấn Đề Chuẩn Xác & Bộ Công Cụ RCA</span>
+        <span class="lang-en">1. Conceptual Core: Problem Statement Formula & RCA Tooling</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Sai lầm phổ biến nhất của các dự án phần mềm thất bại là <strong>"Nhảy ngay vào giải pháp khi chưa hiểu đúng vấn đề"</strong> (Premature Solutioning). Một Problem Statement chuẩn hóa bắt buộc phải trả lời 4 thành tố định lượng:</span>
+        <span class="lang-en">The primary cause of software failure is <strong>Premature Solutioning</strong>. A standardized Problem Statement formula mandates 4 quantitative dimensions:</span>
+      </p>
+
+      <div class="callout callout-info" style="margin-bottom: 1.5rem;">
+        <div class="callout-title">
+          <span class="lang-vi">📐 Công Thức Chuẩn Hóa Bản Tuyên Bố Vấn Đề (Problem Statement Formula)</span>
+          <span class="lang-en">📐 Standardized Problem Statement Formula</span>
+        </div>
+        <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0;">
+          <strong>Vấn đề hiện tại:</strong> [Hiện tượng gì đang xảy ra sai lệch so với kỳ vọng?]<br>
+          <strong>Đối tượng chịu tác động:</strong> [Ai là người bị ảnh hưởng trực tiếp?]<br>
+          <strong>Hậu quả kinh doanh đo lường được:</strong> [Tổ chức bị thiệt hại bao nhiêu tiền, bao nhiêu giờ công, hoặc bao nhiêu % khách hàng rời bỏ?]<br>
+          <strong>Tiêu chí thành công của giải pháp:</strong> [Chỉ số đo lường (KPI) nào chứng minh vấn đề đã được giải quyết triệt để?]<br>
+          <em>Ví dụ: "Hiện tượng: Tỷ lệ hủy đơn hàng giao chậm vượt 18% &rarr; Tác động: 45,000 khách hàng mua sắm trực tuyến &rarr; Hậu quả: Thất thoát 3.2 tỷ VNĐ doanh thu mỗi tháng &rarr; Tiêu chí thành công: Giảm tỷ lệ hủy đơn xuống dưới 4% trong vòng 90 ngày sau Go-live."</em>
+        </p>
+        <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0;">
+          <strong>Condition:</strong> [What deviation is occurring vs baseline expectations?]<br>
+          <strong>Impacted Stakeholders:</strong> [Who suffers operational disruption?]<br>
+          <strong>Measurable Business Consequence:</strong> [What is the quantifiable loss in revenue, person-hours, or churn rate?]<br>
+          <strong>Target Success Metric:</strong> [What exact KPI proves the problem is permanently eradicated?]<br>
+          <em>Example: "Condition: Late delivery order cancellations reach 18% &rarr; Impact: 45,000 online shoppers &rarr; Consequence: 3.2 Billion VND lost monthly &rarr; Success Metric: Compress cancellation rate below 4% within 90 days post-launch."</em>
+        </p>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🔬</span>
+        <span class="lang-vi">2. Các Công Cụ Phân Tích Nguyên Nhân Cốt Lõi: 5 Whys, Biểu Đồ Xương Cá Ishikawa & Pareto</span>
+        <span class="lang-en">2. Root Cause Toolset: 5 Whys, Ishikawa Fishbone & Pareto 80/20</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Để bóc tách tận gốc vấn đề thay vì chỉ chữa cháy triệu chứng bề mặt, BA kết hợp 3 công cụ kinh điển:</span>
+        <span class="lang-en">To cure root illnesses rather than mask superficial symptoms, BAs combine 3 classic analytical frameworks:</span>
+      </p>
+
+      <div class="grid-2-col" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">1. Kỹ thuật 5 Whys (Năm Câu Hỏi Tại Sao)</h4>
+          <p class="domain-p" style="font-size: 0.88rem;">Hỏi lặp đi lặp lại câu hỏi "Tại sao?" qua ít nhất 5 tầng để xuyên thủng các triệu chứng bên ngoài, chạm đến lỗ hổng quy trình hoặc chính sách quản trị cốt lõi.</p>
+        </div>
+        <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">2. Biểu đồ Xương Cá Ishikawa (Fishbone Diagram)</h4>
+          <p class="domain-p" style="font-size: 0.88rem;">Phân loại toàn bộ các nguyên nhân khả dĩ theo 6 nhánh <strong>6M</strong> (Man, Machine, Method, Material, Measurement, Milieu) hoặc <strong>4P</strong> (People, Process, Platform, Policy) nhằm tránh bỏ sót góc nhìn.</p>
+        </div>
+        <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">3. Nguyên Lý Pareto (Quy tắc 80/20)</h4>
+          <p class="domain-p" style="font-size: 0.88rem;">Xác định 20% nguyên nhân cốt lõi gây ra 80% sự cố hệ thống. Giúp dự án tập trung ngân sách và nguồn lực giải quyết các điểm nghẽn có đòn bẩy giá trị cao nhất.</p>
+        </div>
+        <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h4 style="color: var(--color-primary); margin-bottom: 0.5rem;">4. Phân Tích GAP (As-Is vs. To-Be)</h4>
+          <p class="domain-p" style="font-size: 0.88rem;">Mô hình hóa Hiện trạng (As-Is State), thiết kế Tương lai mong muốn (To-Be State), và xác định Khoảng cách (Gap) cùng lộ trình các sáng kiến công nghệ để khỏa lấp khoảng cách đó.</p>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Đào Sâu 5 Whys Cho Hiện Tượng Tỷ Lệ Bỏ Giỏ Hàng Tăng Vọt 35%</span>
+        <span class="lang-en">3. Hands-on Practicum: 5 Whys Analysis for a 35% Cart Abandonment Surge</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống:</strong> Một sàn thương mại điện tử ghi nhận tỷ lệ khách hàng bỏ giỏ hàng tại bước thanh toán tăng vọt từ 12% lên 35% trong tháng qua. Giám đốc Kinh doanh yêu cầu: <em>"Lập tức thiết kế tính năng tặng voucher 20% cho ai chuẩn bị thoát app"</em>.<br>
+          <strong>Nhiệm vụ của BA:</strong> Áp dụng kỹ thuật 5 Whys để xác định xem việc tặng voucher có giải quyết đúng nguyên nhân gốc rễ hay không.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Chuỗi 5 Whys Bóc Tách Nguyên Nhân Thật</span><span class="lang-en">👉 View 5 Whys Diagnostic Chain & Root Cause</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>Chuỗi 5 Whys thực tế của Lead BA:</strong><br>
+              • <em>Tại sao 1 (Why 1):</em> Tại sao khách hàng bỏ giỏ hàng tăng 35% ở bước thanh toán? &rarr; <em>Vì khách hàng bấm nút "Thanh toán bằng Thẻ Visa/Mastercard" nhưng màn hình tải xoay vòng tròn quá 15 giây mà không phản hồi.</em><br>
+              • <em>Tại sao 2 (Why 2):</em> Tại sao màn hình thanh toán bị xoay vòng tròn quá 15 giây? &rarr; <em>Vì kết nối API từ hệ thống đến Cổng thanh toán bên thứ ba bị timeout (Gateway Timeout).</em><br>
+              • <em>Tại sao 3 (Why 3):</em> Tại sao API cổng thanh toán bị timeout? &rarr; <em>Vì cổng thanh toán bắt buộc phải xác thực 3D-Secure qua SMS OTP, nhưng dịch vụ viễn thông quốc tế bị nghẽn mạng vào giờ cao điểm từ 20h đến 22h.</em><br>
+              • <em>Tại sao 4 (Why 4):</em> Tại sao hệ thống lại phụ thuộc duy nhất vào một cổng thanh toán quốc tế đó? &rarr; <em>Vì trong tài liệu kiến trúc ban đầu, nhóm phát triển chỉ tích hợp duy nhất 1 Payment Provider độc quyền mà không có cơ chế dự phòng (No Fallback / Failover Routing).</em><br>
+              • <em>Tại sao 5 (Why 5 - NGUYÊN NHÂN GỐC RỄ):</em> Tại sao không thiết kế cơ chế định tuyến dự phòng nhiều cổng? &rarr; <em>Vì hợp đồng ban đầu ký độc quyền với nhà cung cấp cũ để lấy chiết khấu phí 0.2%, bỏ qua yêu cầu phi chức năng về Tính sẵn sàng cao (High Availability $\ge 99.9\%$).</em><br>
+              <br>
+              <strong>KẾT LUẬN:</strong> Đề xuất tặng voucher của Giám đốc Kinh doanh là hoàn toàn vô nghĩa và gây tốn kém thêm chi phí, vì bản chất khách hàng muốn mua nhưng hệ thống thanh toán bị nghẽn! Giải pháp đúng đắn là xây dựng <strong>Multi-Gateway Dynamic Routing</strong> tự động chuyển hướng sang Cổng thanh toán nội địa Napas/Momo khi cổng quốc tế phản hồi chậm quá 5 giây.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Khi Khách Hàng Yêu Cầu Sai Giải Pháp</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): Challenging Premature Client Solutions</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Hãy chia sẻ một tình huống khách hàng khăng khăng đòi xây dựng một tính năng cụ thể, nhưng qua phân tích nguyên nhân gốc rễ bạn đã thuyết phục họ chọn một giải pháp hoàn toàn khác?"</span>
+          <span class="lang-en">Question: "Describe an experience where a client insisted on building a specific feature, but through root cause analysis you convinced them to adopt an entirely different approach?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Giám đốc Chăm sóc Khách hàng của một chuỗi bệnh viện yêu cầu chi 500 triệu VNĐ để phát triển ứng dụng di động Chatbot AI hỗ trợ giải đáp thắc mắc cho bệnh nhân vì tổng đài luôn bị quá tải.<br>
+          • <strong>Task:</strong> Là Lead BA, tôi cần thẩm định xem Chatbot AI có thực sự giải quyết được bài toán quá tải hay không.<br>
+          • <strong>Action:</strong> Tôi đã phân tích nhật ký 10,000 cuộc gọi tổng đài trong 3 tháng gần nhất (Document & Data Analysis). Tôi phát hiện ra 74% cuộc gọi không phải hỏi về tư vấn y khoa chuyên sâu, mà chỉ hỏi đúng 2 thông tin đơn giản: <em>"Bác sĩ X hôm nay có lịch khám không?"</em> và <em>"Số thứ tự đang khám tại phòng khám Y là số bao nhiêu?"</em>. Tôi đã chỉ ra rằng Chatbot AI không giúp được việc này vì dữ liệu lịch khám của bác sĩ vẫn đang được viết tay trên bảng trắng tại khoa khám bệnh! Giải pháp đúng đắn không phải là Chatbot, mà là một màn hình LCD điện tử hiển thị số thứ tự tự động kết nối với phần mềm chấm công của bác sĩ.<br>
+          • <strong>Result:</strong> Tiết kiệm 350 triệu VNĐ chi phí dự án; sau khi lắp đặt màn hình điện tử, số lượng cuộc gọi hỏi số thứ tự giảm ngay 70% trong tuần đầu tiên; bệnh nhân vô cùng hài lòng.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DOMAIN 4: REQUIREMENTS & SCOPE GOVERNANCE -->
+    <!-- ========================================== -->
+    <section id="domain-4" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 4</span>
+          <h2>
+            <span class="lang-vi">Kỹ Nghệ Yêu Cầu & Quản Trị Phạm Vi Dự Án</span>
+            <span class="lang-en">Requirements Engineering & Scope Governance</span>
+          </h2>
+          <div class="domain-meta">Standard: BABOK® v3 Ch. 5 (Lifecycle) & ISO/IEC 25010 (Quality Models)</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🏗️</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Phân Tầng Yêu Cầu BABOK & Chuẩn Mực NFR ISO 25010</span>
+        <span class="lang-en">1. Conceptual Core: BABOK 4-Tier Taxonomy & ISO 25010 NFRs</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">IIBA BABOK v3 thiết lập cấu trúc phả hệ 4 tầng yêu cầu nghiêm ngặt. Mọi yêu cầu cấp dưới đều phải giải thích được đóng góp gì cho yêu cầu cấp trên:</span>
+        <span class="lang-en">IIBA BABOK v3 establishes a strict 4-tier requirement taxonomy where every child requirement traces to an ancestor:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Cấp Bậc Yêu Cầu</span><span class="lang-en">Requirement Tier</span></th>
+              <th><span class="lang-vi">Đối Tượng Phục Vụ</span><span class="lang-en">Target Audience</span></th>
+              <th><span class="lang-vi">Đặc Điểm & Nội Dung Cốt Lõi</span><span class="lang-en">Core Characteristics</span></th>
+              <th><span class="lang-vi">Ví Dụ Cụ Thể (Ngân Hàng Số)</span><span class="lang-en">Concrete Banking Example</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Yêu Cầu Kinh Doanh (Business Requirements)</strong></td>
+              <td>Ban Giám đốc, Nhà đầu tư</td>
+              <td>Mục tiêu chiến lược cấp cao, lý do kinh tế tồn tại của dự án, ROI và KPI tài chính.</td>
+              <td><code>Tăng 25% số lượng mở tài khoản tiết kiệm online trong năm 2026.</code></td>
+            </tr>
+            <tr>
+              <td><strong>2. Yêu Cầu Bên Liên Quan (Stakeholder Requirements)</strong></td>
+              <td>Khách hàng, Người dùng nội bộ</td>
+              <td>Nhu cầu cụ thể của từng nhóm người dùng khi tương tác với tổ chức.</td>
+              <td><code>Khách hàng muốn mở sổ tiết kiệm kỳ hạn 6 tháng ngay trên điện thoại mà không cần ra quầy.</code></td>
+            </tr>
+            <tr>
+              <td><strong>3. Yêu Cầu Giải Pháp: Chức Năng (Functional)</strong></td>
+              <td>Lập trình viên, Kiểm thử viên</td>
+              <td>Các hành vi, tính năng, quy tắc nghiệp vụ mà hệ thống phần mềm phải thực thi.</td>
+              <td><code>Hệ thống kiểm tra số dư tài khoản thanh toán &ge; số tiền gửi, tự động trích nợ và tạo bản ghi sổ tiết kiệm.</code></td>
+            </tr>
+            <tr>
+              <td><strong>4. Yêu Cầu Giải Pháp: Phi Chức Năng (Non-Functional)</strong></td>
+              <td>Kiến trúc sư phần mềm, DevOps</td>
+              <td>Các tiêu chuẩn chất lượng theo ISO 25010: Hiệu năng, Bảo mật, Tính sẵn sàng, Độ tin cậy.</td>
+              <td><code>Giao dịch mở sổ tiết kiệm phải hoàn thành trong &le; 2.0s tại mức tải 10,000 người dùng đồng thời; mã hóa TLS 1.3.</code></td>
+            </tr>
+            <tr>
+              <td><strong>5. Yêu Cầu Chuyển Giao (Transition Requirements)</strong></td>
+              <td>Đội Chuyển đổi số, Đào tạo</td>
+              <td>Các nhu cầu tạm thời phục vụ bàn giao: Di trú dữ liệu lịch sử, đào tạo người dùng, chạy song song.</td>
+              <td><code>Di trú toàn bộ 500,000 bản ghi sổ tiết kiệm giấy cũ vào CSDL trước 24h trước khi Go-live.</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MASTERCLASS LINK CARDS FOR DOMAIN 4 -->
+      <div class="masterclass-link-card">
+        <div>
+          <h4 style="margin: 0 0 0.25rem 0; color: var(--color-primary);">
+            <span class="lang-vi">📖 Khám Phá Bài Chuyên Khảo: Quản Trị Yêu Cầu Thay Đổi (Change Request) & CCB</span>
+            <span class="lang-en">📖 Deep Masterclass: Change Request Governance & 360-Degree Impact Analysis</span>
+          </h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">
+            <span class="lang-vi">Nắm vững cách vận hành Hội đồng CCB, ma trận phân tích tác động 360 độ và kỹ thuật tái lập đường cơ sở Baseline.</span>
+            <span class="lang-en">Master CCB council governance, 360-degree impact modeling, and baseline re-versioning discipline.</span>
+          </p>
+        </div>
+        <a href="../modules/change-request-impact-analysis/" class="btn btn-primary btn-sm">
+          <span>Xem Bài Học Chuyên Khảo &rarr;</span>
+        </a>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚖️</span>
+        <span class="lang-vi">2. Kỹ Thuật Ưu Tiên Hóa MoSCoW & Khung Quản Trị DoR / DoD</span>
+        <span class="lang-en">2. MoSCoW Prioritization & The Definition of Ready / Done Gateways</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Trong phát triển phần mềm, nguồn lực luôn có hạn. Kỹ thuật <strong>MoSCoW</strong> phân bổ ngân sách và thời gian theo tỷ lệ chuẩn mực: <strong>Must Have (&le; 60% nỗ lực)</strong>, <strong>Should Have (~20%)</strong>, <strong>Could Have (~20%)</strong>, và <strong>Won't Have (0% trong kỳ này)</strong>. Kết hợp với hai cánh cổng kiểm soát chất lượng:</span>
+        <span class="lang-en">Engineering bandwidth is strictly finite. The <strong>MoSCoW</strong> framework calibrates allocations: <strong>Must Have (&le; 60%)</strong>, <strong>Should Have (~20%)</strong>, <strong>Could Have (~20%)</strong>, and <strong>Won't Have (0% in active release)</strong>. Governed by twin quality gates:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Cánh Cổng Kiểm Soát</th>
+              <th>Mục Đích & Ranh Giới</th>
+              <th>Tiêu Chí Đánh Giá Bắt Buộc Của BA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Definition of Ready (DoR)</strong><br><em>(Cổng vào Sprint)</em></td>
+              <td>Đảm bảo User Story đủ độ chín, không còn mơ hồ trước khi đưa cho đội ngũ phát triển lập trình.</td>
+              <td>• Có User Story đúng cú pháp INVEST.<br>• Có Acceptance Criteria bằng Gherkin.<br>• Có thiết kế UI Wireframe hoặc API Contract đã thống nhất.<br>• Đã được Dev & QA ước tính Story Points khả thi.</td>
+            </tr>
+            <tr>
+              <td><strong>Definition of Done (DoD)</strong><br><em>(Cổng ra Sprint)</em></td>
+              <td>Đảm bảo tính năng được hoàn thành trọn vẹn, có thể phát hành (Potentially Shippable) mà không để lại nợ kỹ thuật.</td>
+              <td>• 100% tiêu chí chấp nhận được kiểm thử Passed.<br>• Code đạt chuẩn Unit Test Coverage &ge; 80%.<br>• Không còn bug Sev 1 hoặc Sev 2 tồn đọng.<br>• Đã cập nhật tài liệu hướng dẫn sử dụng và tài liệu SFS.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Chuyển Hóa Yêu Cầu Phi Chức Năng Mơ Hồ Sang Chỉ Số Đo Lường Định Lượng</span>
+        <span class="lang-en">3. Hands-on Practicum: Translating Ambiguous NFRs into Quantifiable Metrics</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống:</strong> Trong tài liệu thầu dự án Cổng Dịch Vụ Công, khách hàng viết 3 yêu cầu sau:<br>
+          1. <em>"Hệ thống phải phản hồi nhanh chóng, không để người dân chờ đợi lâu."</em><br>
+          2. <em>"Hệ thống phải tuyệt đối an toàn, bảo mật thông tin công dân."</em><br>
+          3. <em>"Hệ thống phải chạy ổn định liên tục, không bị sập vào mùa nộp hồ sơ cao điểm."</em><br>
+          <strong>Nhiệm vụ:</strong> Viết lại 3 yêu cầu trên theo chuẩn ISO 25010 với các chỉ số định lượng cụ thể, có thể kiểm chứng được bằng công cụ test tự động.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Đặc Tả NFR Chuẩn Mực ISO 25010</span><span class="lang-en">👉 View Quantifiable ISO 25010 Metric Formulations</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>1. Yêu cầu 1 &rarr; Đặc tính Hiệu Năng (Performance Efficiency - Response Time & Throughput):</strong><br>
+              <code>"Thời gian phản hồi của 95% các yêu cầu tải trang (Page Load Time p95) phải &le; 1.5 giây và p99 phải &le; 3.0 giây dưới mức tải đồng thời 5,000 người dùng (Concurrent Users), với thông lượng tối thiểu 500 requests/giây (RPS)."</code><br>
+              <br>
+              <strong>2. Yêu cầu 2 &rarr; Đặc tính Bảo Mật (Security - Encryption & Authentication):</strong><br>
+              <code>"Toàn bộ dữ liệu truyền tải phải được mã hóa chuẩn TLS 1.3 với cipher suite AES-256-GCM. Dữ liệu nhạy cảm của công dân (Số CCCD, Sinh trắc học) trong CSDL phải được mã hóa ở cấp độ cột (Column-level encryption) bằng khóa KMS riêng biệt. Hệ thống phải vượt qua bài kiểm tra bảo mật thâm nhập (OWASP Top 10 Penetration Test) mà không có lỗ hổng mức High/Critical nào."</code><br>
+              <br>
+              <strong>3. Yêu cầu 3 &rarr; Đặc tính Tin Cậy & Sẵn Sàng (Reliability & Availability):</strong><br>
+              <code>"Chỉ số thời gian hoạt động sẵn sàng (System Availability SLA) phải đạt tối thiểu 99.9% trong năm (thời gian ngừng hoạt động ngoài kế hoạch tối đa không quá 8.76 giờ/năm). Thời gian phục hồi sau thảm họa (RTO - Recovery Time Objective) &le; 15 phút và mức mất mát dữ liệu tối đa (RPO - Recovery Point Objective) &le; 0 phút (Zero data loss nhờ cơ chế đồng bộ CSDL Multi-Region Multi-AZ)."</code>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Kỹ Thuật Bảo Vệ Đường Cơ Sở Yêu Cầu</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): Defending Scope Baselines</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Khi Giám đốc Dự án (PM) và Khách hàng gây áp lực đòi bạn đưa thêm tính năng mới vào Sprint mà không muốn gia hạn thời gian bàn giao, bạn xử lý thế nào?"</span>
+          <span class="lang-en">Question: "When the PM and Client pressure you to insert new features into active delivery without extending deadlines, how do you handle it?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Hai tuần trước đợt bàn giao quan trọng của ứng dụng B2B Logistics, Giám đốc Kinh doanh yêu cầu bổ sung phân hệ Xuất Hóa Đơn Điện Tử Tự Động mà không chấp nhận lùi ngày Go-live.<br>
+          • <strong>Task:</strong> Với vai trò Lead BA, tôi phải bảo vệ tiến độ và chất lượng của hệ thống, ngăn chặn nguy cơ vỡ nợ kỹ thuật nhưng vẫn giải quyết được nhu cầu xuất hóa đơn cấp bách.<br>
+          • <strong>Action:</strong> Tôi sử dụng mô hình Tam Giác Sắt (Iron Triangle) để giải thích trực quan: <em>"Nếu giữ nguyên Thời gian và Chi phí mà tăng thêm Phạm vi, thì Chất lượng kiểm thử sẽ bị đè bẹp, gây rủi ro sai sót thuế trước pháp luật."</em> Tôi đề xuất giải pháp Trade-off dựa trên MoSCoW: Thay vì tích hợp API hóa đơn điện tử tự động 100% trong 2 tuần này (vốn cần 15 ngày công), tôi thiết kế giải pháp tạm thời Phase 1 (Giai đoạn bàn giao hiện tại): Hệ thống cho phép xuất file dữ liệu giao dịch chuẩn Excel/CSV có sẵn để kế toán nhập một chạm vào cổng hóa đơn của Tổng cục Thuế (chỉ mất 2 ngày công). Tính năng tích hợp API tự động hoàn toàn được đưa vào Phase 2 với ngân sách và thời gian kiểm thử riêng biệt.<br>
+          • <strong>Result:</strong> Cả Khách hàng và PM đều nhất trí cao; đợt phát hành Go-live diễn ra an toàn tuyệt đối đúng ngày đã định.
+        </p>
+      </div>
+    </section>
+"""
+
+with open(r"C:\Users\asus\.gemini\antigravity\brain\1228ac6c-02c7-4591-80b5-ea22e436671f\scratch\km_part3.html", 'w', encoding='utf-8') as f:
+    f.write(part3)
+
+print("Part 3 written.")
+# Domain 5 & Domain 6
+part4 = """
+    <!-- ========================================== -->
+    <!-- DOMAIN 5: REQUIREMENTS DOCUMENTATION -->
+    <!-- ========================================== -->
+    <section id="domain-5" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 5</span>
+          <h2>
+            <span class="lang-vi">Tài Liệu Hóa Yêu Cầu Phần Mềm & Agile User Stories</span>
+            <span class="lang-en">Requirements Documentation & Agile User Stories</span>
+          </h2>
+          <div class="domain-meta">Standard: IEEE 830 / ISO/IEC/IEEE 29148:2018 & Agile Alliance BDD</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>📑</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Phân Định Ranh Giới BRD vs. URD vs. SRS/SFS</span>
+        <span class="lang-en">1. Conceptual Core: BRD vs. URD vs. SRS/SFS Specification Boundaries</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Một trong những nhầm lẫn lớn nhất của BA mới vào nghề là đánh đồng mọi tài liệu đặc tả là một. Theo chuẩn ISO/IEC/IEEE 29148:2018:</span>
+        <span class="lang-en">A widespread junior BA pitfall is treating all specification documents identically. Per ISO/IEC/IEEE 29148:2018:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Loại Tài Liệu</span><span class="lang-en">Artifact Type</span></th>
+              <th><span class="lang-vi">Mục Tiêu Trọng Tâm</span><span class="lang-en">Core Focus</span></th>
+              <th><span class="lang-vi">Độc Giả Chính</span><span class="lang-en">Primary Reader</span></th>
+              <th><span class="lang-vi">Có Mô Tả Thuật Toán / Database Không?</span><span class="lang-en">Includes DB / Tech Logic?</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>BRD (Business Requirements Document)</strong></td>
+              <td>Mục tiêu kinh doanh chiến lược, bài toán đầu tư (Business Case), ROI và phân tích đối thủ.</td>
+              <td>Ban Giám đốc, Nhà tài trợ dự án, Trưởng các khối nghiệp vụ.</td>
+              <td><span style="color: #dc2626; font-weight: 700;">Tuyệt đối KHÔNG</span> (Chỉ tập trung vào <em>Why & What</em> ở tầm chiến lược).</td>
+            </tr>
+            <tr>
+              <td><strong>URD (User Requirements Document)</strong></td>
+              <td>Chân dung người dùng (Personas), hành trình trải nghiệm người dùng (User Journey), luồng thao tác hàng ngày.</td>
+              <td>Đội ngũ thiết kế UI/UX, Quản lý sản phẩm (Product Manager), Đại diện khách hàng.</td>
+              <td><span style="color: #dc2626; font-weight: 700;">KHÔNG</span> (Tập trung vào cảm nhận, mục tiêu và nỗi đau người dùng).</td>
+            </tr>
+            <tr>
+              <td><strong>SRS / SFS (Software Requirements / Functional Spec)</strong></td>
+              <td>Hành vi chi tiết của hệ thống phần mềm: Quy tắc nghiệp vụ, Từ điển dữ liệu, Cổng API REST, Thông báo lỗi.</td>
+              <td>Lập trình viên (Developers), Kỹ sư kiểm thử (QA/QC), Kiến trúc sư giải pháp.</td>
+              <td><span style="color: #059669; font-weight: 700;">CÓ BẮT BUỘC</span> (Đặc tả chính xác thuật toán hộp đen, regex, kiểu dữ liệu và mã lỗi).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MASTERCLASS LINK CARDS FOR DOMAIN 5 -->
+      <div class="masterclass-link-card">
+        <div>
+          <h4 style="margin: 0 0 0.25rem 0; color: var(--color-primary);">
+            <span class="lang-vi">📖 Các Bài Học Chuyên Khảo Chi Tiết Trong Miền 5:</span>
+            <span class="lang-en">📖 Masterclass Deep Lessons Available for Domain 5:</span>
+          </h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">
+            <span class="lang-vi">Học sâu với case study thực chiến OmniLogix AIR-VIP có đầy đủ mã dự án, công thức toán học và biểu mẫu thực tế:</span>
+            <span class="lang-en">Explore worked enterprise modules featuring full code samples, data dictionaries, and financial ROI models:</span>
+          </p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <a href="../modules/domain-5-user-stories-gherkin/" class="btn btn-primary btn-sm">User Stories & Gherkin &rarr;</a>
+          <a href="../modules/brd-business-requirements-document/" class="btn btn-outline btn-sm">BRD Masterclass &rarr;</a>
+          <a href="../modules/sfs-software-functional-specification/" class="btn btn-outline btn-sm">SFS Functional Spec &rarr;</a>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>📝</span>
+        <span class="lang-vi">2. Chuẩn Mực Viết User Story (INVEST) & Tiêu Chí Chấp Nhận Gherkin BDD</span>
+        <span class="lang-en">2. Agile Story Modeling: INVEST Criteria & Gherkin BDD Acceptance Criteria</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Mẫu Connextra tiêu chuẩn: <code>As a [Role], I want [Action/Feature], So that [Business Value/Benefit]</code>. Một User Story chỉ đạt chuẩn khi thỏa mãn bộ 6 tiêu chí <strong>INVEST</strong> (Independent, Negotiable, Valuable, Estimable, Small, Testable) và có Tiêu chí chấp nhận viết bằng cú pháp Gherkin:</span>
+        <span class="lang-en">Standard Connextra template: <code>As a [Role], I want [Action/Feature], So that [Business Value/Benefit]</code>. Must satisfy the <strong>INVEST</strong> criteria and feature unambiguous Gherkin scenarios:</span>
+      </p>
+
+      <div class="code-block">
+Feature: Xác thực Đơn Mua Hàng theo Hạn mức Ngân sách (PO Approval Threshold)
+
+  Scenario: Trưởng phòng Mua hàng duyệt đơn hàng nằm trong định mức thẩm quyền (Happy Path)
+    Given Người dùng đã đăng nhập với vai trò "PROCUREMENT_MANAGER"
+      And Đơn mua hàng PO-202610-0089 có tổng giá trị là 45,000,000 VNĐ (&le; 50,000,000 VNĐ)
+      And Trạng thái hiện tại của đơn hàng là "PENDING_APPROVAL"
+     When Người dùng bấm nút "Phê Duyệt Đơn Hàng"
+     Then Hệ thống chuyển trạng thái đơn hàng sang "APPROVED"
+      And Lưu bản ghi nhật ký kiểm toán với User ID và Timestamp hiện tại
+      And Gửi thông báo xác nhận và Token truy cập đến Email của Nhà cung cấp trong vòng &le; 10 giây
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Tái Cấu Trúc User Story Mơ Hồ Thành Chuẩn INVEST & Gherkin</span>
+        <span class="lang-en">3. Hands-on Practicum: Refactoring Ambiguous User Stories into Gherkin BDD</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống:</strong> Một khách hàng gửi cho bạn một User Story như sau:<br>
+          <em>"Là một người dùng, tôi muốn hệ thống gửi mã OTP nhanh chóng và tiện lợi để tôi đăng nhập bảo mật."</em><br>
+          <strong>Câu hỏi:</strong> Hãy phân tích những điểm vi phạm nguyên tắc viết User Story trong câu trên, và viết lại thành 1 User Story chuẩn kèm 2 kịch bản Gherkin (1 Kịch bản thuận và 1 Kịch bản ngoại lệ hết hạn OTP).
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Bản Viết Lại Chuẩn BDD Của Lead BA</span><span class="lang-en">👉 View Expert Refactored BDD User Story</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>1. Các điểm vi phạm:</strong><br>
+              • Vai trò mơ hồ: <em>"Người dùng"</em> quá chung chung (Là khách hàng vãng lai, khách VIP hay nhân viên nội bộ?).<br>
+              • Tính từ cảm tính không thể kiểm thử: <em>"Nhanh chóng và tiện lợi"</em> không có giá trị kỹ thuật để QA viết test case.<br>
+              • Giá trị nghiệp vụ không rõ: <em>"Đăng nhập bảo mật"</em> chỉ là phương tiện, không nêu rõ bảo vệ tài sản gì.<br>
+              <br>
+              <strong>2. Viết lại User Story chuẩn:</strong><br>
+              <code>"Là một Chủ tài khoản Ngân hàng số, Tôi muốn nhận mã xác thực một lần (SMS OTP 6 chữ số) khi đăng nhập trên thiết bị lạ, Để bảo vệ tài khoản khỏi nguy cơ bị chiếm đoạt số dư tài chính trái phép."</code><br>
+              <br>
+              <strong>3. Kịch bản Gherkin chuẩn:</strong>
+            </p>
+            <div class="code-block">
+Scenario: Nhập đúng mã OTP trong thời gian hiệu lực 60 giây (Happy Path)
+  Given Khách hàng đăng nhập trên thiết bị chưa từng được tin cậy
+    And Hệ thống đã gửi mã OTP "882910" đến số điện thoại đăng ký lúc 10:00:00
+   When Khách hàng nhập mã "882910" vào lúc 10:00:25 (&le; 60 giây)
+   Then Hệ thống xác thực thành công, cấp quyền truy cập vào màn hình Trang chủ
+    And Lưu thiết bị này vào danh sách thiết bị tin cậy
+
+Scenario: Nhập mã OTP đã quá hạn hiệu lực 60 giây (Exception Flow)
+  Given Khách hàng nhận mã OTP "882910" lúc 10:00:00
+   When Khách hàng nhập mã "882910" vào lúc 10:01:05 (&gt; 60 giây)
+   Then Hệ thống từ chối đăng nhập
+    And Hiển thị thông báo lỗi "ERR-AUTH-OTP-EXPIRED: Mã xác thực đã hết hạn. Vui lòng bấm Yêu cầu gửi lại mã mới."
+    And Giữ nguyên số lần nhập sai cho phép là 3 lần
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Kỹ Năng Ngăn Chặn "Dev Xây Nhầm Tính Năng"</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): Eliminating Ambiguity in Handoffs</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Làm thế nào bạn đảm bảo rằng sau khi bàn giao tài liệu SFS hoặc User Story, lập trình viên sẽ code chính xác 100% theo ý tưởng nghiệp vụ mà không tự ý suy diễn?"</span>
+          <span class="lang-en">Question: "How do you ensure developers implement specifications with 100% fidelity without injecting undocumented assumptions?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong một dự án trước đây, lập trình viên đã tự ý code tính năng tính phí giao hàng dựa trên đường chim bay (Euclidean distance) thay vì tính khoảng cách đường bộ thực tế qua Google Maps API do trong tài liệu BA chỉ ghi chung chung là <em>"tính phí theo khoảng cách"</em>.<br>
+          • <strong>Task:</strong> Thiết lập quy trình bàn giao (Handoff) chặt chẽ, triệt tiêu mọi không gian cho sự phỏng đoán.<br>
+          • <strong>Action:</strong> Tôi áp dụng nguyên tắc <strong>"The Three Amigos" (Bộ Ba Đồng Lòng: BA + Dev + QA)</strong> trong phiên Backlog Refinement. Thay vì gửi tài liệu một chiều, chúng tôi cùng ngồi duyệt từng User Story. Tôi yêu cầu Dev giải thích lại bằng lời cách họ sẽ xử lý thuật toán, và QA trình bày các ca kiểm thử biên tiêu cực (Negative Edge Cases). Nếu có bất kỳ chỗ nào chưa thống nhất, tôi bổ sung ngay một kịch bản Gherkin cụ thể kèm dữ liệu mẫu số học vào tiêu chí chấp nhận. Chỉ khi cả 3 bên cùng gật đầu thì Story mới được dán nhãn <code>Ready for Sprint</code>.<br>
+          • <strong>Result:</strong> Tỷ lệ phát hiện lỗi hiểu sai yêu cầu giảm hơn 85%; không còn bất kỳ tranh cãi nào giữa BA và Dev trong các đợt Sprint Review.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DOMAIN 6: PROCESS & SYSTEM MODELING -->
+    <!-- ========================================== -->
+    <section id="domain-6" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 6</span>
+          <h2>
+            <span class="lang-vi">Mô Hình Hóa Quy Trình & Kiến Trúc Hệ Thống (BPMN 2.0 & UML 2.5)</span>
+            <span class="lang-en">Process & System Modeling (BPMN 2.0 & UML 2.5)</span>
+          </h2>
+          <div class="domain-meta">Standard: OMG BPMN™ 2.0 & OMG UML® 2.5 Standards</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🔄</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: BPMN 2.0 Rigor & Ma Trận Phân Biệt Sơ Đồ UML</span>
+        <span class="lang-en">1. Conceptual Core: BPMN 2.0 Execution Rigor & UML Diagram Matrix</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Hình vẽ trực quan thay ngàn lời nói, nhưng chỉ khi sơ đồ tuân thủ chặt chẽ ngữ nghĩa chuẩn mực quốc tế của OMG (Object Management Group):</span>
+        <span class="lang-en">Diagrams communicate faster than prose, provided they adhere rigorously to OMG standards:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Loại Sơ Đồ (Diagram)</span><span class="lang-en">Diagram Type</span></th>
+              <th><span class="lang-vi">Góc Nhìn Trọng Tâm (Viewpoint)</span><span class="lang-en">Primary Viewpoint</span></th>
+              <th><span class="lang-vi">Các Phần Tử Cốt Lõi</span><span class="lang-en">Key Semantic Elements</span></th>
+              <th><span class="lang-vi">Khi Nào Nên Dùng?</span><span class="lang-en">When to Use</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>BPMN 2.0 Process Diagram</strong></td>
+              <td>Quy trình nghiệp vụ thực tế liên phòng ban và đối tác bên ngoài.</td>
+              <td>Pools (Tổ chức), Swimlanes (Vai trò), Gateways (XOR, AND, OR), Events (Timer, Message, Error).</td>
+              <td>Phân tích hiện trạng As-Is / To-Be, tối ưu hóa năng suất chuỗi vận hành doanh nghiệp.</td>
+            </tr>
+            <tr>
+              <td><strong>UML Use Case Diagram</strong></td>
+              <td>Ranh giới phạm vi hệ thống (System Boundary) và quyền hạn của tác nhân (Actor).</td>
+              <td>Actors (Người dùng/Hệ thống ngoài), Use Cases, <code>&lt;&lt;include&gt;&gt;</code> (Bắt buộc), <code>&lt;&lt;extend&gt;&gt;</code> (Tùy chọn).</td>
+              <td>Lập kế hoạch phân rã chức năng ở giai đoạn khởi động dự án hoặc trong BRD.</td>
+            </tr>
+            <tr>
+              <td><strong>UML Sequence Diagram</strong></td>
+              <td>Tương tác trao đổi thông điệp tuần tự theo thời gian giữa các thành phần phần mềm.</td>
+              <td>Lifelines (Đối tượng/Hệ thống), Synchronous Call, Async Message, Return, Combined Fragments (<code>alt</code>, <code>loop</code>).</td>
+              <td>Thiết kế tích hợp API, mô tả chi tiết cách Web App gọi API Gateway và CSDL.</td>
+            </tr>
+            <tr>
+              <td><strong>UML State Machine Diagram</strong></td>
+              <td>Toàn bộ vòng đời biến đổi trạng thái của MỘT thực thể kinh doanh duy nhất.</td>
+              <td>States (Trạng thái tĩnh), Transitions (Mũi tên chuyển trạng thái), Triggers (Sự kiện), Guards (Điều kiện).</td>
+              <td>Đặc tả vòng đời Đơn hàng (Order), Hóa đơn (Invoice), Vé hỗ trợ (Ticket) trong SFS.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MASTERCLASS LINK CARDS FOR DOMAIN 6 -->
+      <div class="masterclass-link-card">
+        <div>
+          <h4 style="margin: 0 0 0.25rem 0; color: var(--color-primary);">
+            <span class="lang-vi">📖 Khám Phá Bài Chuyên Khảo: Đặc Tả Chức Năng Phần Mềm (SFS Functional Module)</span>
+            <span class="lang-en">📖 Deep Masterclass: Software Functional Specification (SFS Module)</span>
+          </h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">
+            <span class="lang-vi">Xem cách kết hợp State Machine Diagram, Từ điển dữ liệu Data Dictionary và Luồng ngoại lệ trong dự án OmniLogix.</span>
+            <span class="lang-en">See real-world integration of State Machine diagrams, Data Dictionaries, and REST contracts in OmniLogix.</span>
+          </p>
+        </div>
+        <a href="../modules/sfs-software-functional-specification/" class="btn btn-primary btn-sm">
+          <span>Xem Bài Học Chuyên Khảo &rarr;</span>
+        </a>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">2. Bài Tập Thực Chiến: Thiết Kế Quy Trình Duyệt Vay Trả Góp Bằng BPMN 2.0</span>
+        <span class="lang-en">2. Hands-on Practicum: Designing an Installment Loan Approval Workflow in BPMN 2.0</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống nghiệp vụ:</strong> Một công ty tài chính tiêu dùng muốn tự động hóa quy trình xét duyệt khoản vay mua xe máy trả góp:<br>
+          1. Khách hàng nộp hồ sơ vay qua ứng dụng di động.<br>
+          2. Hệ thống chạy chấm điểm tín dụng tự động qua API Trung tâm Tín dụng Quốc gia (CIC).<br>
+          3. Nếu điểm tín dụng xấu (&lt; 450 điểm) &rarr; Hệ thống tự động gửi thông báo từ chối cho khách hàng.<br>
+          4. Nếu điểm tín dụng tốt (&ge; 650 điểm) &rarr; Tự động phê duyệt và chuyển hợp đồng điện tử cho khách hàng ký số OTP.<br>
+          5. Nếu điểm tín dụng trung bình (từ 450 đến dưới 650 điểm) &rarr; Hồ sơ chuyển sang Chuyên viên Thẩm định để gọi điện xác minh nơi làm việc.<br>
+          <strong>Câu hỏi:</strong> Hãy xác định các Swimlanes, Gateways (XOR/AND) và các Luồng sự kiện bắt buộc để vẽ sơ đồ BPMN 2.0 không có lỗi logic.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Kiến Trúc Mô Hình Hóa BPMN 2.0 Chuẩn</span><span class="lang-en">👉 View Expert BPMN 2.0 Architecture Solution</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>Cấu trúc chuẩn hóa BPMN 2.0:</strong><br>
+              • <strong>Pool (Doanh nghiệp):</strong> <code>Công Ty Tài Chính Tiêu Dùng</code>.<br>
+              • <strong>Swimlanes (3 Làn bơi):</strong><br>
+              - <em>Lane 1 (Khách Hàng):</em> Bắt đầu bằng <code>Start Event</code> (Nộp hồ sơ vay) &rarr; Nhận kết quả &rarr; Ký số hợp đồng OTP (nếu được duyệt).<br>
+              - <em>Lane 2 (Hệ Thống Tự Động / Automated Engine):</em> Gọi API CIC &rarr; Kích hoạt <strong>Exclusive Gateway (XOR)</strong> phân 3 nhánh dựa trên điểm tín dụng <code>credit_score</code>: Nhánh 1 (Score &lt; 450: End Event Từ chối), Nhánh 2 (Score &ge; 650: Tự động phê duyệt), Nhánh 3 (450 &le; Score &lt; 650: Tạo task thẩm định).<br>
+              - <em>Lane 3 (Chuyên Viên Thẩm Định):</em> Tiếp nhận task từ Nhánh 3 &rarr; Thực hiện tác vụ người dùng (User Task: Gọi điện xác minh nơi làm việc) &rarr; Kích hoạt XOR Gateway thứ 2 (Phê duyệt thủ công / Từ chối thủ công).<br>
+              <br>
+              <strong>Lưu ý kiến trúc chuẩn:</strong> Tuyệt đối không dùng Parallel Gateway (AND) tại điểm rẽ nhánh điểm tín dụng, vì hồ sơ chỉ có thể đi vào DUY NHẤT một trong ba nhánh điều kiện loại trừ lẫn nhau (Mutually Exclusive).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">3. Phỏng Vấn Kỹ Thuật (STAR Method): Phân Biệt Sơ Đồ Activity vs Sequence vs State Machine</span>
+        <span class="lang-en">3. Technical Interview Preparation (STAR Method): Activity vs. Sequence vs. State Machine</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Khi nào bạn chọn vẽ Sequence Diagram và khi nào bạn chọn vẽ State Machine Diagram cho một tính năng phức tạp?"</span>
+          <span class="lang-en">Question: "How do you choose between drawing a Sequence Diagram versus a State Machine Diagram for a complex system feature?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong một dự án Cổng Thanh toán Liên ngân hàng, đội ngũ kỹ sư và bên đối tác NAPAS liên tục tranh luận về quy trình xử lý giao dịch bị nghẽn mạng giữa chừng.<br>
+          • <strong>Task:</strong> Tôi cần sử dụng công cụ mô hình hóa trực quan chính xác để giải quyết cả hai bài toán: Thứ tự giao tiếp giữa các máy chủ và vòng đời của mã giao dịch thanh toán.<br>
+          • <strong>Action:</strong> Tôi đã phân định rõ ràng mục đích của từng sơ đồ:<br>
+          - Tôi vẽ <strong>Sequence Diagram</strong> khi cần mô tả tương tác tích hợp đa hệ thống theo trục thời gian (Time-ordered): User bấm thanh toán &rarr; Frontend gửi JWT &rarr; API Gateway xác thực &rarr; Payment Service gọi NAPAS &rarr; NAPAS trả Webhook. Sơ đồ này giúp lập trình viên backend hiểu rõ các trường hợp Timeout 504 và cơ chế gọi lại (Retry Call).<br>
+          - Tôi vẽ <strong>State Machine Diagram</strong> khi cần kiểm soát tính toàn vẹn của MỘT thực thể duy nhất là Giao Dịch (Transaction): Các trạng thái hợp lệ như <code>INITIATED &rarr; AUTHORIZING &rarr; SETTLED</code>, và chặn đứng các chuyển đổi phi lý như từ <code>FAILED</code> nhảy thẳng sang <code>SETTLED</code>.<br>
+          • <strong>Result:</strong> Cả đội Dev ngân hàng và Tech Lead NAPAS đều hiểu chính xác kiến trúc, triệt tiêu 100% tranh cãi trong các đợt kiểm thử tích hợp (SIT).
+        </p>
+      </div>
+    </section>
+"""
+
+with open(r"C:\Users\asus\.gemini\antigravity\brain\1228ac6c-02c7-4591-80b5-ea22e436671f\scratch\km_part4.html", 'w', encoding='utf-8') as f:
+    f.write(part4)
+
+print("Part 4 written.")
+# Domain 7 & Domain 8 & Footer
+part5 = """
+    <!-- ========================================== -->
+    <!-- DOMAIN 7: DATA ARCHITECTURE & SQL -->
+    <!-- ========================================== -->
+    <section id="domain-7" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 7</span>
+          <h2>
+            <span class="lang-vi">Kiến Trúc Dữ Liệu Quan Hệ & Truy Vấn SQL Dành Cho BA</span>
+            <span class="lang-en">Data Architecture & Relational SQL for Business Analysts</span>
+          </h2>
+          <div class="domain-meta">Standard: ANSI/ISO SQL & Codd's Relational Database Theory</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🗄️</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Mô Hình Thực Thể Quan Hệ (ERD) & Chuẩn Hóa 1NF - 3NF</span>
+        <span class="lang-en">1. Conceptual Core: Entity Relationship Modeling (ERD) & 1NF-3NF Normalization</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Một BA chuyên nghiệp không thể chỉ nhìn phần mềm qua màn hình giao diện. Cội nguồn của mọi logic hệ thống nằm ở cấu trúc dữ liệu bên dưới:</span>
+        <span class="lang-en">A professional BA looks far beyond UI mockups. The bedrock of software logic resides in the underlying relational data model:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th><span class="lang-vi">Cấp Độ Chuẩn Hóa</span><span class="lang-en">Normal Form</span></th>
+              <th><span class="lang-vi">Quy Tắc Bắt Buộc</span><span class="lang-en">Mandatory Rule</span></th>
+              <th><span class="lang-vi">Dị Thường Được Triệt Tiêu (Anomalies Eradicated)</span><span class="lang-en">Anomalies Eradicated</span></th>
+              <th><span class="lang-vi">Ví Dụ Vi Phạm Thường Gặp</span><span class="lang-en">Common Violation</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1NF (First Normal Form)</strong></td>
+              <td>Mỗi ô dữ liệu chỉ chứa giá trị nguyên tử (Atomic Value), không chứa mảng hoặc chuỗi phân tách bằng dấu phẩy.</td>
+              <td>Triệt tiêu việc lưu chuỗi danh sách không thể lập chỉ mục (Index) hay lọc tìm kiếm.</td>
+              <td>Cột <code>phone_numbers</code> lưu chuỗi <code>"0912345678, 0987654321"</code> trong cùng 1 dòng.</td>
+            </tr>
+            <tr>
+              <td><strong>2NF (Second Normal Form)</strong></td>
+              <td>Thỏa mãn 1NF và mọi thuộc tính không khóa phải phụ thuộc hàm toàn phần vào toàn bộ khóa chính phức hợp (No Partial Dependency).</td>
+              <td>Triệt tiêu dị thường cập nhật (Update Anomaly) khi một thuộc tính bị trùng lặp ở nhiều dòng.</td>
+              <td>Trong bảng <code>order_items (order_id, product_id, product_name)</code>, <code>product_name</code> chỉ phụ thuộc vào <code>product_id</code> chứ không phụ thuộc <code>order_id</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>3NF (Third Normal Form)</strong></td>
+              <td>Thỏa mãn 2NF và không có thuộc tính không khóa nào phụ thuộc bắc cầu vào khóa chính thông qua một thuộc tính khác (No Transitive Dependency: $A \rightarrow B \rightarrow C$).</td>
+              <td>Triệt tiêu dị thường xóa (Delete Anomaly): Xóa một bản ghi đơn hàng không làm biến mất thông tin thành phố của khách hàng.</td>
+              <td>Trong bảng <code>orders (order_id, customer_id, customer_city)</code>, cột <code>customer_city</code> phụ thuộc vào <code>customer_id</code> chứ không phụ thuộc trực tiếp vào <code>order_id</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>💻</span>
+        <span class="lang-vi">2. Cẩm Nang Truy Vấn SQL Thực Chiến Cho BA (DML, Joins & Thứ Tự Thực Thi)</span>
+        <span class="lang-en">2. Practical SQL Compendium for BAs: Joins, Aggregations & Execution Order</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Thứ tự thực thi thực tế của bộ máy cơ sở dữ liệu (SQL Engine Execution Order) khác hoàn toàn với thứ tự bạn viết câu lệnh trên màn hình:</span>
+        <span class="lang-en">The logical query processing order inside a database engine differs radically from how queries are authored:</span>
+      </p>
+
+      <div style="background: #0f172a; color: #38bdf8; padding: 1rem 1.25rem; border-radius: var(--radius-md); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.8; margin-bottom: 1rem;">
+        1. FROM & JOINs &rarr; 2. WHERE &rarr; 3. GROUP BY &rarr; 4. HAVING &rarr; 5. SELECT &rarr; 6. DISTINCT &rarr; 7. ORDER BY &rarr; 8. LIMIT / OFFSET
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Toán Tử / Mệnh Đề</th>
+              <th>Mục Đích Sử Dụng Nghiệp Vụ</th>
+              <th>Ví Dụ Cú Pháp SQL Thực Tế</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>INNER JOIN</strong></td>
+              <td>Chỉ lấy các bản ghi có sự trùng khớp khóa ở CẢ HAI bảng (Giao nhau).</td>
+              <td><code>SELECT o.id, c.name FROM orders o INNER JOIN customers c ON o.customer_id = c.id;</code></td>
+            </tr>
+            <tr>
+              <td><strong>LEFT JOIN</strong></td>
+              <td>Lấy TOÀN BỘ bản ghi bảng bên trái; nếu bảng phải không có thì điền <code>NULL</code> (Rất hữu ích khi tìm khách hàng chưa từng mua hàng).</td>
+              <td><code>SELECT c.name, o.id FROM customers c LEFT JOIN orders o ON c.id = o.customer_id WHERE o.id IS NULL;</code></td>
+            </tr>
+            <tr>
+              <td><strong>GROUP BY & HAVING</strong></td>
+              <td>Gom nhóm dữ liệu theo chiều phân tích và lọc trên kết quả tính toán của hàm tổng hợp (SUM, COUNT).</td>
+              <td><code>SELECT customer_id, SUM(total_amount) AS revenue FROM orders GROUP BY customer_id HAVING SUM(total_amount) &gt; 10000000;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">3. Bài Tập Thực Chiến: Viết Câu Lệnh SQL Báo Cáo Top Khách Hàng VIP Cho Ban Giám Đốc</span>
+        <span class="lang-en">3. Hands-on Practicum: Authoring Production SQL for Executive VIP Analytics</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống nghiệp vụ:</strong> Ban Giám đốc yêu cầu BA trích xuất danh sách: <em>"Top 5 Khách hàng có tổng chi tiêu trong năm 2026 trên 50,000,000 VNĐ và có số lượng đơn hàng hoàn thành tối thiểu 3 đơn"</em> từ CSDL có 2 bảng:<br>
+          • <code>customers (customer_id, full_name, email, city)</code><br>
+          • <code>orders (order_id, customer_id, total_amount, order_status, created_at)</code><br>
+          <strong>Câu hỏi:</strong> Hãy viết câu lệnh SQL hoàn chỉnh, tối ưu và giải thích tại sao không thể dùng mệnh đề <code>WHERE</code> để lọc tổng chi tiêu 50M.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải SQL Chuẩn & Phân Tích Logic</span><span class="lang-en">👉 View Production SQL Query & Explanation</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <div class="code-block">
+SELECT 
+    c.customer_id,
+    c.full_name,
+    c.email,
+    COUNT(o.order_id) AS completed_orders_count,
+    SUM(o.total_amount) AS total_annual_spent
+FROM customers c
+INNER JOIN orders o 
+    ON c.customer_id = o.customer_id
+WHERE o.order_status = 'COMPLETED'
+  AND o.created_at >= '2026-01-01 00:00:00'
+  AND o.created_at <= '2026-12-31 23:59:59'
+GROUP BY 
+    c.customer_id, 
+    c.full_name, 
+    c.email
+HAVING SUM(o.total_amount) > 50000000
+   AND COUNT(o.order_id) >= 3
+ORDER BY total_annual_spent DESC
+LIMIT 5;
+            </div>
+            <p class="domain-p">
+              <strong>Giải thích kiến trúc:</strong><br>
+              Mệnh đề <code>WHERE</code> được thực thi ở <strong>Bước 2</strong> (trước khi dữ liệu được gom nhóm), do đó tại thời điểm chạy <code>WHERE</code> máy chủ CSDL chưa hề tính toán hàm tổng hợp <code>SUM()</code> hay <code>COUNT()</code>. Để lọc trên kết quả tính toán gom nhóm, bắt buộc phải dùng mệnh đề <code>HAVING</code> ở <strong>Bước 4</strong> sau khi đã gom nhóm bằng <code>GROUP BY</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">4. Phỏng Vấn Kỹ Thuật (STAR Method): Phân Biệt Khác Nhau Giữa WHERE Và HAVING</span>
+        <span class="lang-en">4. Technical Interview Preparation (STAR Method): WHERE vs. HAVING Execution</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Hãy giải thích sự khác biệt cơ bản giữa mệnh đề WHERE và HAVING trong SQL, và khi nào bạn dùng LEFT JOIN thay vì INNER JOIN?"</span>
+          <span class="lang-en">Question: "Explain the fundamental execution differences between WHERE and HAVING in SQL, and when would you use a LEFT JOIN over an INNER JOIN?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong một đợt kiểm thử dữ liệu đối soát tài chính, lập trình viên viết câu lệnh SQL dùng WHERE lọc trên hàm <code>SUM()</code> bị báo lỗi cú pháp khiến tiến độ đối soát bị đình trệ.<br>
+          • <strong>Task:</strong> Tôi đã trực tiếp hướng dẫn và sửa lại cấu trúc truy vấn để trích xuất đúng tập dữ liệu.<br>
+          • <strong>Action:</strong> Tôi giải thích rõ bản chất theo thứ tự thực thi của SQL Engine:<br>
+          - <code>WHERE</code> là bộ lọc dòng đơn lẻ (Row-level filter), lọc dữ liệu thô trước khi gom nhóm. Trong khi <code>HAVING</code> là bộ lọc trên tập dữ liệu đã tổng hợp (Aggregate-level filter), lọc các nhóm thỏa mãn điều kiện sau khi đã chạy <code>GROUP BY</code>.<br>
+          - Về phép nối: Tôi dùng <code>INNER JOIN</code> khi bài toán đòi hỏi bản ghi phải tồn tại ở cả 2 bảng (ví dụ: chỉ lấy đơn hàng có thông tin khách hàng hợp lệ). Tôi dùng <code>LEFT JOIN</code> khi cần bảo toàn 100% bản ghi bảng nguồn kể cả khi bảng đích chưa có dữ liệu (ví dụ: tìm kiếm danh sách các sản phẩm trong kho chưa từng được bán lần nào: <code>LEFT JOIN orders ... WHERE order_id IS NULL</code>).<br>
+          • <strong>Result:</strong> Giúp đội ngũ kỹ thuật tối ưu hóa câu lệnh đối soát tài chính, giảm thời gian truy vấn CSDL từ 45 giây xuống còn 1.2 giây nhờ tận dụng đúng chỉ mục (Index).
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DOMAIN 8: REST APIS & SOFTWARE QA -->
+    <!-- ========================================== -->
+    <section id="domain-8" class="domain-section">
+      <div class="domain-header">
+        <div class="domain-title-group">
+          <span class="badge badge-explicit">Domain 8</span>
+          <h2>
+            <span class="lang-vi">Tích Hợp API RESTful & Kiểm Thử Phần Mềm QA Chuyên Nghiệp</span>
+            <span class="lang-en">RESTful APIs & Software Quality Assurance (QA)</span>
+          </h2>
+          <div class="domain-meta">Standard: IETF RFC 9110 (HTTP Semantics) & ISTQB® CTFL 4.0</div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🌐</span>
+        <span class="lang-vi">1. Nền Tảng Lý Thuyết: Các Động Từ HTTP, Tính Bất Biến (Idempotency) & Mã Trạng Thái</span>
+        <span class="lang-en">1. Conceptual Core: HTTP Verbs, Idempotency & HTTP Status Codes</span>
+      </h3>
+      <p class="domain-p">
+        <span class="lang-vi">Trong kỷ nguyên kiến trúc vi dịch vụ (Microservices), BA bắt buộc phải hiểu chuẩn giao tiếp API RESTful. Đặc biệt là khái niệm <strong>Idempotent (Tính bất biến)</strong>: Một phương thức được gọi là Idempotent nếu gọi 1 lần hay gọi 100 lần liên tiếp với cùng tham số thì trạng thái của tài nguyên trên máy chủ không thay đổi:</span>
+        <span class="lang-en">In modern microservices, BAs must master RESTful contracts, especially <strong>Idempotency</strong>: Calling a method once or 100 times with identical payloads yields identical server resource states:</span>
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Phương Thức (Verb)</th>
+              <th>Hành Động Nghiệp Vụ</th>
+              <th>An Toàn (Safe)?</th>
+              <th>Bất Biến (Idempotent)?</th>
+              <th>Mã Phản Hồi Thành Công Điển Hình</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>GET</code></td>
+              <td>Đọc dữ liệu tài nguyên, không làm thay đổi trạng thái DB.</td>
+              <td><span style="color: #059669; font-weight: 700;">YES</span></td>
+              <td><span style="color: #059669; font-weight: 700;">YES</span></td>
+              <td><code>200 OK</code></td>
+            </tr>
+            <tr>
+              <td><code>POST</code></td>
+              <td>Tạo mới tài nguyên (Gọi 2 lần sẽ tạo 2 bản ghi khác nhau nếu thiếu cơ chế chống trùng).</td>
+              <td><span style="color: #dc2626; font-weight: 700;">NO</span></td>
+              <td><span style="color: #dc2626; font-weight: 700;">NO</span></td>
+              <td><code>201 Created</code></td>
+            </tr>
+            <tr>
+              <td><code>PUT</code></td>
+              <td>Cập nhật/Thay thế TOÀN BỘ tài nguyên (Gửi lại nguyên bản thể mới).</td>
+              <td><span style="color: #dc2626; font-weight: 700;">NO</span></td>
+              <td><span style="color: #059669; font-weight: 700;">YES</span></td>
+              <td><code>200 OK</code> hoặc <code>204 No Content</code></td>
+            </tr>
+            <tr>
+              <td><code>PATCH</code></td>
+              <td>Cập nhật MỘT PHẦN tài nguyên (Chỉ gửi các trường cần thay đổi, ví dụ đổi số điện thoại).</td>
+              <td><span style="color: #dc2626; font-weight: 700;">NO</span></td>
+              <td><span style="color: #f59e0b; font-weight: 700;">Tùy Logic</span></td>
+              <td><code>200 OK</code></td>
+            </tr>
+            <tr>
+              <td><code>DELETE</code></td>
+              <td>Xóa tài nguyên khỏi hệ thống.</td>
+              <td><span style="color: #dc2626; font-weight: 700;">NO</span></td>
+              <td><span style="color: #059669; font-weight: 700;">YES</span></td>
+              <td><code>200 OK</code> hoặc <code>204 No Content</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+        <div class="callout-title">
+          <span>🚦</span>
+          <span class="lang-vi">Ma Trận Mã Lỗi HTTP Status Codes Cần Nhớ Nằm Lòng Dành Cho BA:</span>
+          <span class="lang-en">Critical HTTP Status Code Matrix Every BA Must Memorize:</span>
+        </div>
+        <p class="domain-p" style="font-size: 0.9rem; margin-bottom: 0;">
+          • <strong>200 OK:</strong> Thành công đọc/cập nhật dữ liệu.<br>
+          • <strong>201 Created:</strong> Tạo mới bản ghi thành công (thường đi kèm header <code>Location</code>).<br>
+          • <strong>400 Bad Request:</strong> Lỗi cú pháp request payload sai định dạng JSON hoặc thiếu trường bắt buộc.<br>
+          • <strong>401 Unauthorized:</strong> Chưa xác thực danh tính (Chưa đăng nhập, thiếu JWT Token hoặc Token hết hạn).<br>
+          • <strong>403 Forbidden:</strong> Đã đăng nhập nhưng KHÔNG CÓ QUYỀN truy cập tài nguyên này (Vi phạm phân quyền RBAC).<br>
+          • <strong>404 Not Found:</strong> Không tìm thấy tài nguyên theo URI.<br>
+          • <strong>409 Conflict:</strong> Xung đột dữ liệu (Ví dụ: Email hoặc Mã đơn hàng đã tồn tại trong CSDL).<br>
+          • <strong>500 Internal Server Error:</strong> Mã nguồn backend bị lỗi exception chưa được try-catch.<br>
+          • <strong>502 Bad Gateway:</strong> Máy chủ Gateway/Proxy không nhận được phản hồi hợp lệ từ server dịch vụ backend.<br>
+          • <strong>504 Gateway Timeout:</strong> Dịch vụ thứ ba phản hồi quá thời gian chờ quy định (Time-out).
+        </p>
+      </div>
+
+      <!-- MASTERCLASS LINK CARDS FOR DOMAIN 8 -->
+      <div class="masterclass-link-card">
+        <div>
+          <h4 style="margin: 0 0 0.25rem 0; color: var(--color-primary);">
+            <span class="lang-vi">📖 Khám Phá Bài Chuyên Khảo: Thiết Kế Test Case & Biểu Mẫu Nghiệm Thu UAT</span>
+            <span class="lang-en">📖 Deep Masterclass: Technical Test Case Design & UAT Specification</span>
+          </h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-body);">
+            <span class="lang-vi">Nắm trọn kỹ thuật Phân vùng tương đương (EP), Giá trị biên (BVA), Bảng quyết định và Biên bản nghiệm thu có chữ ký Sponsor.</span>
+            <span class="lang-en">Master Equivalence Partitioning, Boundary Value Analysis, Decision Tables, and formal UAT sign-off protocols.</span>
+          </p>
+        </div>
+        <a href="../modules/test-case-uat-specification/" class="btn btn-primary btn-sm">
+          <span>Xem Bài Học Chuyên Khảo &rarr;</span>
+        </a>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>⚙️</span>
+        <span class="lang-vi">2. Bài Tập Thực Chiến: Khắc Phục Lỗi Giao Tiếp Webhook Trong Tích Hợp Thanh Toán</span>
+        <span class="lang-en">2. Hands-on Practicum: Diagnosing Asynchronous Payment Webhook Drops</span>
+      </h3>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <p class="domain-p" style="margin-bottom: 0.5rem;">
+          <strong>Tình huống nghiệp vụ:</strong> Trong dự án tích hợp Cổng thanh toán ví điện tử, khách hàng đã thanh toán trừ tiền thành công trên ứng dụng ví Momo/VNPay, nhưng trạng thái đơn hàng trên website thương mại điện tử vẫn báo <code>PENDING_PAYMENT</code>. Khi kiểm tra nhật ký máy chủ, phát hiện Cổng thanh toán bắn Webhook thông báo kết quả nhưng backend của sàn trả về HTTP <code>500 Internal Server Error</code>.<br>
+          <strong>Nhiệm vụ:</strong> Trong vai trò Technical BA, bạn hãy đưa ra 3 nguyên nhân kỹ thuật khả dĩ nhất và đề xuất giải pháp thiết kế kiến trúc khắc phục triệt để.
+        </p>
+
+        <div class="interactive-solution">
+          <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+            <span><span class="lang-vi">👉 Xem Lời Giải & Kiến Trúc Xử Lý Webhook Bền Vững</span><span class="lang-en">👉 View Expert Webhook Resilience Architecture</span></span>
+            <span>▼</span>
+          </button>
+          <div class="solution-content">
+            <p class="domain-p">
+              <strong>1. Ba nguyên nhân kỹ thuật phổ biến nhất:</strong><br>
+              • <em>Nguyên nhân 1 (Xác thực chữ ký thất bại):</em> Backend kiểm tra chữ ký mã hóa (HMAC-SHA256 Signature) bị lỗi do sai Secret Key hoặc payload JSON bị format lại thứ tự trường trước khi hash.<br>
+              • <em>Nguyên nhân 2 (Lỗi tranh chấp khóa - Race Condition):</em> Webhook từ ví điện tử gửi về quá nhanh trước khi bản ghi đơn hàng kịp commit xong vào CSDL của sàn, dẫn đến câu lệnh <code>UPDATE orders WHERE order_id = ...</code> không tìm thấy dòng và sinh lỗi <code>NullPointerException</code>.<br>
+              • <em>Nguyên nhân 3 (Thiếu cơ chế Idempotency):</em> Ví điện tử có cơ chế retry gửi lại Webhook 3 lần; backend không kiểm tra trạng thái cũ mà cố insert bản ghi thanh toán lần 2 vào bảng giao dịch có khóa trùng, gây lỗi <code>DuplicateKeyException</code>.<br>
+              <br>
+              <strong>2. Giải pháp kiến trúc khắc phục chuẩn quốc tế:</strong><br>
+              • <em>Tách rời luồng xử lý bất đồng bộ (Async Queue):</em> Khi nhận Webhook, controller chỉ kiểm tra chữ ký signature hợp lệ và trả ngay lập tức <strong>HTTP 200 OK</strong> cho Cổng thanh toán trong vòng &le; 200ms để xác nhận đã tiếp nhận. Payload sau đó được đẩy vào hàng đợi RabbitMQ / Kafka để worker xử lý ngầm.<br>
+              • <em>Thiết lập Khóa Bất Biến (Idempotency Key):</em> Worker kiểm tra bảng <code>processed_webhooks</code> theo <code>transaction_id</code>; nếu giao dịch đã được xử lý thành công trước đó thì bỏ qua, đảm bảo không bao giờ cộng tiền 2 lần cho khách hàng.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="domain-subheading">
+        <span>🎯</span>
+        <span class="lang-vi">3. Phỏng Vấn Kỹ Thuật (STAR Method): Phân Biệt 401 Unauthorized vs. 403 Forbidden & Tầm Quan Trọng Của Idempotency</span>
+        <span class="lang-en">3. Technical Interview Preparation (STAR Method): 401 vs. 403 & Idempotency</span>
+      </h3>
+      <div style="background: #ffffff; border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; box-shadow: var(--shadow-sm);">
+        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--color-primary);">
+          <span class="lang-vi">Câu hỏi: "Hãy giải thích sự khác biệt cốt lõi giữa mã lỗi HTTP 401 và 403, và tại sao tính chất Idempotent lại đặc biệt quan trọng trong các giao dịch chuyển tiền ngân hàng?"</span>
+          <span class="lang-en">Question: "What is the architectural difference between 401 and 403, and why is Idempotency mission-critical in financial wire transfer integrations?"</span>
+        </p>
+        <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-body);">
+          <strong>STAR Response:</strong><br>
+          • <strong>Situation:</strong> Trong một dự án Cổng Tài chính Doanh nghiệp, người dùng phàn nàn rằng khi tài khoản nhân viên đăng nhập thành công vào hệ thống nhưng bấm vào xem Báo cáo Lương thì màn hình lại bắn lỗi 401 khiến ứng dụng tự động văng ra màn hình đăng nhập lại.<br>
+          • <strong>Task:</strong> Tôi cần chuẩn hóa lại quy định xử lý mã lỗi HTTP giữa đội Frontend và Backend, đồng thời thiết kế cơ chế bảo vệ giao dịch thanh toán.<br>
+          • <strong>Action:</strong><br>
+          - Tôi chỉ rõ sự nhầm lẫn: <strong>401 Unauthorized</strong> là lỗi <em>Xác Thực (Authentication)</em> — Hệ thống không biết bạn là ai (chưa đăng nhập hoặc Token hết hạn). Còn <strong>403 Forbidden</strong> là lỗi <em>Phân Quyền (Authorization)</em> — Hệ thống biết rõ bạn là ai, nhưng tài khoản của bạn không được phép xem tài nguyên này (Nhân viên không có quyền xem bảng lương). Tôi yêu cầu backend trả đúng mã 403 để frontend hiển thị thông báo "Bạn không có quyền" thay vì ép văng đăng nhập.<br>
+          - Về <strong>Idempotency trong Chuyển tiền:</strong> Khi người dùng bấm nút "Chuyển tiền 100M VNĐ", mạng di động bị chập chờn khiến ứng dụng không nhận được phản hồi nên người dùng sốt ruột bấm nút Submit lần 2. Nếu API không có tính Idempotent, hệ thống sẽ thực hiện 2 lệnh trừ tiền thành 200M VNĐ! Tôi đã yêu cầu sinh một mã duy nhất <code>Idempotency-Key (UUIDv4)</code> gắn vào Header của request. Server lưu mã này vào Redis Cache; nếu request thứ 2 gửi đến cùng key trong vòng 60 giây, server trả về ngay kết quả giao dịch cũ từ cache mà tuyệt đối không trừ tiền lần 2.<br>
+          • <strong>Result:</strong> Loại bỏ hoàn toàn sự cố trừ tiền kép; bảo vệ an toàn 100% dòng tiền giao dịch của khách hàng.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">Thẻ ghi nhớ (48 thẻ)</span><span class="lang-en">Flashcards (48 Cards)</span></a></li>
+          <li><a href="../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay & Biểu mẫu</span><span class="lang-en">Handbook & Templates</span></a></li>
+          <li><a href="../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Kho Tải về</span><span class="lang-en">Downloads Hub</span></a></li>
+          <li><a href="../about/" style="color: var(--text-muted);"><span class="lang-vi">Giới thiệu tác giả</span><span class="lang-en">About Author</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Chuẩn mực tham chiếu</span>
+          <span class="lang-en">Standard Frameworks</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          BABOK® Guide v3 (IIBA) • OMG BPMN™ 2.0 • OMG UML® 2.5 • Agile Alliance • ANSI/ISO SQL • IETF RFC Standards • ISTQB® Testing Principles.
+        </p>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        © 2026 <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>. All rights reserved.
+      </div>
+      <div>
+        <span class="lang-vi">Trang web cá nhân độc lập phục vụ học tập và nghiên cứu chuyên môn.</span>
+        <span class="lang-en">Independent personal knowledge platform for professional study and practice.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
+"""
+
+with open(r"C:\Users\asus\.gemini\antigravity\brain\1228ac6c-02c7-4591-80b5-ea22e436671f\scratch\km_part5.html", 'w', encoding='utf-8') as f:
+    f.write(part5)
+
+print("Part 5 written.")

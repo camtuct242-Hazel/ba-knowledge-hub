@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Đặc tả Chức năng Phần mềm (SFS - Software Functional Specification) | Hazel BA Hub</title>
+  <title class="lang-en">Software Functional Specification (SFS) Masterclass | Hazel BA Hub</title>
+  <meta name="description" content="Chuyên khảo thực hành toàn diện về kỹ thuật soạn thảo Đặc tả Chức năng Phần mềm (SFS) chuẩn công nghiệp quốc tế - Tác giả Nguyễn Đăng Cẩm Tú (Hazel).">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/lesson.css">
+  <!-- Core i18n -->
+  <script src="../../assets/js/i18n.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../../knowledge-map/" class="nav-link"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../../study-guide/" class="nav-link active"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container lesson-page">
+    <!-- Breadcrumb & Hero -->
+    <div class="lesson-hero">
+      <div class="lesson-breadcrumb">
+        <a href="../../"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a>
+        <span>/</span>
+        <a href="../../study-guide/"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a>
+        <span>/</span>
+        <span class="lang-vi">Biểu mẫu 3: Đặc tả Chức năng Phần mềm (SFS)</span>
+        <span class="lang-en">Template 3: Software Functional Specification (SFS)</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-explicit">Domain 5 • Masterclass</span>
+        <span class="badge badge-inferred">Functional Specification / IEEE 830 &amp; 29148</span>
+        <span class="badge badge-illustrative">Author: Nguyễn Đăng Cẩm Tú (Hazel)</span>
+      </div>
+
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">
+        <span class="lang-vi">Soạn thảo Đặc tả Chức năng Phần mềm (SFS) Chuẩn Thực chiến</span>
+        <span class="lang-en">Authoring Production-Grade Software Functional Specifications (SFS)</span>
+      </h1>
+      <p style="font-size: 1.05rem; max-width: 880px; color: var(--text-muted); margin-bottom: 0;">
+        <span class="lang-vi">Chuyên khảo chuyên sâu: Kỹ thuật phân rã luồng nghiệp vụ (Happy, Alternative, Exception Paths), xây dựng bảng từ điển dữ liệu cấp trường (Field Dictionary), quy chuẩn tích hợp API đồng bộ/bất đồng bộ, xử lý trùng lặp (Idempotency), và hoàn thiện hồ sơ module thực chiến SFS-INV-001.</span>
+        <span class="lang-en">A substantive, practical masterclass: Deconstructing multi-branch workflows (Happy, Alternative, Exception Paths), authoring field-level data dictionaries, defining sync/async integration contracts, managing idempotency, and examining complete worked module SFS-INV-001.</span>
+      </p>
+    </div>
+
+    <!-- Lesson Layout Grid: Sidebar + Main Content -->
+    <div class="lesson-layout">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="lesson-sidebar">
+        <div class="sidebar-title">
+          <span class="lang-vi">Mục lục chuyên khảo</span>
+          <span class="lang-en">Lesson Contents</span>
+        </div>
+        <ul class="toc-list">
+          <li><a href="#sec-objectives" class="toc-link"><span class="lang-vi">A. Mục tiêu học tập</span><span class="lang-en">A. Learning Objectives</span></a></li>
+          <li><a href="#sec-concepts" class="toc-link"><span class="lang-vi">B. Bản chất & Ranh giới SFS</span><span class="lang-en">B. Conceptual Foundations</span></a></li>
+          <li><a href="#sec-method" class="toc-link"><span class="lang-vi">C. Quy trình 6 Bước Soạn SFS</span><span class="lang-en">C. 6-Step SFS Method</span></a></li>
+          <li><a href="#sec-worked-sfs" class="toc-link"><span class="lang-vi">D. Hồ sơ SFS Thực chiến Mẫu</span><span class="lang-en">D. Worked Enterprise SFS</span></a></li>
+          <li><a href="#sec-mistakes" class="toc-link"><span class="lang-vi">E. Sai lầm Kinh điển & Khắc phục</span><span class="lang-en">E. Common Anti-Patterns</span></a></li>
+          <li><a href="#sec-exercises" class="toc-link"><span class="lang-vi">F. Bài tập Thực hành & Lời giải</span><span class="lang-en">F. Practice Exercises</span></a></li>
+          <li><a href="#sec-interviews" class="toc-link"><span class="lang-vi">G. Bộ Câu hỏi Phỏng vấn Kỹ thuật</span><span class="lang-en">G. Technical Interview Q&amp;A</span></a></li>
+          <li><a href="#sec-glossary-references" class="toc-link"><span class="lang-vi">H. Thuật ngữ & Nguồn Tham chiếu</span><span class="lang-en">H. Glossary &amp; References</span></a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Lesson Content Area -->
+      <article class="lesson-content">
+
+        <!-- SECTION A: LEARNING OBJECTIVES -->
+        <section id="sec-objectives" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">A</span>
+            <h2>
+              <span class="lang-vi">Mục tiêu Học tập (Learning Objectives)</span>
+              <span class="lang-en">Learning Objectives</span>
+            </h2>
+          </div>
+          <p class="lang-vi">Sau khi hoàn thành chuyên khảo này, người học sẽ có khả năng làm chủ các năng lực phân tích chức năng và đặc tả phần mềm chi tiết sau:</p>
+          <p class="lang-en">Upon completing this masterclass, learners will be equipped to execute the following functional analysis and software specification competencies:</p>
+          
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;"><span class="lang-vi">Cấp độ (Bloom)</span><span class="lang-en">Cognitive Level</span></th>
+                  <th style="width: 75%;"><span class="lang-vi">Năng lực Đạt được Cụ thể</span><span class="lang-en">Specific Competency Outcome</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Định vị (Position)</strong></td>
+                  <td>
+                    <span class="lang-vi">Xác định ranh giới chức năng rõ ràng giữa SFS (Software Functional Specification), BRD (Business Requirements Document) và Technical Architecture Specification, bảo đảm BA đặc tả trọn vẹn hành vi hệ thống có thể quan sát được mà không can thiệp vào mã nguồn nội bộ.</span>
+                    <span class="lang-en">Demarcate precise functional boundaries between SFS, BRD, and Technical Architecture, ensuring the analyst comprehensively specifies observable system behaviors without overstepping into internal code implementation.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>2. Cấu trúc hóa Luồng (Structure Flows)</strong></td>
+                  <td>
+                    <span class="lang-vi">Thiết kế cấu trúc module chức năng chặt chẽ: Tác nhân (Actors), Sự kiện kích hoạt (Triggers), Tiền điều kiện (Preconditions), Luồng chính (Happy Path), các Luồng phụ (Alternative Flows) và các Luồng ngoại lệ xử lý sự cố (Exception Flows).</span>
+                    <span class="lang-en">Structure robust functional modules encompassing Actors, Triggers, Preconditions, Happy Path, Alternative Flows, and comprehensive fault-tolerant Exception Flows.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>3. Định lượng Trường dữ liệu (Quantify Fields)</strong></td>
+                  <td>
+                    <span class="lang-vi">Biên soạn Bảng từ điển trường dữ liệu (Field Data Dictionary) chuẩn xác đến từng thuộc tính: kiểu dữ liệu, độ dài, trạng thái bắt buộc, điều kiện biên, biểu thức chính quy (Regex) và thông báo lỗi song ngữ định danh theo mã.</span>
+                    <span class="lang-en">Author field-level data dictionaries specifying data types, lengths, nullability, boundary limits, regex validations, and unique code-identified bilingual error messages.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>4. Tích hợp Hệ thống (Integrate Systems)</strong></td>
+                  <td>
+                    <span class="lang-vi">Đặc tả giao thức tích hợp hệ thống bên thứ ba, phân biệt rõ ràng tương tác đồng bộ (Synchronous) vs. bất đồng bộ (Asynchronous), cơ chế đảm bảo tính duy nhất không lặp giao dịch (Idempotency), timeout, cơ chế thử lại (Retry) và bồi hoàn dữ liệu (Compensating actions).</span>
+                    <span class="lang-en">Specify third-party system integrations, distinguishing synchronous from asynchronous contracts, idempotency keys, timeouts, retry policies, and compensating rollback mechanisms.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>5. Kiểm thử & Truy vết (Test & Trace)</strong></td>
+                  <td>
+                    <span class="lang-vi">Duy trì tính kiểm thử được (Testability) 100% của mọi yêu cầu chức năng và bảo toàn ma trận truy vết hai chiều (Bidirectional Traceability) từ mục tiêu BRD đến từng mã ca kiểm thử (Test Case ID).</span>
+                    <span class="lang-en">Ensure 100% testability across all functional requirements and preserve bidirectional traceability from BRD business goals down to individual functional test case IDs.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION B: CONCEPTUAL FOUNDATIONS -->
+        <section id="sec-concepts" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">B</span>
+            <h2>
+              <span class="lang-vi">Bản chất Khái niệm & Ranh giới của SFS</span>
+              <span class="lang-en">Conceptual Foundations & SFS Boundaries</span>
+            </h2>
+          </div>
+
+          <h3>
+            <span class="lang-vi">1. SFS là gì và Ranh giới So với BRD &amp; Tech Spec?</span>
+            <span class="lang-en">1. What is an SFS and How Does it Differ from BRD &amp; Tech Spec?</span>
+          </h3>
+          <p class="lang-vi">
+            Tài liệu Đặc tả Chức năng Phần mềm (<strong>Software Functional Specification - SFS</strong>, hoặc <strong>Functional Requirements Specification - FRS</strong>) là hồ sơ kỹ thuật nghiệp vụ mô tả chi tiết <em>phần mềm phải thực hiện những hành vi gì</em> để đáp ứng các yêu cầu kinh doanh đã xác lập trong BRD. Nếu như BRD giải thích lý do tồn tại (WHY) và năng lực kinh doanh cấp cao (WHAT), thì SFS đi sâu vào <strong>hành vi tương tác cụ thể của hệ thống ở góc nhìn người dùng và dữ liệu</strong>.
+          </p>
+          <p class="lang-en">
+            A <strong>Software Functional Specification (SFS)</strong> (also known as FRS or SRS Functional Module) is a technical-business artifact detailing <em>what behaviors the software must exhibit</em> to fulfill the business capabilities established in the BRD. While the BRD addresses strategic intent (WHY) and high-level capability (WHAT), the SFS details <strong>concrete user-system interactions, validations, and data transformations from an observable behavioral perspective</strong>.
+          </p>
+
+          <div class="table-responsive" style="margin: 1.25rem 0;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;"><span class="lang-vi">Tiêu chí So sánh</span><span class="lang-en">Dimension</span></th>
+                  <th style="width: 26%;"><span class="lang-vi">Tài liệu Yêu cầu Kinh doanh (BRD)</span><span class="lang-en">Business Requirements Doc (BRD)</span></th>
+                  <th style="width: 27%;"><span class="lang-vi">Đặc tả Chức năng Phần mềm (SFS)</span><span class="lang-en">Software Functional Spec (SFS)</span></th>
+                  <th style="width: 27%;"><span class="lang-vi">Đặc tả Thiết kế Kỹ thuật (Tech Spec)</span><span class="lang-en">Technical Architecture Spec</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Câu hỏi Trả lời</strong></td>
+                  <td><em>Tại sao cần làm? Năng lực kinh doanh nào cần có?</em></td>
+                  <td><em>Hệ thống phản hồi hành động người dùng ra sao? Dữ liệu xử lý thế nào?</em></td>
+                  <td><em>Hệ thống được lập trình và cài đặt bên trong bằng công nghệ gì?</em></td>
+                </tr>
+                <tr>
+                  <td><strong>Người Sở hữu &amp; Đọc chính</strong></td>
+                  <td>Business Sponsor, VP, Lead BA, Product Manager</td>
+                  <td>BA, Product Owner, QA/Testers, Developers, UI/UX</td>
+                  <td>Solution Architect, Tech Lead, Senior Developers, DevOps</td>
+                </tr>
+                <tr>
+                  <td><strong>Mức độ Trừu tượng</strong></td>
+                  <td>Cấp cao (Chiến lược, Quy trình nghiệp vụ, ROI, Phạm vi)</td>
+                  <td>Chi tiết hành vi quan sát được (Giao diện, Dòng dữ liệu, Quy tắc, Mã lỗi)</td>
+                  <td>Chi tiết nội bộ (Cấu trúc bảng CSDL, API endpoint code, Class, Memory)</td>
+                </tr>
+                <tr>
+                  <td><strong>Ví dụ Điển hình</strong></td>
+                  <td>"Hệ thống phải tự động bổ sung hàng khi tồn kho chạm điểm an toàn."</td>
+                  <td>"Khi Available Inventory &le; ROP, hệ thống tạo bản ghi PO trạng thái Draft, xác thực trường Supplier_ID qua bảng đối chiếu."</td>
+                  <td>"Chạy cron job Node.js mỗi 30 phút, truy vấn PostgreSQL bảng `tbl_inventory`, publish message vào Kafka topic `po-events`."</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: var(--bg-surface-warm); border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin: 1.25rem 0; border-radius: var(--radius-sm);">
+            <strong style="color: var(--color-primary-dark);">
+              <span class="lang-vi">Nguyên tắc Bất di Bất dịch của BA khi Viết SFS (The "Black-Box" Heuristic):</span>
+              <span class="lang-en">The Core "Black-Box" Heuristic for Functional Analysts:</span>
+            </strong>
+            <p style="margin: 0.5rem 0 0; font-size: 0.95rem;" class="lang-vi">
+              SFS đặc tả hệ thống như một <strong>"Hộp đen" (Black-Box)</strong>: Tập trung vào <em>Dữ liệu đầu vào (Input)</em>, <em>Quy tắc chuyển hóa (Rules/Logic)</em>, và <em>Kết quả quan sát được (Observable Output / Feedback / State Change)</em>. Tuyệt đối không chỉ định thuật toán lập trình nội bộ, chỉ số index CSDL hoặc kiến trúc bộ nhớ vi mô.
+            </p>
+            <p style="margin: 0.5rem 0 0; font-size: 0.95rem;" class="lang-en">
+              An SFS specifies the system as a <strong>"Black-Box"</strong>: Focusing on <em>Inputs</em>, <em>Transformation Rules</em>, and <em>Observable Outputs / State Transitions</em>. It must never dictate internal algorithmic code routines, database indexing mechanics, or micro-level memory constructs.
+            </p>
+          </div>
+
+          <h3>
+            <span class="lang-vi">2. Tương tác Đồng bộ (Sync) vs. Bất đồng bộ (Async) &amp; Tính Bền bỉ</span>
+            <span class="lang-en">2. Synchronous vs. Asynchronous Behavior &amp; Resilience</span>
+          </h3>
+          <p class="lang-vi">
+            Một SFS thực chiến không chỉ vẽ luồng chạy mượt mà trên giao diện, mà phải minh định rõ bản chất tương tác với các hệ thống bên ngoài:
+          </p>
+          <p class="lang-en">
+            A production-ready SFS goes beyond ideal UI clicks to rigorously define system-to-system behavioral contracts:
+          </p>
+
+          <div class="comparison-grid">
+            <div class="card-good">
+              <strong style="color: #047857;">
+                <span class="lang-vi">TƯƠNG TÁC ĐỒNG BỘ (SYNCHRONOUS CALLS):</span>
+                <span class="lang-en">SYNCHRONOUS INTERACTIONS:</span>
+              </strong>
+              <p style="margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.6;" class="lang-vi">
+                Hệ thống gọi API và <strong>chặn (Block) phiên làm việc</strong> để đợi phản hồi tức thời trong một ngưỡng thời gian định mức (ví dụ: &lt; 3 giây). Nếu quá ngưỡng (Timeout), SFS phải quy định rõ: Hiển thị thông báo gì cho người dùng? Giao dịch có được hủy hay chuyển sang trạng thái chờ xử lý?
+              </p>
+              <p style="margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.6;" class="lang-en">
+                The caller triggers an API request and blocks execution awaiting an immediate response within a strict threshold (e.g., &lt; 3 seconds). If timed out, the SFS must mandate: What feedback is shown? Is the transaction rolled back or placed into pending state?
+              </p>
+            </div>
+
+            <div class="card-bad">
+              <strong style="color: #1E40AF;">
+                <span class="lang-vi">TƯƠNG TÁC BẤT ĐỒNG BỘ (ASYNCHRONOUS JOBS):</span>
+                <span class="lang-en">ASYNCHRONOUS / EVENT-DRIVEN CONTRACTS:</span>
+              </strong>
+              <p style="margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.6;" class="lang-vi">
+                Hệ thống gửi yêu cầu, nhận ngay mã xác nhận đã tiếp nhận (HTTP 202 Accepted), sau đó tiếp tục công việc. Kết quả thực tế được gửi về sau qua Webhook hoặc tiến trình chạy ngầm. SFS phải đặc tả: Trạng thái trung gian hiển thị ra sao? Cơ chế xử lý nếu Webhook bị gửi lặp lại (Idempotency) là gì?
+              </p>
+              <p style="margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.6;" class="lang-en">
+                The system dispatches a payload, receives an immediate acknowledgment (HTTP 202 Accepted), and releases the user thread. Actual execution confirms later via Webhooks or message queues. The SFS must specify intermediate states and duplicate payload handling (Idempotency).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION C: 6-STEP SFS AUTHORING METHOD -->
+        <section id="sec-method" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">C</span>
+            <h2>
+              <span class="lang-vi">Quy trình 6 Bước Soạn thảo SFS Thực chiến</span>
+              <span class="lang-en">The 6-Step Practical SFS Authoring Method</span>
+            </h2>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem;">
+            <!-- Step 1 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 1 / STEP 1</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Xác định Phạm vi Module, Tác nhân &amp; Tiền điều kiện (Scope, Actors &amp; Preconditions)</span><span class="lang-en">Define Module Scope, Actors &amp; Preconditions</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Khoanh vùng ranh giới tính năng: Tác nhân khởi tạo là người dùng (User Persona) hay dịch vụ hệ thống tự động (Cron Job/Scheduler)? Điều kiện tiên quyết của môi trường và cơ sở dữ liệu để luồng được phép bắt đầu là gì?
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Bound the feature module: Is the initiating actor a human user or an automated background scheduler? What exact system and database preconditions must hold true before execution is permitted?
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 2 / STEP 2</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Phác thảo Luồng Chính Thực thi Lý tưởng (Happy Path Step-by-Step)</span><span class="lang-en">Draft the Primary Execution Flow (Happy Path)</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Mô tả tuần tự từng bước tương tác hai chiều: Người dùng/Hệ thống thực hiện hành động $X \rightarrow$ Phần mềm xác thực điều kiện $Y \rightarrow$ Phần mềm cập nhật dữ liệu và hiển thị phản hồi $Z$. Không để sót các bước trung gian chuyển trạng thái.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Sequence the primary interactive steps: Actor initiates action $X \rightarrow$ System validates condition $Y \rightarrow$ System updates database state and returns observable feedback $Z$. Avoid skipping transitional states.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 3 / STEP 3</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Khai phá Triệt để Luồng Phụ &amp; Luồng Ngoại lệ (Alternative &amp; Exception Flows)</span><span class="lang-en">Systematically Uncover Alternative &amp; Exception Branches</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Đặt câu hỏi phản biện tại mỗi bước của luồng chính: <em>"Điều gì sẽ xảy ra nếu mạng mất kết nối? Nếu người dùng nhập sai? Nếu nhà cung cấp từ chối? Nếu đơn hàng bị trùng lặp?"</em>. Gắn mã định danh cho từng luồng nhánh (ví dụ: `ALT-01`, `EXC-01`).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Interrogate every step of the happy path: <em>"What if the network drops? What if user inputs fail? What if the vendor rejects? What if a duplicate request arrives?"</em> Assign unique identifiers to every branch (e.g., `ALT-01`, `EXC-01`).
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 4 / STEP 4</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Xây dựng Bảng Từ điển Dữ liệu Cấp trường (Field-Level Data Dictionary)</span><span class="lang-en">Author the Field-Level Data Dictionary &amp; Validation Matrix</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Liệt kê toàn bộ các trường thông tin tham gia vào module. Xác định chính xác kiểu dữ liệu (String, Integer, Decimal, Boolean), độ dài tối thiểu/tối đa, bắt buộc/tùy chọn, quy tắc Regex, và thông điệp lỗi song ngữ tương ứng khi vi phạm.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Catalog every field involved in the module. Mandate data types, length constraints, nullability, validation regex, and contextual bilingual error messages tied to unique error codes.
+              </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 5 / STEP 5</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Đặc tả Giao ước Tích hợp &amp; Xử lý Bất đồng bộ (Integration Contracts &amp; Resilience)</span><span class="lang-en">Specify Integration Contracts, Timeouts &amp; Idempotency</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Mô tả các điểm chạm API: Phương thức (POST/GET/PUT), Payload dữ liệu mẫu (JSON/XML), thời gian Timeout cho phép, số lần thử lại tối đa (Max retries) kèm thuật toán giãn cách thời gian (Exponential Backoff), và khóa chống trùng lặp (Idempotency Key).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Define interface integration touchpoints: HTTP methods, sample JSON payloads, timeout thresholds, exponential backoff retry policies, and unique idempotency header requirements.
+              </p>
+            </div>
+
+            <!-- Step 6 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 6 / STEP 6</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Gắn kết Ma trận Truy vết &amp; Kiểm toán Quyền truy cập (Traceability &amp; RBAC Audit)</span><span class="lang-en">Establish Bidirectional Traceability &amp; RBAC Access Matrix</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin: 0;">
+                Liên kết module ngược về Business Rule (`BR-xxx`) trong BRD và xuôi xuống Test Case (`TC-xxx`). Thiết lập ma trận phân quyền người dùng (Role-Based Access Control - RBAC) và quy chuẩn ghi nhật ký kiểm toán (Audit Trail Logging).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin: 0;">
+                Trace the module backward to BRD business rules (`BR-xxx`) and forward to QA test suites (`TC-xxx`). Establish Role-Based Access Control (RBAC) permissions and immutable audit logging mandates.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION D: WORKED ENTERPRISE SFS MODULE -->
+        <section id="sec-worked-sfs" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">D</span>
+            <h2>
+              <span class="lang-vi">Hồ sơ SFS Mẫu Thực chiến: Module Phát hành &amp; Xác nhận PO (SFS-INV-001)</span>
+              <span class="lang-en">Worked Enterprise SFS: Automated PO Dispatch Module (SFS-INV-001)</span>
+            </h2>
+          </div>
+
+          <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 1rem; margin-bottom: 1rem;">
+              <div>
+                <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--color-primary-dark); letter-spacing: 0.05em;">SOFTWARE FUNCTIONAL SPECIFICATION (SFS)</span>
+                <h3 style="margin: 0.25rem 0; font-size: 1.4rem;">Mã Module: SFS-INV-001</h3>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                  <strong>Tên tính năng:</strong> Tự động Khởi tạo Đơn Mua hàng (PO) &amp; Đồng bộ Cổng Nhà cung cấp<br>
+                  <strong>Dự án:</strong> OmniLogix AIR-VIP (Traceable to: <code>PRJ-OLX-2026-BRD</code>) | <strong>Tác giả:</strong> Nguyễn Đăng Cẩm Tú (Hazel)
+                </p>
+              </div>
+              <div style="text-align: right;">
+                <span class="badge badge-explicit">Trạng thái: ĐÃ DUYỆT (READY FOR DEV)</span>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Phiên bản: v1.1 | Ưu tiên: High</div>
+              </div>
+            </div>
+
+            <!-- Pedagogical Notice -->
+            <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; padding: 0.85rem 1.1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.85rem; color: #92400E; line-height: 1.5;">
+              <strong style="display: block; margin-bottom: 0.25rem;">
+                <span class="lang-vi">📌 LƯU Ý DỮ LIỆU ĐÀO TẠO &amp; TÍNH LIÊN TỤC TRUY VẾT:</span>
+                <span class="lang-en">📌 PEDAGOGICAL NOTICE &amp; TRACEABILITY INTEGRITY:</span>
+              </strong>
+              <span class="lang-vi">Hồ sơ SFS này là module đặc tả chức năng nối tiếp trực tiếp từ Hồ sơ BRD của dự án OmniLogix AIR-VIP (Mã BRD: <code>PRJ-OLX-2026-BRD</code>). Toàn bộ quy tắc tính toán, mã lỗi và định dạng API dưới đây là dữ liệu giả định chuẩn mực do tác giả Nguyễn Đăng Cẩm Tú (Hazel) thiết kế để minh họa việc chuyển hóa từ Business Rules cấp cao thành hành vi phần mềm chi tiết.</span>
+              <span class="lang-en">This SFS module represents the direct functional realization of the OmniLogix AIR-VIP project (BRD Code: <code>PRJ-OLX-2026-BRD</code>). All calculation rules, error codes, and API contracts below are illustrative models crafted independently by Nguyễn Đăng Cẩm Tú (Hazel) to demonstrate seamless requirements decomposition from high-level business rules into testable software behaviors.</span>
+            </div>
+
+            <!-- SFS Section 1: Overview & Scope -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">1. Tổng quan Module &amp; Phạm vi Nghiệp vụ (Module Overview &amp; Scope)</span>
+              <span class="lang-en">1. Module Overview &amp; Scope</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+              Module `SFS-INV-001` chịu trách nhiệm tự động quét lượng tồn kho khả dụng của 4,200 mã hàng SKU trên toàn bộ 4 trung tâm phân phối OmniLogix. Khi phát hiện tồn kho chạm hoặc thấp hơn Điểm Tái Đặt Hàng (Reorder Point - ROP theo `BR-INV-01`), hệ thống tự động sinh dự thảo đơn đặt hàng (Purchase Order - PO), thực thi ma trận định tuyến phê duyệt tài chính (`BR-INV-02`), phát hành đơn qua cổng Vendor Portal và gửi thông báo số tức thời cho đại diện nhà cung cấp (`BR-INV-03`).
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+              Module `SFS-INV-001` governs the automated scanning of available inventory balances across 4,200 SKUs in all 4 OmniLogix fulfillment centers. Upon detecting that available stock falls at or below the dynamic Reorder Point (ROP per `BR-INV-01`), the engine generates a draft Purchase Order (PO), routes it through the tiered financial approval hierarchy (`BR-INV-02`), publishes it to the Vendor Portal, and dispatches digital notifications to the vendor representative (`BR-INV-03`).
+            </p>
+
+            <!-- SFS Section 2: Actors & Preconditions -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">2. Tác nhân &amp; Tiền điều kiện (Actors &amp; Preconditions)</span>
+              <span class="lang-en">2. Actors &amp; Preconditions</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 25%;"><span class="lang-vi">Thành phần Đặc tả</span><span class="lang-en">Specification Element</span></th>
+                    <th style="width: 75%;"><span class="lang-vi">Nội dung Đặc tả Chi tiết</span><span class="lang-en">Detailed Behavioral Specification</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Tác nhân Chính (Primary Actors)</strong></td>
+                    <td>
+                      <span class="lang-vi">• <strong>Replenishment Engine Daemon (Hệ thống chạy ngầm):</strong> Kích hoạt tự động quét định kỳ mỗi 30 phút.<br>• <strong>Category Buyer (Chuyên viên Mua hàng):</strong> Xem xét và phê duyệt dự thảo PO thủ công nếu giá trị vượt ngưỡng.<br>• <strong>Vendor Representative (Đại diện NCC):</strong> Đăng nhập Portal để xác nhận đơn và cam kết ngày giao.</span>
+                      <span class="lang-en">• <strong>Replenishment Engine Daemon (System Actor):</strong> Automated 30-minute periodic cron job.<br>• <strong>Category Buyer (Internal User):</strong> Reviews and manually signs off PO drafts exceeding threshold.<br>• <strong>Vendor Representative (External User):</strong> Accesses Vendor Portal to acknowledge orders and commit ETAs.</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tiền điều kiện (Preconditions)</strong></td>
+                    <td>
+                      <span class="lang-vi">1. Mã hàng SKU có trạng thái hoạt động (`status = 'ACTIVE'`) và đã được liên kết với ít nhất một Nhà cung cấp chính thức (`primary_vendor_id IS NOT NULL`).<br>2. Hợp đồng nguyên tắc của NCC còn hiệu lực (`contract_end_date &gt; CURRENT_DATE`).<br>3. Bảng giá niêm yết của SKU đang có hiệu lực trong hệ thống ERP.</span>
+                      <span class="lang-en">1. Target SKU status is `ACTIVE` and mapped to an authorized primary vendor (`primary_vendor_id IS NOT NULL`).<br>2. Active master vendor agreement in place (`contract_end_date &gt; CURRENT_DATE`).<br>3. Approved unit contract price catalog exists in the ERP ledger.</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- SFS Section 3: Detailed Behavioral Execution Flows -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">3. Các Luồng Thực thi Hành vi (Detailed Behavioral Flows)</span>
+              <span class="lang-en">3. Detailed Behavioral Execution Flows</span>
+            </h4>
+
+            <div style="background: #FFF; border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem;">
+              <strong style="color: #047857; font-size: 1.05rem;">
+                <span class="lang-vi">Luồng Chính / Happy Path (Luồng Thực thi Lý tưởng — Tự động Phát hành PO &le; 50M VNĐ):</span>
+                <span class="lang-en">Primary Happy Path (Automated Dispatch for PO &le; 50M VND):</span>
+              </strong>
+              <ol style="margin: 0.75rem 0 0 1.25rem; padding: 0; font-size: 0.95rem; line-height: 1.7;">
+                <li><strong>Quét định kỳ:</strong> Hệ thống ngầm kích hoạt lúc phút thứ 00 và 30 mỗi giờ, tính toán Tồn kho Khả dụng: $\text{Available} = \text{On-Hand} + \text{On-Order} - \text{Allocated}$.</li>
+                <li><strong>Phát hiện chạm ngưỡng:</strong> Với SKU-7041, hệ thống xác định $\text{Available (120 units)} \le \text{ROP (150 units)}$ theo công thức `BR-INV-01`.</li>
+                <li><strong>Tính toán lượng đặt tối ưu (EOQ):</strong> Hệ thống tính số lượng cần đặt: $\text{Order\_Qty} = \text{Max\_Capacity} - \text{Available} = 500 - 120 = 380\text{ units}$. Tổng giá trị đơn hàng: $380 \times 110,000\text{ VNĐ} = 41,800,000\text{ VNĐ}$.</li>
+                <li><strong>Định tuyến thẩm quyền:</strong> Vì giá trị $\le 50,000,000\text{ VNĐ}$, hệ thống tự động gán trạng thái `APPROVED` mà không cần chữ ký phê duyệt thủ công (`BR-INV-02`).</li>
+                <li><strong>Sinh mã PO &amp; Khóa chống trùng:</strong> Hệ thống cấp mã số duy nhất `PO-2026-0312-0042` kèm mã Idempotency Token `UUIDv4`, lưu bản ghi với trạng thái `ISSUED`.</li>
+                <li><strong>Phát tán thông báo:</strong> Hệ thống đẩy bản ghi lên Vendor Portal qua API đồng bộ, đồng thời gửi SMS và Email cảnh báo đến đại diện nhà cung cấp (`BR-INV-03`). Bắt đầu đếm ngược đồng hồ SLA 24 giờ.</li>
+                <li><strong>Xác nhận từ đối tác:</strong> Đại diện nhà cung cấp đăng nhập Portal trong vòng 4 giờ, kiểm tra đơn, bấm nút "Xác nhận Cam kết Giao hàng", hệ thống cập nhật trạng thái đơn thành `VENDOR_ACKNOWLEDGED`.</li>
+              </ol>
+            </div>
+
+            <div style="background: #FFF; border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem;">
+              <strong style="color: #1E40AF; font-size: 1.05rem;">
+                <span class="lang-vi">Các Luồng Phụ (Alternative Flows):</span>
+                <span class="lang-en">Alternative Behavioral Flows:</span>
+              </strong>
+              <ul style="margin: 0.75rem 0 0 1.25rem; padding: 0; font-size: 0.95rem; line-height: 1.7;">
+                <li>
+                  <strong><code>ALT-01</code> — Đơn hàng vượt hạn mức tài chính (&gt; 50M VNĐ):</strong> Tại Bước 4, nếu tổng giá trị đơn hàng từ 50M đến 200M VNĐ, hệ thống gán trạng thái `PENDING_BUYER_APPROVAL`, tạo nhiệm vụ chờ duyệt trong giao diện làm việc của Trưởng phòng Mua hàng. Chỉ khi được duyệt điện tử (E-signature), đơn mới chuyển sang Bước 5 (`ISSUED`). Nếu giá trị &gt; 200M VNĐ, hệ thống tự động bổ sung thêm cấp duyệt của Phó Tổng Giám đốc Vận hành (VP Ops).
+                </li>
+                <li>
+                  <strong><code>ALT-02</code> — Nhà cung cấp đề xuất điều chỉnh ngày giao hàng (ETA Adjustment):</strong> Tại Bước 7, nhà cung cấp bấm nút "Đề xuất Thay đổi Lịch giao". Nhà cung cấp bắt buộc nhập ngày giao mới và lý do giải trình. Đơn chuyển sang trạng thái `ETA_AMENDMENT_REQUESTED`. Hệ thống phát thông báo cho Category Buyer phê duyệt hoặc từ chối đề xuất này trong 8 giờ làm việc.
+                </li>
+              </ul>
+            </div>
+
+            <div style="background: #FFF; border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem;">
+              <strong style="color: #B91C1C; font-size: 1.05rem;">
+                <span class="lang-vi">Các Luồng Ngoại lệ &amp; Xử lý Lỗi (Exception Flows):</span>
+                <span class="lang-en">Exception &amp; Fault-Tolerant Flows:</span>
+              </strong>
+              <ul style="margin: 0.75rem 0 0 1.25rem; padding: 0; font-size: 0.95rem; line-height: 1.7;">
+                <li>
+                  <strong><code>EXC-01</code> — Cổng ERP phản hồi quá hạn (ERP Timeout &gt; 5,000ms):</strong> Khi hệ thống truy vấn kiểm tra tồn kho hoặc tạo bút toán tài chính sang ERP mà không nhận được phản hồi sau 5 giây: Hệ thống hủy kết nối (Abort connection), không sinh mã PO dở dang, ghi log mã lỗi `ERR-ERP-504`, chuyển sang thử lại tự động theo cơ chế Exponential Backoff (sau 1 phút, 5 phút, 15 phút). Nếu sau 3 lần vẫn lỗi, phát cảnh báo khẩn P2 cho đội ngũ IT Ops.
+                </li>
+                <li>
+                  <strong><code>EXC-02</code> — Nhà cung cấp từ chối toàn bộ đơn hàng (Full PO Dispute/Rejection):</strong> Tại Bước 7, nhà cung cấp bấm "Từ chối Đơn hàng" kèm lý do bắt buộc (ví dụ: đứt gãy nguồn nguyên liệu). Hệ thống cập nhật trạng thái `VENDOR_REJECTED`, kích hoạt thông báo đỏ khẩn cấp cho Category Buyer và tự động đề xuất nhà cung cấp thứ cấp (Secondary Vendor) nếu có trong danh mục.
+                </li>
+                <li>
+                  <strong><code>EXC-03</code> — Quá hạn SLA 24h không phản hồi (Breached SLA Escalation):</strong> Nếu sau 24 giờ kể từ khi phát hành mà PO vẫn ở trạng thái `ISSUED` chưa có xác nhận từ NCC: Hệ thống tự động chuyển trạng thái đơn sang `SLA_BREACHED`, gửi tin nhắn SMS cảnh báo tới Giám đốc Kinh doanh của NCC và đưa PO lên đầu danh sách cảnh báo đỏ của Phòng Mua hàng.
+                </li>
+                <li>
+                  <strong><code>EXC-04</code> — Yêu cầu phát hành trùng lặp (Duplicate Request Interception):</strong> Nếu cron job bị lỗi kích hoạt 2 tiến trình song song cùng 1 lúc: Hệ thống sử dụng Khóa Idempotency (`SKU_ID` + `Warehouse_ID` + `Date_YYYYMMDD_HH`). Tiến trình thứ hai bị chặn ngay ở tầng kiểm tra khóa với thông báo `ERR-PO-409: Duplicate replenishment order in progress`.
+                </li>
+              </ul>
+            </div>
+
+            <!-- SFS Section 4: Field-Level Data Dictionary -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">4. Bảng Từ điển Dữ liệu Cấp trường (Field-Level Data Dictionary)</span>
+              <span class="lang-en">4. Field-Level Data Dictionary &amp; Validation Rules</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 14%;">Tên Trường (Field)</th>
+                    <th style="width: 12%;">Kiểu dữ liệu (Type)</th>
+                    <th style="width: 8%;">Bắt buộc?</th>
+                    <th style="width: 26%;"><span class="lang-vi">Quy tắc Nghiệp vụ &amp; Ranh giới (Validation)</span><span class="lang-en">Validation Rule &amp; Bounds</span></th>
+                    <th style="width: 12%;">Mã Lỗi (Code)</th>
+                    <th style="width: 28%;"><span class="lang-vi">Thông báo Lỗi Hiển thị (Error Message)</span><span class="lang-en">User-Facing Error Message</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>po_number</code></td>
+                    <td>String (VARCHAR 24)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>Định dạng Regex: <code>^PO-[0-9]{4}-[0-9]{4}-[0-9]{4}$</code>. Duy nhất toàn hệ thống.</td>
+                    <td><code>ERR-PO-001</code></td>
+                    <td>
+                      <span class="lang-vi">"Mã số đơn mua hàng không đúng định dạng chuẩn."</span>
+                      <span class="lang-en">"Purchase Order number format is invalid."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>vendor_id</code></td>
+                    <td>String (VARCHAR 16)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>Phải tồn tại trong danh mục nhà cung cấp có trạng thái `ACTIVE`.</td>
+                    <td><code>ERR-PO-002</code></td>
+                    <td>
+                      <span class="lang-vi">"Nhà cung cấp không tồn tại hoặc hợp đồng đã hết hiệu lực."</span>
+                      <span class="lang-en">"Vendor does not exist or vendor contract has expired."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>sku_code</code></td>
+                    <td>String (VARCHAR 20)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>Phải tồn tại trong kho chỉ định và có trạng thái `ACTIVE`.</td>
+                    <td><code>ERR-PO-003</code></td>
+                    <td>
+                      <span class="lang-vi">"Mã sản phẩm SKU không tồn tại trong kho nhận."</span>
+                      <span class="lang-en">"SKU code does not exist in the designated warehouse."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>order_quantity</code></td>
+                    <td>Integer (INT)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>$1 \le \text{order\_quantity} \le 50,000$. Phải là bội số của quy cách đóng gói (Case pack size).</td>
+                    <td><code>ERR-PO-004</code></td>
+                    <td>
+                      <span class="lang-vi">"Số lượng đặt phải là số nguyên dương và là bội số của quy cách thùng."</span>
+                      <span class="lang-en">"Order quantity must be a positive integer matching case pack increments."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>unit_price</code></td>
+                    <td>Decimal (14, 2)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>$\text{unit\_price} &gt; 0$. Phải khớp chính xác với đơn giá niêm yết trên hợp đồng ERP.</td>
+                    <td><code>ERR-PO-005</code></td>
+                    <td>
+                      <span class="lang-vi">"Đơn giá không được âm và phải khớp với hợp đồng hiệu lực."</span>
+                      <span class="lang-en">"Unit price must be positive and match the active contractual price."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>promised_delivery_date</code></td>
+                    <td>Date (YYYY-MM-DD)</td>
+                    <td>Bắt buộc (Y)</td>
+                    <td>$\text{promised\_delivery\_date} \ge \text{issue\_date} + \text{min\_lead\_time}$.</td>
+                    <td><code>ERR-PO-006</code></td>
+                    <td>
+                      <span class="lang-vi">"Ngày cam kết giao hàng không thể sớm hơn thời gian vận chuyển tối thiểu."</span>
+                      <span class="lang-en">"Promised delivery date cannot precede minimum vendor lead time."</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>rejection_reason</code></td>
+                    <td>String (TEXT)</td>
+                    <td>Điều kiện (N)</td>
+                    <td>Bắt buộc khi trạng thái là `VENDOR_REJECTED`. Tối thiểu 10 ký tự, tối đa 500 ký tự.</td>
+                    <td><code>ERR-PO-007</code></td>
+                    <td>
+                      <span class="lang-vi">"Vui lòng nhập lý do từ chối đơn hàng (tối thiểu 10 ký tự)."</span>
+                      <span class="lang-en">"Please provide a rejection justification (minimum 10 characters)."</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- SFS Section 5: External System Interaction Contract -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">5. Giao ước Tích hợp Hệ thống (Integration API Contract)</span>
+              <span class="lang-en">5. External System Integration Contract</span>
+            </h4>
+            <div style="background: #1E293B; color: #F8FAFC; padding: 1.25rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.85rem; overflow-x: auto; margin-bottom: 1rem;">
+              <span style="color: #94A3B8;">// Endpoint: Cổng đẩy thông báo đơn hàng sang Vendor Portal (REST POST)</span><br>
+              <strong style="color: #38BDF8;">POST</strong> /api/v1/vendor-portal/purchase-orders/dispatch<br>
+              <strong style="color: #94A3B8;">Headers:</strong><br>
+              &nbsp;&nbsp;Content-Type: application/json<br>
+              &nbsp;&nbsp;Authorization: Bearer &lt;JWT_TOKEN&gt;<br>
+              &nbsp;&nbsp;X-Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000<br>
+              <strong style="color: #94A3B8;">Request Body (JSON):</strong><br>
+              {<br>
+              &nbsp;&nbsp;<span style="color: #FBBF24;">"po_number"</span>: <span style="color: #34D399;">"PO-2026-0312-0042"</span>,<br>
+              &nbsp;&nbsp;<span style="color: #FBBF24;">"vendor_id"</span>: <span style="color: #34D399;">"VEND-VN-0891"</span>,<br>
+              &nbsp;&nbsp;<span style="color: #FBBF24;">"warehouse_id"</span>: <span style="color: #34D399;">"WH-SOUTH-02"</span>,<br>
+              &nbsp;&nbsp;<span style="color: #FBBF24;">"items"</span>: [<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FBBF24;">"sku_code"</span>: <span style="color: #34D399;">"SKU-7041"</span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FBBF24;">"quantity"</span>: <span style="color: #F87171;">380</span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FBBF24;">"unit_price"</span>: <span style="color: #F87171;">110000.00</span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #FBBF24;">"currency"</span>: <span style="color: #34D399;">"VND"</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+              &nbsp;&nbsp;],<br>
+              &nbsp;&nbsp;<span style="color: #FBBF24;">"sla_expiration_timestamp"</span>: <span style="color: #34D399;">"2026-03-13T10:00:00Z"</span><br>
+              }<br>
+              <strong style="color: #94A3B8;">Expected HTTP Response Codes:</strong><br>
+              &nbsp;&nbsp;<span style="color: #34D399;">HTTP 200 OK</span>: PO successfully queued and visible on Vendor Portal.<br>
+              &nbsp;&nbsp;<span style="color: #F87171;">HTTP 400 Bad Request</span>: Validation error in payload schema.<br>
+              &nbsp;&nbsp;<span style="color: #F87171;">HTTP 409 Conflict</span>: Duplicate Idempotency Key detected; request rejected.<br>
+              &nbsp;&nbsp;<span style="color: #F87171;">HTTP 503 Service Unavailable</span>: Vendor Portal under maintenance; retry via queue.
+            </div>
+
+            <!-- SFS Section 6: Traceability & RBAC -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">6. Phân quyền (RBAC) &amp; Ma trận Truy vết Ngược - Xuôi</span>
+              <span class="lang-en">6. RBAC Permissions &amp; Bidirectional Traceability</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 25%;">Vai trò (Role)</th>
+                    <th style="width: 25%;">Quyền hạn trên PO (Permissions)</th>
+                    <th style="width: 25%;">Mục tiêu BRD Liên kết</th>
+                    <th style="width: 25%;">Mã Kiểm thử Liên kết (Test Cases)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Replenishment System Daemon</strong></td>
+                    <td>CREATE, AUTO_APPROVE (&le; 50M), DISPATCH</td>
+                    <td><code>OBJ-INV-01</code>, <code>OBJ-INV-02</code></td>
+                    <td><code>TC-INV-001</code>, <code>TC-INV-002</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Category Buyer</strong></td>
+                    <td>VIEW, MANUAL_APPROVE (50M–200M), REJECT</td>
+                    <td><code>BR-INV-02</code></td>
+                    <td><code>TC-INV-003</code>, <code>TC-INV-004</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>VP of Operations</strong></td>
+                    <td>VIEW, EXECUTIVE_APPROVE (&gt; 200M)</td>
+                    <td><code>BR-INV-02</code></td>
+                    <td><code>TC-INV-005</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Vendor Representative</strong></td>
+                    <td>VIEW, ACKNOWLEDGE, REQUEST_AMENDMENT, DISPUTE</td>
+                    <td><code>BR-INV-03</code>, <code>OBJ-INV-04</code></td>
+                    <td><code>TC-INV-006</code>, <code>TC-INV-007</code>, <code>TC-INV-008</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION E: COMMON ANTI-PATTERNS & PRODUCTION FIXES -->
+        <section id="sec-mistakes" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">E</span>
+            <h2>
+              <span class="lang-vi">3 Sai lầm Kinh điển khi Viết SFS &amp; Cách Khắc phục</span>
+              <span class="lang-en">3 Common SFS Anti-Patterns &amp; Production Corrections</span>
+            </h2>
+          </div>
+
+          <!-- Anti-Pattern 1 -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 1: Đặc tả Ràng buộc Dữ liệu Mơ hồ ("Dữ liệu phải hợp lệ")</span>
+              <span class="lang-en">Mistake 1: Vague Field Validations ("Data must be valid")</span>
+            </h3>
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">✗ Cách viết Mơ hồ:</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Người dùng nhập số lượng đặt hàng hợp lệ và ngày giao hàng phù hợp. Nếu nhập sai, hệ thống báo lỗi."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <em>Hậu quả:</em> Developer tự phỏng đoán số lượng (có cho nhập số âm? số thập phân 1.5? số 0?). Tester không thể lập kịch bản kiểm thử biên.
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">✓ Cách viết Chuẩn Kỹ nghệ SFS:</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Trường `order_quantity` là số nguyên dương ($1 \le \text{qty} \le 50,000$), phải là bội số của `pack_size`. Nếu vi phạm, trả về mã lỗi `ERR-PO-004` kèm thông điệp: 'Số lượng đặt phải là số nguyên dương và là bội số của quy cách đóng thùng'."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <em>Ưu điểm:</em> Rõ ràng 100% về kiểu dữ liệu, cận biên dưới, cận biên trên, quy tắc nghiệp vụ và thông báo lỗi hiển thị.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-Pattern 2 -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 2: Bỏ quên Luồng Ngoại lệ &amp; Xử lý Quá hạn API (Missing Timeout/Exceptions)</span>
+              <span class="lang-en">Mistake 2: Omission of Network Timeouts &amp; Unhappy Path Exceptions</span>
+            </h3>
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">✗ Cách viết Mơ hồ:</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Hệ thống gửi dữ liệu đơn hàng sang cổng đối tác và nhận xác nhận từ nhà cung cấp."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <em>Hậu quả:</em> Khi mạng chập chờn hoặc server đối tác sập, hệ thống bị treo vĩnh viễn (hung process), người dùng không biết đơn hàng đã được gửi hay chưa.
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">✓ Cách viết Chuẩn Kỹ nghệ SFS:</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Thiết lập Timeout 5,000ms. Nếu đối tác không phản hồi, hủy kết nối, ghi log `ERR-ERP-504`, lưu PO trạng thái `DISPATCH_FAILED`, và kích hoạt cơ chế thử lại tự động 3 lần (1m, 5m, 15m). Sau 3 lần thất bại, chuyển đơn sang hàng đợi xử lý khẩn của Buyer."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <em>Ưu điểm:</em> Xử lý triệt để bài toán thất bại mạng, bảo đảm an toàn dữ liệu và tính sẵn sàng của hệ thống.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-Pattern 3 -->
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 3: Can thiệp Sâu vào Thuật toán Lập trình Nội bộ (Premature Design Dictation)</span>
+              <span class="lang-en">Mistake 3: Dictating Internal Database Engines or Algorithmic Code</span>
+            </h3>
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">✗ Cách viết Sai (Can thiệp Kỹ thuật):</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Developer phải dùng hàm array.filter() trong JavaScript để lọc danh sách PO và đánh index B-tree trên cột `vendor_id` trong MySQL để tăng tốc truy vấn."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <em>Hậu quả:</em> BA xâm phạm quyền thiết kế kỹ thuật của Tech Lead/Architect, tạo ra tài liệu gượng ép và nhanh chóng lỗi thời khi công nghệ thay đổi.
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">✓ Cách viết Chuẩn Kỹ nghệ SFS:</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Hệ thống phải trả về danh sách PO lọc theo `vendor_id` và sắp xếp giảm dần theo ngày tạo trong thời gian &lt; 800ms khi tải trọng hệ thống đạt 1,000 yêu cầu đồng thời."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <em>Ưu điểm:</em> Định rõ tiêu chuẩn hiệu năng và kết quả mong đợi, trao toàn quyền lựa chọn cấu trúc dữ liệu và giải thuật tối ưu cho đội ngũ kỹ sư.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION F: PRACTICE EXERCISES WITH EXPLAINED SOLUTIONS -->
+        <section id="sec-exercises" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">F</span>
+            <h2>
+              <span class="lang-vi">Bài tập Thực hành Chuyên sâu &amp; Lời giải Chuyên gia</span>
+              <span class="lang-en">Practice Exercises &amp; Expert Solutions</span>
+            </h2>
+          </div>
+          <p class="lang-vi">Hãy hoàn thành 3 bài tập tình huống dưới đây, sau đó bấm vào từng thanh để đối chiếu với hồ sơ giải pháp chi tiết của chuyên gia:</p>
+          <p class="lang-en">Solve the three practical specification scenarios below, then expand each accordion to inspect the detailed expert solution:</p>
+
+          <!-- Exercise 1 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 1.25rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 1: Đặc tả Bảng Từ điển Dữ liệu cho Form Đăng ký Doanh nghiệp B2B</span>
+                <span class="lang-en">Exercise 1: Authoring a Data Dictionary for a B2B Business Registration Form</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Bối cảnh Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Context:</p>
+              <p class="lang-vi">
+                Bạn được giao viết đặc tả cấp trường cho 3 thông tin trong form đăng ký đại lý B2B: (1) Mã số thuế doanh nghiệp (Tax Code), (2) Số điện thoại người đại diện (Contact Phone), và (3) Hạn mức tín dụng đề xuất (Credit Limit Request). Hãy xây dựng bảng đặc tả chi tiết gồm: Kiểu dữ liệu, Bắt buộc/Tùy chọn, Quy tắc Regex / Cận biên, Mã lỗi và Thông báo lỗi thân thiện cho người dùng.
+              </p>
+              <p class="lang-en">
+                You are tasked with authoring field specifications for 3 inputs on a B2B Dealer Registration form: (1) Enterprise Tax Code, (2) Representative Phone Number, and (3) Requested Credit Limit. Create a detailed specification table covering: Data Type, Nullability, Validation Rules/Regex, Error Codes, and Actionable Bilingual Error Messages.
+              </p>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Lời giải Chuẩn mực của Chuyên gia:</span>
+                <span class="lang-en">Expert Solution &amp; Validation Specifications:</span>
+              </h4>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Tên Trường</th>
+                      <th>Kiểu / Độ dài</th>
+                      <th>Bắt buộc?</th>
+                      <th>Quy tắc Kiểm tra (Validation &amp; Regex)</th>
+                      <th>Mã Lỗi</th>
+                      <th>Thông báo Lỗi Song ngữ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>tax_code</code></td>
+                      <td>VARCHAR(14)</td>
+                      <td>Bắt buộc (Y)</td>
+                      <td>Định dạng MST Việt Nam: 10 chữ số (doanh nghiệp mẹ) hoặc 13 chữ số có dấu gạch ngang (chi nhánh): <code>^[0-9]{10}(-[0-9]{3})?$</code>. Thuật toán kiểm tra số kiểm tra Modulo 11 nếu áp dụng.</td>
+                      <td><code>ERR-REG-011</code></td>
+                      <td>
+                        <span class="lang-vi">"Mã số thuế không đúng định dạng 10 hoặc 13 ký tự số."</span><br>
+                        <span class="lang-en">"Tax identification number must be 10 or 13 digits (e.g., 0101234567 or 0101234567-001)."</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>contact_phone</code></td>
+                      <td>VARCHAR(12)</td>
+                      <td>Bắt buộc (Y)</td>
+                      <td>Đầu số di động Việt Nam: <code>^(03|05|07|08|09)[0-9]{8}$</code> hoặc chuẩn E.164: <code>^\+84(3|5|7|8|9)[0-9]{8}$</code>. Loại bỏ khoảng trắng và ký tự đặc biệt trước khi lưu.</td>
+                      <td><code>ERR-REG-012</code></td>
+                      <td>
+                        <span class="lang-vi">"Số điện thoại di động người đại diện không hợp lệ (10 chữ số bắt đầu bằng 03, 05, 07, 08, 09)."</span><br>
+                        <span class="lang-en">"Mobile phone number is invalid (must be 10 digits starting with recognized mobile prefix)."</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>credit_limit_request</code></td>
+                      <td>DECIMAL(15, 0)</td>
+                      <td>Tùy chọn (N)</td>
+                      <td>Nếu nhập: $10,000,000 \le \text{limit} \le 5,000,000,000\text{ VNĐ}$. Phải là bội số của 5,000,000 VNĐ. Nếu để trống, mặc định hạn mức phê duyệt thử việc là 0 VNĐ.</td>
+                      <td><code>ERR-REG-013</code></td>
+                      <td>
+                        <span class="lang-vi">"Hạn mức tín dụng đề xuất phải từ 10 triệu đến 5 tỷ VNĐ và là bội số của 5 triệu VNĐ."</span><br>
+                        <span class="lang-en">"Requested credit limit must be between 10M and 5B VND in increments of 5M VND."</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 2 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 1.25rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 2: Đặc tả Luồng Ngoại lệ cho Cổng Webhook Thanh toán Trực tuyến</span>
+                <span class="lang-en">Exercise 2: Specifying Exception Branches for an Asynchronous Payment Webhook</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Prompt:</p>
+              <p class="lang-vi">
+                Một cổng thanh toán ngân hàng đối tác gửi dữ liệu Webhook bất đồng bộ thông báo kết quả giao dịch thanh toán đơn hàng về máy chủ của bạn qua URL: <code>POST /api/v1/payments/webhook</code>. Hãy đặc tả <strong>3 luồng xử lý ngoại lệ bắt buộc</strong> để bảo vệ tính toàn vẹn tài chính của hệ thống: (1) Sai chữ ký điện tử HMAC (Signature Verification Failure), (2) Gửi lặp lại thông báo Webhook cho giao dịch đã xử lý (Duplicate Delivery), và (3) Cơ sở dữ liệu nội bộ bị khóa (DB Deadlock/Timeout).
+              </p>
+              <p class="lang-en">
+                An external payment gateway dispatches asynchronous webhook notifications to your server at <code>POST /api/v1/payments/webhook</code>. Author <strong>3 mandatory exception branches</strong> safeguarding transactional integrity: (1) HMAC Signature Verification Failure, (2) Duplicate Webhook Delivery for an already-settled order, and (3) Internal Database Deadlock/Timeout.
+              </p>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Lời giải Đặc tả Chuẩn mực của Chuyên gia:</span>
+                <span class="lang-en">Expert Exception Flow Specifications:</span>
+              </h4>
+              <ul style="margin: 0.5rem 0 0 1.25rem; padding: 0; font-size: 0.95rem; line-height: 1.7;">
+                <li>
+                  <strong><code>EXC-PAY-01</code> — Sai lệch chữ ký số bảo mật (HMAC Signature Mismatch):</strong><br>
+                  <em>Điều kiện kích hoạt:</em> Hệ thống tái tạo mã băm HMAC-SHA256 từ `Request Body` kết hợp với `Secret Key` và đối chiếu với header `X-Signature`. Giá trị đối chiếu không khớp.<br>
+                  <em>Hành vi hệ thống:</em> Lập tức từ chối yêu cầu, ghi log cảnh báo an ninh P1 (IP, Timestamp, Payload Hash), trả về HTTP 401 Unauthorized kèm body <code>{"error": "INVALID_SIGNATURE"}</code>. Tuyệt đối không thay đổi trạng thái đơn hàng.
+                </li>
+                <li>
+                  <strong><code>EXC-PAY-02</code> — Webhook gửi lặp lại (Idempotent Duplicate Execution):</strong><br>
+                  <em>Điều kiện kích hoạt:</em> Cổng thanh toán gửi lại webhook với mã `transaction_id` mà hệ thống đã ghi nhận trạng thái `PAID` từ 2 phút trước.<br>
+                  <em>Hành vi hệ thống:</em> Hệ thống kiểm tra trạng thái đơn hàng trong DB. Phát hiện đơn đã hoàn tất, hệ thống <strong>bỏ qua bước cộng tiền hay phát hành vé lặp lại</strong>, ghi log audit `INFO: Duplicate webhook acknowledged`, và trả về ngay HTTP 200 OK để cổng thanh toán dừng việc thử lại (Stop retrying).
+                </li>
+                <li>
+                  <strong><code>EXC-PAY-03</code> — Cơ sở dữ liệu nội bộ bị quá tải/khóa giao dịch (DB Lock Timeout):</strong><br>
+                  <em>Điều kiện kích hoạt:</em> Quá trình mở transaction cập nhật trạng thái đơn hàng bị khóa quá 3,000ms do cao điểm tải trọng.<br>
+                  <em>Hành vi hệ thống:</em> Rollback toàn bộ thao tác dở dang, trả về HTTP 500 Internal Server Error (hoặc 503). Khi nhận được mã 5xx, cổng thanh toán đối tác theo chuẩn quốc tế sẽ kích hoạt cơ chế tự động gửi lại sau 15 giây, 1 phút, 5 phút.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Exercise 3 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 0.5rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 3: Chuyển đổi Yêu cầu Mơ hồ thành Luồng Phê duyệt Chuyển tiền Đa cấp</span>
+                <span class="lang-en">Exercise 3: Transforming Vague Requirements into a Testable Multi-tier Wire Transfer Flow</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Prompt:</p>
+              <p class="lang-vi">
+                Khách hàng doanh nghiệp gửi yêu cầu: <em>"Hệ thống Internet Banking phải có tính năng chuyển tiền doanh nghiệp, số tiền nhỏ thì duyệt nhanh, số tiền lớn thì phải qua Giám đốc và Kế toán trưởng ký duyệt trước khi gửi sang ngân hàng."</em> Hãy viết lại yêu cầu này thành một đặc tả luồng chức năng hoàn chỉnh gồm: Điều kiện hạn mức định lượng, Luồng chính (Maker - Checker), Luồng phụ (Dual Approval), và Hậu điều kiện (Postconditions).
+              </p>
+              <p class="lang-en">
+                A corporate client states: <em>"Corporate Internet Banking must support fund transfers where small amounts are quick and large sums require CFO and Chief Accountant sign-offs before dispatch to the clearing house."</em> Refactor this vague request into a testable SFS flow with quantitative limits, Happy Path, Dual Approval Alternative Path, and Postconditions.
+              </p>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Hồ sơ Đặc tả Luồng Chuẩn mực của Chuyên gia:</span>
+                <span class="lang-en">Expert Refactored Flow Specification:</span>
+              </h4>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>1. Định mức Thẩm quyền (Quantitative Boundary Matrix):</strong><br>
+                • <em>Cấp 1 (&le; 100,000,000 VNĐ):</em> Mô hình Maker - Checker 1 cấp (1 Kế toán viên lập lệnh + 1 Kế toán trưởng duyệt OTP Soft Token).<br>
+                • <em>Cấp 2 (&gt; 100,000,000 VNĐ đến 2,000,000,000 VNĐ):</em> Mô hình Dual-Approval (1 Kế toán viên lập lệnh + Kế toán trưởng duyệt + Giám đốc Tài chính/Tổng Giám đốc ký số USB Token PKI).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>1. Quantitative Authority Boundary Matrix:</strong><br>
+                • <em>Tier 1 (&le; 100,000,000 VND):</em> Single-level Maker-Checker model (1 Accountant creates draft + 1 Chief Accountant approves via Soft Token OTP).<br>
+                • <em>Tier 2 (&gt; 100,000,000 VND to 2,000,000,000 VND):</em> Dual-Approval model (1 Accountant creates draft + Chief Accountant reviews + CFO/General Director digital PKI USB token signature).
+              </p>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>2. Luồng Chính (Happy Path - Lệnh Chuyển tiền &le; 100M VNĐ):</strong><br>
+                1. Kế toán viên (Maker) đăng nhập, chọn tài khoản nguồn, nhập số tài khoản đích, ngân hàng thụ hưởng, số tiền 45,000,000 VNĐ và nội dung chuyển khoản.<br>
+                2. Hệ thống kiểm tra: Số dư khả dụng &ge; (45,000,000 + phí 5,500 VNĐ). Trạng thái tài khoản nguồn và đích đều `ACTIVE`.<br>
+                3. Maker bấm "Tạo Lệnh"; hệ thống tạm giữ (Hold) 45,005,500 VNĐ từ số dư khả dụng, tạo giao dịch trạng thái `PENDING_APPROVAL_LV1`.<br>
+                4. Kế toán trưởng (Checker) nhận thông báo, đăng nhập vào màn hình "Duyệt Lệnh", kiểm tra chứng từ, nhập mã OTP Smart OTP 6 số.<br>
+                5. Hệ thống xác thực OTP thành công trong thời gian hiệu lực 60s, gọi API cổng thanh toán liên ngân hàng NAPAS.<br>
+                6. Nhận phản hồi `NAPAS_SUCCESS`, cập nhật trạng thái đơn thành `SETTLED`, trừ số dư sổ cái thực tế, gửi biên lai PDF qua email cho cả 2 bên.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>2. Happy Path Flow (Wire Transfer &le; 100M VND):</strong><br>
+                1. Accountant (Maker) logs in, selects source account, inputs beneficiary account number, beneficiary bank, transfer amount 45,000,000 VND and payment narrative.<br>
+                2. System validates: Available balance &ge; (45,000,000 + 5,500 VND fee). Both source and destination accounts are `ACTIVE`.<br>
+                3. Maker clicks "Submit Order"; system places an authorization hold of 45,005,500 VND on available balance, creating transaction in `PENDING_APPROVAL_LV1` state.<br>
+                4. Chief Accountant (Checker) receives notification, logs into "Order Approval" queue, inspects supporting vouchers, and enters 6-digit Smart OTP code.<br>
+                5. System verifies OTP within 60s window, dispatches payout call to NAPAS interbank payment gateway API.<br>
+                6. Upon receiving `NAPAS_SUCCESS`, system transitions status to `SETTLED`, deducts actual ledger balance, and sends PDF receipt via email to both parties.
+              </p>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>3. Hậu điều kiện (Postconditions):</strong><br>
+                • <em>Về dữ liệu:</em> Số dư tài khoản nguồn giảm chính xác số tiền chuyển + phí; bản ghi nhật ký hạch toán kép (Debit/Credit) được tạo trong bảng Ledger.<br>
+                • <em>Về kiểm toán:</em> Ghi nhận chi tiết: Maker ID, Checker ID, Thời gian tạo lệnh, Thời gian ký duyệt, Mã trace ngân hàng NAPAS.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>3. Postconditions:</strong><br>
+                • <em>Data state:</em> Source account balance debited exactly for transfer amount + fee; immutable double-entry ledger journal entry (Debit/Credit) generated.<br>
+                • <em>Audit logging:</em> Full immutable record: Maker ID, Checker ID, submission timestamp, approval timestamp, NAPAS gateway trace ID.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION G: TECHNICAL INTERVIEW PREPARATION -->
+        <section id="sec-interviews" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">G</span>
+            <h2>
+              <span class="lang-vi">Bộ Câu hỏi Phỏng vấn Kỹ thuật Thực tế (STAR Method)</span>
+              <span class="lang-en">Technical BA Interview Questions (STAR Method)</span>
+            </h2>
+          </div>
+          <p class="lang-vi">Các câu hỏi dưới đây kiểm tra năng lực đặc tả chi tiết và làm việc thực tế giữa BA với đội ngũ Kỹ sư phần mềm và Kiểm thử viên:</p>
+          <p class="lang-en">These questions assess your capability to write production-grade specifications and collaborate effectively with Developers and QA Engineers:</p>
+
+          <!-- Interview Question 1 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 1: Bạn xử lý thế nào khi Kỹ sư phần mềm (Developers) phàn nàn rằng tài liệu SFS của bạn quá chi tiết (can thiệp sâu vào việc lập trình) hoặc ngược lại, quá mơ hồ và thiếu các trường dữ liệu cần thiết?</span>
+              <span class="lang-en">Question 1: How do you respond when developers complain that your SFS is either overly detailed (micromanaging implementation) or too vague regarding data fields?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Đánh giá mức độ thấu hiểu ranh giới phân tích "Hộp đen" (Black-box) và kỹ năng cộng tác kỹ thuật (Technical Collaboration).</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Evaluates understanding of the "Black-Box" analysis boundary and engineering collaboration agility.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ bảo Developer là tài liệu chuẩn quốc tế viết thế nào thì cứ làm theo thế đấy, không được thắc mắc."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I tell developers the specification is final and they must code whatever I wrote without arguing."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Situation:</strong> Trong một dự án thanh toán trước đây, ban đầu Tech Lead phản hồi rằng tài liệu đặc tả của tôi quy định cả tên bảng cơ sở dữ liệu và các hàm xử lý mã nguồn, khiến đội ngũ lập trình cảm thấy bị gò bó quyền tự chủ kiến trúc.<br>
+              • <strong>Task:</strong> Tôi cần thiết lập lại ranh giới phân tích chuẩn mực: BA chịu trách nhiệm đặc tả trọn vẹn hành vi bên ngoài có thể quan sát được (External Observable Behavior) và hợp đồng dữ liệu (Data Contract), còn Developer toàn quyền quyết định cấu trúc nội bộ (Internal Implementation).<br>
+              • <strong>Action:</strong> Tôi đã chủ động ngồi lại với Tech Lead và QA Lead trong một buổi "Specification Alignment". Chúng tôi thống nhất áp dụng quy tắc <strong>"Hộp đen" (Black-box Principle)</strong>: SFS của tôi sẽ chỉ đặc tả chính xác: (1) Tên trường dữ liệu nghiệp vụ, kiểu dữ liệu, độ dài và quy tắc Regex; (2) Các luồng rẽ nhánh Happy Path, Alternative và Exception; (3) Hợp đồng API (Request/Response codes và mã lỗi). Tôi loại bỏ hoàn toàn các đề xuất về câu lệnh SQL nội bộ hay tên hàm lập trình.<br>
+              • <strong>Result:</strong> Đội ngũ Developer cảm thấy được tôn trọng về mặt chuyên môn kiến trúc, trong khi QA có đầy đủ 100% dữ liệu để viết test cases. Tốc độ bàn giao Sprint tăng 25% nhờ không còn các cuộc tranh cãi về ranh giới tài liệu.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Situation:</strong> In a previous financial integration initiative, the Tech Lead noted that my specification dictated internal database table schemas and code-level function names, constraining their architectural autonomy.<br>
+              • <strong>Task:</strong> I needed to re-establish the standard analytical boundary: the BA governs external observable behavior and data contracts, while engineering retains full ownership of internal implementation architecture.<br>
+              • <strong>Action:</strong> I scheduled a dedicated "Specification Alignment" clinic with the Tech Lead and QA Lead. We adopted the <strong>"Black-box Principle"</strong>: my SFS strictly focused on: (1) Business field names, data types, lengths, boundaries, and validation regex; (2) Complete Happy, Alternative, and Exception paths; (3) External API contracts and code-identified error messages. I excised all internal SQL queries and framework-specific code references.<br>
+              • <strong>Result:</strong> Developers felt empowered in architectural design, QA gained complete validation parameters for test matrices, and sprint delivery velocity improved by 25% by eliminating boundary friction.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 2 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 2: Khái niệm "Tính lũy kế / Bất biến khi lặp lại" (Idempotency) trong tài liệu đặc tả chức năng là gì? Tại sao BA bắt buộc phải quan tâm đến nó khi viết SFS cho các hệ thống thanh toán hoặc kho vận?</span>
+              <span class="lang-en">Question 2: What is "Idempotency" in functional specifications, and why must a BA address it when writing specifications for payment or supply chain systems?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra kiến thức kỹ thuật nâng cao về tính toàn vẹn dữ liệu trong các hệ thống phân tán (Distributed Systems Integrity).</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests advanced technical acumen regarding distributed system transactional integrity and duplicate execution prevention.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em nghe từ này lạ quá, hình như là thuật ngữ của lập trình viên chứ BA không cần biết."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "Idempotency sounds like a developer term; BAs only need to care about UI screens."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Bản chất khái niệm:</strong> Idempotency là đặc tính mà khi một yêu cầu (Request) được thực thi một lần hay nhiều lần liên tiếp với cùng một dữ liệu đầu vào, trạng thái cuối cùng của hệ thống vẫn hoàn toàn <strong>giữ nguyên không đổi và không sinh ra tác dụng phụ lặp lại (Side effects)</strong>.<br>
+              • <strong>Tầm quan trọng đối với BA:</strong> Trong thương mại điện tử, thanh toán hoặc kho vận, mạng chập chờn thường khiến người dùng bấm nút "Thanh toán" 2 lần, hoặc cổng ngân hàng gửi webhook báo có 3 lần liên tiếp. Nếu BA không đặc tả cơ chế Idempotency trong SFS, hệ thống có thể trừ tiền 2 lần từ tài khoản khách hàng hoặc trừ trùng 2 lần số lượng hàng trong kho vật lý, gây tổn thất tài chính và khủng hoảng niềm tin.<br>
+              • <strong>Cách tôi đặc tả trong SFS:</strong> Tôi luôn quy định một trường định danh duy nhất gọi là <strong>Idempotency Key</strong> (thường là sự kết hợp giữa `User_ID` + `Cart_ID` hoặc mã token `UUIDv4`). Tôi bổ sung luồng ngoại lệ: <em>"Nếu hệ thống tiếp nhận một yêu cầu có Idempotency Key trùng với giao dịch đang xử lý hoặc đã hoàn tất thành công trong vòng 24 giờ, hệ thống lập tức chặn việc tạo giao dịch mới, trả về kết quả của giao dịch trước đó và ghi log kiểm toán."</em>
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Concept Essence:</strong> Idempotency is the architectural attribute guaranteeing that executing an operation once or multiple times with identical parameters produces the <strong>exact same final system state without duplicate side-effects</strong>.<br>
+              • <strong>Business Impact:</strong> In payments, fulfillment, and ERP integrations, network latency frequently triggers double-clicks or repeated webhook retries. If the BA omits idempotency specifications, a customer might be debited twice or inventory deducted redundantly, creating direct financial losses and compliance breaches.<br>
+              • <strong>Specification Application:</strong> In my SFS artifacts, I mandate a unique <strong>Idempotency Key</strong> header (derived from composite keys or client UUIDv4). I explicitly specify an exception flow: <em>"If a payload arrives bearing an Idempotency Key matching an active or settled transaction within 24 hours, the system intercepts duplicate execution, returns the original cached transaction outcome, and logs an audit trail."</em>
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 3 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 3: Làm thế nào bạn đảm bảo mọi yêu cầu trong tài liệu SFS đều có tính kiểm thử được (Testable) và không có tiêu chí định tính mơ hồ?</span>
+              <span class="lang-en">Question 3: How do you guarantee every functional requirement in your SFS is testable and free of ambiguous qualitative assertions?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra phương pháp luận thẩm định chất lượng yêu cầu (Requirements Verification &amp; Validation).</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Evaluates formal requirements verification criteria and alignment with QA testing protocols.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em cố gắng viết câu văn rõ ràng, dễ hiểu nhất có thể là được."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I just try to write clear and readable sentences."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Nguyên tắc cốt lõi:</strong> Một yêu cầu chỉ được coi là "Kiểm thử được" khi một QA độc lập có thể thiết kế một bộ ca kiểm thử nhị phân rõ ràng: <strong>ĐẠT (PASS) hoặc KHÔNG ĐẠT (FAIL)</strong> mà không cần phỏng đoán.<br>
+              • <strong>Phương pháp thực thi của tôi:</strong><br>
+              1. <strong>Thanh lọc các tính từ cảm tính:</strong> Tôi rà soát và loại bỏ tuyệt đối các từ ngữ như: "nhanh chóng", "thân thiện", "tối ưu", "dễ sử dụng". Thay vào đó, tôi chuyển hóa thành ngưỡng định lượng (ví dụ: thay vì "tải trang nhanh", tôi viết "Màn hình danh sách đơn hàng phải tải dưới 1.5 giây với 2,000 người dùng đồng thời").<br>
+              2. <strong>Nguyên tắc Phân tích Giá trị Biên (Boundary Value Analysis):</strong> Với mọi trường dữ liệu số hoặc ngày tháng, tôi đặc tả rõ 5 điểm giá trị: Dưới biên, Cận biên dưới, Trong biên, Cận biên trên, và Vượt biên.<br>
+              3. <strong>Kiểm toán chéo cùng QA Lead (Requirements Walkthrough):</strong> Trước khi đóng băng SFS, tôi tổ chức phiên rà soát 1 giờ cùng QA Lead. Tôi đặt câu hỏi: <em>"Dựa vào bảng này, bạn đã viết được Test Case ngay chưa? Có trường hợp nào bạn chưa biết kết quả kỳ vọng (Expected Result) sẽ là gì không?"</em>. Bất kỳ câu hỏi chưa có câu trả lời rõ ràng đều được tôi bổ sung vào SFS ngay lập tức.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Core Principle:</strong> A requirement is only "Testable" if an independent QA engineer can execute a test producing an unambiguous binary outcome: <strong>PASS or FAIL</strong> without subjective speculation.<br>
+              • <strong>Practical Execution:</strong><br>
+              1. <strong>Purging Subjective Adjectives:</strong> I systematically eliminate words like "fast," "user-friendly," "optimal," or "robust." I replace them with measurable thresholds (e.g., converting "fast load" to "screen renders within 1.5 seconds under 2,000 concurrent sessions").<br>
+              2. <strong>Boundary Value Integration:</strong> For every numeric or date constraint, I specify exact testing boundaries: Below Min, At Min, Nominal Range, At Max, and Exceeding Max.<br>
+              3. <strong>Collaborative QA Walkthroughs:</strong> Prior to baseline freeze, I facilitate a peer review with the QA Lead asking: <em>"Can you author automated test assertions directly from this specification? Are there any inputs where expected outcomes are unclear?"</em> Any ambiguity is resolved immediately in the artifact.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 4 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 4: Khi tài liệu API của hệ thống đối tác thứ ba bị thiếu sót, lỗi thời hoặc không phản hồi đúng theo tài liệu, bạn làm thế nào để hoàn thiện SFS đúng tiến độ?</span>
+              <span class="lang-en">Question 4: When a third-party partner's API documentation is outdated, incomplete, or diverges from actual sandbox behavior, how do you deliver an accurate SFS on schedule?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Đánh giá tính chủ động giải quyết vấn đề kỹ thuật và quản lý rủi ro tích hợp hệ thống.</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests initiative, technical problem-solving, and API integration risk mitigation under real-world constraints.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ ngồi chờ đến khi đối tác cập nhật xong tài liệu mới thì mới viết tiếp."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I halt specification work and wait until the partner updates their documentation."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Situation:</strong> Trong một dự án tích hợp cổng vận chuyển giao hàng, tài liệu PDF của đối tác được viết từ 2 năm trước và hoàn toàn không khớp với cấu trúc JSON thực tế mà họ trả về trong môi trường Sandbox.<br>
+              • <strong>Task:</strong> Tôi không thể thụ động chờ đợi vì sẽ làm chậm tiến độ Sprint của toàn đội, nhưng cũng không thể viết SFS dựa trên tài liệu sai lệch.<br>
+              • <strong>Action:</strong> Tôi đã sử dụng công cụ Postman để trực tiếp gửi các request thử nghiệm vào môi trường Sandbox của đối tác, ghi lại toàn bộ các payload thực tế trong các kịch bản thành công và lỗi (HTTP 200, 400, 404, 500). Sau đó, tôi chủ động lập một bảng tổng hợp đối chiếu (Gap Analysis Table) nêu rõ sự khác biệt giữa tài liệu cũ và phản hồi thực tế của Sandbox, gửi email xác nhận chính thức cho đội ngũ kỹ thuật của đối tác. Đồng thời trong SFS, tôi thiết lập mục <strong>"Giả định Giao diện Tích hợp" (Integration Interface Assumptions)</strong> ghi nhận cấu trúc đã kiểm chứng bằng Postman làm cơ sở tạm thời.<br>
+              • <strong>Result:</strong> Đối tác đã xác nhận bảng đối chiếu của tôi chỉ trong 24 giờ. Đội ngũ Developer có hợp đồng API chuẩn xác để lập trình ngay mà không phải chờ đợi tài liệu chính thức từ đối tác.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Situation:</strong> During a logistics carrier integration, the vendor's PDF specification was two years out of date, diverging sharply from the JSON payloads returned in their actual sandbox.<br>
+              • <strong>Task:</strong> I could not afford to halt sprint velocity, yet could not author an SFS based on obsolete documentation.<br>
+              • <strong>Action:</strong> I opened Postman and empirically executed test requests against their sandbox, capturing live payloads across success and failure conditions (HTTP 200, 400, 404, 500). I consolidated a side-by-side Gap Analysis Table detailing divergences between their written spec and live behavior, dispatching it to their lead integration engineer for confirmation. Inside our SFS, I documented these as <strong>"Empirically Verified Interface Assumptions"</strong> backed by the Postman collection exports.<br>
+              • <strong>Result:</strong> The vendor verified my gap matrix within 24 hours. Our developers began building contracts immediately without losing sprint momentum.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 5 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 5: Sự khác biệt căn bản giữa Luồng phụ (Alternative Flow) và Luồng ngoại lệ (Exception Flow) trong một Use Case / SFS là gì? Đưa ra ví dụ minh họa cụ thể.</span>
+              <span class="lang-en">Question 5: What is the fundamental distinction between an Alternative Flow and an Exception Flow in an SFS/Use Case? Provide concrete enterprise examples.</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra độ chuẩn xác về nền tảng lý thuyết phân tích quy trình (Process Modeling Fundamentals).</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests theoretical rigor and conceptual clarity regarding workflow modeling conventions.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Luồng phụ là luồng ít xảy ra hơn, còn luồng ngoại lệ là khi hệ thống bị lỗi bug."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "Alternative flows are rare branches; exception flows are software bugs."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Tiêu chí phân định cốt lõi:</strong> Điểm khác biệt sống còn giữa Luồng phụ và Luồng ngoại lệ nằm ở việc: <strong>Mục tiêu ban đầu của tác nhân (Goal of the Actor) có hoàn thành được hay không!</strong><br>
+              1. <strong>Luồng phụ (Alternative Flow):</strong> Là một con đường rẽ nhánh khác với luồng chính, nhưng <em>vẫn dẫn đến việc hoàn thành thành công mục tiêu ban đầu của tác nhân</em>. Ví dụ: Trong tính năng thanh toán, Luồng chính là thanh toán qua Thẻ tín dụng; Luồng phụ là khách hàng chọn quét mã VietQR hoặc chuyển sang trả góp qua thẻ tín dụng. Dù đi theo nhánh nào, mục tiêu "Thanh toán thành công đơn hàng" vẫn đạt được.<br>
+              2. <strong>Luồng ngoại lệ (Exception Flow):</strong> Là con đường rẽ nhánh phát sinh do lỗi, vi phạm quy tắc nghiệp vụ hoặc sự cố hệ thống, <em>dẫn đến việc mục tiêu ban đầu của tác nhân bị thất bại hoặc bị hủy bỏ hoàn toàn</em>. Ví dụ: Khách hàng nhập sai OTP quá 5 lần, hoặc thẻ tín dụng bị ngân hàng từ chối do không đủ hạn mức. Đơn hàng không thể hoàn tất và hệ thống phải thực hiện hành động phục hồi (rollback dữ liệu, trả hàng về giỏ).
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Core Demarcation Criterion:</strong> The fundamental distinction between an Alternative Flow and an Exception Flow hinges entirely on: <strong>Whether the primary actor's goal is ultimately achieved!</strong><br>
+              1. <strong>Alternative Flow:</strong> A divergent operational branch that follows a different sequence of steps but <em>still results in the successful fulfillment of the actor's intended goal</em>. Example: In checkout, the Happy Path is credit card settlement; the Alternative Path is selecting VietQR scanning or 0% installment financing. Regardless of the chosen path, the overarching goal—"Order Successfully Paid"—is achieved.<br>
+              2. <strong>Exception Flow:</strong> A branch triggered by error conditions, business rule violations, or technical failures that <em>permanently prevents the actor from achieving their primary goal</em>. Example: Customer enters an incorrect OTP 5 times, or the issuing bank declines the card for insufficient funds. The transaction fails, and the system executes compensatory recovery (rolling back reservations, returning items to cart).
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION H: GLOSSARY & VERIFIED REFERENCES -->
+        <section id="sec-glossary-references" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">H</span>
+            <h2>
+              <span class="lang-vi">Thuật ngữ Song ngữ &amp; Nguồn Tham chiếu Quốc tế</span>
+              <span class="lang-en">Bilingual Glossary &amp; Verified Standards References</span>
+            </h2>
+          </div>
+
+          <h3>
+            <span class="lang-vi">1. Bảng Thuật ngữ Đặc tả Chức năng Chuẩn hóa</span>
+            <span class="lang-en">1. Standardized Functional Specification Terminology</span>
+          </h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Thuật ngữ Tiếng Anh</th>
+                  <th style="width: 25%;">Thuật ngữ Tiếng Việt</th>
+                  <th style="width: 50%;">Định nghĩa Nghiệp vụ Chuẩn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Software Functional Specification (SFS)</strong></td>
+                  <td>Đặc tả Chức năng Phần mềm</td>
+                  <td>Hồ sơ chi tiết mô tả các hành vi tương tác, quy tắc xử lý và dòng dữ liệu có thể quan sát được của phần mềm.</td>
+                </tr>
+                <tr>
+                  <td><strong>Happy Path (Main Flow)</strong></td>
+                  <td>Luồng Thực thi Lý tưởng</td>
+                  <td>Kịch bản vận hành tuần tự thuận lợi nhất khi không có bất kỳ lỗi nhập liệu hay sự cố hệ thống nào xảy ra.</td>
+                </tr>
+                <tr>
+                  <td><strong>Alternative Flow</strong></td>
+                  <td>Luồng Rẽ nhánh Phụ</td>
+                  <td>Con đường thực thi thay thế giúp tác nhân hoàn thành mục tiêu thông qua phương thức hoặc lựa chọn khác.</td>
+                </tr>
+                <tr>
+                  <td><strong>Exception Flow</strong></td>
+                  <td>Luồng Ngoại lệ Sự cố</td>
+                  <td>Luồng xử lý khi phát sinh lỗi hoặc vi phạm quy tắc khiến mục tiêu ban đầu bị gián đoạn hoặc thất bại.</td>
+                </tr>
+                <tr>
+                  <td><strong>Field Data Dictionary</strong></td>
+                  <td>Từ điển Trường Dữ liệu</td>
+                  <td>Bảng danh mục định nghĩa toàn diện về kiểu dữ liệu, độ dài, trạng thái bắt buộc, regex và thông báo lỗi của từng trường.</td>
+                </tr>
+                <tr>
+                  <td><strong>Idempotency</strong></td>
+                  <td>Tính Bất biến khi Lặp lại</td>
+                  <td>Thuộc tính bảo đảm việc gọi một thao tác nhiều lần liên tiếp không làm thay đổi trạng thái vượt quá lần gọi đầu tiên.</td>
+                </tr>
+                <tr>
+                  <td><strong>Preconditions &amp; Postconditions</strong></td>
+                  <td>Tiền điều kiện &amp; Hậu điều kiện</td>
+                  <td>Trạng thái bắt buộc của hệ thống trước khi bắt đầu và sau khi hoàn thành (hoặc hủy bỏ) một ca chức năng.</td>
+                </tr>
+                <tr>
+                  <td><strong>Synchronous vs. Asynchronous</strong></td>
+                  <td>Đồng bộ vs. Bất đồng bộ</td>
+                  <td>Cơ chế tương tác chặn luồng để đợi kết quả tức thời (Sync) so với cơ chế tiếp nhận lệnh và xử lý ngầm (Async).</td>
+                </tr>
+                <tr>
+                  <td><strong>Role-Based Access Control (RBAC)</strong></td>
+                  <td>Kiểm soát Truy cập theo Vai trò</td>
+                  <td>Mô hình phân quyền gán các đặc quyền thao tác dữ liệu (CRUD) theo chức danh người dùng được ủy quyền.</td>
+                </tr>
+                <tr>
+                  <td><strong>Traceability Matrix (RTM)</strong></td>
+                  <td>Ma trận Truy vết Yêu cầu</td>
+                  <td>Bảng liên kết đối ứng giữa Yêu cầu Kinh doanh (BRD), Đặc tả Chức năng (SFS) và Kịch bản Kiểm thử (Test Case).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">2. Danh mục Tài liệu Tham chiếu Quốc tế Được Xác thực</span>
+            <span class="lang-en">2. Verified International Industry References</span>
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://standards.ieee.org/ieee/29148/7243/" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  1. ISO/IEC/IEEE 29148:2018 — Systems and Software Engineering — Requirements Engineering ↗
+                </a>
+                <span class="badge badge-technical">Tiêu chuẩn Quốc tế / Thu phí có bản quyền (Paid)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Mục 8.4: System Requirements Specification (SyRS) và Software Requirements Specification (SRS) — Tiêu chuẩn công nghiệp kế thừa IEEE 830 về cấu trúc đặc tả chức năng.
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://alistair.cockburn.us/use-cases/" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  2. Alistair Cockburn — Writing Effective Use Cases (Addison-Wesley) ↗
+                </a>
+                <span class="badge badge-good" style="background: #D1FAE5; color: #065F46;">Tài liệu Nền tảng / Trích dẫn Mở của Tác giả (Public Reference)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Mô hình quy chuẩn phân tách giữa Main Success Scenario (Happy Path), Extensions (Alternative Flows) và Failure Handling (Exception Flows).
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.rfc-editor.org/rfc/rfc9110.html" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  3. IETF RFC 9110: HTTP Semantics (Standards Track) ↗
+                </a>
+                <span class="badge badge-good" style="background: #D1FAE5; color: #065F46;">Tiêu chuẩn Mở Quốc tế / Truy cập Miễn phí (Open Access)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Định nghĩa chính thức về Ngữ nghĩa phương thức HTTP (GET, POST, PUT, DELETE), Mã trạng thái phản hồi chuẩn (2xx, 4xx, 5xx), và Tính Idempotency trong tích hợp web.
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://martinfowler.com/articles/microservice-testing/" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  4. Martin Fowler — Testing Strategies in a Microservice Architecture ↗
+                </a>
+                <span class="badge badge-good" style="background: #D1FAE5; color: #065F46;">Tài liệu Chuyên ngành / Truy cập Miễn phí (Open Access)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Phương pháp luận về kiểm thử hợp đồng giao tiếp hệ thống (Contract Testing), xử lý timeout và kiến trúc kiểm thử phân tán.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay Hướng dẫn Biểu mẫu</span><span class="lang-en">Study Guide &amp; Templates</span></a></li>
+          <li><a href="../../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">48 Thẻ Ghi nhớ Chuyên sâu</span><span class="lang-en">48 Study Flashcards</span></a></li>
+          <li><a href="../../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Tài liệu &amp; Tải về</span><span class="lang-en">Downloads &amp; Assets</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Bản quyền &amp; Chuẩn mực</span>
+          <span class="lang-en">Standards &amp; Ethics</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          <span class="lang-vi">Tác giả: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>.<br>Học liệu tuân thủ chuẩn ISO/IEC/IEEE 29148 &amp; BABOK v3. Mọi kịch bản module là tình huống giả định phục vụ đào tạo.</span>
+          <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>.<br>Aligned with ISO/IEC/IEEE 29148 &amp; BABOK v3. All functional scenarios represent illustrative training cases.</span>
+        </p>
+      </div>
+    </div>
+    <div class="container" style="border-top: 1px solid var(--border-warm); padding-top: 1rem; margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+      © 2026 Hazel BA Hub. All rights reserved. Designed for professional IT Business Analysts.
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

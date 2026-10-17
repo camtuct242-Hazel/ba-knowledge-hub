@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Soạn thảo BRD Chuẩn Doanh nghiệp (Business Requirements Document) | Hazel BA Hub</title>
+  <title class="lang-en">Authoring Enterprise Business Requirements Documents (BRD) | Hazel BA Hub</title>
+  <meta name="description" content="Chuyên khảo thực hành toàn diện về kỹ thuật soạn thảo tài liệu yêu cầu kinh doanh BRD chuẩn công nghiệp quốc tế - Tác giả Nguyễn Đăng Cẩm Tú (Hazel).">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/lesson.css">
+  <!-- Core i18n -->
+  <script src="../../assets/js/i18n.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../../knowledge-map/" class="nav-link"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../../study-guide/" class="nav-link active"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container lesson-page">
+    <!-- Breadcrumb & Hero -->
+    <div class="lesson-hero">
+      <div class="lesson-breadcrumb">
+        <a href="../../"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a>
+        <span>/</span>
+        <a href="../../study-guide/"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a>
+        <span>/</span>
+        <span class="lang-vi">Biểu mẫu 2: Tài liệu Yêu cầu Kinh doanh (BRD)</span>
+        <span class="lang-en">Template 2: Business Requirements Document (BRD)</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-explicit">Domain 5 • Masterclass</span>
+        <span class="badge badge-inferred">Enterprise Analysis / BABOK v3</span>
+        <span class="badge badge-illustrative">Author: Nguyễn Đăng Cẩm Tú (Hazel)</span>
+      </div>
+
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">
+        <span class="lang-vi">Soạn thảo Tài liệu Yêu cầu Kinh doanh (BRD) Chuẩn Doanh nghiệp</span>
+        <span class="lang-en">Authoring Enterprise Business Requirements Documents (BRD) — Production Guide</span>
+      </h1>
+      <p style="font-size: 1.05rem; max-width: 880px; color: var(--text-muted); margin-bottom: 0;">
+        <span class="lang-vi">Cẩm nang chuyên sâu: Phân tầng các cấp độ yêu cầu, bóc tách ranh giới phạm vi, mô hình hóa quy trình As-Is/To-Be, xây dựng mô hình ROI có kiểm soát giả định, và thực thi hồ sơ BRD mẫu cho chuỗi cung ứng OmniLogix.</span>
+        <span class="lang-en">A substantive, practical masterclass: Deconstructing requirement hierarchies, establishing in/out-of-scope boundaries, modeling As-Is/To-Be transitions, building disciplined ROI hypotheses, and examining a complete worked BRD for OmniLogix Supply Chain.</span>
+      </p>
+    </div>
+
+    <!-- Lesson Layout Grid: Sidebar + Main Content -->
+    <div class="lesson-layout">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="lesson-sidebar">
+        <div class="sidebar-title">
+          <span class="lang-vi">Mục lục chuyên khảo</span>
+          <span class="lang-en">Lesson Contents</span>
+        </div>
+        <ul class="toc-list">
+          <li><a href="#sec-objectives" class="toc-link"><span class="lang-vi">A. Mục tiêu học tập</span><span class="lang-en">A. Learning Objectives</span></a></li>
+          <li><a href="#sec-concepts" class="toc-link"><span class="lang-vi">B. Bản chất & Phân tầng Yêu cầu</span><span class="lang-en">B. Conceptual Foundations</span></a></li>
+          <li><a href="#sec-method" class="toc-link"><span class="lang-vi">C. Quy trình 6 Bước Soạn thảo BRD</span><span class="lang-en">C. 6-Step Authoring Method</span></a></li>
+          <li><a href="#sec-worked-brd" class="toc-link"><span class="lang-vi">D. Hồ sơ BRD Thực chiến Hoàn chỉnh</span><span class="lang-en">D. Worked Enterprise BRD</span></a></li>
+          <li><a href="#sec-mistakes" class="toc-link"><span class="lang-vi">E. Sai lầm Kinh điển & Khắc phục</span><span class="lang-en">E. Common Anti-Patterns</span></a></li>
+          <li><a href="#sec-exercises" class="toc-link"><span class="lang-vi">F. Bài tập Thực hành & Lời giải</span><span class="lang-en">F. Practice Exercises</span></a></li>
+          <li><a href="#sec-interviews" class="toc-link"><span class="lang-vi">G. Bộ Câu hỏi Phỏng vấn Kỹ thuật</span><span class="lang-en">G. Technical Interview Q&A</span></a></li>
+          <li><a href="#sec-glossary-references" class="toc-link"><span class="lang-vi">H. Thuật ngữ & Nguồn Tham chiếu</span><span class="lang-en">H. Glossary & References</span></a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Lesson Content Area -->
+      <article class="lesson-content">
+
+        <!-- SECTION A: LEARNING OBJECTIVES -->
+        <section id="sec-objectives" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">A</span>
+            <h2>
+              <span class="lang-vi">Mục tiêu Học tập (Learning Objectives)</span>
+              <span class="lang-en">Learning Objectives</span>
+            </h2>
+          </div>
+          <p class="lang-vi">Sau khi hoàn thành chuyên khảo này, người học sẽ có khả năng làm chủ các năng lực phân tích chiến lược và soạn thảo BRD thực chiến sau:</p>
+          <p class="lang-en">Upon completing this masterclass, learners will be equipped to execute the following strategic analysis and BRD authoring competencies:</p>
+          
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;"><span class="lang-vi">Cấp độ (Bloom)</span><span class="lang-en">Cognitive Level</span></th>
+                  <th style="width: 75%;"><span class="lang-vi">Năng lực Đạt được Cụ thể</span><span class="lang-en">Specific Competency Outcome</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Phân biệt (Differentiate)</strong></td>
+                  <td>
+                    <span class="lang-vi">Phân định chuẩn xác các tầng yêu cầu theo chuẩn IIBA BABOK v3 & ISO/IEC/IEEE 29148: Nhu cầu kinh doanh (Business Needs), Yêu cầu kinh doanh (Business Requirements), Yêu cầu bên liên quan (Stakeholder Requirements), Yêu cầu giải pháp (Solution Requirements gồm Chức năng / Functional và Phi chức năng / NFR), và Thiết kế giải pháp kỹ thuật (Solution Design).</span>
+                    <span class="lang-en">Accurately distinguish requirement tiers aligned with IIBA BABOK v3 & ISO/IEC/IEEE 29148: Business Needs, Business Requirements, Stakeholder Requirements, Solution Requirements (subdivided into Functional and Non-Functional/NFR), and Solution Design.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>2. Thiết lập ranh giới (Demarcate)</strong></td>
+                  <td>
+                    <span class="lang-vi">Định vị và bảo vệ ranh giới phạm vi (Scope Boundaries), lập danh mục cụ thể các hạng mục nằm ngoài phạm vi (Explicit Out-of-Scope) nhằm ngăn chặn rủi ro phình phạm vi (Scope Creep) ngay từ giai đoạn khởi tạo.</span>
+                    <span class="lang-en">Establish and defend scope boundaries by authoring explicit Out-of-Scope registers to preempt scope creep at the project initiation phase.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>3. Mô hình hóa (Model)</strong></td>
+                  <td>
+                    <span class="lang-vi">Bóc tách quy trình hiện trạng (As-Is) bằng kỹ thuật 5 Whys / Ishikawa, xác định điểm nghẽn nghiệp vụ và phác thảo quy trình tương lai (To-Be) kèm quy tắc nghiệp vụ định lượng.</span>
+                    <span class="lang-en">Deconstruct As-Is workflows using 5 Whys / Fishbone root-cause analysis, isolate operational bottlenecks, and design Target Operating Models (To-Be) with quantitative business rules.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>4. Lượng hóa Giá trị (Evaluate ROI)</strong></td>
+                  <td>
+                    <span class="lang-vi">Xây dựng mô hình chứng minh giá trị kinh doanh và hoàn vốn đầu tư (ROI) dựa trên bằng chứng khả sát, đồng thời minh bạch hóa mọi giả định chi phí, rủi ro biến động và điều kiện phụ thuộc.</span>
+                    <span class="lang-en">Construct evidence-based business value and Return on Investment (ROI) models while explicitly documenting underlying cost assumptions, sensitivity boundaries, and dependencies.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>5. Quản trị & Phê duyệt (Govern)</strong></td>
+                  <td>
+                    <span class="lang-vi">Vận hành ma trận phân nhiệm RACI phù hợp với bối cảnh tổ chức, điều phối các phiên duyệt tài liệu (Walkthroughs), xử lý bất đồng giữa các bên và thiết lập đường cơ sở yêu cầu (Baseline Freeze).</span>
+                    <span class="lang-en">Facilitate contextual RACI governance, lead structured stakeholder walkthroughs, negotiate cross-departmental conflicts, and establish formal requirement baselines.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION B: CONCEPTUAL FOUNDATIONS -->
+        <section id="sec-concepts" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">B</span>
+            <h2>
+              <span class="lang-vi">Bản chất Khái niệm & Phân tầng Yêu cầu</span>
+              <span class="lang-en">Conceptual Foundations & Requirements Hierarchy</span>
+            </h2>
+          </div>
+
+          <h3>
+            <span class="lang-vi">1. BRD là gì và Vai trò Chiến lược trong Dự án?</span>
+            <span class="lang-en">1. What is a BRD and its Strategic Role?</span>
+          </h3>
+          <p class="lang-vi">
+            Tài liệu Yêu cầu Kinh doanh (<strong>Business Requirements Document - BRD</strong>) là hồ sơ chính thức xác lập <em>tại sao</em> một sáng kiến hoặc dự án cần được thực hiện, <em>những vấn đề kinh doanh nào</em> cần giải quyết, và <em>kết quả mong đợi</em> được đo lường bằng những chỉ số định lượng nào. BRD thuộc sở hữu của phía kinh doanh (Business Sponsors / Product Management) và do Business Analyst chịu trách nhiệm điều phối, khơi gợi và hệ thống hóa.
+          </p>
+          <p class="lang-en">
+            A <strong>Business Requirements Document (BRD)</strong> is a formal artifact establishing <em>why</em> an initiative is undertaken, <em>what specific business problem</em> it resolves, and <em>what observable business outcomes</em> measure success. The BRD is owned by the business sponsors/product leadership and facilitated, elicited, and structured by the Business Analyst.
+          </p>
+
+          <div style="background: var(--bg-surface-warm); border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; margin: 1.25rem 0; border-radius: var(--radius-sm);">
+            <strong style="color: var(--color-primary-dark);">
+              <span class="lang-vi">Ranh giới cốt lõi của một BRD:</span>
+              <span class="lang-en">Core Abstraction Boundary of a BRD:</span>
+            </strong>
+            <p style="margin: 0.5rem 0 0; font-size: 0.95rem;" class="lang-vi">
+              BRD tập trung vào <strong>Năng lực Kinh doanh Cần đạt (WHAT & WHY)</strong>, tuyệt đối <strong>KHÔNG</strong> sa đà vào việc quy định giải pháp kỹ thuật cụ thể (HOW — như lựa chọn công nghệ, ngôn ngữ lập trình, thiết kế cơ sở dữ liệu hay chi tiết mã nguồn).
+            </p>
+            <p style="margin: 0.5rem 0 0; font-size: 0.95rem;" class="lang-en">
+              A BRD focuses strictly on <strong>Required Business Capabilities (WHAT & WHY)</strong> and must <strong>NEVER</strong> dictate the technical solution implementation (HOW — such as programming frameworks, database engines, schema layouts, or UI pixel coordinates).
+            </p>
+          </div>
+
+          <h3>
+            <span class="lang-vi">2. Tháp Phân tầng Yêu cầu & Cấu trúc Phân loại Chuẩn (BABOK v3 & ISO/IEC/IEEE 29148)</span>
+            <span class="lang-en">2. Requirements Hierarchy & Classification Architecture (BABOK v3 & ISO/IEC/IEEE 29148)</span>
+          </h3>
+          <p class="lang-vi">
+            Trong chuẩn quốc tế IIBA BABOK® Guide v3 (Chương 2) và ISO/IEC/IEEE 29148:2018, yêu cầu được phân loại chính thức thành 4 nhóm nghiệp vụ: <strong>Business Requirements</strong>, <strong>Stakeholder Requirements</strong>, <strong>Solution Requirements</strong>, và <strong>Transition Requirements</strong> (Yêu cầu chuyển đổi tạm thời). Khi nhìn trong toàn bộ vòng đời phát triển phần mềm đầu-cuối (End-to-End Lifecycle), các yêu cầu này được định vị giữa <strong>Nhu cầu Chiến lược ban đầu (Business Need)</strong> và <strong>Thiết kế Kỹ thuật hạ nguồn (Solution Design)</strong>. Đặc biệt, tầng Yêu cầu Giải pháp luôn được bóc tách thành 2 phân nhánh vận hành thiết yếu: <em>Yêu cầu Chức năng (Functional)</em> và <em>Yêu cầu Phi chức năng (Non-Functional)</em>:
+          </p>
+          <p class="lang-en">
+            Under international standards IIBA BABOK® Guide v3 (Chapter 2) and ISO/IEC/IEEE 29148:2018, requirements are formally categorized into: <strong>Business Requirements</strong>, <strong>Stakeholder Requirements</strong>, <strong>Solution Requirements</strong>, and <strong>Transition Requirements</strong>. In an end-to-end delivery lifecycle, these are framed between the upstream <strong>Strategic Business Need</strong> and downstream <strong>Solution Design</strong>. Importantly, Solution Requirements are operationally divided into two essential classes: <em>Functional Requirements</em> and <em>Non-Functional Requirements (NFR)</em>:
+          </p>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;"><span class="lang-vi">Tầng / Danh mục Phân loại</span><span class="lang-en">Tier / Category</span></th>
+                  <th style="width: 25%;"><span class="lang-vi">Bản chất & Trả lời Câu hỏi</span><span class="lang-en">Core Purpose & Question</span></th>
+                  <th style="width: 35%;"><span class="lang-vi">Ví dụ Minh họa Thực tế</span><span class="lang-en">Concrete Example</span></th>
+                  <th style="width: 20%;"><span class="lang-vi">Hồ sơ Chứa Yêu cầu</span><span class="lang-en">Target Artifact</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Nhu cầu Kinh doanh (Business Need)</strong></td>
+                  <td>Bối cảnh chiến lược, vấn đề gốc rễ thúc đẩy đầu tư. <em>"Vì sao tổ chức phải chi ngân sách?"</em></td>
+                  <td>Giảm tỷ lệ hủy đơn hàng do hết hàng ngoài dự kiến từ 18% xuống dưới 4% trong vòng 2 quý.</td>
+                  <td><strong>Business Case / Project Charter</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>2. Yêu cầu Kinh doanh (Business Requirements)</strong></td>
+                  <td>Năng lực nghiệp vụ cấp cao tổ chức cần có để thỏa mãn Business Need. <em>"Tổ chức cần đạt năng lực gì?"</em></td>
+                  <td>Hệ thống phải tự động cảnh báo và kích hoạt đặt hàng tái bổ sung khi lượng tồn kho thực tế chạm ngưỡng an toàn.</td>
+                  <td><strong>BRD (Chuyên khảo này)</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>3. Yêu cầu Bên liên quan (Stakeholder Requirements)</strong></td>
+                  <td>Nhu cầu tác nghiệp của một nhóm người dùng hoặc bộ phận cụ thể. <em>"Người dùng cần làm gì?"</em></td>
+                  <td>Nhân viên điều phối kho cần xem danh sách 20 mặt hàng sắp cạn kiệt và duyệt đơn mua hàng theo lô chỉ bằng 1 thao tác.</td>
+                  <td><strong>URD / User Stories (Epic)</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>4a. Yêu cầu Chức năng (Functional Requirements)</strong></td>
+                  <td>Hành vi cụ thể, luồng xử lý và quy tắc tính toán của phần mềm. <em>"Phần mềm thực hiện hành vi gì?"</em></td>
+                  <td>Hệ thống phải tự động tính lại ROP mỗi 30 phút, tạo bản ghi PO dự thảo và gửi thông báo qua webhook trong &lt; 2 giây.</td>
+                  <td><strong>SRS / SFS / Gherkin AC</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>4b. Yêu cầu Phi chức năng (Non-Functional / NFR)</strong></td>
+                  <td>Thuộc tính chất lượng vận hành: hiệu năng, bảo mật, độ sẵn sàng. <em>"Hệ thống vận hành tốt đến mức nào?"</em></td>
+                  <td>Màn hình danh sách đơn hàng phải tải dưới 1.5 giây với 2,000 người dùng đồng thời; dữ liệu truyền tải mã hóa TLS 1.3.</td>
+                  <td><strong>SRS / NFR Specification</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>5. Thiết kế Giải pháp Kỹ thuật (Solution Design)</strong></td>
+                  <td>Quyết định kiến trúc và công nghệ của kỹ sư phần mềm. <em>"Kỹ sư xây dựng bằng công nghệ gì?"</em></td>
+                  <td>Sử dụng Apache Kafka để xử lý message luồng tồn kho, lưu trữ bằng PostgreSQL và triển khai trên AWS EKS.</td>
+                  <td><strong>Architecture Design / Tech Spec (Ngoài phạm vi BRD)</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>
+            <span class="lang-vi">3. Khi nào CẦN BRD và Khi nào KHÔNG NÊN viết BRD?</span>
+            <span class="lang-en">3. When to Use a BRD vs. Lean Alternatives</span>
+          </h3>
+          <p class="lang-vi">
+            BRD không phải là tài liệu mang tính giáo điều bắt buộc cho mọi dự án phần mềm. Tùy thuộc vào quy mô tổ chức, mô hình quản trị và tính bất định của bài toán mà BA lựa chọn phương pháp tài liệu hóa phù hợp:
+          </p>
+          <p class="lang-en">
+            A formal BRD is not a dogmatic mandate for every software effort. Depending on organizational governance, initiative scale, and domain uncertainty, the analyst must tailor the documentation approach:
+          </p>
+
+          <div class="comparison-grid">
+            <div class="card-good">
+              <strong style="color: #047857;">
+                <span class="lang-vi">✓ BẮT BUỘC / NÊN SOẠN THẢO BRD KHI:</span>
+                <span class="lang-en">✓ A BRD IS ESSENTIAL WHEN:</span>
+              </strong>
+              <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                <li><span class="lang-vi">Dự án chuyển đổi liên phòng ban (Cross-departmental): Liên quan từ 3 đơn vị nghiệp vụ trở lên (ví dụ: Kho bãi, Kế toán, Mua hàng, Pháp chế).</span><span class="lang-en">Cross-departmental transformations involving 3+ business units (e.g., Warehouse, Accounting, Procurement, Legal).</span></li>
+                <li><span class="lang-vi">Thuê ngoài phát triển (Vendor Tendering / Outsourcing / RFP): Cần cơ sở pháp lý và phạm vi nghiệm thu hợp đồng rõ ràng.</span><span class="lang-en">Vendor procurement, RFPs, or outsourcing where contractual scope boundaries are legally binding.</span></li>
+                <li><span class="lang-vi">Lĩnh vực bị ràng buộc pháp lý nghiêm ngặt (Banking, Fintech, Y tế, Dược phẩm): Đòi hỏi truy vết kiểm toán (Audit Trail) chặt chẽ.</span><span class="lang-en">Highly regulated industries (Banking, Healthcare, Pharma) requiring rigorous auditability.</span></li>
+                <li><span class="lang-vi">Ngân sách đầu tư lớn (CAPEX): Cần Hội đồng Đầu tư hoặc Ban Giám đốc phê duyệt tính khả thi kinh tế (ROI).</span><span class="lang-en">Substantial capital investments requiring executive board sign-off and formal ROI justification.</span></li>
+              </ul>
+            </div>
+
+            <div class="card-bad">
+              <strong style="color: #B91C1C;">
+                <span class="lang-vi">✗ NÊN TINH GỌN (DÙNG PRODUCT CANVAS / USER STORIES) KHI:</span>
+                <span class="lang-en">✗ OPT FOR LEAN CANVASES / USER STORIES WHEN:</span>
+              </strong>
+              <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                <li><span class="lang-vi">Sản phẩm Startup hoặc MVP có mức độ bất định cực cao: Giả định kinh doanh thay đổi liên tục hàng tuần.</span><span class="lang-en">Early-stage startup MVPs where core business hypotheses pivot weekly based on market learning.</span></li>
+                <li><span class="lang-vi">Cải tiến tính năng nhỏ trong một Sprint: Nhóm Agile nội bộ tự quản có thể giao tiếp trực tiếp hàng ngày.</span><span class="lang-en">Incremental feature iterations within an established Agile team with daily co-located collaboration.</span></li>
+                <li><span class="lang-vi">Nhiệm vụ tái cấu trúc kỹ thuật nội bộ (Tech Debt Refactoring): Không làm thay đổi quy trình hay năng lực nghiệp vụ của người dùng.</span><span class="lang-en">Pure technical debt refactoring initiatives that introduce zero alterations to business capabilities.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION C: 6-STEP AUTHORING METHOD -->
+        <section id="sec-method" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">C</span>
+            <h2>
+              <span class="lang-vi">Quy trình 6 Bước Soạn thảo BRD Thực chiến</span>
+              <span class="lang-en">The 6-Step Practical BRD Authoring Method</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Một bản BRD chuẩn mực không được tạo ra từ phòng kín bằng sự phỏng đoán của BA, mà là kết quả của một quy trình khơi gợi, phân tích và đồng thuận có kỷ luật:
+          </p>
+          <p class="lang-en">
+            A production-grade BRD is never generated in isolation through guesswork; it is the structured outcome of a disciplined elicitation, analysis, and alignment workflow:
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+            <!-- Step 1 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 1 / STEP 1</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Khám phá Vấn đề Cốt lõi & Phỏng vấn Khơi gợi (Problem Discovery & Root Cause)</span><span class="lang-en">Problem Discovery & Root Cause Analysis</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Không chấp nhận ngay giải pháp bề mặt do các bên đề xuất (ví dụ: <em>"Chúng tôi cần mua phần mềm AI"</em>). BA áp dụng kỹ thuật <strong>5 Whys</strong> hoặc <strong>Biểu đồ Xương cá (Ishikawa)</strong> để tìm ra nguyên nhân gốc rễ (Root Cause) của sự lãng phí, thất thoát doanh thu hoặc đình trệ vận hành.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Refuse to take surface-level solution requests at face value (e.g., <em>"We need an AI platform"</em>). Apply the <strong>5 Whys</strong> or <strong>Ishikawa Diagram</strong> to isolate the true root causes of operational friction, lost revenue, or supply chain bottlenecks.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 2 / STEP 2</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Đóng khung Ranh giới Phạm vi: Trong vs. Ngoài Phạm vi (Scope Demarcation)</span><span class="lang-en">Scope Demarcation: In-Scope vs. Explicitly Out-of-Scope</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Xác định chính xác những gì dự án cam kết bàn giao (In-Scope) và <strong>đặc biệt nhấn mạnh danh sách loại trừ (Out-of-Scope)</strong>. Danh sách ngoài phạm vi là tấm khiên bảo vệ nhóm phát triển khỏi những đòi hỏi phát sinh ngoài dự kiến trong các cuộc họp điều hành.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Define precisely what the project commits to deliver (In-Scope) and <strong>explicitly catalog excluded items (Out-of-Scope)</strong>. The out-of-scope register serves as the team's operational shield against scope creep during subsequent sprint reviews.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 3 / STEP 3</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Mô hình hóa Dòng chảy Quy trình: Từ As-Is sang To-Be (Process Transformation)</span><span class="lang-en">Process Modeling: Transitioning from As-Is to To-Be</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Vẽ sơ đồ quy trình nghiệp vụ hiện tại (As-Is Process), gắn nhãn các điểm nghẽn (Pain points / Wait times / Error rates). Sau đó, phác thảo quy trình tương lai (To-Be Process) thể hiện rõ cách công nghệ mới cắt giảm các bước thủ công thừa thãi.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Map the current business workflow (As-Is) and visually flag bottlenecks, latency, and error clusters. Then, design the target workflow (To-Be) demonstrating how automation eliminates manual handoffs.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 4 / STEP 4</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Đặc tả Quy tắc Nghiệp vụ & Ràng buộc Pháp lý (Business Rules Modeling)</span><span class="lang-en">Formulating Business Rules & Regulatory Constraints</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Trích xuất và đánh mã các quy tắc điều hành doanh nghiệp (Business Policies, Calculation Formulas, Validation Thresholds). Đảm bảo các quy tắc này tồn tại độc lập với mã lập trình của phần mềm.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Catalog and assign unique identifiers to enterprise operational policies, calculation formulas, and validation thresholds, ensuring rules are decoupled from specific software implementations.
+              </p>
+            </div>
+
+            <!-- Step 5 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 5 / STEP 5</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Xây dựng Mô hình Giá trị Kinh doanh & Phân tích ROI (ROI Modeling with Assumptions)</span><span class="lang-en">Financial Justification & Disciplined ROI Modeling</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Tính toán lợi ích kinh tế (tiết kiệm chi phí nhân công, giảm thất thoát hàng tồn kho, gia tăng doanh số) đối chiếu với tổng chi phí sở hữu (TCO). Ghi nhận minh bạch mọi giả định định lượng và vùng rủi ro chưa chắc chắn.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Quantify projected economic benefits against Total Cost of Ownership (TCO). Explicitly document all underlying assumptions, cost estimates, and sensitivity limits rather than claiming speculative returns as certainty.
+              </p>
+            </div>
+
+            <!-- Step 6 -->
+            <div style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.25rem; background: var(--bg-surface);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <span style="background: var(--color-primary-dark); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">BƯỚC 6 / STEP 6</span>
+                <h4 style="margin: 0; font-size: 1.1rem;"><span class="lang-vi">Thiết lập Phân nhiệm RACI, Duyệt Thấu suốt & Đóng băng Cơ sở (Governance & Baseline Freeze)</span><span class="lang-en">RACI Governance, Walkthroughs & Baseline Sign-Off</span></h4>
+              </div>
+              <p class="lang-vi" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Tổ chức các phiên rà soát tài liệu (Requirements Walkthrough) với tất cả các bên liên quan. Khi đạt được sự đồng thuận, thực hiện ký duyệt (Sign-off) để đóng băng đường cơ sở (Baseline Freeze). Mọi thay đổi sau thời điểm này đều phải đi qua quy trình Change Request (CR) chính thức.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem; margin-bottom: 0.5rem;">
+                Lead structured requirement walkthroughs across business units. Upon consensus, secure executive sign-off to freeze the requirements baseline. Subsequent scope additions must strictly transition through the Change Request (CR) process.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION D: WORKED ENTERPRISE BRD -->
+        <section id="sec-worked-brd" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">D</span>
+            <h2>
+              <span class="lang-vi">Hồ sơ BRD Mẫu Thực chiến Hoàn chỉnh: Dự án OmniLogix AIR-VIP</span>
+              <span class="lang-en">Worked Enterprise BRD: OmniLogix AIR-VIP Project</span>
+            </h2>
+          </div>
+
+          <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 1rem; margin-bottom: 1rem;">
+              <div>
+                <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--color-primary-dark); letter-spacing: 0.05em;">ENTERPRISE BUSINESS REQUIREMENTS DOCUMENT</span>
+                <h3 style="margin: 0.25rem 0; font-size: 1.4rem;">Mã dự án: PRJ-OLX-2026-BRD</h3>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">
+                  <strong>Dự án:</strong> Nền tảng Tự động hóa Tái bổ hàng & Tích hợp Nhà cung cấp (Project AIR-VIP)<br>
+                  <strong>Doanh nghiệp:</strong> OmniLogix Fulfillment Solutions | <strong>Tác giả:</strong> Nguyễn Đăng Cẩm Tú (Lead BA)
+                </p>
+              </div>
+              <div style="text-align: right;">
+                <span class="badge badge-explicit">Trạng thái: ĐÃ PHÊ DUYỆT / APPROVED</span>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Phiên bản: v1.0 (Baseline Freeze)</div>
+              </div>
+            </div>
+
+            <!-- Fictional Case Study Disclaimer -->
+            <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; padding: 0.85rem 1.1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: 0.85rem; color: #92400E; line-height: 1.5;">
+              <strong style="display: block; margin-bottom: 0.25rem;">
+                <span class="lang-vi">📌 LƯU Ý BẢN QUYỀN VÀ DỮ LIỆU HUẤN LUYỆN (ILLUSTRATIVE CASE NOTICE):</span>
+                <span class="lang-en">📌 PEDAGOGICAL NOTICE & FICTIONAL CASE DATA:</span>
+              </strong>
+              <span class="lang-vi">Toàn bộ tên doanh nghiệp (OmniLogix Fulfillment Solutions), số liệu vận hành, định mức tài chính và tình huống dự án dưới đây là trường hợp giả định thực tế (Illustrative Training Case) được tác giả Nguyễn Đăng Cẩm Tú (Hazel) xây dựng độc lập phục vụ mục đích đào tạo và minh họa phương pháp luận phân tích yêu cầu chuẩn quốc tế. Mọi số liệu không đại diện cho bất kỳ tổ chức thương mại cụ thể nào.</span>
+              <span class="lang-en">All enterprise entities (OmniLogix Fulfillment Solutions), operational baselines, financial metrics, and scenario parameters below represent a fictional illustrative training case developed independently by Nguyễn Đăng Cẩm Tú (Hazel) for educational purposes. Figures demonstrate analysis methodologies and do not represent proprietary data of any commercial firm.</span>
+            </div>
+
+            <!-- BRD Section 1: Executive Summary & Business Need -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">1. Tóm tắt Điều hành & Nhu cầu Kinh doanh (Executive Summary & Business Need)</span>
+              <span class="lang-en">1. Executive Summary & Business Need</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>Bối cảnh doanh nghiệp:</strong> OmniLogix hiện vận hành 4 trung tâm phân phối khu vực (Fulfillment Centers) phục vụ hơn 85,000 đơn hàng B2B mỗi tháng, với danh mục 4,200 mã hàng (SKU) từ 120 nhà cung cấp sản xuất. Hiện trạng bổ sung hàng hóa phụ thuộc hoàn toàn vào quy trình thủ công: nhân viên lập kế hoạch trích xuất file Excel từ hệ thống ERP cũ vào mỗi cuối tuần, tính toán nhu cầu đặt hàng bằng các bảng tính cá nhân hóa, sau đó gửi đơn đặt mua hàng (PO) qua email hoặc gọi điện thoại.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>Enterprise Context:</strong> OmniLogix operates 4 regional distribution fulfillment centers dispatching over 85,000 B2B orders monthly across 4,200 SKUs supplied by 120 manufacturing vendors. Current inventory replenishment is completely manual: inventory planners export disparate Excel workbooks from a legacy ERP each weekend, run localized demand calculations in isolated spreadsheets, and dispatch purchase orders (POs) via manual email or phone calls.
+            </p>
+            <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>Nỗi đau cốt lõi (Business Need):</strong> Độ trễ tổng hợp dữ liệu kéo dài từ 3 đến 5 ngày dẫn đến tình trạng hết hàng ngoài dự kiến (Stockouts) chiếm tới <strong>18.4%</strong> trong mùa cao điểm quý 4 năm trước, làm phát sinh 2.4 tỷ VNĐ phí phạt hủy hợp đồng dịch vụ SLA với các chuỗi bán lẻ. Ngược lại, để phòng thủ, các kho lại tích trữ đệm an toàn quá mức, khiến vốn lưu động bị chôn trong tồn kho dư thừa lên đến 14.2 tỷ VNĐ. Doanh nghiệp cần chuyển dịch sang một nền tảng quản trị bổ sung hàng tự động, liên kết dữ liệu thời gian thực giữa kho và cổng nhà cung cấp.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>Core Business Need:</strong> Data aggregation latency of 3–5 days caused unpredicted stockouts reaching <strong>18.4%</strong> during peak Q4 last year, triggering 2.4B VND in customer SLA penalties. Conversely, planners over-ordered safety buffers, locking up 14.2B VND of working capital in stagnant stock. OmniLogix urgently requires an automated replenishment platform synchronizing real-time warehouse velocity directly with a dedicated vendor portal.
+            </p>
+
+            <!-- BRD Section 2: Objectives & Success Metrics -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">2. Mục tiêu Dự án & Chỉ số Đo lường Thành công (Objectives & Target KPIs)</span>
+              <span class="lang-en">2. Project Objectives & Target Success Metrics</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 15%;">Mã KPI / ID</th>
+                    <th style="width: 35%;"><span class="lang-vi">Mục tiêu Kinh doanh (SMART)</span><span class="lang-en">Business Objective (SMART)</span></th>
+                    <th style="width: 25%;"><span class="lang-vi">Mức Hiện trạng (Baseline)</span><span class="lang-en">Baseline Metric</span></th>
+                    <th style="width: 25%;"><span class="lang-vi">Mục tiêu Sau 6 Tháng (Target)</span><span class="lang-en">Target (Post 6-Months)</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>OBJ-INV-01</code></td>
+                    <td><span class="lang-vi">Cắt giảm tỷ lệ đơn hàng bị trễ do thiếu hụt tồn kho (Stockout Fulfillment Delay Rate)</span><span class="lang-en">Reduce customer stockout fulfillment delay rate across all 4 hubs</span></td>
+                    <td>18.4% (Quy mô cao điểm)</td>
+                    <td><strong>&lt; 3.5%</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>OBJ-INV-02</code></td>
+                    <td><span class="lang-vi">Rút ngắn thời gian xử lý và phát hành đơn mua hàng (PO Generation & Dispatch Cycle)</span><span class="lang-en">Accelerate purchase order generation to vendor dispatch cycle</span></td>
+                    <td>72 giờ làm việc (Thủ công)</td>
+                    <td><strong>&lt; 2 giờ</strong> (Tự động hóa)</td>
+                  </tr>
+                  <tr>
+                    <td><code>OBJ-INV-03</code></td>
+                    <td><span class="lang-vi">Giảm giá trị tồn kho đệm dư thừa (Safety Stock Working Capital) mà vẫn đảm bảo tỷ lệ sẵn sàng</span><span class="lang-en">Decrease redundant safety stock holding without degrading fulfillment fill rate</span></td>
+                    <td>14.2 tỷ VNĐ vốn đọng</td>
+                    <td><strong>Giảm tối thiểu 20% (~2.8 tỷ VNĐ)</strong></td>
+                  </tr>
+                  <tr>
+                    <td><code>OBJ-INV-04</code></td>
+                    <td><span class="lang-vi">Tỷ lệ nhà cung cấp nhóm A (chiếm 80% sản lượng) tích hợp xác nhận đơn hàng qua Vendor Portal</span><span class="lang-en">Adoption rate of Tier-A vendors confirming orders via Vendor Portal</span></td>
+                    <td>0% (Hiện qua email/Zalo)</td>
+                    <td><strong>&gt; 90%</strong> sau 90 ngày Go-Live</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 3: Scope Boundaries -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">3. Ranh giới Phạm vi Dự án (Project Scope Boundaries)</span>
+              <span class="lang-en">3. Project Scope Boundaries</span>
+            </h4>
+            <div class="comparison-grid">
+              <div class="card-good">
+                <strong style="color: #047857;">
+                  <span class="lang-vi">✓ TRONG PHẠM VI DỰ ÁN (IN-SCOPE):</span>
+                  <span class="lang-en">✓ COMMITTED IN-SCOPE:</span>
+                </strong>
+                <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                  <li><span class="lang-vi">Cơ chế tính toán tự động điểm đặt hàng lại (Reorder Point - ROP) theo công thức động dựa trên tốc độ bán bình quân và Lead-time nhà cung cấp.</span><span class="lang-en">Automated dynamic Reorder Point (ROP) calculation engine based on sales velocity and vendor lead time.</span></li>
+                  <li><span class="lang-vi">Cổng thông tin tự phục vụ dành cho Nhà cung cấp (Vendor Portal): Xem PO, xác nhận số lượng cam kết giao, tải hóa đơn điện tử và cập nhật ngày giao dự kiến (ETA).</span><span class="lang-en">Self-service Vendor Portal: PO visibility, quantity commitment, e-invoice upload, and ETA confirmation.</span></li>
+                  <li><span class="lang-vi">Quy trình duyệt đơn đặt hàng phân cấp (Approval Matrix) cho các đơn hàng có giá trị vượt ngưỡng ngân sách định mức.</span><span class="lang-en">Tiered multi-level PO approval workflow for purchases exceeding defined budget thresholds.</span></li>
+                  <li><span class="lang-vi">Giao diện tích hợp dữ liệu 2 chiều (Bidirectional API) với hệ thống ERP hiện tại (Kế toán & Kho).</span><span class="lang-en">Bidirectional synchronization API with the legacy ERP for inventory ledger and financial accounts.</span></li>
+                </ul>
+              </div>
+
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">
+                  <span class="lang-vi">✗ DANH MỤC NGOẠI LỆ LOẠI TRỪ (EXPLICITLY OUT-OF-SCOPE):</span>
+                  <span class="lang-en">✗ EXPLICITLY OUT-OF-SCOPE:</span>
+                </strong>
+                <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                  <li><span class="lang-vi">Thay thế hoặc nâng cấp hệ thống phần mềm quản lý kho WMS tại các trung tâm phân phối vật lý (vẫn giữ nguyên thiết bị quét mã vạch hiện hành).</span><span class="lang-en">Replacing or refactoring the physical Warehouse Management System (WMS) or barcode RF devices.</span></li>
+                  <li><span class="lang-vi">Thực hiện thanh toán giải ngân tiền tệ trực tiếp cho nhà cung cấp (hệ thống chỉ gửi dữ liệu công nợ sang phòng Kế toán ERP, không tích hợp cổng ngân hàng).</span><span class="lang-en">Direct monetary disbursement to vendor bank accounts (system exports approved invoices to ERP AP module only).</span></li>
+                  <li><span class="lang-vi">Hỗ trợ các nhà cung cấp dịch vụ logistics quốc tế hoặc hải quan (chỉ áp dụng cho 120 nhà cung cấp nội địa trong Phase 1).</span><span class="lang-en">Cross-border customs clearance and international freight forwarder logistics workflows (Domestic vendors only in Phase 1).</span></li>
+                  <li><span class="lang-vi">Ứng dụng di động (Mobile App) cho nhà cung cấp (chỉ phát triển Web Portal chuẩn Responsive).</span><span class="lang-en">Dedicated native mobile applications for vendors (Responsive Web Portal only).</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- BRD Section 4: Current State vs Future State -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">4. Phân tích Hiện trạng (As-Is) & Mô hình Tương lai (To-Be)</span>
+              <span class="lang-en">4. Current State (As-Is) vs. Target Future State (To-Be)</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;"><span class="lang-vi">Khía cạnh So sánh</span><span class="lang-en">Process Dimension</span></th>
+                    <th style="width: 40%;"><span class="lang-vi">Hiện trạng (As-Is Process)</span><span class="lang-en">Current State (As-Is)</span></th>
+                    <th style="width: 40%;"><span class="lang-vi">Tương lai Đề xuất (To-Be Model)</span><span class="lang-en">Proposed Target State (To-Be)</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Thu thập Dữ liệu Tồn kho</strong></td>
+                    <td>Xuất file Excel thủ công mỗi cuối tuần từ ERP. Dữ liệu bị trễ từ 3-5 ngày so với biến động thực tế tại sàn kho.</td>
+                    <td>Dịch vụ ngầm (Background Job) đồng bộ tự động tồn kho thực tế mỗi 30 phút qua REST API.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tính toán Nhu cầu Đặt hàng</strong></td>
+                    <td>Nhân viên tự phỏng đoán lượng đặt dựa trên kinh nghiệm cá nhân, không có công thức an toàn chuẩn hóa.</td>
+                    <td>Hệ thống tính ROP động tự động: $ROP = (D \times L) + SS$, cảnh báo màu theo 3 cấp độ rủi ro (Xanh, Vàng, Đỏ).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Phát hành Đơn Mua (PO)</strong></td>
+                    <td>Nhập liệu bằng tay vào ERP, in bản cứng xin chữ ký Giám đốc Mua hàng, scan gửi email cho đối tác.</td>
+                    <td>Tự động sinh dự thảo PO khi chạm điểm ROP, định tuyến phê duyệt điện tử (E-approval) theo phân quyền giá trị.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Xác nhận từ Nhà cung cấp</strong></td>
+                    <td>Nhà cung cấp trả lời qua Zalo hoặc email, thường xuyên phát sinh tranh chấp về số lượng thực giao và giá niêm yết.</td>
+                    <td>Nhà cung cấp đăng nhập Vendor Portal, bấm xác nhận PO trong 24h, ghi nhận lịch sử kiểm toán (Audit Trail) không thể chối bỏ.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 5: Stakeholder Matrix & RACI -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">5. Phân tích Bên Liên quan & Ma trận Phân nhiệm (RACI Matrix)</span>
+              <span class="lang-en">5. Stakeholder Analysis & RACI Governance Matrix</span>
+            </h4>
+            <div style="background: #FFF; border: 1px solid var(--border-warm); padding: 0.75rem 1rem; margin-bottom: 0.75rem; border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              <em><span class="lang-vi">Lưu ý nghiệp vụ của BA: Ma trận RACI là công cụ truyền thông và điều phối trách nhiệm theo bối cảnh tổ chức, không phải điều luật bất biến. Trong chuẩn quản trị dự án nghiêm ngặt, mỗi nhiệm vụ chỉ có <strong>DUY NHẤT một vai trò Accountable (A)</strong> để xóa bỏ khoảng trống trách nhiệm, đồng thời hạn chế ghép chung 'A/R' trên cùng một cá nhân để bảo toàn tính kiểm soát độc lập. Ở dự án này: Sponsor giữ vai trò Accountable (A) phê duyệt cuối cùng, còn Lead BA và nhóm dự án giữ vai trò Responsible (R) triển khai tài liệu.</span><span class="lang-en">BA Governance Note: The RACI matrix is a contextual communication tool, not an inflexible statute. Under rigorous project governance, each activity maintains <strong>strictly ONE Accountable (A)</strong> party to avoid ownership ambiguity and discourages combined 'A/R' assignments to ensure independent oversight. Here, the Sponsor serves as Accountable (A) for executive sign-off, while the Lead BA acts as Responsible (R) for operational synthesis.</span></em>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 35%;"><span class="lang-vi">Hoạt động / Giai đoạn Quyết định</span><span class="lang-en">Key Decision / Project Activity</span></th>
+                    <th style="width: 13%;">Business Sponsor (VP Ops)</th>
+                    <th style="width: 13%;">Procurement Mgr (Trưởng Mua hàng)</th>
+                    <th style="width: 13%;">Warehouse Mgr (Trưởng Kho)</th>
+                    <th style="width: 13%;">Lead BA (Nguyễn Đ.C. Tú)</th>
+                    <th style="width: 13%;">Vendor Reps (Đại diện NCC)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Xác lập mục tiêu chiến lược & cấp ngân sách</td>
+                    <td><strong>A</strong> (Phê duyệt)</td>
+                    <td>C</td>
+                    <td>C</td>
+                    <td><strong>R</strong> (Dự thảo)</td>
+                    <td>I</td>
+                  </tr>
+                  <tr>
+                    <td>Cung cấp quy tắc nghiệp vụ tính điểm ROP</td>
+                    <td>I</td>
+                    <td><strong>A</strong></td>
+                    <td>C</td>
+                    <td><strong>R</strong> (Khơi gợi)</td>
+                    <td>I</td>
+                  </tr>
+                  <tr>
+                    <td>Xác nhận thiết kế quy trình To-Be & Màn hình Portal</td>
+                    <td>I</td>
+                    <td>C</td>
+                    <td>C</td>
+                    <td><strong>R</strong></td>
+                    <td><strong>C</strong> (Khảo sát)</td>
+                  </tr>
+                  <tr>
+                    <td>Phê duyệt tài liệu BRD (Sign-off Baseline)</td>
+                    <td><strong>A</strong> (Quyết định)</td>
+                    <td>C</td>
+                    <td>C</td>
+                    <td><strong>R</strong> (Điều phối)</td>
+                    <td>I</td>
+                  </tr>
+                  <tr>
+                    <td>Nghiệm thu chấp nhận người dùng (UAT)</td>
+                    <td>I</td>
+                    <td><strong>A</strong></td>
+                    <td><strong>R</strong></td>
+                    <td><strong>R</strong> (Hỗ trợ)</td>
+                    <td>C</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 6: Business Rules Catalog -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">6. Danh mục Quy tắc Nghiệp vụ Doanh nghiệp (Enterprise Business Rules)</span>
+              <span class="lang-en">6. Enterprise Business Rules Catalog</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 15%;">Mã Quy tắc</th>
+                    <th style="width: 25%;"><span class="lang-vi">Tên Quy tắc</span><span class="lang-en">Rule Title</span></th>
+                    <th style="width: 45%;"><span class="lang-vi">Đặc tả Logic Nghiệp vụ Định lượng</span><span class="lang-en">Detailed Business Logic Specification</span></th>
+                    <th style="width: 15%;"><span class="lang-vi">Bộ phận Quản trị</span><span class="lang-en">Governing Dept</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>BR-INV-01</code></td>
+                    <td><span class="lang-vi">Công thức Tính Điểm Tái Đặt hàng (ROP)</span><span class="lang-en">Dynamic ROP Calculation Formula</span></td>
+                    <td>
+                      $$ROP = (D \times L) + SS$$
+                      <div style="font-size: 0.85rem; line-height: 1.5; margin-top: 0.5rem;">
+                        <span class="lang-vi">
+                          • <strong>$D$ (Tốc độ tiêu thụ / Demand Velocity):</strong> Số lượng SKU xuất kho bình quân mỗi ngày (units/ngày) tính theo trung bình trượt 30 ngày gần nhất.<br>
+                          • <strong>$L$ (Thời gian bổ hàng / Vendor Lead Time):</strong> Số ngày lịch từ khi phát hành PO đến khi hàng nhập kho thực tế (ngày).<br>
+                          • <strong>$SS$ (Tồn kho an toàn / Safety Stock):</strong> $SS = Z \times \sigma_D \times \sqrt{L}$, với hệ số $Z = 1.65$ tương ứng mức độ phục vụ chu kỳ 95% ($\sigma_D$ là độ lệch chuẩn nhu cầu ngày, units/ngày).<br>
+                          • <strong>Điều kiện kích hoạt:</strong> Tồn kho khả dụng ($\text{Available} = \text{On-Hand} + \text{On-Order} - \text{Allocated}$) &le; ROP.<br>
+                          • <strong>Giả định toán học:</strong> Áp dụng cho mô hình Lead time $L$ tương đối ổn định theo SLA hợp đồng và nhu cầu hàng ngày tuân theo phân phối chuẩn.
+                        </span>
+                        <span class="lang-en">
+                          • <strong>$D$ (Demand Velocity):</strong> Average daily SKU dispatch volume (units/day) based on a 30-day rolling average window.<br>
+                          • <strong>$L$ (Vendor Lead Time):</strong> Calendar days from PO issuance to physical warehouse dock receipt (days).<br>
+                          • <strong>$SS$ (Safety Stock):</strong> $SS = Z \times \sigma_D \times \sqrt{L}$, with service factor $Z = 1.65$ yielding a 95% cycle service level ($\sigma_D$ is daily demand standard deviation in units/day).<br>
+                          • <strong>Trigger Condition:</strong> Available Inventory ($\text{Available} = \text{On-Hand} + \text{On-Order} - \text{Allocated}$) &le; ROP.<br>
+                          • <strong>Model Assumptions:</strong> Assumes deterministic contractual vendor lead time $L$ and normally distributed daily demand.
+                        </span>
+                      </div>
+                    </td>
+                    <td>Supply Chain Planning</td>
+                  </tr>
+                  <tr>
+                    <td><code>BR-INV-02</code></td>
+                    <td><span class="lang-vi">Định mức Thẩm quyền Duyệt PO</span><span class="lang-en">Tiered PO Financial Approval Authority</span></td>
+                    <td>
+                      <span class="lang-vi">• PO &le; 50 triệu VNĐ: Tự động phê duyệt và phát hành nếu ROP hợp lệ.<br>• PO 50–200 triệu VNĐ: Yêu cầu Trưởng phòng Mua hàng duyệt điện tử.<br>• PO &gt; 200 triệu VNĐ: Bắt buộc Giám đốc Vận hành (VP of Operations) ký duyệt.</span>
+                      <span class="lang-en">• PO &le; 50M VND: Auto-approved and dispatched if triggered by valid ROP.<br>• PO 50M–200M VND: Electronic sign-off by Procurement Manager.<br>• PO &gt; 200M VND: Mandatory approval by VP of Operations.</span>
+                    </td>
+                    <td>Finance & Internal Audit</td>
+                  </tr>
+                  <tr>
+                    <td><code>BR-INV-03</code></td>
+                    <td><span class="lang-vi">Thời hạn Cam kết Phản hồi PO</span><span class="lang-en">Vendor PO Confirmation SLA</span></td>
+                    <td>
+                      <span class="lang-vi">Nhà cung cấp phải phản hồi chấp thuận hoặc từ chối đơn hàng trên Vendor Portal trong vòng <strong>24 giờ làm việc</strong> kể từ khi PO phát hành. Nếu quá hạn, hệ thống tự động gửi tin nhắn SMS cảnh báo và chuyển đơn sang danh sách xử lý khẩn của Buyer.</span>
+                      <span class="lang-en">Vendors must acknowledge or dispute PO line items on the Portal within <strong>24 business hours</strong> of issuance. Breaches trigger automated escalation alerts to the designated Category Buyer.</span>
+                    </td>
+                    <td>Vendor Relationship Mgmt</td>
+                  </tr>
+                  <tr>
+                    <td><code>BR-INV-04</code></td>
+                    <td><span class="lang-vi">Dung sai Giao hàng Cho phép</span><span class="lang-en">Delivery Quantity Tolerance Limit</span></td>
+                    <td>
+                      <span class="lang-vi">Kho chỉ chấp nhận nhập hàng nếu số lượng thực giao dao động trong biên độ &plusmn; 2% so với PO đã cam kết. Số lượng vượt quá 2% sẽ bị kho từ chối nhập tự động và không hạch toán công nợ.</span>
+                      <span class="lang-en">Inbound receiving docks will accept delivery quantities within a tolerance of &plusmn; 2% against committed PO. Quantities exceeding 2% are rejected and barred from invoice settlement.</span>
+                    </td>
+                    <td>Warehouse Operations</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 7: Business Value & ROI Model -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">7. Đánh giá Giá trị Kinh doanh & Mô hình Hoàn vốn (Business Value & ROI Model)</span>
+              <span class="lang-en">7. Business Value & Financial ROI Justification</span>
+            </h4>
+            <div style="background: #FFF; border: 1px solid var(--border-warm); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.9rem;">
+              <strong style="color: var(--color-primary-dark);">
+                <span class="lang-vi">Minh bạch Giả định Tính toán (Documented Assumptions & Caveats):</span>
+                <span class="lang-en">Underlying Baseline Financial Assumptions:</span>
+              </strong>
+              <p class="lang-vi" style="margin: 0.5rem 0 0;">
+                Mô hình tài chính dưới đây được xây dựng dựa trên dữ liệu vận hành thực tế 12 tháng qua tại 4 kho của OmniLogix. <em>Đây là mô hình ước tính giả định có căn cứ (Planning Hypothesis), không phải lời cam kết lợi nhuận bất di bất dịch</em>. Chi phí phát triển phần mềm được ước tính dựa trên báo giá tham chiếu của đội ngũ triển khai nội bộ kết hợp chuyên gia tích hợp bên ngoài.
+              </p>
+              <p class="lang-en" style="margin: 0.5rem 0 0;">
+                The financial justification below is derived from 12-month operational metrics across OmniLogix's 4 fulfillment centers. <em>This represents an evidence-based planning hypothesis rather than an absolute commercial guarantee</em>. Implementation costs reflect blended internal labor and external integration consulting.
+              </p>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 45%;"><span class="lang-vi">Hạng mục Chi phí & Lợi ích (Ước tính Năm 1)</span><span class="lang-en">Cost & Benefit Financial Line Items (Year 1)</span></th>
+                    <th style="width: 20%;"><span class="lang-vi">Giá trị (VNĐ)</span><span class="lang-en">Amount (VND)</span></th>
+                    <th style="width: 35%;"><span class="lang-vi">Bản chất Tài chính & Căn cứ Tính toán</span><span class="lang-en">Financial Nature & Calculation Basis</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background: #FEF2F2;">
+                    <td><strong>Tổng Chi phí Đầu tư Ban đầu (CAPEX + OPEX Năm 1)</strong></td>
+                    <td><strong>980,000,000 VNĐ</strong></td>
+                    <td>Phát triển phần mềm (650M) + Bản quyền Cloud/Server (130M) + Đào tạo & Thiết bị (200M)</td>
+                  </tr>
+                  <tr style="background: #F0FDF4;">
+                    <td>• Tiết kiệm chi phí phạt hủy đơn vi phạm SLA (SLA Penalties Avoidance)</td>
+                    <td>+ 1,440,000,000 VNĐ</td>
+                    <td><strong>Tránh dòng tiền chi phạt thực tế (Avoided Outflow):</strong> Giảm tỷ lệ phạt do thiếu hàng từ 2.4 tỷ xuống còn ~960M VNĐ/năm (tiết kiệm 60%)</td>
+                  </tr>
+                  <tr style="background: #F0FDF4;">
+                    <td>• Cắt giảm chi phí nhân sự nhập liệu thủ công (Labor Cost Savings)</td>
+                    <td>+ 336,000,000 VNĐ</td>
+                    <td><strong>Tiết kiệm chi phí vận hành (Cash Savings):</strong> Giải phóng 3 nhân viên điều phối khỏi gõ PO (3 người &times; 14 triệu &times; 8 tháng sau Go-Live)</td>
+                  </tr>
+                  <tr style="background: #F0FDF4;">
+                    <td>• Tiết kiệm chi phí vốn từ giải phóng tồn kho dư (Capital Cost Savings)</td>
+                    <td>+ 280,000,000 VNĐ</td>
+                    <td><strong>Chi phí cơ hội vốn vay (WACC Savings):</strong> Giải phóng 2.8 tỷ VNĐ vốn đệm tồn kho &times; 10% chi phí sử dụng vốn hàng năm. <em>(Lưu ý: Không cộng gộp gốc 2.8 tỷ vào tiết kiệm để tránh tính trùng)</em></td>
+                  </tr>
+                  <tr style="background: #ECFDF5; font-weight: 700;">
+                    <td><strong>TỔNG LỢI ÍCH TÀI CHÍNH NĂM THỨ NHẤT (YEAR 1 GROSS BENEFIT)</strong></td>
+                    <td><strong>+ 2,056,000,000 VNĐ</strong></td>
+                    <td>Tổng các dòng tiền tiết kiệm trực tiếp và chi phí cơ hội được kế toán thẩm định</td>
+                  </tr>
+                  <tr style="background: #E0F2FE; font-size: 1.05rem; font-weight: 800;">
+                    <td><strong>LỢI ÍCH RÒNG & TỶ SUẤT HOÀN VỐN ĐẦU TƯ (YEAR 1 ROI)</strong></td>
+                    <td><strong>ROI = 109.8%</strong></td>
+                    <td>
+                      $$\text{ROI} = \frac{2,056\text{M} - 980\text{M}}{980\text{M}} \times 100\% = 109.8\%$$
+                      <div style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted); line-height: 1.4; margin-top: 0.25rem;">
+                        <span class="lang-vi">• <strong>Thời gian hoàn vốn (Payback Period):</strong> Dự án phát triển 4 tháng, Go-Live tháng 5. Tốc độ tiết kiệm thực tế sau Go-Live đạt ~185.3M VNĐ/tháng ($120\text{M} + 42\text{M} + 23.3\text{M}$). Do đó đạt điểm hoàn vốn sau <strong>5.3 tháng vận hành thực tế</strong> (Tháng thứ 9.3 của dự án), hoặc ~5.72 tháng nếu tính bình quân giản đơn cả năm.<br>• <strong>Dài hạn (Năm 2+):</strong> Chi phí duy trì Cloud/OPEX cố định 130M VNĐ/năm; lợi ích duy trì trọn 12 tháng đạt &gt; 2.22 tỷ VNĐ/năm.</span>
+                        <span class="lang-en">• <strong>Payback Period:</strong> 4-month development, Go-Live at Month 5. Operational run-rate savings reach ~185.3M VND/month post-launch ($120\text{M} + 42\text{M} + 23.3\text{M}$). Break-even achieved at <strong>5.3 months of live operation</strong> (Month 9.3 from kickoff), or ~5.72 months annualized.<br>• <strong>Multi-Year Horizon (Year 2+):</strong> Recurring Cloud/OPEX is 130M VND/year; annualized 12-month gross benefits exceed 2.22B VND/year.</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 8: Assumptions, Constraints & Risks -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">8. Giả định, Ràng buộc & Ma trận Rủi ro Ban đầu (Assumptions, Constraints & Risks)</span>
+              <span class="lang-en">8. Assumptions, Constraints & Initial Risk Register</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width: 15%;">Mã Rủi ro</th>
+                    <th style="width: 30%;"><span class="lang-vi">Mô tả Rủi ro & Nguyên nhân</span><span class="lang-en">Risk Description & Trigger</span></th>
+                    <th style="width: 15%;"><span class="lang-vi">Mức độ (P &times; I)</span><span class="lang-en">Severity (Prob &times; Imp)</span></th>
+                    <th style="width: 40%;"><span class="lang-vi">Kế hoạch Ứng phó & Giảm thiểu của BA (Mitigation Plan)</span><span class="lang-en">BA Mitigation & Contingency Strategy</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>RSK-INV-01</code></td>
+                    <td><span class="lang-vi">Nhà cung cấp từ chối dùng Vendor Portal, tiếp tục gửi báo giá qua Zalo/email cá nhân.</span><span class="lang-en">Vendors resist adopting the new Portal, preferring legacy ad-hoc messaging.</span></td>
+                    <td><span class="badge badge-technical">Cao / High (4 &times; 4 = 16)</span></td>
+                    <td>
+                      <span class="lang-vi">Ban hành chính sách ưu tiên thanh toán sớm 5 ngày cho các NCC gửi hóa đơn qua Portal; tổ chức 3 hội thảo đào tạo trực tuyến kèm video hướng dẫn 2 phút.</span>
+                      <span class="lang-en">Tie a 5-day accelerated invoice payment incentive to Portal adoption; conduct 3 virtual onboarding clinics with bite-sized video tutorials.</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>RSK-INV-02</code></td>
+                    <td><span class="lang-vi">Hệ thống ERP cũ bị quá tải hoặc phản hồi chậm khi đồng bộ tồn kho thời gian thực.</span><span class="lang-en">Legacy ERP database bottlenecks under high-concurrency inventory synchronization calls.</span></td>
+                    <td><span class="badge badge-inferred">Trung bình / Med (3 &times; 4 = 12)</span></td>
+                    <td>
+                      <span class="lang-vi">Thiết kế cơ chế đồng bộ theo lô (Micro-batching) 30 phút một lần thay vì gọi API tức thời cho từng dòng giao dịch; bổ sung hàng đợi đệm (Message Queue).</span>
+                      <span class="lang-en">Implement 30-minute micro-batch synchronization rather than chatty real-time RPC calls; introduce a message queue buffer.</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>RSK-INV-03</code></td>
+                    <td><span class="lang-vi">Thời gian giao hàng thực tế của nhà cung cấp biến động mạnh do sự cố chuỗi cung ứng vĩ mô.</span><span class="lang-en">Vendor delivery lead time fluctuates wildly due to macro supply chain disruptions.</span></td>
+                    <td><span class="badge badge-illustrative">Trung bình / Med (4 &times; 3 = 12)</span></td>
+                    <td>
+                      <span class="lang-vi">Thiết lập thuật toán tự động cập nhật Lead Time thực tế (Moving Average 5 chuyến giao gần nhất) thay vì sử dụng Lead Time danh nghĩa ghi trên hợp đồng.</span>
+                      <span class="lang-en">Configure algorithms to dynamically update Lead Times based on a 5-shipment rolling average rather than static contractual SLAs.</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- BRD Section 9: Sign-Off & Change Control -->
+            <h4 style="color: var(--color-primary-dark); margin-top: 1.5rem; margin-bottom: 0.5rem;">
+              <span class="lang-vi">9. Ký duyệt Đóng băng Cơ sở & Kiểm soát Thay đổi (Baseline Sign-Off Protocol)</span>
+              <span class="lang-en">9. Baseline Sign-Off & Change Control Protocol</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.95rem;">
+              Việc ký duyệt vào tài liệu BRD này đồng nghĩa với việc xác nhận: (1) Toàn bộ các yêu cầu kinh doanh, quy tắc nghiệp vụ và ranh giới phạm vi nêu trên đã được thống nhất; (2) Tài liệu được chính thức <strong>đóng băng đường cơ sở (Baseline Freeze)</strong> làm căn cứ để đội ngũ kỹ thuật viết Đặc tả chức năng (SFS) và kế hoạch Sprint; (3) Bất kỳ thay đổi phạm vi nào sau ngày ký đều bắt buộc phải lập phiếu <strong>Yêu cầu Thay đổi (Change Request - CR)</strong> và được Hội đồng CCB phê duyệt.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem;">
+              Executing sign-off on this BRD confirms that: (1) All business requirements, operational rules, and scope boundaries are formally agreed upon; (2) The document establishes an official <strong>frozen requirements baseline</strong> governing downstream Functional Specifications (SFS) and Sprint backlogs; (3) Any scope modification post-baseline requires a formal <strong>Change Request (CR)</strong> submitted to the Change Control Board.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.25rem;">
+              <div style="border: 1px dashed #CBD5E1; border-radius: var(--radius-sm); padding: 1rem; background: #FFF;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Executive Business Sponsor</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">Trần Hoàng Nam</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Phó Tổng Giám đốc Vận hành (VP of Operations)</div>
+                <div style="margin-top: 0.75rem; color: #047857; font-weight: 600; font-size: 0.85rem;">✓ Đã ký điện tử / Signed: 12/03/2026</div>
+              </div>
+
+              <div style="border: 1px dashed #CBD5E1; border-radius: var(--radius-sm); padding: 1rem; background: #FFF;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Procurement Lead</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">Lê Minh Quân</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Trưởng phòng Quản lý Mua sắm (Procurement Mgr)</div>
+                <div style="margin-top: 0.75rem; color: #047857; font-weight: 600; font-size: 0.85rem;">✓ Đã ký điện tử / Signed: 11/03/2026</div>
+              </div>
+
+              <div style="border: 1px dashed #CBD5E1; border-radius: var(--radius-sm); padding: 1rem; background: #FFF;">
+                <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Lead Business Analyst</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">Nguyễn Đăng Cẩm Tú (Hazel)</div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">Chuyên gia Phân tích Nghiệp vụ Trưởng (Lead IT BA)</div>
+                <div style="margin-top: 0.75rem; color: #047857; font-weight: 600; font-size: 0.85rem;">✓ Đã biên soạn & xác thực: 10/03/2026</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION E: COMMON ANTI-PATTERNS & RECTIFICATIONS -->
+        <section id="sec-mistakes" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">E</span>
+            <h2>
+              <span class="lang-vi">3 Sai lầm Kinh điển khi Viết BRD & Cách Khắc phục</span>
+              <span class="lang-en">3 Common BRD Anti-Patterns & Production Fixes</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Dưới đây là 3 cạm bẫy thực tế mà các chuyên gia phân tích nghiệp vụ thường mắc phải khi soạn thảo BRD, kèm phân tích hậu quả và cách sửa đổi đạt chuẩn công nghiệp:
+          </p>
+          <p class="lang-en">
+            Below are three recurring real-world traps business analysts encounter when crafting a BRD, accompanied by impact analyses and standardized production corrections:
+          </p>
+
+          <!-- Anti-Pattern 1 -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 1: Trộn lẫn Thiết kế Giải pháp Kỹ thuật vào Tài liệu Yêu cầu Kinh doanh</span>
+              <span class="lang-en">Mistake 1: Conflating Technical Solution Implementation with Business Requirements</span>
+            </h3>
+            <p class="lang-vi" style="font-size: 0.95rem;">
+              <strong>Bản chất sai phạm:</strong> BA quy định cụ thể tên công nghệ, cơ sở dữ liệu, ngôn ngữ lập trình hoặc thiết kế màn hình chi tiết trong phần yêu cầu nghiệp vụ thay vì mô tả năng lực kinh doanh cần đạt.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem;">
+              <strong>The Anti-Pattern:</strong> The analyst dictates specific frameworks, database engines, or UI components within business requirements instead of specifying business capabilities.
+            </p>
+
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">
+                  <span class="lang-vi">✗ Cách viết Sai (Trộn Giải pháp Kỹ thuật):</span>
+                  <span class="lang-en">✗ Flawed (Solution-Dictated):</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Hệ thống phải sử dụng cơ sở dữ liệu MongoDB để lưu trữ dữ liệu tồn kho dưới dạng JSON document và viết API bằng Node.js Express để gửi thông báo qua ứng dụng Telegram cho nhà cung cấp."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <span class="lang-vi"><em>Hậu quả:</em> Tước đoạt quyền chủ động của Kiến trúc sư phần mềm, trói buộc doanh nghiệp vào công nghệ cụ thể có thể không tương thích với hạ tầng sẵn có.</span>
+                  <span class="lang-en"><em>Consequence:</em> Usurps technical architects' authority and prematurely couples the business to technologies that may violate enterprise IT governance.</span>
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">
+                  <span class="lang-vi">✓ Cách viết Chuẩn Doanh nghiệp (Tập trung Năng lực):</span>
+                  <span class="lang-en">✓ Corrected Production Standard:</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Hệ thống phải có năng lực ghi nhận biến động số lượng tồn kho theo thời gian thực và tự động phát thông báo khẩn cấp đến đại diện nhà cung cấp trong vòng &lt; 2 phút qua kênh số hóa bảo mật."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <span class="lang-vi"><em>Ưu điểm:</em> Nêu rõ năng lực cần đạt (thời gian thực, &lt; 2 phút, bảo mật) và trao quyền tối ưu giải pháp cho đội ngũ kỹ sư.</span>
+                  <span class="lang-en"><em>Advantage:</em> Defines measurable business requirements (real-time, &lt; 2 mins, secured) while granting architects autonomy to engineer the optimal stack.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-Pattern 2 -->
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 2: Bỏ qua hoặc Viết Chung chung Ranh giới Ngoại lệ (Vague Out-of-Scope)</span>
+              <span class="lang-en">Mistake 2: Missing or Vaguely Defined Out-of-Scope Boundaries</span>
+            </h3>
+            <p class="lang-vi" style="font-size: 0.95rem;">
+              <strong>Bản chất sai phạm:</strong> Chỉ liệt kê danh sách những thứ sẽ làm (In-Scope), để trống hoặc viết một dòng chung chung như <em>"Những thứ không đề cập thì không làm"</em>.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem;">
+              <strong>The Anti-Pattern:</strong> Documenting only in-scope desires while omitting or providing vague statements like <em>"Anything not mentioned is out of scope."</em>
+            </p>
+
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">
+                  <span class="lang-vi">✗ Cách viết Sai (Mơ hồ):</span>
+                  <span class="lang-en">✗ Flawed (Vague Boundary):</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Phạm vi ngoài dự án: Các tính năng nâng cao khác sẽ được xem xét trong các giai đoạn tương lai khi có thêm ngân sách."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <span class="lang-vi"><em>Hậu quả:</em> Các bên liên quan sẽ liên tục chất vấn tại sao không tích hợp thanh toán ngân hàng, không làm mobile app, dẫn đến tranh chấp bất tận.</span>
+                  <span class="lang-en"><em>Consequence:</em> Stakeholders constantly demand mobile apps, bank payouts, and foreign logistics, triggering perpetual friction.</span>
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">
+                  <span class="lang-vi">✓ Cách viết Chuẩn Doanh nghiệp (Minh định Tuyệt đối):</span>
+                  <span class="lang-en">✓ Corrected Production Standard:</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Dự án KHÔNG bao gồm: (1) Nâng cấp phần cứng máy quét mã vạch kho; (2) Giải ngân thanh toán tiền mặt trực tiếp cho nhà cung cấp; (3) Hỗ trợ nhà cung cấp nước ngoài; (4) Xây dựng ứng dụng di động riêng biệt."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <span class="lang-vi"><em>Ưu điểm:</em> Thiết lập rào chắn đanh thép, đóng vai trò căn cứ pháp lý để từ chối các đòi hỏi phát sinh ngoài cam kết.</span>
+                  <span class="lang-en"><em>Advantage:</em> Creates an airtight contractual baseline authorizing the PM/BA to reject out-of-scope demands with zero ambiguity.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anti-Pattern 3 -->
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="font-size: 1.15rem; color: #B91C1C;">
+              <span class="lang-vi">Sai lầm 3: Khẳng định ROI Tuyệt đối mà Không Minh bạch Giả định và Chi phí Ngầm</span>
+              <span class="lang-en">Mistake 3: Asserting Absolute ROI Without Transparent Cost Assumptions</span>
+            </h3>
+            <p class="lang-vi" style="font-size: 0.95rem;">
+              <strong>Bản chất sai phạm:</strong> BA đưa ra một con số ROI hào nhoáng (ví dụ: <em>"Dự án chắc chắn đạt ROI 300%"</em>) nhưng giấu nhẹm chi phí bảo trì hàng năm, chi phí đào tạo người dùng và không ghi chú các điều kiện tiên quyết để đạt được con số đó.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem;">
+              <strong>The Anti-Pattern:</strong> The analyst declares aggressive ROI promises (e.g., <em>"Guaranteed 300% ROI"</em>) while concealing recurring cloud hosting, ongoing change management, and critical operational prerequisites.
+            </p>
+
+            <div class="comparison-grid">
+              <div class="card-bad">
+                <strong style="color: #B91C1C;">
+                  <span class="lang-vi">✗ Cách viết Sai (Thổi phồng Không căn cứ):</span>
+                  <span class="lang-en">✗ Flawed (Speculative Over-promising):</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Đầu tư 500 triệu làm hệ thống, doanh nghiệp sẽ tăng trưởng 20 tỷ doanh số ngay trong năm đầu tiên và hoàn vốn trong vòng 1 tháng."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #7F1D1D;">
+                  <span class="lang-vi"><em>Hậu quả:</em> Làm mất hoàn toàn uy tín chuyên môn của BA khi Ban Giám đốc hoặc Kiểm toán Tài chính yêu cầu bảo vệ số liệu.</span>
+                  <span class="lang-en"><em>Consequence:</em> Destroys professional credibility when the CFO or Finance Committee audits the speculative figures.</span>
+                </div>
+              </div>
+
+              <div class="card-good">
+                <strong style="color: #047857;">
+                  <span class="lang-vi">✓ Cách viết Chuẩn Doanh nghiệp (Mô hình Giả định Có Kiểm soát):</span>
+                  <span class="lang-en">✓ Corrected Production Standard:</span>
+                </strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.9rem; font-family: monospace;">
+                  "Ước tính ROI năm 1 đạt 109.8% dựa trên giả định: (a) Tỷ lệ áp dụng Vendor Portal đạt &gt; 90% ở nhóm NCC loại A; (b) Chi phí bảo trì Cloud ước tính 130M VNĐ/năm; (c) Không có biến động lớn về giá xăng dầu vận tải."
+                </p>
+                <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #065F46;">
+                  <span class="lang-vi"><em>Ưu điểm:</em> Rõ ràng, trung thực, giúp lãnh đạo nhận diện chính xác các biến số cần kiểm soát để dự án thành công.</span>
+                  <span class="lang-en"><em>Advantage:</em> Transparent and accountable, enabling executive leadership to govern the specific risk variables that safeguard project ROI.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION F: PRACTICE EXERCISES WITH EXPLAINED SOLUTIONS -->
+        <section id="sec-exercises" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">F</span>
+            <h2>
+              <span class="lang-vi">Bài tập Thực hành Chuyên sâu & Lời giải Chuyên gia</span>
+              <span class="lang-en">Practice Exercises & Expert Solutions</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Hãy tự rèn luyện kỹ năng bóc tách yêu cầu thực tế thông qua 3 bài tập tình huống dưới đây. Sau khi tự xây dựng giải pháp, bấm vào từng mục để đối chiếu với phân tích chuyên gia:
+          </p>
+          <p class="lang-en">
+            Sharpen your real-world analysis competencies through the three situational exercises below. Draft your response, then toggle each accordion to inspect the expert solution:
+          </p>
+
+          <!-- Exercise 1 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 1.25rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 1: Phân loại Ma trận 6 Yêu cầu Hỗn hợp (Classifying Requirement Types)</span>
+                <span class="lang-en">Exercise 1: Classifying a Mixed Register of 6 Requirements</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Prompt:</p>
+              <p class="lang-vi">
+                Dựa trên Tháp Phân tầng Yêu cầu ở Phần B (trong đó Tầng 4 Yêu cầu Giải pháp được phân rã thành hai nhóm vận hành: 4a. Functional Requirement và 4b. Non-Functional Requirement), hãy phân loại từng phát biểu sau từ các bên liên quan vào đúng nhóm: <strong>(1) Business Need, (2) Business Requirement, (3) Stakeholder Requirement, (4a) Functional Requirement, (4b) Non-Functional Requirement (NFR), hay (5) Solution Design</strong>:
+              </p>
+              <p class="lang-en">
+                Applying the Requirements Taxonomy from Section B (where Tier 4 Solution Requirements is operationally divided into 4a. Functional Requirements and 4b. Non-Functional Requirements), categorize each of the following stakeholder statements into its proper classification group: <strong>(1) Business Need, (2) Business Requirement, (3) Stakeholder Requirement, (4a) Functional Requirement, (4b) Non-Functional Requirement (NFR), or (5) Solution Design</strong>:
+              </p>
+              <ol style="margin-left: 1.25rem; font-size: 0.95rem; line-height: 1.6;">
+                <li><em>"Tổ chức cần cắt giảm 35% chi phí tổ chức lớp học trực tiếp và tuân thủ chứng chỉ an toàn lao động bắt buộc trước tháng 12."</em></li>
+                <li><em>"Hệ thống phải lưu trữ toàn bộ dữ liệu học tập bằng cơ sở dữ liệu MySQL và đặt cụm server tại trung tâm dữ liệu Viettel IDC."</em></li>
+                <li><em>"Hệ thống phải tự động thu hồi quyền truy cập khóa học và gửi thông báo cho nhân sự khi nhân viên nghỉ việc."</em></li>
+                <li><em>"Giảng viên nội bộ muốn tải lên video bài giảng dung lượng tối đa 2GB và tạo bài kiểm tra trắc nghiệm 20 câu trong vòng 10 phút."</em></li>
+                <li><em>"Màn hình danh sách khóa học phải tải xong trong thời gian dưới 1.5 giây khi có đồng thời 2,000 học viên truy cập."</em></li>
+                <li><em>"Doanh nghiệp phải có năng lực đo lường và theo dõi tiến độ hoàn thành các khóa đào tạo bắt buộc của 100% nhân sự theo thời gian thực."</em></li>
+              </ol>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Lời giải & Phân tích Chuyên gia:</span>
+                <span class="lang-en">Expert Solution & Categorization Analysis:</span>
+              </h4>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 10%;">#</th>
+                      <th style="width: 30%;"><span class="lang-vi">Tầng Phân loại Chuẩn</span><span class="lang-en">Standard Classification</span></th>
+                      <th style="width: 60%;"><span class="lang-vi">Lý giải Chuyên môn của BA</span><span class="lang-en">BA Rationalization</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td><span class="badge badge-explicit">1. Business Need</span></td>
+                      <td>Nêu rõ động cơ tài chính (cắt giảm 35% chi phí) và áp lực pháp lý chiến lược (chứng chỉ an toàn trước tháng 12) ở cấp độ lãnh đạo tổ chức.</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td><span class="badge badge-bad" style="background: #FEE2E2; color: #991B1B;">5. Solution Design</span></td>
+                      <td>Quy định cụ thể tên công nghệ (MySQL) và địa điểm hạ tầng vật lý (Viettel IDC). Đây là quyết định kỹ thuật của IT/Architect, <strong>không được đưa vào BRD</strong>.</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td><span class="badge badge-technical">4a. Functional Requirement</span></td>
+                      <td>Đặc tả hành vi tự động cụ thể của hệ thống khi có sự kiện nhân viên nghỉ việc kích hoạt (thu hồi quyền, phát thông báo).</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td><span class="badge badge-inferred">3. Stakeholder Requirement</span></td>
+                      <td>Phản ánh mong muốn và mục tiêu tác nghiệp của một nhóm người dùng cụ thể (Giảng viên nội bộ) để thực hiện công việc của họ.</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td><span class="badge badge-procedural">4b. Non-Functional Requirement (NFR)</span></td>
+                      <td>Đo lường thuộc tính chất lượng của hệ thống: Hiệu năng (Performance / Latency &lt; 1.5s) dưới tải trọng đồng thời (Concurrency 2,000 users).</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td><span class="badge badge-explicit">2. Business Requirement</span></td>
+                      <td>Xác định năng lực kinh doanh cấp cao mà toàn bộ tổ chức cần đạt được để thỏa mãn mục tiêu chiến lược (tuân thủ đào tạo 100%).</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 2 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 1.25rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 2: Thiết lập Ranh giới Trong / Ngoài Phạm vi (Scope Demarcation)</span>
+                <span class="lang-en">Exercise 2: Establishing In-Scope vs. Out-of-Scope Demarcation</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Bối cảnh Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Context:</p>
+              <p class="lang-vi">
+                Bạn được giao làm Lead BA cho dự án số hóa quy trình <strong>Đề nghị & Quyết toán Công tác phí (Corporate Travel Expense Management)</strong> cho một tổng công ty 3,000 nhân sự. Hiện nhân viên phải nộp hóa đơn giấy, làm thủ tục phê duyệt thủ công qua 4 phòng ban mất trung bình 21 ngày làm việc mới nhận được tiền hoàn trả. Hãy soạn thảo <strong>Danh mục 4 hạng mục Trong phạm vi (In-Scope)</strong> và <strong>4 hạng mục Ngoài phạm vi dứt khoát (Explicit Out-of-Scope)</strong> cho phiên bản Giai đoạn 1 (Phase 1).
+              </p>
+              <p class="lang-en">
+                You are Lead BA for digitizing the <strong>Corporate Travel Expense Reimbursement Process</strong> across an enterprise of 3,000 employees. Currently, manual paper receipts take 21 business days to settle through 4 departments. Draft <strong>4 explicit In-Scope capabilities</strong> and <strong>4 rigorous Out-of-Scope boundaries</strong> for Phase 1.
+              </p>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Lời giải Đề xuất Đạt chuẩn Chuyên gia:</span>
+                <span class="lang-en">Expert Solution & Boundary Architecture:</span>
+              </h4>
+              <div class="comparison-grid">
+                <div class="card-good">
+                  <strong style="color: #047857;">HẠNG MỤC TRONG PHẠM VI (IN-SCOPE PHASE 1):</strong>
+                  <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                    <li><strong>1. Chụp ảnh & Trích xuất Hóa đơn (OCR):</strong> Ứng dụng web/mobile cho phép tải ảnh hóa đơn VAT và tự động trích xuất mã số thuế, số tiền, ngày phát hành.</li>
+                    <li><strong>2. Ma trận Phê duyệt Phân cấp Đa tầng:</strong> Tự động định tuyến hồ sơ theo chính sách hạn mức chi tiêu (Trưởng phòng &le; 10M, Giám đốc khối &gt; 10M).</li>
+                    <li><strong>3. Kiểm tra Chính sách Tự động (Policy Engine):</strong> Cảnh báo tức thời nếu tiền phòng khách sạn hoặc vé máy bay vượt định mức theo cấp bậc nhân viên.</li>
+                    <li><strong>4. Tích hợp Trích xuất Dữ liệu Kế toán:</strong> Xuất file bảng kê chi phí đã duyệt chuẩn định dạng sang hệ thống SAP ERP vào ngày 15 và 30 hàng tháng.</li>
+                  </ul>
+                </div>
+
+                <div class="card-bad">
+                  <strong style="color: #B91C1C;">HẠNG MỤC LOẠI TRỪ DỨT KHOÁT (EXPLICIT OUT-OF-SCOPE):</strong>
+                  <ul style="margin: 0.5rem 0 0; padding-left: 1.25rem; font-size: 0.9rem; line-height: 1.6;">
+                    <li><strong>1. Giải ngân Tiền tự động qua Ngân hàng:</strong> Hệ thống không kết nối trực tiếp cổng chi hộ ngân hàng; thủ quỹ vẫn bấm lệnh chuyển khoản trên Internet Banking như hiện hành.</li>
+                    <li><strong>2. Đặt vé Máy bay / Khách sạn Trực tiếp:</strong> Không tích hợp cổng booking trực tuyến của hãng bay (nhân viên tự đặt vé hoặc qua đại lý nội bộ của công ty).</li>
+                    <li><strong>3. Hỗ trợ Đa tiền tệ Nước ngoài Phức tạp:</strong> Phase 1 chỉ xử lý chứng từ tiền tệ VNĐ; chi phí công tác nước ngoài (USD, EUR, JPY) xử lý thủ công riêng.</li>
+                    <li><strong>4. Ứng trước Tiền mặt (Cash Advance Management):</strong> Chỉ xử lý quyết toán chi phí thực tế đã phát sinh, không xử lý quy trình xin tạm ứng ngân sách.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 3 -->
+          <div class="accordion-item" style="border: 1px solid var(--border-warm); border-radius: var(--radius-md); margin-bottom: 0.5rem; overflow: hidden; background: var(--bg-surface);">
+            <button type="button" class="accordion-trigger" style="width: 100%; text-align: left; padding: 1.25rem; background: var(--bg-surface-warm); border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; font-size: 1.05rem;">
+              <span>
+                <span class="lang-vi">Bài tập 3: Xây dựng Giả định Lợi ích & Nhận diện Chi phí Ngầm (ROI Modeling)</span>
+                <span class="lang-en">Exercise 3: Building an Evidence-Based ROI Hypothesis & Identifying Hidden Costs</span>
+              </span>
+              <span class="accordion-icon">▼</span>
+            </button>
+            <div class="accordion-body" style="padding: 1.25rem; display: none;">
+              <p class="lang-vi" style="font-weight: 600; margin-bottom: 0.5rem;">Đề bài:</p>
+              <p class="lang-en" style="font-weight: 600; margin-bottom: 0.5rem;">Prompt:</p>
+              <p class="lang-vi">
+                Giám đốc Tài chính (CFO) yêu cầu bạn chứng minh tính khả thi kinh tế cho dự án mua phần mềm tự động hóa xử lý 10,000 hóa đơn đầu vào mỗi tháng. Giá chào bán phần mềm của nhà cung cấp là 400 triệu VNĐ (One-off license). Nhóm dự án đề xuất rằng dự án sẽ tiết kiệm ngay 600 triệu tiền lương nhân viên mỗi năm, suy ra ROI = $(600 - 400) / 400 = 50\%$. Là một BA chuyên nghiệp, hãy chỉ ra <strong>4 chi phí ngầm (Hidden Costs)</strong> bị bỏ sót và lập lại bảng tính TCO (Total Cost of Ownership) trung thực.
+              </p>
+              <p class="lang-en">
+                The CFO tasks you with economically justifying an automated invoice ingestion platform processing 10,000 monthly invoices. The software vendor quotes a 400M VND one-off license. The project sponsor claims 600M VND annual labor savings, yielding a simplistic ROI of $(600 - 400) / 400 = 50\%$. As a professional BA, identify <strong>4 hidden TCO cost categories</strong> omitted and reconstruct a responsible Year-1 financial model.
+              </p>
+
+              <hr style="margin: 1.25rem 0; border: none; border-top: 1px dashed var(--border-warm);">
+
+              <h4 style="color: var(--color-primary-dark); margin-bottom: 0.5rem;">
+                <span class="lang-vi">Phân tích Chi phí Ngầm & Bảng TCO Điều chỉnh:</span>
+                <span class="lang-en">Hidden Cost Audit & Adjusted TCO Model:</span>
+              </h4>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                Một BA dày dạn kinh nghiệm sẽ nhận diện ngay 4 khoản chi phí tất yếu bị che giấu:
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                A seasoned BA immediately identifies four critical hidden cost categories that must be factored into the model:
+              </p>
+              <ol style="margin-left: 1.25rem; font-size: 0.95rem; line-height: 1.6;">
+                <li><strong>Phí Tích hợp & Tùy biến Hệ thống (Integration & Customization):</strong> Chi phí kết nối API với hệ thống kế toán nội bộ và chỉnh sửa trường dữ liệu đặc thù (~150 triệu VNĐ).</li>
+                <li><strong>Phí Thuê hạ tầng Cloud / OCR API hàng tháng:</strong> Chi phí gọi dịch vụ bóc tách ký tự quang học (10,000 hóa đơn &times; 1,000 đ/hóa đơn &times; 12 tháng = 120 triệu VNĐ/năm).</li>
+                <li><strong>Chi phí Bảo trì & Nâng cấp Phần mềm Hàng năm (Annual Maintenance):</strong> Thông thường chiếm 18% - 22% giá bản quyền (~80 triệu VNĐ/năm).</li>
+                <li><strong>Chi phí Đào tạo, Chuyển đổi Vận hành & Dự phòng Rủi ro:</strong> Đào tạo đội ngũ kế toán thích nghi với phần mềm mới và chi phí nhân sự song song trong giai đoạn đầu (~60 triệu VNĐ).</li>
+              </ol>
+
+              <div class="table-responsive" style="margin-top: 1rem;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 30%;"><span class="lang-vi">Chỉ số Tài chính</span><span class="lang-en">Financial Metric</span></th>
+                      <th style="width: 20%;"><span class="lang-vi">Năm 1 (Triển khai & 80% Tải)</span><span class="lang-en">Year 1 (Go-Live & 80%)</span></th>
+                      <th style="width: 20%;"><span class="lang-vi">Năm 2 (Vận hành 100%)</span><span class="lang-en">Year 2 (Full Run-rate)</span></th>
+                      <th style="width: 30%;"><span class="lang-vi">Năm 3 & Tổng hợp 3 Năm (TCO)</span><span class="lang-en">Year 3 & 3-Year Cumulative</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Chi phí Phát sinh (Costs / TCO)</strong></td>
+                      <td><strong>810,000,000 VNĐ</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">CAPEX (610M) + OPEX (200M)</span></td>
+                      <td><strong>200,000,000 VNĐ</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">OCR (120M) + Bảo trì (80M)</span></td>
+                      <td><strong>200,000,000 VNĐ</strong><br><strong style="color: var(--color-primary-dark);">Tổng TCO 3 năm = 1.21 tỷ VNĐ</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Lợi ích Tiết kiệm (Gross Benefit)</strong></td>
+                      <td><strong>480,000,000 VNĐ</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">(80% hiệu suất giai đoạn đầu)</span></td>
+                      <td><strong>600,000,000 VNĐ</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">(100% tự động hóa ổn định)</span></td>
+                      <td><strong>600,000,000 VNĐ</strong><br><strong style="color: #047857;">Tổng Lợi ích 3 năm = 1.68 tỷ VNĐ</strong></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Dòng tiền Ròng (Net Cash Flow)</strong></td>
+                      <td><span style="color: #B91C1C; font-weight: 700;">- 330,000,000 VNĐ</span></td>
+                      <td><span style="color: #047857; font-weight: 700;">+ 400,000,000 VNĐ</span></td>
+                      <td><span style="color: #047857; font-weight: 700;">+ 400,000,000 VNĐ</span></td>
+                    </tr>
+                    <tr style="background: #E0F2FE;">
+                      <td><strong>Lũy kế & Hiệu quả Đầu tư</strong></td>
+                      <td>Lũy kế: -330M VNĐ</td>
+                      <td>Lũy kế: +70M VNĐ<br><strong>Hòa vốn: Tháng 22</strong></td>
+                      <td>
+                        <strong>Lợi ích Ròng 3 năm: + 470,000,000 VNĐ</strong><br>
+                        $$\text{ROI}_{\text{3-Year TCO}} = \frac{470\text{M}}{1,210\text{M}} \times 100\% = \mathbf{38.8\%}$$
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="lang-vi" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+                <em>Kết luận của BA: Báo cáo thơ ngây ban đầu của nhóm kinh doanh tuyên bố "hoàn vốn trong 1 tháng và ROI 50%" đã bỏ qua 4 khoản chi phí tất yếu (410M VNĐ chi phí ngầm năm 1). Mô hình 3 năm chuẩn mực của BA chứng minh dự án thực tế âm 330M trong Năm 1, đạt điểm hòa vốn ở Tháng thứ 22 và mang lại ROI 3 năm thực chất là 38.8%. Đây là cách tiếp cận trung thực giúp bảo vệ uy tín nghề nghiệp trước Hội đồng Tài chính.</em>
+              </p>
+              <p class="lang-en" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">
+                <em>BA Financial Synthesis: The naive initial claim of "1-month payback and 50% ROI" omitted 4 mandatory cost categories (410M VND of Year-1 hidden costs). The BA's disciplined 3-year model proves Year 1 is net-negative (-330M VND), reaches true break-even in Month 22, and delivers a rigorous 3-year TCO ROI of 38.8%. This rigorous transparency establishes executive trust with the CFO.</em>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION G: TECHNICAL INTERVIEW PREPARATION -->
+        <section id="sec-interviews" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">G</span>
+            <h2>
+              <span class="lang-vi">Bộ Câu hỏi Phỏng vấn Kỹ thuật Thực tế (STAR Method)</span>
+              <span class="lang-en">Technical BA Interview Questions (STAR Method)</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Bộ câu hỏi dưới đây mô phỏng các tình huống phỏng vấn thực tế từ mức độ Khởi đầu (Junior/Fresher) đến Chuyên viên (Mid-Senior BA). Mỗi câu trả lời mẫu theo mô hình STAR được định hình để thể hiện đúng vai trò chuẩn mực: <strong>BA là người lắng nghe, khơi gợi, lượng hóa tác động và đề xuất giải pháp khách quan</strong>; quyền ra quyết định phạm vi và phân bổ ngân sách thuộc thẩm quyền của Product Owner, Business Sponsor hoặc Hội đồng Quản trị:
+          </p>
+          <p class="lang-en">
+            The questions below simulate realistic interview challenges spanning Junior/Fresher to Mid-Senior BA levels. Each STAR response illustrates standard professional boundaries: <strong>the BA listens, elicits root causes, quantifies impact, and recommends objective trade-offs</strong>, while final scope and budget determinations remain the prerogative of the Product Owner, Business Sponsor, or Governance Board:
+          </p>
+
+          <!-- Interview Question 1 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 1: Bạn xử lý thế nào khi một Giám đốc Khối (Sponsor) một mực yêu cầu phải ghi chi tiết công nghệ kỹ thuật (như "phải dùng Oracle và Flutter") vào BRD?</span>
+              <span class="lang-en">Question 1: How do you handle an executive sponsor who insists on specifying technical implementation technologies directly inside the BRD?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra bản lĩnh giao tiếp với lãnh đạo cấp cao, năng lực bảo vệ nguyên tắc phân tích nghiệp vụ mà không gây xung đột cá nhân.</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests executive diplomacy, assertiveness, and understanding of the boundary between business requirements and technical solution design.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ từ chối thẳng thừng và nói rằng BRD là của BA, Giám đốc không có chuyên môn IT nên không được can thiệp vào công nghệ." hoặc "Dạ sếp muốn thì em cứ ghi vào thôi ạ."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I'd flatly refuse and say executives shouldn't dictate tech," or "If the executive wants it, I just write whatever they ask."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Situation (Bối cảnh):</strong> Trong dự án Cổng dịch vụ khách hàng trước đây, Phó Tổng Giám đốc yêu cầu ghi rõ vào BRD rằng ứng dụng phải viết bằng Flutter và dùng cơ sở dữ liệu Oracle.<br>
+              • <strong>Task (Nhiệm vụ):</strong> Tôi cần giải tỏa mối bận tâm ngầm của lãnh đạo, đồng thời chuyển hóa phát biểu đó về đúng bản chất năng lực kinh doanh để không trói buộc Kiến trúc sư phần mềm.<br>
+              • <strong>Action (Hành động):</strong> Tôi đã tổ chức một cuộc trao đổi riêng ngắn, đặt câu hỏi khơi gợi: <em>"Tại sao Oracle và Flutter lại là ưu tiên hàng đầu của anh cho sáng kiến này?"</em>. Lãnh đạo chia sẻ rằng công ty đã có sẵn thỏa thuận bản quyền doanh nghiệp với Oracle và ông lo ngại chi phí phát triển ứng dụng di động bị đội gấp đôi nếu làm riêng cho iOS và Android. Sau khi hiểu rõ gốc rễ, tôi phân tích: <em>"Băn khoăn của anh về tối ưu chi phí hạ tầng và tính nhất quán đa nền tảng là cực kỳ chuẩn xác. Em đề xuất chúng ta sẽ định nghĩa yêu cầu nghiệp vụ là 'Hệ thống phải vận hành đồng nhất trên iOS và Android với ngân sách bảo trì tối ưu, đồng thời tận dụng tối đa hạ tầng dữ liệu hiện hữu'. Em sẽ đưa mong muốn về Oracle/Flutter vào mục 'Ràng buộc Hạ tầng Hiện hành' (Existing Constraints) để Tech Lead có căn cứ đánh giá khả thi thay vì ép chết giải pháp ngay từ BRD."</em><br>
+              • <strong>Result (Kết quả):</strong> Lãnh đạo hoàn toàn bị thuyết phục và đánh giá cao sự thấu hiểu chi phí của tôi. Về sau, đội ngũ kỹ sư đã chứng minh được việc sử dụng cơ sở dữ liệu nguồn mở kết hợp lưu trữ đám mây giúp tiết kiệm thêm 30% chi phí vận hành so với việc mua thêm core Oracle.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Situation:</strong> In a customer portal initiative, the VP insisted on mandating Flutter and Oracle DB directly within the BRD.<br>
+              • <strong>Task:</strong> My objective was to address the underlying business motivation while abstracting the requirement so the Technical Architect retained solution design autonomy.<br>
+              • <strong>Action:</strong> I scheduled a 1-on-1 discovery chat asking: <em>"What business drivers make Flutter and Oracle essential from your perspective?"</em> He revealed anxiety about escalating maintenance costs if building separate native iOS/Android codebases, and noted our existing corporate Oracle enterprise agreement. I acknowledged: <em>"Your priority to eliminate redundant maintenance and leverage sunk capital is spot-on. In the BRD, let's specify the business requirement as 'Unified cross-platform parity across iOS/Android under constrained operational budgets, integrating seamlessly with existing enterprise data repositories.' We will record Oracle and Flutter as 'Organizational Technical Constraints/Preferences' for the architecture team to evaluate rather than hardcoded constraints."</em><br>
+              • <strong>Result:</strong> The executive felt heard and validated. The technical team subsequently evaluated options and demonstrated a cloud repository model that saved an additional 30% in licensing over purchasing incremental Oracle CPU cores.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 2 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 2: Trong môi trường Agile / Scrum, nhiều người cho rằng BRD là "thừa thãi, cồng kềnh và mang tính Waterfall". Quan điểm của bạn thế nào?</span>
+              <span class="lang-en">Question 2: In an Agile/Scrum environment, critics argue a BRD is "wasteful, heavyweight Waterfall documentation." What is your stance?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Đánh giá mức độ am hiểu thực chất về Agile Manifesto (đo lường giá trị thực tế thay vì chủ nghĩa giáo điều hình thức).</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Evaluates whether the candidate understands Agile pragmatism vs. dogmatic misinterpretations of the Agile Manifesto.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Đúng vậy ạ, làm Agile thì không bao giờ viết BRD, chỉ cần viết User Story trên Jira là đủ."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "Agile means no BRDs ever; we only write short Jira user stories."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Quan điểm cốt lõi:</strong> Agile tuyên ngôn đề cao <em>"Phần mềm chạy tốt hơn tài liệu đồ sộ"</em>, chứ không nói <em>"Không có tài liệu"</em>. Trong các hệ thống doanh nghiệp lớn, việc bỏ qua hoàn toàn BRD sẽ dẫn đến tình trạng các nhóm Agile phát triển các User Story cục bộ mà không biết chúng đóng góp vào mục tiêu chiến lược nào, gây phân mảnh kiến trúc và phình phạm vi.<br>
+              • <strong>Giải pháp thích ứng của tôi (Agile BRD / Lean BRD):</strong> Thay vì viết một bản BRD dày 200 trang mất 6 tháng như Waterfall truyền thống, tôi áp dụng mô hình <strong>Lean BRD (chỉ 15–25 trang)</strong> với phương pháp tiến hóa lũy tiến (Progressive Elaboration). Tài liệu chỉ tập trung vào: (1) Nỗi đau kinh doanh & Chỉ số OKRs đo lường; (2) Ranh giới Trong/Ngoài phạm vi rõ ràng; (3) Sơ đồ dòng chảy quy trình To-Be cấp cao; (4) Ma trận các quy tắc nghiệp vụ cốt lõi.<br>
+              • <strong>Kết quả:</strong> Bản Lean BRD này đóng vai trò là "chiếc la bàn định hướng" (North Star) cho Product Owner và nhóm phát triển để phân rã chính xác thành các Epics và User Stories trên Jira, đảm bảo từng Sprint đều phục vụ cho bài toán hoàn vốn (ROI) chung của tổ chức.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Core Stance:</strong> The Agile Manifesto values <em>"Working software over comprehensive documentation,"</em> not <em>"no documentation."</em> In enterprise ecosystems, omitting high-level business alignment leads to disconnected, localized user stories that fail to deliver cohesive enterprise value.<br>
+              • <strong>Practical Adaptation (Lean BRD):</strong> Rather than authoring 200-page Waterfall tomes over months, I implement a <strong>Lean BRD (15–25 pages)</strong> via progressive elaboration. It focuses strictly on: (1) Core business problem & target OKRs; (2) In-scope vs. explicit out-of-scope boundaries; (3) High-level To-Be process flow; (4) Enterprise business rules catalog.<br>
+              • <strong>Result:</strong> This Lean BRD serves as the strategic "North Star" enabling the Product Owner and development squad to decompose business capabilities into high-integrity Epics and User Stories, ensuring every sprint contributes directly to measurable business outcomes.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 3 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 3: Làm thế nào bạn xác định được ranh giới Ngoài phạm vi (Out-of-Scope) khi hai phòng ban nghiệp vụ bất đồng ý kiến gay gắt về một tính năng?</span>
+              <span class="lang-en">Question 3: How do you establish Out-of-Scope boundaries when two business departments fiercely dispute whether a feature belongs in the project?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra kỹ năng đàm phán, giải quyết xung đột (Conflict Resolution) và khả năng sử dụng dữ liệu khách quan để hỗ trợ các bên ra quyết định phạm vi.</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests negotiation, conflict resolution, objective scope gating frameworks, and stakeholder management.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ chiều theo sếp nào có chức vụ cao hơn hoặc đẩy việc đó cho Project Manager tự xử lý."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I side with the higher-ranking manager or dump the issue onto the Project Manager."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Situation:</strong> Trong một dự án chuỗi cung ứng, phòng Mua hàng yêu cầu hệ thống phải có tính năng chấm điểm tín nhiệm nhà cung cấp (Vendor Credit Scoring) ngay trong Phase 1, trong khi phòng Kho bãi và IT phản đối vì sẽ làm tăng độ phức tạp và nguy cơ trễ tiến độ Go-Live 2 tháng.<br>
+              • <strong>Task:</strong> Với vai trò BA, tôi nhận thức rõ trách nhiệm của mình không phải là tự tiện quyết định bỏ hay giữ tính năng, mà là giúp các bên làm rõ mức độ đóng góp thực tế của tính năng vào mục tiêu cốt lõi để cùng thống nhất ranh giới phạm vi.<br>
+              • <strong>Action:</strong> Tôi đã báo cáo với Project Manager và xin phép điều phối một phiên làm việc sử dụng <strong>Ma trận Giá trị vs. Nỗ lực (Value vs. Complexity Matrix)</strong> đối chiếu trực tiếp với <strong>Mục tiêu chiến lược của dự án (Project Charter)</strong>. Tôi đặt câu hỏi khơi gợi: <em>"Tính năng chấm điểm này tác động trực tiếp như thế nào vào mục tiêu cắt giảm tỷ lệ hết hàng (Stockouts) dưới 3.5% trong đợt cao điểm tới?"</em>. Phía Mua hàng thừa nhận đây là nhu cầu đánh giá định kỳ hàng năm chứ không phục vụ việc bổ hàng tức thời. Tôi tổng hợp đề xuất phân kỳ: <em>"Chúng ta sẽ đề xuất đưa tính năng này vào danh mục 'Explicitly Out-of-Scope cho Phase 1' để bảo vệ mốc Go-Live, và cam kết đưa vào 'Product Roadmap Phase 2'. Đồng thời, nhóm kỹ sư sẽ chuẩn bị sẵn cấu trúc dữ liệu để khi mở rộng Phase 2 không phải đập đi xây lại."</em><br>
+              • <strong>Result:</strong> Cả hai Trưởng phòng đều nhất trí với đề xuất phân kỳ và cùng ký duyệt phạm vi BRD mà không làm phát sinh xung đột nội bộ.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Situation:</strong> In a supply chain initiative, Procurement demanded a complex Vendor Credit Scoring engine in Phase 1, while Warehouse Operations and IT strongly objected because it would add technical complexity and risk delaying Go-Live by 2 months.<br>
+              • <strong>Task:</strong> As a BA, I recognized that my role was not to unilaterally dictate scope inclusions, but to provide structured impact analysis that helped stakeholders evaluate trade-offs objectively against core project goals.<br>
+              • <strong>Action:</strong> In alignment with the Project Manager, I facilitated a working session using a <strong>Value vs. Complexity Matrix</strong> mapped directly against the <strong>Project Charter Objectives</strong>. I asked: <em>"How directly does automated credit scoring contribute to cutting peak stockout rates below 3.5%?"</em> Procurement acknowledged credit scoring was an annual retrospective exercise rather than real-time replenishment dispatch. I formulated a phased recommendation: <em>"We recommend logging Credit Scoring as 'Explicitly Out-of-Scope for Phase 1' to secure the launch date, while scheduling it for 'Phase 2 Architecture Roadmap'. In Phase 1 data modeling, the technical team will ensure schema extensibility to minimize future refactoring."</em><br>
+              • <strong>Result:</strong> Both department leads endorsed the phased approach and co-signed the BRD baseline without requiring escalation.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 4 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 4: Khi dự án bắt đầu mà doanh nghiệp hoàn toàn không có số liệu đo lường hiện trạng (Baseline Data), bạn tính toán và bảo vệ tính khả thi kinh tế (ROI) trong BRD như thế nào?</span>
+              <span class="lang-en">Question 4: When an initiative launches with zero quantitative baseline metrics, how do you calculate and defend financial justification/ROI in the BRD?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Đánh giá tính trung thực học thuật, năng lực lập mô hình trong điều kiện bất định và kỹ năng làm việc với giả định định lượng.</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Tests analytical honesty, modeling under uncertainty, baseline estimation techniques, and documentation of assumptions.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ bịa ra một vài con số cho đẹp mắt để qua vòng duyệt ngân sách của Ban Giám đốc." hoặc "Không có số liệu thì không tính được ROI."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I invent plausible numbers to get past budget approval," or "Without data, calculating ROI is impossible."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Nguyên tắc cốt lõi:</strong> Một BA chuyên nghiệp tuyệt đối không bao giờ ngụy tạo số liệu hay hứa hẹn bừa bãi. Khi thiếu số liệu hiện trạng, tôi tiếp cận theo 3 kỹ thuật bổ trợ:<br>
+              1. <strong>Đo lường Mẫu Ngắn hạn (Sampling Time-Motion Study):</strong> Cùng nhân sự tác nghiệp bấm giờ thực tế trong 3 đến 5 ngày làm việc để đo thời gian trung bình xử lý một tác vụ (ví dụ: mất 45 phút để nhập 1 đơn PO thủ công).<br>
+              2. <strong>Khảo sát Đối chuẩn Ngành (Industry Benchmarking):</strong> Sử dụng dữ liệu báo cáo uy tín của các hiệp hội chuỗi cung ứng hoặc Gartner/McKinsey cho các doanh nghiệp cùng quy mô.<br>
+              3. <strong>Mô hình Giả định Độ nhạy (Sensitivity Analysis với 3 Kịch bản):</strong> Thay vì đưa một con số cố định, tôi xây dựng 3 kịch bản: Thận trọng (Conservative - ROI 25%), Khả dĩ nhất (Most Likely - ROI 65%), và Lạc quan (Optimistic - ROI 110%).<br>
+              • <strong>Bảo vệ trong BRD:</strong> Tôi dành riêng một mục để <strong>minh bạch hóa danh mục giả định (Assumptions Register)</strong>, nêu rõ các khoảng biến thiên và đề xuất thiết lập cơ chế đo lường tự động ngay trong Sprint đầu tiên để hiệu chỉnh lại mô hình tài chính sau 30 ngày vận hành.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Core Principle:</strong> A professional BA never fabricates figures or promises unverified financial returns. In the absence of historical telemetry, I apply a tripartite estimation methodology:<br>
+              1. <strong>Empirical Time-Motion Sampling:</strong> Shadow operations staff over 3–5 working days to sample baseline task durations directly (e.g., measuring that manual PO creation averages 45 minutes per order).<br>
+              2. <strong>Industry Benchmark Triangulation:</strong> Leverage validated industry benchmarks (Gartner, APQC, CSCMP) for mid-market logistics operations.<br>
+              3. <strong>Sensitivity Modeling (3-Scenario Bounds):</strong> Model three distinct financial outcomes: Conservative (ROI 25%), Most Likely (ROI 65%), and Optimistic (ROI 110%).<br>
+              • <strong>Defense in the BRD:</strong> I document a dedicated <strong>Assumptions & Constraints Register</strong> explicitly detailing sensitivity limits and embed an automated instrumentation requirement in Sprint 1 to establish live baseline telemetry within 30 days of launch.
+              </span>
+            </div>
+          </div>
+
+          <!-- Interview Question 5 -->
+          <div class="interview-card">
+            <div class="interview-q">
+              <span class="lang-vi">Câu hỏi 5: Sau khi BRD đã được ký duyệt (Baseline Freeze), Product Owner hoặc Business Sponsor liên tục yêu cầu bổ sung các "thay đổi nhỏ" mà không muốn làm thủ tục Change Request (CR) vì sợ mất thời gian. Bạn xử lý thế nào?</span>
+              <span class="lang-en">Question 5: Following formal BRD baseline freeze, the Product Owner repeatedly requests "minor changes" without submitting a formal Change Request (CR) to avoid delay. How do you respond?</span>
+            </div>
+            <div class="evaluator-note">
+              <span class="lang-vi"><strong>Ý định người phỏng vấn:</strong> Kiểm tra kỹ năng quản trị thay đổi (Scope Management & Governance) và bảo vệ đội ngũ kỹ sư khỏi tình trạng quá tải không được ghi nhận.</span>
+              <span class="lang-en"><strong>Evaluator Intent:</strong> Assesses scope governance, adherence to change control protocols, and the ability to protect development capacity diplomatically.</span>
+            </div>
+            <div class="weak-answer">
+              <span class="lang-vi"><strong>Câu trả lời Yếu cần tránh:</strong> "Em sẽ từ chối thẳng thừng, nói sếp làm sai quy trình và dọa sẽ báo cáo lên Giám đốc dự án." hoặc "Thôi việc nhỏ thì em cứ lén sửa vào tài liệu để chiều lòng PO."</span>
+              <span class="lang-en"><strong>Weak Answer to Avoid:</strong> "I report them to executive management for policy violation," or "If it's minor, I secretly squeeze it in to keep the PO happy."</span>
+            </div>
+            <div class="strong-answer">
+              <span class="lang-vi"><strong>Câu trả lời Mẫu Chuẩn STAR:</strong><br>
+              • <strong>Thấu hiểu tâm lý:</strong> Stakeholders thường ngại làm CR vì họ nghĩ quy trình này nặng nề, mất 2 tuần họp hành. Là BA, tôi không từ chối một cách tiêu cực, mà phân tích dựa trên tác động trực quan.<br>
+              • <strong>Hành động cụ thể:</strong><br>
+              1. <strong>Tách biệt Rõ ràng giữa "Làm rõ (Clarification)" và "Thay đổi (Change)":</strong> Nếu yêu cầu đó thực chất chỉ là làm sáng tỏ một logic đã nằm trong phạm vi ban đầu, tôi cập nhật tài liệu với ghi chú phiên bản. Nhưng nếu đó là một quy tắc mới hoặc thay đổi luồng nghiệp vụ, tôi chỉ ra tác động domino: <em>"Yêu cầu này rất hay và hợp lý về mặt kinh doanh, tuy nhiên nó sẽ ảnh hưởng đến 2 API đang viết và làm tăng thêm 8 điểm Story Points trong Sprint tới."</em><br>
+              2. <strong>Quy trình Fast-track CR Tinh gọn:</strong> Thay vì bắt điền biểu mẫu phức tạp, tôi chủ động soạn sẵn một phiếu đánh giá tác động 1 trang (Impact Assessment 1-pager) nêu rõ: (a) Lợi ích kinh doanh; (b) Tác động tiến độ (dời ngày Go-Live 3 ngày hoặc phải đẩy 1 Story khác ra khỏi Sprint backlog); (c) Rủi ro liên quan.<br>
+              3. <strong>Trao quyền Quyết định Đánh đổi cho PO:</strong> <em>"Nếu anh muốn đưa tính năng này vào Sprint 3, chúng ta cần thống nhất hoãn tính năng B sang Sprint 4 để đảm bảo chất lượng kiểm thử của nhóm."</em><br>
+              • <strong>Kết quả:</strong> Đội ngũ kỹ sư được bảo vệ khỏi áp lực phát sinh ngoài kế hoạch, trong khi PO hiểu rõ tính đánh đổi của các quyết định kinh doanh.
+              </span>
+              <span class="lang-en"><strong>Strong STAR Answer:</strong><br>
+              • <strong>Empathy & Root Cause:</strong> Stakeholders bypass CRs because they perceive change control as bureaucratic overhead. Rather than responding with rigid resistance, I lead with objective impact transparency.<br>
+              • <strong>Concrete Action:</strong><br>
+              1. <strong>Delineate Clarification vs. Scope Alteration:</strong> If the request merely clarifies an existing requirement, I update the documentation under standard revision notes. If it introduces new business logic or alters data flows, I illustrate the ripple effect: <em>"This is a valuable capability, but it impacts 2 active API contracts and introduces 8 incremental story points."</em><br>
+              2. <strong>Deploy a Fast-Track 1-Page Impact Assessment:</strong> I draft a concise 1-page summary covering: (a) Business justification, (b) Trade-offs (delaying milestone by 3 days OR swapping out a lower-priority story), and (c) Architectural risk.<br>
+              3. <strong>Empower the PO with Trade-Off Choices:</strong> <em>"If we prioritize this into Sprint 3, let's agree which equivalent-effort story we defer to Sprint 4 to protect team velocity and test coverage."</em><br>
+              • <strong>Result:</strong> Engineers remain shielded from unaccounted scope churn, while the PO gains clear visibility into the real trade-offs of scope expansion.
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION H: GLOSSARY & VERIFIED REFERENCES -->
+        <section id="sec-glossary-references" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">H</span>
+            <h2>
+              <span class="lang-vi">Thuật ngữ Song ngữ & Nguồn Tham chiếu Quốc tế</span>
+              <span class="lang-en">Bilingual Glossary & Verified Standards References</span>
+            </h2>
+          </div>
+
+          <h3>
+            <span class="lang-vi">1. Bảng Thuật ngữ BA Chuẩn hóa (Bilingual Terminology)</span>
+            <span class="lang-en">1. Standardized Business Analysis Terminology</span>
+          </h3>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Thuật ngữ Tiếng Anh</th>
+                  <th style="width: 25%;">Thuật ngữ Tiếng Việt</th>
+                  <th style="width: 50%;">Định nghĩa Nghiệp vụ Chuẩn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Business Requirements Document (BRD)</strong></td>
+                  <td>Tài liệu Yêu cầu Kinh doanh</td>
+                  <td>Hồ sơ xác lập các mục tiêu kinh doanh, năng lực cần đạt và ranh giới phạm vi ở mức độ tổ chức.</td>
+                </tr>
+                <tr>
+                  <td><strong>Business Need</strong></td>
+                  <td>Nhu cầu Kinh doanh Cốt lõi</td>
+                  <td>Vấn đề hoặc cơ hội chiến lược thúc đẩy tổ chức quyết định khởi tạo dự án và đầu tư ngân sách.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scope Demarcation</strong></td>
+                  <td>Phân định Ranh giới Phạm vi</td>
+                  <td>Hoạt động xác định tường minh những hạng mục nằm trong phạm vi (In-Scope) và loại trừ (Out-of-Scope).</td>
+                </tr>
+                <tr>
+                  <td><strong>As-Is Process</strong></td>
+                  <td>Quy trình Hiện trạng</td>
+                  <td>Mô hình phản ánh chân thực cách thức vận hành thực tế hiện tại kèm các điểm nghẽn và chi phí lãng phí.</td>
+                </tr>
+                <tr>
+                  <td><strong>To-Be Process</strong></td>
+                  <td>Quy trình Mục tiêu Tương lai</td>
+                  <td>Mô hình quy trình được thiết kế lại nhằm tối ưu hóa các bước thủ công khi có giải pháp công nghệ mới.</td>
+                </tr>
+                <tr>
+                  <td><strong>RACI Matrix</strong></td>
+                  <td>Ma trận Phân nhiệm Trách nhiệm</td>
+                  <td>Công cụ quản trị xác định 4 vai trò: Thực hiện (R), Giải trình (A), Tham vấn (C), và Nhận thông tin (I).</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Cost of Ownership (TCO)</strong></td>
+                  <td>Tổng Chi phí Sở hữu</td>
+                  <td>Toàn bộ chi phí phát triển ban đầu (CAPEX) cộng với chi phí bảo trì, vận hành và hạ tầng hàng năm (OPEX).</td>
+                </tr>
+                <tr>
+                  <td><strong>Return on Investment (ROI)</strong></td>
+                  <td>Tỷ suất Hoàn vốn Đầu tư</td>
+                  <td>Chỉ số đo lường hiệu quả kinh tế: $\text{ROI} = (\text{Lợi ích Ròng} / \text{Tổng Chi phí}) \times 100\%$.</td>
+                </tr>
+                <tr>
+                  <td><strong>Baseline Freeze</strong></td>
+                  <td>Đóng băng Đường cơ sở</td>
+                  <td>Thời điểm tài liệu yêu cầu được chính thức phê duyệt và mọi thay đổi sau đó phải qua quy trình Change Request.</td>
+                </tr>
+                <tr>
+                  <td><strong>Traceability Matrix</strong></td>
+                  <td>Ma trận Truy vết Yêu cầu</td>
+                  <td>Bảng liên kết 2 chiều giữa mục tiêu kinh doanh, yêu cầu chức năng, ca kiểm thử và dòng mã triển khai.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">2. Danh mục Tài liệu Tham chiếu Quốc tế Được Xác thực</span>
+            <span class="lang-en">2. Verified International Industry References</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; color: var(--text-muted);">
+            Tất cả các nguồn tham khảo dưới đây đều được dẫn xuất từ các tổ chức tiêu chuẩn nghề nghiệp quốc tế có thẩm quyền, kèm thông tin minh bạch về cấp độ truy cập (miễn phí công khai hoặc có bản quyền/thu phí):
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; color: var(--text-muted);">
+            All references below cite authoritative international standards bodies, accompanied by transparent access level disclosures (free public open-access vs. paid/licensed publications):
+          </p>
+
+          <ul style="list-style: none; padding: 0; margin: 1rem 0; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.iiba.org/career-resources/a-guide-to-the-business-analysis-body-of-knowledge-babok-guide/" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  1. IIBA BABOK® Guide v3 (A Guide to the Business Analysis Body of Knowledge) ↗
+                </a>
+                <span class="badge badge-technical">Tiêu chuẩn Nghề nghiệp / Sách có bản quyền (IIBA Member / Paid)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Chương 3 (Business Analysis Planning & Monitoring), Chương 6 (Strategy Analysis), và Chương 7 (Requirements Analysis and Design Definition).
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://standards.ieee.org/ieee/29148/7243/" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  2. ISO/IEC/IEEE 29148:2018 — Systems and Software Engineering — Requirements Engineering ↗
+                </a>
+                <span class="badge badge-technical">Tiêu chuẩn Quốc tế / Thu phí có bản quyền (ISO/IEEE Paid)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Mục 8.2: Business Requirements Specification (BRS) — Khung cấu trúc quy chuẩn cho đặc tả yêu cầu kinh doanh và ranh giới hệ thống.
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.gov.uk/service-manual/service-assessments" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  3. UK Government Digital Service (GDS) — Service Standard & Business Analysis Guidance ↗
+                </a>
+                <span class="badge badge-good" style="background: #D1FAE5; color: #065F46;">Truy cập Công khai Miễn phí (Open Access / Crown Copyright)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Hướng dẫn thực tế về phân tích vấn đề người dùng, xác định ranh giới dịch vụ số và đo lường thành công định lượng trong khu vực công.
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.pmi.org/pmbok-guide-standards/foundational/business-analysis" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  4. PMI The PMI Guide to Business Analysis (Project Management Institute) ↗
+                </a>
+                <span class="badge badge-technical">Tiêu chuẩn Chuyên nghiệp / PMI Member / Paid</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Quy chuẩn về Đánh giá Nhu cầu (Needs Assessment), Quản trị Đường cơ sở Phạm vi và Quản lý Thay đổi trong các dự án quy mô lớn.
+              </div>
+            </li>
+
+            <li style="border: 1px solid var(--border-warm); border-radius: var(--radius-sm); padding: 0.85rem 1.1rem; background: var(--bg-surface);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.karlwiegers.com/books.html" target="_blank" rel="noopener noreferrer" style="font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
+                  5. Karl Wiegers & Joy Beatty — Software Requirements (3rd Edition, Microsoft Press) ↗
+                </a>
+                <span class="badge badge-technical">Sách Chuyên ngành / Bản quyền Thương mại (Commercial Book)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+                Chương 5: Establishing the Business Requirements — Phân biệt rành mạch giữa Business Requirements, Use Cases và Functional Specifications.
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay Hướng dẫn Biểu mẫu</span><span class="lang-en">Study Guide & Templates</span></a></li>
+          <li><a href="../../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">48 Thẻ Ghi nhớ Chuyên sâu</span><span class="lang-en">48 Study Flashcards</span></a></li>
+          <li><a href="../../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Tài liệu & Tải về</span><span class="lang-en">Downloads & Assets</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Bản quyền & Chuẩn mực</span>
+          <span class="lang-en">Standards & Ethics</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          <span class="lang-vi">Tác giả: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>.<br>Học liệu tuân thủ chuẩn mở IIBA BABOK v3, ISO/IEC/IEEE 29148. Mọi kịch bản doanh nghiệp là tình huống giả định phục vụ đào tạo.</span>
+          <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>.<br>Aligned with IIBA BABOK v3 & ISO/IEC/IEEE 29148. All enterprise scenarios are illustrative training cases.</span>
+        </p>
+      </div>
+    </div>
+    <div class="container" style="border-top: 1px solid var(--border-warm); padding-top: 1rem; margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+      © 2026 Hazel BA Hub. All rights reserved. Designed for professional IT Business Analysts.
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

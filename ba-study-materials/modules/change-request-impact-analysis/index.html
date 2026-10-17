@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Yêu Cầu Thay Đổi & Đánh Giá Tác Động (Change Request & Impact Analysis) | Hazel BA Hub</title>
+  <title class="lang-en">Change Request & Impact Analysis Specification Masterclass | Hazel BA Hub</title>
+  <meta name="description" content="Hướng dẫn chuyên sâu quản trị yêu cầu thay đổi (Change Request) và phân tích tác động 360 độ dành cho Business Analyst: Phân biệt Bug vs Scope Change, cơ chế Hội đồng CCB, cập nhật đường cơ sở (Baseline) và bảo vệ tam giác ràng buộc dự án.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/lesson.css">
+  <!-- Core i18n -->
+  <script src="../../assets/js/i18n.js"></script>
+  <style>
+    .cr-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-approved { background-color: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-rejected { background-color: rgba(239, 68, 68, 0.15); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-pending { background-color: rgba(245, 158, 11, 0.15); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-deferred { background-color: rgba(107, 114, 128, 0.15); color: #4b5563; border: 1px solid rgba(107, 114, 128, 0.3); }
+    .cr-container {
+      border: 1px solid var(--border-card, #e2e8f0);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface, #ffffff);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .cr-header {
+      padding: 1rem 1.25rem;
+      background: var(--bg-surface-warm, #f8fafc);
+      border-bottom: 1px solid var(--border-warm, #e2e8f0);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cr-body {
+      padding: 1.25rem;
+    }
+    .cr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+    }
+    .cr-meta-item strong {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.2rem;
+    }
+    .interactive-solution {
+      border: 1px solid var(--border-card, #e2e8f0);
+      border-radius: var(--radius-md);
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+    .solution-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      background: var(--bg-surface-warm, #f8fafc);
+      border: none;
+      font-weight: 600;
+      color: var(--color-primary-dark, #b58428);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .solution-trigger:hover {
+      background: var(--bg-surface-hover, #f6f0df);
+    }
+    .solution-content {
+      padding: 1.25rem;
+      display: none;
+      background: var(--bg-surface, #ffffff);
+      border-top: 1px solid var(--border-warm, #e2e8f0);
+    }
+    .solution-content.active {
+      display: block;
+    }
+    .diff-table td ins {
+      background: rgba(16, 185, 129, 0.2);
+      text-decoration: none;
+      color: #065f46;
+      font-weight: 600;
+      padding: 0.1rem 0.3rem;
+      border-radius: 2px;
+    }
+    .diff-table td del {
+      background: rgba(239, 68, 68, 0.2);
+      color: #991b1b;
+      padding: 0.1rem 0.3rem;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../../knowledge-map/" class="nav-link"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../../study-guide/" class="nav-link active"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container lesson-page">
+    <!-- Breadcrumb & Hero -->
+    <div class="lesson-hero">
+      <div class="lesson-breadcrumb">
+        <a href="../../"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a>
+        <span>/</span>
+        <a href="../../study-guide/"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a>
+        <span>/</span>
+        <span class="lang-vi">Biểu mẫu 5: Yêu Cầu Thay Đổi (Change Request) & Đánh Giá Tác Động</span>
+        <span class="lang-en">Template 5: Change Request & Impact Analysis</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-explicit">Domain 4 • Masterclass</span>
+        <span class="badge badge-inferred">Scope Governance / BABOK v3 Ch. 5 & PMBOK 7th Ed.</span>
+        <span class="badge badge-illustrative">Author: Nguyễn Đăng Cẩm Tú (Hazel)</span>
+      </div>
+
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">
+        <span class="lang-vi">Quản Trị Yêu Cầu Thay Đổi (Change Request) & Đánh Giá Tác Động 360 Độ</span>
+        <span class="lang-en">Change Request (CR) Governance & 360-Degree Impact Analysis Masterclass</span>
+      </h1>
+      <p style="font-size: 1.05rem; max-width: 880px; color: var(--text-muted); margin-bottom: 0;">
+        <span class="lang-vi">Làm chủ nghệ thuật bảo vệ phạm vi và ngân sách dự án: Phương pháp luận phân loại Bug vs Scope Change, cơ chế vận hành Hội đồng Kiểm soát Thay đổi (CCB), kỹ thuật phân tích tác động toàn diện 360 độ và quy trình đóng băng & tái thiết lập đường cơ sở (Baseline Re-versioning).</span>
+        <span class="lang-en">Master the art of defending project scope and budget: Rigorous taxonomy for Bug vs Scope Change, Change Control Board (CCB) mechanics, 360-degree cross-cutting impact modeling, and baseline re-freezing discipline.</span>
+      </p>
+    </div>
+
+    <!-- Lesson Layout Grid: Sidebar + Main Content -->
+    <div class="lesson-layout">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="lesson-sidebar">
+        <div class="sidebar-title">
+          <span class="lang-vi">Mục lục chuyên khảo</span>
+          <span class="lang-en">Lesson Contents</span>
+        </div>
+        <ul class="toc-list">
+          <li><a href="#sec-objectives" class="toc-link"><span class="lang-vi">A. Mục Tiêu Học Tập (Bloom)</span><span class="lang-en">A. Learning Objectives</span></a></li>
+          <li><a href="#sec-foundations" class="toc-link"><span class="lang-vi">B. Bản Chất Quản Trị Thay Đổi</span><span class="lang-en">B. Change Control Foundations</span></a></li>
+          <li><a href="#sec-methodology" class="toc-link"><span class="lang-vi">C. Quy Trình 6 Bước Dành Cho BA</span><span class="lang-en">C. 6-Step BA Change Workflow</span></a></li>
+          <li><a href="#sec-enterprise-cr" class="toc-link"><span class="lang-vi">D. Hồ Sơ Yêu Cầu Thay Đổi Thực Chiến</span><span class="lang-en">D. Worked Enterprise CR Artifact</span></a></li>
+          <li><a href="#sec-anti-patterns" class="toc-link"><span class="lang-vi">E. 3 Sai Lầm Chí Mạng & Cách Tránh</span><span class="lang-en">E. 3 Critical Anti-Patterns</span></a></li>
+          <li><a href="#sec-exercises" class="toc-link"><span class="lang-vi">F. Bài Tập Tình Huống Thực Chiến</span><span class="lang-en">F. Hands-on Practicum</span></a></li>
+          <li><a href="#sec-interviews" class="toc-link"><span class="lang-vi">G. Phỏng Vấn Chuyên Sâu (STAR)</span><span class="lang-en">G. Technical Interview Q&A</span></a></li>
+          <li><a href="#sec-references" class="toc-link"><span class="lang-vi">H. Thuật Ngữ & Nguồn Uy Tín</span><span class="lang-en">H. Glossary & References</span></a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Lesson Content Area -->
+      <article class="lesson-content">
+<section id="sec-objectives" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">A</span>
+          <h2>
+            <span class="lang-vi">Mục Tiêu Học Tập Chuẩn Hóa (Bloom's Taxonomy)</span>
+            <span class="lang-en">Standardized Learning Objectives (Bloom's Taxonomy)</span>
+          </h2>
+        </div>
+        <p class="lang-vi">
+          Thay đổi là quy luật tất yếu của mọi dự án phần mềm do biến động thị trường và luật định. Một Business Analyst chuyên nghiệp không bao giờ từ chối thay đổi bằng thái độ phòng thủ cực đoan, nhưng cũng không chấp thuận thay đổi vô tội vạ dẫn đến vỡ tiến độ. Hoàn thành mô-đun này, bạn sẽ nắm vững:
+        </p>
+        <p class="lang-en">
+          Change is the fundamental reality of all software development driven by competitive shifts and regulatory mandates. A professional Business Analyst neither defensively rejects changes nor recklessly accepts them causing project collapse. Upon completing this masterclass, you will achieve:
+        </p>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Cấp độ Bloom</span><span class="lang-en">Bloom Level</span></th>
+                <th><span class="lang-vi">Hành vi Cụ thể Sau Khóa học</span><span class="lang-en">Target Behavioral Competency</span></th>
+                <th><span class="lang-vi">Thước đo Thành thạo (Assessment Criteria)</span><span class="lang-en">Mastery Evidence</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Hiểu (Understand)</strong></td>
+                <td>
+                  <span class="lang-vi">Phân biệt tuyệt đối giữa Lỗi hệ thống (Defect), Làm rõ yêu cầu (Clarification) và Yêu cầu thay đổi phạm vi (Change Request) dựa trên tài liệu Baseline đã ký kết.</span>
+                  <span class="lang-en">Unambiguously differentiate between System Defects, Requirement Clarifications, and Scope Change Requests based on signed Baseline specifications.</span>
+                </td>
+                <td><span class="lang-vi">Không cho phép các yêu cầu tính năng mới đội lốt "sửa lỗi" lọt qua vòng kiểm soát.</span><span class="lang-en">Zero acceptance of feature enhancements disguised as "bug fixes".</span></td>
+              </tr>
+              <tr>
+                <td><strong>2. Áp dụng (Apply)</strong></td>
+                <td>
+                  <span class="lang-vi">Vận hành quy trình tiếp nhận, sàng lọc và điều phối biểu mẫu Change Request theo chuẩn quản trị dự án quốc tế PMBOK / BABOK.</span>
+                  <span class="lang-en">Execute formalized intake, triage, and orchestration workflows for Change Requests per PMBOK / BABOK standards.</span>
+                </td>
+                <td><span class="lang-vi">100% yêu cầu phát sinh được số hóa, định danh và có tài liệu đánh giá trước khi phân bổ nguồn lực.</span><span class="lang-en">100% of emerging requests digitized, tagged, and analyzed before engineering allocation.</span></td>
+              </tr>
+              <tr>
+                <td><strong>3. Phân tích (Analyze)</strong></td>
+                <td>
+                  <span class="lang-vi">Thực hiện Phân tích tác động 360 độ (360-Degree Impact Assessment) toàn diện trên 6 trục: Nghiệp vụ, Kiến trúc CSDL, API tích hợp, Tiến độ (Schedule), Chi phí (Cost) và Rủi ro hồi quy (Regression).</span>
+                  <span class="lang-en">Conduct a comprehensive 360-Degree Impact Assessment across 6 dimensions: Business Process, Database Schema, API Contracts, Schedule, Budget, and Regression Risk.</span>
+                </td>
+                <td><span class="lang-vi">Báo cáo phân tích định lượng rõ số ngày công (Person-Days), chi phí phát sinh (VNĐ) và các module bị ảnh hưởng gián tiếp.</span><span class="lang-en">Quantitatively model person-days effort, budget delta (VND), and downstream ripple effects.</span></td>
+              </tr>
+              <tr>
+                <td><strong>4. Đánh giá (Evaluate)</strong></td>
+                <td>
+                  <span class="lang-vi">Thiết kế Ma trận Đánh đổi (Trade-off Matrix) đa phương án và chủ trì báo cáo đề xuất trước Hội đồng Quản trị Thay đổi (CCB).</span>
+                  <span class="lang-en">Engineer multi-option Trade-off Matrices and present objective recommendations before the Change Control Board (CCB).</span>
+                </td>
+                <td><span class="lang-vi">Cung cấp tối thiểu 3 phương án lựa chọn (Full, Phased, Reject) kèm phân tích lợi ích - chi phí minh bạch.</span><span class="lang-en">Provide at least 3 viable alternatives (Full, Phased, Reject) with transparent cost-benefit tradeoffs.</span></td>
+              </tr>
+              <tr>
+                <td><strong>5. Sáng tạo (Create)</strong></td>
+                <td>
+                  <span class="lang-vi">Thực hiện quy trình Tái lập Đường cơ sở (Baseline Re-versioning): Cập nhật BRD, SFS, Test Cases, Ma trận RTM và thông báo cập nhật đồng bộ cho toàn bộ dự án.</span>
+                  <span class="lang-en">Execute Baseline Re-versioning discipline: Update BRD, SFS, Test Suites, RTM matrices, and broadcast synchronized change notifications.</span>
+                </td>
+                <td><span class="lang-vi">Toàn bộ kho tài liệu được thăng hạng phiên bản (ví dụ BRD v1.0 &rarr; v1.1) với lịch sử theo dõi sửa đổi (Audit Trail) không tì vết.</span><span class="lang-en">All project repositories bumped (e.g., BRD v1.0 &rarr; v1.1) with flawless revision audit trails.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION B: CHANGE CONTROL FOUNDATIONS -->
+      <section id="sec-foundations" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">B</span>
+          <h2>
+            <span class="lang-vi">Bản Chất: Tam Giác Sắt, Phân Loại Thay Đổi & Hội Đồng CCB</span>
+            <span class="lang-en">Foundations: The Iron Triangle, Change Taxonomy & The Change Control Board (CCB)</span>
+          </h2>
+        </div>
+
+        <div class="callout callout-info">
+          <div class="callout-title">
+            <span class="lang-vi">💡 Nguyên Lý Bất Biến: Tam Giác Sắt (The Iron Triangle)</span>
+            <span class="lang-en">💡 Immutable Principle: The Iron Triangle of Project Management</span>
+          </div>
+          <p class="lang-vi">
+            Bất kỳ sự thay đổi nào đối với <strong>Phạm vi (Scope)</strong> của phần mềm cũng tất yếu kéo theo sự biến động của ít nhất một trong ba đỉnh còn lại:<br>
+            • <strong>Thời gian (Schedule):</strong> Ngày bàn giao bị lùi lại do khối lượng công việc tăng.<br>
+            • <strong>Chi phí (Budget / Cost):</strong> Tăng ngân sách chi trả cho số ngày công (Man-Days) của đội ngũ kỹ sư và cơ sở hạ tầng.<br>
+            • <strong>Chất lượng (Quality):</strong> Nếu ép giữ nguyên thời gian và ngân sách khi phạm vi phình to, chất lượng kiểm thử sẽ bị cắt giảm, sinh ra hàng loạt nợ kỹ thuật (Technical Debt) và lỗi trên Production.<br>
+            <em>"Người BA chuyên nghiệp không nói 'Không', người BA nói: 'Có thể, và đây là chi phí và thời gian đi kèm'."</em>
+          </p>
+          <p class="lang-en">
+            Any modification to software <strong>Scope</strong> inevitably exerts stress upon the remaining constraints:<br>
+            • <strong>Schedule:</strong> Delivery dates shift outward due to incremental engineering workload.<br>
+            • <strong>Budget / Cost:</strong> Fiscal expenditures expand to fund additional engineering person-days and cloud infrastructure.<br>
+            • <strong>Quality:</strong> Forcing scope expansion while freezing time and budget crushes testing cycles, accumulating disastrous technical debt and production incidents.<br>
+            <em>"A professional BA rarely says 'No'; a professional BA says: 'Yes, and here are the exact timeline and fiscal costs attached'."</em>
+          </p>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">
+          <span class="lang-vi">1. Bộ Tiêu Trí Phân Biệt: Bug vs. Clarification vs. Change Request</span>
+          <span class="lang-en">1. The Definitive Triage Taxonomy: Bug vs. Clarification vs. Change Request</span>
+        </h3>
+        <p class="lang-vi">
+          Khi một yêu cầu điều chỉnh xuất hiện trong quá trình phát triển hoặc nghiệm thu, BA phải áp dụng bài kiểm tra 3 bước sau để phân loại:
+        </p>
+        <p class="lang-en">
+          When modification requests emerge during engineering or acceptance, the BA must apply this 3-step decision heuristic:
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Phân Loại (Classification)</span><span class="lang-en">Classification</span></th>
+                <th><span class="lang-vi">Dấu hiệu Nhận biết Đặc trưng</span><span class="lang-en">Distinct Diagnostic Signals</span></th>
+                <th><span class="lang-vi">Ai Chịu Trách Nhiệm Chi Phí?</span><span class="lang-en">Cost & Effort Allocation</span></th>
+                <th><span class="lang-vi">Hành Động Chuẩn Của BA</span><span class="lang-en">Standard BA Protocol</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Lỗi Hệ Thống (Defect / Bug)</strong></td>
+                <td>
+                  <span class="lang-vi">Hệ thống xử lý sai khác hoặc không đáp ứng đúng những gì đã được ghi rõ ràng trong tài liệu SFS / Tiêu chí chấp nhận đã ký kết.</span>
+                  <span class="lang-en">System behavior contradicts or fails to satisfy explicit behaviors documented in the signed SFS / Acceptance Criteria.</span>
+                </td>
+                <td><span class="lang-vi">Đội Kỹ thuật (Development Team) tự khắc phục mà không phát sinh thêm chi phí dự án.</span><span class="lang-en">Development team remediates within contracted scope at zero client surcharge.</span></td>
+                <td><span class="lang-vi">Xác thực lỗi trên môi trường kiểm thử, ghi nhận Defect Ticket trên Jira kèm số SFS tham chiếu.</span><span class="lang-en">Log formal Defect Ticket citing exact violated SFS requirement ID.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Làm Rõ Yêu Cầu (Clarification)</strong></td>
+                <td>
+                  <span class="lang-vi">Yêu cầu đã được đề cập trong phạm vi tổng thể nhưng đặc tả còn mơ hồ, thiếu chi tiết nhỏ về giao diện hoặc văn bản thông báo mà không làm thay đổi kiến trúc DB hay luồng nghiệp vụ cốt lõi.</span>
+                  <span class="lang-en">Requirement was within scope but expressed with minor ambiguity (e.g., notification copy or field tooltip) without altering DB schema or business workflows.</span>
+                </td>
+                <td><span class="lang-vi">Hấp thụ vào nguồn lực dự phòng (Buffer/Contingency) của Sprint hiện tại.</span><span class="lang-en">Absorbed within current sprint buffer/contingency bandwidth.</span></td>
+                <td><span class="lang-vi">Cập nhật bổ sung ghi chú vào SFS v1.0.1, thông báo cho Tech Lead và QA mà không cần triệu tập CCB.</span><span class="lang-en">Issue inline SFS note update, communicate to Tech Lead & QA without formal CCB convening.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Yêu Cầu Thay Đổi (Change Request)</strong></td>
+                <td>
+                  <span class="lang-vi">Bổ sung quy tắc nghiệp vụ mới, thay đổi luồng xử lý đã ký duyệt, sửa đổi cấu trúc bảng CSDL, thêm cổng API tích hợp bên thứ ba, hoặc mở rộng dung sai vượt ngưỡng thỏa thuận.</span>
+                  <span class="lang-en">Introduces new business rules, alters baselined workflows, modifies relational schema, integrates new 3rd-party APIs, or expands operational tolerances beyond signed bounds.</span>
+                </td>
+                <td><span class="lang-vi">Khách hàng hoặc Chủ dự án cấp thêm ngân sách và gia hạn tiến độ nếu được chấp thuận.</span><span class="lang-en">Client / Project Sponsor funds additional budget and extends timeline upon approval.</span></td>
+                <td><span class="lang-vi">Lập hồ sơ Change Request Form, thực hiện Đánh giá tác động 360 độ và trình Hội đồng CCB phê duyệt.</span><span class="lang-en">Draft structured CR Dossier, conduct 360-Degree Impact Analysis, and table for CCB adjudication.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 1.5rem;">
+          <span class="lang-vi">2. Cơ Chế Hội Đồng Quản Trị Thay Đổi (Change Control Board - CCB)</span>
+          <span class="lang-en">2. Change Control Board (CCB) Governance & Quorum</span>
+        </h3>
+        <p class="lang-vi">
+          Hội đồng Quản trị Thay đổi (CCB hoặc CAB - Change Advisory Board) là cơ quan có thẩm quyền tối cao quyết định số phận của mọi yêu cầu thay đổi trong dự án. Cơ cấu CCB chuẩn mực bao gồm:
+        </p>
+        <p class="lang-en">
+          The Change Control Board (CCB) is the authoritative governing body empowered to adjudicate project change requests. A standard enterprise CCB quorum consists of:
+        </p>
+
+        <div class="grid-2-col" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;"><span class="lang-vi">1. Chủ Tịch Hội Đồng (CCB Chair / Sponsor)</span><span class="lang-en">1. CCB Chair / Project Sponsor</span></h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">Người nắm giữ ngân sách và mục tiêu kinh doanh chiến lược (ví dụ: Giám đốc Chuỗi Cung ứng hoặc Product Sponsor). Có quyền phủ quyết cuối cùng và chịu trách nhiệm cấp thêm ngân sách khi CR được phê duyệt.</p>
+            <p class="lang-en" style="font-size: 0.9rem;">Holds budget authority and strategic accountability. Possesses ultimate veto power and authorizes supplemental budget allocations upon CR approval.</p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;"><span class="lang-vi">2. Thư Ký & Phân Tích Viên (Lead BA)</span><span class="lang-en">2. Lead BA (Secretary & Analyst)</span></h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">Người bảo vệ tính nhất quán của hệ thống. Chịu trách nhiệm thuyết minh báo cáo phân tích tác động 360 độ, trình bày các phương án đánh đổi (Trade-offs), ghi biên bản và cập nhật tài liệu cơ sở.</p>
+            <p class="lang-en" style="font-size: 0.9rem;">Guardian of requirements integrity. Presents the 360-degree impact assessment, articulates trade-off alternatives, records formal minutes, and executes baseline updates.</p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;"><span class="lang-vi">3. Đại Diện Kỹ Thuật (Tech Lead / Architect)</span><span class="lang-en">3. Technical Authority (Tech Lead / Architect)</span></h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">Đánh giá tính khả thi kỹ thuật, rủi ro kiến trúc, nợ kỹ thuật, số ngày công (Man-Days) cần thiết và ảnh hưởng đến tính toàn vẹn của cơ sở dữ liệu hiện có.</p>
+            <p class="lang-en" style="font-size: 0.9rem;">Evaluates technical feasibility, architectural elegance, technical debt accumulation, engineering man-days, and database schema migration complexities.</p>
+          </div>
+
+          <div class="card" style="padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <h4 style="color: var(--brand-primary); margin-bottom: 0.5rem;"><span class="lang-vi">4. Quản Lý Dự Án (Project Manager)</span><span class="lang-en">4. Project Manager (Schedule & Delivery)</span></h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">Đánh giá đường găng tiến độ (Critical Path), khả năng điều phối nhân sự của Sprint, tác động lên các mốc bàn giao Milestone và rủi ro trễ hạn hợp đồng.</p>
+            <p class="lang-en" style="font-size: 0.9rem;">Assesses critical path scheduling, sprint staffing allocations, delivery milestone viability, and contractual penalty exposure.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION C: 6-STEP BA CHANGE WORKFLOW -->
+      <section id="sec-methodology" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">C</span>
+          <h2>
+            <span class="lang-vi">Quy Trình 6 Bước Đánh Giá Tác Động & Quản Trị Thay Đổi Của BA</span>
+            <span class="lang-en">The BA's 6-Step Change Request Evaluation & Governance Workflow</span>
+          </h2>
+        </div>
+
+        <div class="timeline" style="margin-top: 1.5rem;">
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 1: Tiếp Nhận & Sàng Lọc Sơ Bộ (Intake & Pre-Screening)</span><span class="lang-en">Step 1: Intake & Initial Triage</span></h4>
+            <p class="lang-vi">Ghi nhận yêu cầu vào Hệ thống Quản trị Thay đổi. Cấp mã định danh duy nhất (ví dụ: <code>CR-OLX-2026-003</code>). Thẩm tra sơ bộ: Đây là Lỗi, Làm rõ hay Thay đổi phạm vi thực sự?</p>
+            <p class="lang-en">Register request into the Change Repository with a unique ID (e.g., <code>CR-OLX-2026-003</code>). Perform rapid triage to confirm whether it is an actual scope change vs bug or clarification.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 2: Phân Tích Tác Động Toàn Diện 360 Độ (360-Degree Impact Assessment)</span><span class="lang-en">Step 2: Conduct 360-Degree Cross-Cutting Impact Analysis</span></h4>
+            <p class="lang-vi">BA chủ trì làm việc với Tech Lead, QA Lead và đại diện nghiệp vụ để quét toàn bộ hệ sinh thái dự án: Luồng công việc, Giao diện UI/UX, Bảng dữ liệu CSDL, Cổng API REST, và Bộ test case hồi quy.</p>
+            <p class="lang-en">Facilitate structured discovery with Tech Lead, QA, and business leads to analyze project ripples: Business workflows, UI journeys, DB tables, REST interfaces, and regression suites.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 3: Định Lượng Chi Phí, Nỗ Lực & Đường Găng Tiến Độ</span><span class="lang-en">Step 3: Quantify Effort, Financial Cost & Critical Path Schedule</span></h4>
+            <p class="lang-vi">Chuyển hóa các phân tích kỹ thuật thành con số quản trị: Tổng số ngày công (Person-Days = BA + Dev + QA), chi phí quy đổi (VNĐ), và số ngày trễ hạn dự kiến của Release Milestone.</p>
+            <p class="lang-en">Translate technical findings into executive metrics: Total person-days (BA + Dev + QA), fiscal budget delta (VND), and projected slippage on the critical release milestone.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 4: Xây Dựng Ma Trận Đánh Đổi (Trade-Off Alternatives Formulation)</span><span class="lang-en">Step 4: Formulate Solution Alternatives & Trade-Off Matrix</span></h4>
+            <p class="lang-vi">Không chỉ đưa ra một giải pháp duy nhất. BA xây dựng tối thiểu 3 kịch bản: (A) Chấp thuận toàn phần; (B) Triển khai từng phần theo lộ trình (Phased Approach); (C) Từ chối và giữ nguyên đường cơ sở.</p>
+            <p class="lang-en">Never offer a single binary choice. Structure at least 3 viable options: (A) Full immediate implementation; (B) De-scoped phased rollout; (C) Rejection with status-quo baseline preservation.</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 5: Trình Bày Hội Đồng CCB & Ra Quyết Định Pháp Lý</span><span class="lang-en">Step 5: Present to CCB & Secure Formal Decision Verdict</span></h4>
+            <p class="lang-vi">Triệu tập phiên họp CCB. BA trình bày báo cáo phân tích tác động. Các thành viên bỏ phiếu và Chủ tịch CCB ký biên bản phê duyệt chính thức (Approved, Rejected, hoặc Deferred).</p>
+            <p class="lang-en">Convene formal CCB meeting. Present the executive dossier. Council votes and Chair executes formal legal verdict (Approved, Rejected, or Deferred).</p>
+          </div>
+
+          <div class="timeline-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--brand-primary);">
+            <h4><span class="lang-vi">Bước 6: Tái Lập Đường Cơ Sở & Đồng Bộ Hóa Truy Vết (Baseline Re-versioning)</span><span class="lang-en">Step 6: Baseline Re-versioning & Traceability Synchronization</span></h4>
+            <p class="lang-vi">Nếu CR được duyệt: Nâng phiên bản BRD v1.0 &rarr; v1.1, SFS v1.0 &rarr; v1.1; cập nhật các kịch bản test trong RTM; cập nhật User Stories trong backlog và gửi email thông báo chính thức cho toàn bộ Stakeholder.</p>
+            <p class="lang-en">Upon approval: Re-version BRD v1.0 &rarr; v1.1, SFS v1.0 &rarr; v1.1; update test suites in RTM; update sprint backlogs; and broadcast synchronized change bulletins to all stakeholders.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION D: WORKED ENTERPRISE CR ARTIFACT -->
+      <section id="sec-enterprise-cr" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">D</span>
+          <h2>
+            <span class="lang-vi">Hồ Sơ Yêu Cầu Thay Đổi Doanh Nghiệp Mẫu: CR-OLX-2026-003</span>
+            <span class="lang-en">Worked Enterprise Change Request Dossier: CR-OLX-2026-003</span>
+          </h2>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">
+            <span class="lang-vi">📌 Tính Kế Thừa Dự Án Xuyên Suốt (OmniLogix PRJ-OLX-2026)</span>
+            <span class="lang-en">📌 Architectural Continuity (OmniLogix PRJ-OLX-2026)</span>
+          </div>
+          <p class="lang-vi">
+            Hồ sơ này tiếp nối trực tiếp quy trình từ các tài liệu trước: <strong>BRD</strong> (Mục tiêu tối ưu hóa chuỗi cung ứng), <strong>SFS-INV-001</strong> (Quy tắc giao hàng nguyên lô và dung sai &plusmn;2% theo <code>BR-INV-04</code>), và <strong>Test Case TC-INV-004</strong> (Quy trình chặn giao hàng vượt dung sai). Yêu cầu thay đổi này xuất phát từ thực tế khủng hoảng thiếu linh kiện toàn cầu của các Nhà cung cấp chủ lực.
+          </p>
+          <p class="lang-en">
+            This dossier maintains direct continuity with preceding artifacts: <strong>BRD</strong> (Supply chain optimization), <strong>SFS-INV-001</strong> (Single-shipment delivery rule and &plusmn;2% receiving tolerance per <code>BR-INV-04</code>), and <strong>Test Case TC-INV-004</strong> (Tolerance gatekeeper). This change originates from real-world global component shortages facing tier-1 suppliers.
+          </p>
+        </div>
+
+        <div class="cr-container" style="margin-top: 1.5rem;">
+          <div class="cr-header">
+            <div>
+              <span class="cr-badge badge-approved"><span class="lang-vi">Đã Phê Duyệt Có Điều Kiện (Conditionally Approved)</span><span class="lang-en">Conditionally Approved</span></span>
+              <h3 style="margin-top: 0.5rem; margin-bottom: 0.2rem; font-size: 1.15rem;">CR-OLX-2026-003: Cho Phép Giao Hàng Chia Nhỏ (Partial Shipments) & Nới Rộng Dung Sai Nhập Kho</h3>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">Ngày Đệ Trình: 18/10/2026</span>
+              <span style="font-size: 0.8rem; color: var(--text-secondary); display: block;">Ngày Quyết Định: 20/10/2026</span>
+            </div>
+          </div>
+
+          <div class="cr-body">
+            <!-- 1. Metadata -->
+            <div class="cr-grid">
+              <div class="cr-meta-item">
+                <strong><span class="lang-vi">Người Đệ Trình (Originator):</span><span class="lang-en">Originator:</span></strong>
+                Đỗ Hoàng Long (Giám Đốc Chuỗi Cung Ứng OmniLogix)
+              </div>
+              <div class="cr-meta-item">
+                <strong><span class="lang-vi">Phân Hệ Ảnh Hưởng:</span><span class="lang-en">Impacted Module:</span></strong>
+                <code>SFS-INV-001</code> | Cổng Quản lý PO & Vendor Portal
+              </div>
+              <div class="cr-meta-item">
+                <strong><span class="lang-vi">Độ Ưu Tiên (Priority):</span><span class="lang-en">Priority:</span></strong>
+                <span style="color: #dc2626; font-weight: 700;">High (Khẩn cấp cho Q4)</span>
+              </div>
+              <div class="cr-meta-item">
+                <strong><span class="lang-vi">Tài Liệu Cơ Sở Ảnh Hưởng:</span><span class="lang-en">Baselined Specs Impacted:</span></strong>
+                <code>BRD v1.0</code>, <code>SFS v1.0</code>, <code>RTM v1.0</code>
+              </div>
+            </div>
+
+            <!-- 2. Problem Statement -->
+            <h4 style="margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1rem; color: var(--brand-primary);">
+              <span class="lang-vi">1. Mô Tả Nhu Cầu & Lý Do Nghiệp Vụ (Business Justification)</span>
+              <span class="lang-en">1. Problem Statement & Business Justification</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+              Theo đặc tả hiện tại trong <code>SFS-INV-001 §D.1</code> và quy tắc <code>BR-INV-04</code>, một đơn hàng PO chỉ chấp nhận <strong>một đợt giao hàng duy nhất (Single Consignment)</strong> với dung sai nghiêm ngặt &plusmn;2%. Tuy nhiên, do đứt gãy chuỗi cung ứng vi mạch và hạn mức vận tải hàng không toàn cầu, 3 nhà cung cấp chiến lược (đóng góp 65% sản lượng linh kiện) yêu cầu OmniLogix cho phép <strong>Giao hàng chia nhỏ (Partial / Split Deliveries)</strong> thành tối đa 3 chuyến giao hàng khác nhau cho cùng một mã PO, đồng thời nới lỏng dung sai giao hàng từ &plusmn;2% lên &plusmn;5% đối với hàng đóng gói công nghiệp cồng kềnh. Nếu không hỗ trợ tính năng này, các nhà cung cấp sẽ từ chối nhận các đơn PO lớn trên 100M VNĐ trong mùa cao điểm Q4/2026.
+            </p>
+            <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+              Under current baselined specifications (<code>SFS-INV-001 §D.1</code> and <code>BR-INV-04</code>), a Purchase Order enforces a <strong>single consignment delivery</strong> within a strict &plusmn;2% quantity tolerance. Due to global semiconductor shortages and airfreight cargo caps, top-tier vendors (accounting for 65% of component supply) formally requested that OmniLogix support <strong>Partial / Split Deliveries</strong> (up to 3 consignments per PO) and expand receiving tolerance from &plusmn;2% to &plusmn;5% for bulk commodities. Without this capability, suppliers will reject large POs (>100M VND) during peak Q4/2026 fulfillment.
+            </p>
+
+            <!-- 3. 360-Degree Impact Matrix -->
+            <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; color: var(--brand-primary);">
+              <span class="lang-vi">2. Bảng Phân Tích Tác Động Toàn Diện 360 Độ (360-Degree Impact Matrix)</span>
+              <span class="lang-en">2. 360-Degree Comprehensive Impact Matrix</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table" style="font-size: 0.85rem;">
+                <thead>
+                  <tr>
+                    <th><span class="lang-vi">Trục Đánh Giá (Dimension)</span><span class="lang-en">Dimension</span></th>
+                    <th><span class="lang-vi">Chi Tiết Tác Động Thực Tế</span><span class="lang-en">Detailed Architectural & Operational Impact</span></th>
+                    <th><span class="lang-vi">Mức Độ Tác Động</span><span class="lang-en">Severity Level</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1. Quy Trình Vận Hành (Business Process)</strong></td>
+                    <td>
+                      <span class="lang-vi">Thủ kho phải thực hiện nhiều lần nhập kho (Multiple GRNs) cho 1 đơn PO; kế toán phải đối soát công nợ nhiều đợt hóa đơn VAT lẻ thay vì 1 hóa đơn tổng.</span>
+                      <span class="lang-en">Warehouse receivers must execute multiple partial GRNs per PO; finance must reconcile multiple partial VAT invoices against a single PO.</span>
+                    </td>
+                    <td><span class="cr-badge badge-pending">Medium</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>2. Kiến Trúc CSDL (Database Schema)</strong></td>
+                    <td>
+                      <span class="lang-vi">Bảng <code>purchase_orders</code> không thể lưu trực tiếp <code>received_qty</code>. Cần tạo mới bảng con <code>po_shipments</code> (Khóa ngoại <code>po_id</code>, lưu <code>shipment_no</code>, <code>delivered_qty</code>, <code>delivery_date</code>, <code>grn_number</code>). Bổ sung trạng thái mới: <code>PARTIALLY_DELIVERED</code>.</span>
+                      <span class="lang-en">Parent table <code>purchase_orders</code> cannot store <code>received_qty</code> directly. Must introduce child table <code>po_shipments</code> (FK <code>po_id</code>, tracking <code>shipment_no</code>, <code>delivered_qty</code>, <code>delivery_date</code>, <code>grn_number</code>). Add new lifecycle state: <code>PARTIALLY_DELIVERED</code>.</span>
+                    </td>
+                    <td><span class="cr-badge badge-rejected">High</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>3. Cổng Tích Hợp API (API Contracts)</strong></td>
+                    <td>
+                      <span class="lang-vi">Thêm endpoint mới: <code>POST /api/v1/purchase-orders/{id}/shipments</code> cho phép Vendor Portal đẩy lịch giao hàng từng đợt; sửa đổi payload đồng bộ SAP ERP IDoc để truyền dữ liệu đợt lẻ.</span>
+                      <span class="lang-en">Expose new endpoint: <code>POST /api/v1/purchase-orders/{id}/shipments</code> enabling Vendor Portal to schedule split dispatches; refactor SAP ERP IDoc outbound payload to sync partial lines.</span>
+                    </td>
+                    <td><span class="cr-badge badge-rejected">High</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>4. Kiểm Thử & Hồi Quy (QA & Regression)</strong></td>
+                    <td>
+                      <span class="lang-vi">Sửa đổi <code>TC-INV-004</code>; viết thêm 6 test case mới cho logic kiểm tra tổng lũy kế các đợt giao không vượt quá 105% PO và xử lý trường hợp đợt 1 giao thiếu nhưng đợt 2 bù dư.</span>
+                      <span class="lang-en">Refactor <code>TC-INV-004</code>; author 6 new test cases verifying cumulative quantity sums do not breach 105% threshold and handling under-delivery in batch 1 with over-delivery in batch 2.</span>
+                    </td>
+                    <td><span class="cr-badge badge-pending">Medium</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>5. Ngân Sách & Chi Phí (Budget & Effort)</strong></td>
+                    <td>
+                      <span class="lang-vi"><strong>Tổng nỗ lực kỹ thuật: 18 Man-Days</strong> (BA: 3MD, Backend Dev: 6MD, Frontend Portal: 4MD, QA/QC: 5MD).<br>Đơn giá: 3,600,000 VNĐ/Man-Day &rarr; <strong>Tổng kinh phí phát sinh: 64,800,000 VNĐ</strong>.</span>
+                      <span class="lang-en"><strong>Total Engineering Effort: 18 Man-Days</strong> (BA: 3MD, Backend: 6MD, Frontend: 4MD, QA: 5MD).<br>Rate: 3,600,000 VND/MD &rarr; <strong>Supplemental Budget: 64,800,000 VND</strong>.</span>
+                    </td>
+                    <td><span class="cr-badge badge-pending">Medium</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>6. Lịch Trình Phát Hành (Schedule)</strong></td>
+                    <td>
+                      <span class="lang-vi">Thời gian triển khai: +6 ngày làm việc. Có thể hấp thụ vào thời gian đệm (Buffer Time) của Sprint 5 mà không làm lùi ngày Go-Live chính thức của toàn dự án (15/11/2026).</span>
+                      <span class="lang-en">Implementation duration: +6 working days. Absorbed within Sprint 5 release buffer without postponing final enterprise Go-Live milestone (Nov 15, 2026).</span>
+                    </td>
+                    <td><span class="cr-badge badge-approved">Low</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 4. Trade-off Matrix -->
+            <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; color: var(--brand-primary);">
+              <span class="lang-vi">3. Ma Trận Đánh Đổi Đa Phương Án (Trade-Off Decision Matrix)</span>
+              <span class="lang-en">3. Multi-Option Trade-Off Decision Matrix</span>
+            </h4>
+            <div class="table-responsive">
+              <table class="data-table" style="font-size: 0.85rem;">
+                <thead>
+                  <tr>
+                    <th>Phương Án Lựa Chọn</th>
+                    <th>Ưu Điểm (Pros)</th>
+                    <th>Nhược Điểm & Rủi Ro (Cons & Risks)</th>
+                    <th>Chi Phí & Tiến Độ</th>
+                    <th>Khuyến Nghị Của BA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Phương án A: Chấp thuận toàn bộ (Full Scope)</strong><br>Hỗ trợ chia nhỏ tối đa 3 đợt và nới dung sai &plusmn;5% trên hệ thống.</td>
+                    <td>Thỏa mãn 100% yêu cầu của Vendor; tránh đứt gãy nguồn hàng Q4; giải phóng hoàn toàn khâu giao nhận.</td>
+                    <td>Phải tạo thêm bảng CSDL con và sửa đổi payload SAP ERP; cần test hồi quy toàn bộ luồng hóa đơn.</td>
+                    <td>64,800,000 VNĐ<br>+6 ngày dev</td>
+                    <td><span class="cr-badge badge-approved">Khuyến Nghị (Recommended)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Phương án B: Giải pháp Tạm thời (Workaround / Phased)</strong><br>Chưa sửa phần mềm; cho phép thủ kho tách thành 2 mã PO con ảo thủ công.</td>
+                    <td>Không tốn chi phí phát triển phần mềm; không làm thay đổi codebase.</td>
+                    <td>Gây sai lệch số liệu kế toán; thủ kho tốn 3 giờ mỗi ngày gõ PO tay; rủi ro thất thoát hàng hóa rất cao.</td>
+                    <td>0 VNĐ phần mềm<br>(Nhưng tăng chi phí vận hành)</td>
+                    <td><span class="cr-badge badge-rejected">Không Khuyến Nghị</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Phương án C: Bác bỏ yêu cầu (Reject CR)</strong><br>Giữ nguyên đường cơ sở giao 1 lần và dung sai &plusmn;2%.</td>
+                    <td>Bảo toàn 100% ngân sách và tiến độ cam kết ban đầu; không phát sinh rủi ro kỹ thuật.</td>
+                    <td>Vendor từ chối ký hợp đồng cung ứng linh kiện; OmniLogix đứng trước nguy cơ thiếu hàng nghiêm trọng trong mùa Black Friday.</td>
+                    <td>0 VNĐ</td>
+                    <td><span class="cr-badge badge-rejected">Rủi Ro Nghiệp Vụ Quá Lớn</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 5. Formal CCB Resolution -->
+            <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; color: var(--brand-primary);">
+              <span class="lang-vi">4. Nghị Quyết Chính Thức Của Hội Đồng Quản Trị Thay Đổi (CCB Official Resolution)</span>
+              <span class="lang-en">4. Change Control Board (CCB) Official Resolution</span>
+            </h4>
+            <div style="background: var(--bg-secondary); border-left: 4px solid #059669; padding: 1rem 1.25rem; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 0.9rem; line-height: 1.6;">
+              <p style="margin: 0 0 0.5rem 0;"><strong>KẾT QUẢ BỎ PHIẾU CCB:</strong> 4/4 Thành viên Thống Nhất Phê Duyệt Có Điều Kiện (Unanimous Conditional Approval).</p>
+              <p style="margin: 0 0 0.5rem 0;"><strong>ĐIỀU KIỆN RÀNG BUỘC PHÊ DUYỆT (CONDITIONS OF APPROVAL):</strong></p>
+              <ul style="margin: 0; padding-left: 1.25rem;">
+                <li>Chỉ áp dụng tính năng Giao hàng chia nhỏ cho các nhà cung cấp được gắn cờ <code>TIER_1_STRATEGIC</code> và đơn hàng có giá trị &gt; 50,000,000 VNĐ.</li>
+                <li>Số lượng đợt giao chia nhỏ tối đa là <strong>3 đợt</strong>. Mỗi đợt giao phải đạt tối thiểu <strong>20%</strong> tổng số lượng PO để tránh tình trạng nhà cung cấp giao lắt nhắt gây tắc nghẽn kho.</li>
+                <li>Dung sai &plusmn;5% chỉ áp dụng cho nhóm hàng Bulk Commodities; nhóm hàng linh kiện điện tử nguyên hộp giữ nguyên dung sai &plusmn;2%.</li>
+                <li>Ngân sách phát sinh 64,800,000 VNĐ được trích từ Quỹ Dự phòng Rủi ro Dự án (Project Management Contingency Reserve).</li>
+              </ul>
+            </div>
+
+            <!-- 6. Baseline Diff Visualization -->
+            <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1rem; color: var(--brand-primary);">
+              <span class="lang-vi">5. Cập Nhật Đường Cơ Sở Yêu Cầu (Requirements Baseline Re-versioning Diff)</span>
+              <span class="lang-en">5. Requirements Baseline Re-versioning Diff (BRD v1.1 & SFS v1.1)</span>
+            </h4>
+            <p class="lang-vi" style="font-size: 0.9rem;">Đối chiếu sự thay đổi trước và sau khi ban hành phiên bản Baseline mới:</p>
+            <p class="lang-en" style="font-size: 0.9rem;">Comparative diff between baselines before and after formal re-versioning:</p>
+
+            <div class="table-responsive">
+              <table class="data-table diff-table" style="font-size: 0.85rem;">
+                <thead>
+                  <tr>
+                    <th>Mã Yêu Cầu</th>
+                    <th>Đường Cơ Sở Cũ (Baseline v1.0)</th>
+                    <th>Đường Cơ Sở Mới Cập Nhật (Baseline v1.1)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>BR-INV-04</code><br>(Dung sai giao hàng)</td>
+                    <td><del>Kho chỉ chấp nhận giao hàng 1 lần nguyên lô với dung sai số lượng tối đa &plusmn;2.00% so với PO.</del></td>
+                    <td><ins>Kho chấp nhận tối đa 3 đợt giao hàng chia nhỏ (Partial Shipments). Dung sai số lượng áp dụng: &plusmn;5.00% cho hàng Bulk và &plusmn;2.00% cho linh kiện điện tử tiêu chuẩn.</ins></td>
+                  </tr>
+                  <tr>
+                    <td><code>SFS-INV-001 §D.1</code><br>(Vòng đời PO)</td>
+                    <td><del>Trạng thái: PENDING_APPROVAL &rarr; APPROVED &rarr; DISPATCHED &rarr; ACKNOWLEDGED &rarr; RECEIVED &rarr; CLOSED.</del></td>
+                    <td><ins>Bổ sung trạng thái trung gian: DISPATCHED &rarr; PARTIALLY_DELIVERED (kèm child records trong bảng po_shipments) &rarr; FULLY_RECEIVED &rarr; CLOSED.</ins></td>
+                  </tr>
+                  <tr>
+                    <td><code>TC-INV-004</code><br>(Kiểm thử biên kho)</td>
+                    <td><del>Kiểm tra chặn tại ngưỡng +2.01% tổng số lượng đơn hàng.</del></td>
+                    <td><ins>Kiểm tra chặn tại ngưỡng +5.01% cho hàng Bulk; kiểm tra lũy kế tổng các đợt giao $Qty_1 + Qty_2 + Qty_3 \le 105\%$ số lượng PO.</ins></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION E: 3 CRITICAL ANTI-PATTERNS -->
+      <section id="sec-anti-patterns" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">E</span>
+          <h2>
+            <span class="lang-vi">3 Sai Lầm Chí Mạng Trong Quản Trị Thay Đổi (Change Anti-Patterns)</span>
+            <span class="lang-en">3 Critical Anti-Patterns in Change Management</span>
+          </h2>
+        </div>
+
+        <!-- Anti-pattern 1 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 1: Scope Creep Thông Qua "Ủng Hộ Miệng" (The "Informal Favor" Trap)</span>
+            <span class="lang-en">🚨 Anti-Pattern 1: Scope Creep via "Informal Favors" & Slack Promises</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> Khách hàng hoặc Giám đốc Kinh doanh nhắn tin riêng qua Slack/Zalo cho Tech Lead hoặc BA: <em>"Thêm giúp anh cái nút Xuất Excel này nhé, đơn giản mà, mất 15 phút thôi!"</em>. Dev cả nể làm thêm. Đến tuần sau, khách hàng đòi thêm định dạng lọc ngày, rồi crash server vì file Excel quá nặng.<br>
+            <strong>Chuẩn mực khắc phục:</strong> Tuyệt đối không nhận bất kỳ thay đổi nào qua tin nhắn chat. BA phải luôn là "tấm khiên" bảo vệ team: <em>"Dạ ý tưởng này rất hay. Em đã ghi nhận và sẽ lập phiếu CR để đánh giá ảnh hưởng lên server và báo cáo anh trong buổi họp CCB thứ Sáu tuần này ạ."</em>
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> A client or executive sends a private DM to a developer or BA: <em>"Could you just quickly add an 'Export to Excel' button? It's super trivial, only 15 minutes of work!"</em>. The dev obliges. A week later, memory exhaustion crashes production because the Excel generator tried rendering 200,000 unpaginated rows.<br>
+            <strong>The Antidote:</strong> Enforce zero verbal/chat scope injection. The BA acts as an impenetrable shield: <em>"That's a valuable enhancement. I've logged it into our change pipeline and will present the architectural impact assessment at this Friday's CCB."</em>
+          </p>
+        </div>
+
+        <!-- Anti-pattern 2 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 2: Phân Tích Tác Động Nông Cạn (The "UI-Only" Impact Blindspot)</span>
+            <span class="lang-en">🚨 Anti-Pattern 2: The Superficial "UI-Only" Impact Blindspot</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> Khi người dùng yêu cầu: <em>"Thêm trường Số điện thoại người nhận thứ 2 trên màn hình đặt hàng"</em>, BA chỉ đánh giá: <em>"Mất 1 ngày thêm ô input trên React"</em>. Nhưng thực tế: CSDL cần chạy migration thêm cột, bảng đồng bộ SAP ERP bị lệch định dạng file CSV khiến tiến độ đối soát ban đêm chết đứng, và hệ thống SMS Brandname phát sinh chi phí gấp đôi.<br>
+            <strong>Chuẩn mực khắc phục:</strong> Luôn áp dụng mô hình <strong>360 độ</strong>: Đi từ UI &rarr; Validation Rule &rarr; Backend Controller &rarr; Database Schema & Data Migration &rarr; Third-party Integration &rarr; Batch/ETL jobs &rarr; Regression Test Suites.
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> When requested to: <em>"Add an alternate recipient phone field on checkout"</em>, the BA only estimates: <em>"1 day to add a text field in React"</em>. In reality, the DB requires migration, downstream SAP ERP nightly flat-file batch jobs abort due to unexpected CSV column offsets, and SMS gateway costs double.<br>
+            <strong>The Antidote:</strong> Rigorously traverse the full <strong>360-degree stack</strong>: UI Journey &rarr; Input Validation &rarr; API Contracts &rarr; Database Relational Schema &rarr; Downstream Batch/ETL &rarr; Regression Test Suites.
+          </p>
+        </div>
+
+        <!-- Anti-pattern 3 -->
+        <div class="callout callout-danger" style="margin-bottom: 1.5rem;">
+          <div class="callout-title">
+            <span class="lang-vi">🚨 Sai Lầm 3: "Zombie Change Requests" (Hồ Sơ Treo Vô Thời Hạn)</span>
+            <span class="lang-en">🚨 Anti-Pattern 3: "Zombie Change Requests" (Perpetual Decision Paralysis)</span>
+          </div>
+          <p class="lang-vi">
+            <strong>Thực trạng:</strong> Các yêu cầu thay đổi đệ trình lên nhưng Ban Quản lý không dám quyết, để trạng thái <code>PENDING</code> kéo dài từ tháng này qua tháng khác. Đội ngũ phát triển hoang mang không biết có nên xây dựng cấu trúc chờ sẵn không, dẫn đến code bị phân mảnh (Branch drift).<br>
+            <strong>Chuẩn mực khắc phục:</strong> Thiết lập quy tắc <strong>Timebox 14 Ngày</strong> trong Điều lệ Quản trị Thay đổi: Mọi CR sau 14 ngày làm việc nếu không được CCB biểu quyết thông qua sẽ tự động chuyển sang trạng thái <code>DEFERRED_TO_NEXT_PHASE</code> (Hoãn sang giai đoạn sau) và đóng hồ sơ Sprint hiện tại.
+          </p>
+          <p class="lang-en">
+            <strong>The Anti-Pattern:</strong> Change requests submitted but trapped in decision paralysis, lingering in <code>PENDING</code> status for months. Developers freeze refactors wondering whether to build extensibility hooks, resulting in severe git branch drift and cognitive fatigue.<br>
+            <strong>The Antidote:</strong> Institute a strict <strong>14-Day Timebox Rule</strong> in the Change Charter: Any CR not formally voted upon within 14 business days automatically transitions to <code>DEFERRED_TO_NEXT_PHASE</code>, freeing the active sprint baseline from ambiguity.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION F: PRACTICUM EXERCISES -->
+      <section id="sec-exercises" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">F</span>
+          <h2>
+            <span class="lang-vi">Bài Tập Tình Huống Thực Chiến (Hands-on Practicum)</span>
+            <span class="lang-en">Hands-on Practicum Exercises with Interactive Solutions</span>
+          </h2>
+        </div>
+
+        <!-- Exercise 1 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 1: Phân Loại Chuẩn Xác Lỗi (Bug) vs Làm Rõ (Clarification) vs Yêu Cầu Thay Đổi (CR)</span>
+            <span class="lang-en">Exercise 1: Rigorous Triage: Defect vs. Clarification vs. Scope Change</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Trong giai đoạn kiểm thử hệ thống Ngân hàng điện tử, 4 phản ánh sau được người dùng gửi về:<br>
+            1. <em>"Khi xuất báo cáo sao kê sang file PDF, tiêu đề bảng bị mất chữ 'Đ' trong từ 'Định Kỳ'."</em><br>
+            2. <em>"Trong SFS ghi 'cho phép khách hàng thanh toán hóa đơn điện lực'. Khi chạy thử, khách hàng muốn sau khi thanh toán xong phải có nút 'Lưu thông tin hóa đơn này cho lần thanh toán sau'."</em><br>
+            3. <em>"Tài liệu SFS ghi 'người dùng nhập số tiền hợp lệ'. Nhưng khi người dùng nhập số tiền có dấu phẩy '50,000' thì hệ thống báo lỗi không cho thanh toán."</em><br>
+            4. <em>"Khách hàng doanh nghiệp yêu cầu bổ sung tính năng duyệt lệnh chuyển tiền bằng chữ ký số USB Token PKI, trong khi hợp đồng ban đầu chỉ cam kết xác thực bằng SMS OTP."</em><br>
+            <strong>Nhiệm vụ:</strong> Hãy phân loại từng phản ánh trên vào đúng nhóm (Bug, Clarification, hay Change Request) và nêu căn cứ giải thích.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> During digital banking verification, 4 user feedbacks are logged:<br>
+            1. <em>"When exporting PDF statements, the Vietnamese diacritic letter 'Đ' is missing from the table header."</em><br>
+            2. <em>"SFS states 'allow utility bill payments'. During testing, users request an additional button: 'Save bill metadata for future recurring payments'."</em><br>
+            3. <em>"SFS specifies 'user inputs valid amount'. When a user types amount with commas '50,000', the system rejects it as invalid string."</em><br>
+            4. <em>"Corporate clients demand hardware USB Token PKI digital signing for wire transfers, whereas the signed contract only agreed to SMS OTP."</em><br>
+            <strong>Task:</strong> Categorize each item into Bug, Clarification, or Scope Change Request with clear architectural justification.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Ma Trận Phân Loại Chuẩn</span><span class="lang-en">👉 View Triage Categorization Solution</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>1. Phản ánh 1: Lỗi Hệ Thống (Defect / Bug)</strong><br>
+                <em>Căn cứ:</em> Thiếu font chữ Unicode UTF-8 trong thư viện xuất PDF. Đây là lỗi kỹ thuật hiển thị sai lệch tiêu chuẩn tiếng Việt, dev phải sửa miễn phí.<br>
+                <br>
+                <strong>2. Phản ánh 2: Yêu Cầu Thay Đổi (Change Request)</strong><br>
+                <em>Căn cứ:</em> "Lưu mẫu hóa đơn cho lần sau" yêu cầu tạo mới bảng CSDL lưu trữ danh bạ thụ hưởng (Beneficiary Directory), thay đổi API và bổ sung luồng UX. Đây là tính năng mới nằm ngoài phạm vi thanh toán đơn lẻ ban đầu.<br>
+                <br>
+                <strong>3. Phản ánh 3: Làm Rõ Yêu Cầu (Requirement Clarification)</strong><br>
+                <em>Căn cứ:</em> SFS đã nêu "số tiền hợp lệ" nhưng thiếu đặc tả mặt nạ nhập liệu (Input Mask). Việc cho phép format dấu phẩy hàng nghìn là chuẩn trải nghiệm người dùng tự nhiên (Implicit User Expectation). BA làm rõ quy tắc regex format tiền tệ để dev update mà không tính CR.<br>
+                <br>
+                <strong>4. Phản ánh 4: Yêu Cầu Thay Đổi Lớn (Major Change Request)</strong><br>
+                <em>Căn cứ:</em> Tích hợp chứng thư số PKI đòi hỏi cài đặt thư viện phần cứng (Hardware Driver Integration), ký số chuẩn mật mã X.509, thay đổi kiến trúc bảo mật backend và quy trình cấp phát chứng thư. Bắt buộc phải tính ngân sách và gia hạn tiến độ thông qua CCB.
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>1. Feedback 1: Defect / Bug</strong><br>
+                <em>Justification:</em> Missing UTF-8 font support in the PDF rendering engine. It violates baseline presentation quality; development must remediate under contracted scope.<br>
+                <br>
+                <strong>2. Feedback 2: Scope Change Request</strong><br>
+                <em>Justification:</em> Saving bill templates requires a new relational table (Beneficiary Directory), new CRUD endpoints, and new UI state persistence. It exceeds single one-off bill payment scope.<br>
+                <br>
+                <strong>3. Feedback 3: Requirement Clarification</strong><br>
+                <em>Justification:</em> SFS specified "valid amount" but omitted currency input masking. Accepting standard thousand-delimiter commas is an implicit industry usability expectation. BA clarifies frontend regex sanitization without raising a billable CR.<br>
+                <br>
+                <strong>4. Feedback 4: Major Scope Change Request</strong><br>
+                <em>Justification:</em> USB PKI token integration entails cryptographic hardware driver interfacing, X.509 digital cert validation, and severe security architecture rework. Non-negotiable CCB governance, supplemental billing, and timeline extension required.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 2: Phân Tích Tác Động 360 Độ Cho Tính Năng Bổ Sung Đa Tiền Tệ (USD & EUR)</span>
+            <span class="lang-en">Exercise 2: Conducting a 360-Degree Impact Assessment for Multi-Currency Support</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Một ứng dụng thương mại điện tử ban đầu được thiết kế chỉ chấp nhận thanh toán bằng Việt Nam Đồng (VNĐ - trường <code>amount INT</code> không có số lẻ thập phân). Sau khi ký hợp đồng phân phối quốc tế, ban giám đốc yêu cầu bổ sung thanh toán bằng USD và EUR.<br>
+            <strong>Nhiệm vụ:</strong> Hãy thực hiện bảng Phân tích Tác động 360 độ trên 5 trục: (1) CSDL, (2) Logic tính toán tỷ giá, (3) Giao diện UI/UX, (4) Báo cáo tài chính kế toán, và (5) Rủi ro kiểm thử.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> An e-commerce platform originally designed solely for Vietnamese Dong (VND with integer data type <code>amount INT</code> without decimals). Following an international distributor partnership, executives request enabling USD and EUR checkout.<br>
+            <strong>Task:</strong> Build a 360-Degree Impact Assessment across 5 axes: (1) Database schema, (2) FX rate calculation logic, (3) UI/UX journey, (4) Accounting & financial reporting, and (5) Testing & compliance risks.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Bảng Đánh Giá Tác Động 360 Độ</span><span class="lang-en">👉 View 360-Degree Impact Assessment Solution</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>1. CSDL (Database Schema):</strong> Cột <code>amount INT</code> sẽ bị lỗi khi lưu <code>19.99 USD</code>. Phải thay đổi toàn bộ các bảng <code>orders</code>, <code>order_items</code>, <code>transactions</code> sang <code>DECIMAL(18, 4)</code> để lưu 4 chữ số thập phân; bổ sung cột <code>currency_code VARCHAR(3)</code> và <code>exchange_rate DECIMAL(12, 6)</code> ghi nhận tỷ giá tại thời điểm phát sinh giao dịch.<br>
+                <strong>2. Logic Tỷ Giá (FX Logic):</strong> Cần tích hợp API lấy tỷ giá ngân hàng tự động (Real-time FX Feed), thiết lập cơ chế khóa tỷ giá (FX Locking) trong 15 phút checkout của khách hàng để tránh chênh lệch giá lúc bấm thanh toán.<br>
+                <strong>3. Giao diện (UI/UX):</strong> Thêm bộ chọn tiền tệ (Currency Picker); xử lý định dạng hiển thị tiền tệ quốc tế (USD: <code>$19.99</code>, EUR: <code>19,99 €</code>, VNĐ: <code>19.000 đ</code>).<br>
+                <strong>4. Kế toán & Thuế (Finance & Tax):</strong> Báo cáo kế toán phải ghi nhận cả 2 giá trị: Giá trị quy đổi tiền tệ gốc (Original Currency) và Giá trị hạch toán VND theo tỷ giá quy định của Tổng cục Thuế để lập hóa đơn điện tử.<br>
+                <strong>5. Kiểm Thử (Testing & Regression):</strong> Test toàn bộ các cổng thanh toán quốc tế (Stripe, Paypal) và test hồi quy các luồng khuyến mãi, mã giảm giá voucher (Voucher 50K VNĐ quy đổi sang USD như thế nào?).
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>1. Database Schema:</strong> <code>amount INT</code> aborts on <code>$19.99</code>. Must migrate all tables (<code>orders</code>, <code>order_items</code>, <code>transactions</code>) to <code>DECIMAL(18, 4)</code>; add columns <code>currency_code VARCHAR(3)</code> and <code>exchange_rate DECIMAL(12, 6)</code> to freeze the FX rate at the exact transaction second.<br>
+                <strong>2. FX Rate Logic:</strong> Integrate live interbank FX feed API; establish a 15-minute FX Rate Lock mechanism during checkout to protect against rate slippage before payment authorization.<br>
+                <strong>3. UI/UX Journey:</strong> Add header Currency Switcher; implement locale-specific currency formatters (USD: <code>$19.99</code>, EUR: <code>19,99 €</code>, VND: <code>19,000 đ</code>).<br>
+                <strong>4. Accounting & Tax Compliance:</strong> Financial ledger must record dual records: Original transaction currency amount and converted VND amount per statutory tax regulations for official e-invoicing.<br>
+                <strong>5. Testing & Regression:</strong> Validate international payment gateway integrations (Stripe, PayPal) and perform deep regression on coupon discount engines (How does a 50,000 VND fixed voucher apply against a USD cart?).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 3 -->
+        <div class="exercise-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
+          <h3 style="color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Bài tập 3: Soạn Thảo Đề Xuất Trình Hội Đồng CCB Cho Một Yêu Cầu Tuân Thủ Pháp Lý Khẩn Cấp</span>
+            <span class="lang-en">Exercise 3: Drafting a CCB Recommendation Brief for Urgent Statutory Compliance</span>
+          </h3>
+          <p class="lang-vi">
+            <strong>Tình huống nghiệp vụ:</strong> Chính phủ ban hành Nghị định mới về Bảo vệ Dữ liệu Cá nhân có hiệu lực sau đúng 30 ngày. Mọi hệ thống thu thập thông tin người dùng bắt buộc phải bổ sung màn hình "Đồng ý Điều khoản Dữ liệu Cá nhân (Explicit Consent Opt-in)" và tính năng cho phép người dùng bấm nút "Yêu Cầu Xóa Toàn Bộ Dữ Liệu (Right to be Forgotten)". Nếu vi phạm, doanh nghiệp bị phạt 5% doanh thu hàng năm.<br>
+            <strong>Nhiệm vụ:</strong> Trong vai trò Lead BA, hãy soạn một Bản Tóm Tắt Đề Xuất (CCB Executive Brief) ngắn gọn nhưng sắc sảo, khuyến nghị Hội đồng CCB phê duyệt khẩn cấp, phân bổ ngân sách và điều chỉnh kế hoạch Sprint.
+          </p>
+          <p class="lang-en">
+            <strong>Business Context:</strong> Government enacts a new Personal Data Protection Decree enforceable in 30 days. All apps must provide an explicit opt-in consent gate and a "Right to be Forgotten" self-service data deletion request. Non-compliance incurs a punitive fine of up to 5% of annual revenue.<br>
+            <strong>Task:</strong> As Lead BA, draft an executive CCB Recommendation Brief urging emergency approval, budget reallocation, and sprint backlog adjustment.
+          </p>
+
+          <div class="interactive-solution">
+            <button class="solution-trigger" onclick="this.nextElementSibling.classList.toggle('active')">
+              <span><span class="lang-vi">👉 Xem Lời Giải & Bản Tờ Trình CCB Chuẩn Mực</span><span class="lang-en">👉 View CCB Executive Brief Solution</span></span>
+              <span>▼</span>
+            </button>
+            <div class="solution-content">
+              <h4 style="margin-bottom: 0.5rem;">TỜ TRÌNH HỘI ĐỒNG CCB: DỰ ÁN DIGITAL PLATFORM</h4>
+              <p class="lang-vi" style="font-size: 0.95rem;">
+                <strong>Mã CR:</strong> <code>CR-REG-2026-DATA-01</code> | <strong>Tính chất:</strong> Tuân thủ Pháp lý Bắt buộc (Statutory Compliance Mandate).<br>
+                <strong>Phân tích Chi phí Không Hành động (Cost of Inaction):</strong> Nếu không triển khai trước ngày 01/12/2026, doanh nghiệp đối mặt án phạt lên đến 5% doanh thu (ước tính ~15 tỷ VNĐ) cùng rủi ro đình chỉ hoạt động ứng dụng.<br>
+                <strong>Giải pháp Đề Xuất:</strong><br>
+                • <em>Giai đoạn 1 (Fast-track 10 ngày):</em> Bổ sung Popup chặn bắt buộc người dùng bấm Đồng ý trước khi tiếp tục dùng app; lưu log thời gian đồng ý vào bảng CSDL mới <code>user_data_consents</code>.<br>
+                • <em>Giai đoạn 2 (15 ngày tiếp theo):</em> Bổ sung nút "Yêu cầu xóa tài khoản"; hệ thống tự động ẩn danh hóa (Anonymize) dữ liệu định danh (Họ tên, SĐT, Email) nhưng giữ lại số liệu giao dịch tài chính để phục vụ kiểm toán thuế theo luật kế toán.<br>
+                <strong>Khuyến nghị Ngân sách & Tiến độ:</strong> Điều chuyển 12 Man-Days từ các tính năng mở rộng của Sprint 4; tạm hoãn tính năng "Gamification Tích Điểm" sang Q1 năm sau; giải ngân 43,200,000 VNĐ từ Quỹ Tuân thủ Doanh nghiệp.<br>
+                <em>&rarr; Đề xuất CCB: PHÊ DUYỆT KHẨN CẤP (FAST-TRACK APPROVAL).</em>
+              </p>
+              <p class="lang-en" style="font-size: 0.95rem;">
+                <strong>CR Ref:</strong> <code>CR-REG-2026-DATA-01</code> | <strong>Classification:</strong> Statutory / Regulatory Compliance Mandate.<br>
+                <strong>Cost of Inaction:</strong> Failure to comply before Dec 1, 2026 triggers regulatory fines up to 5% annual turnover (~15 Billion VND) and app store suspension.<br>
+                <strong>Proposed Implementation Architecture:</strong><br>
+                • <em>Phase 1 (10-Day Fast-Track):</em> Deploy mandatory modal blocking user navigation until explicit consent is acknowledged; record timestamp audit logs in dedicated table <code>user_data_consents</code>.<br>
+                • <em>Phase 2 (Subsequent 15 Days):</em> Provide self-service "Delete Account" button; system automatically anonymizes personal identifiers (Name, Mobile, Email) while retaining immutable financial transaction ledgers to satisfy statutory tax audit requirements.<br>
+                <strong>Resource & Schedule Recommendation:</strong> Reallocate 12 Man-Days from low-priority Sprint 4 enhancements; defer "Gamification Loyalty Badges" to Q1 next year; allocate 43,200,000 VND from the Enterprise Compliance Reserve.<br>
+                <em>&rarr; Recommended Action: EMERGENCY FAST-TRACK APPROVAL.</em>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION G: TECHNICAL INTERVIEW PREPARATION -->
+      <section id="sec-interviews" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">G</span>
+          <h2>
+            <span class="lang-vi">Bộ Câu Hỏi Phỏng Vấn Kỹ Thuật Chuyên Sâu (Chuẩn STAR Method)</span>
+            <span class="lang-en">Technical BA Interview Questions & Calibrated STAR Responses</span>
+          </h2>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 1: Khi khách hàng liên tục thay đổi yêu cầu giữa chừng trong một dự án Agile, bạn xử lý thế nào để vừa duy trì quan hệ tốt vừa bảo vệ team phát triển?</span>
+            <span class="lang-en">Question 1: When a client continuously changes requirements mid-sprint in an Agile engagement, how do you protect team velocity while preserving client rapport?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Trong một dự án Fintech chạy Scrum 2 tuần/sprint, Product Owner phía khách hàng liên tục thêm các trường dữ liệu và thay đổi logic tính phí khi sprint đã bước sang ngày thứ 6, khiến đội dev thường xuyên phải làm thêm giờ và sprint bị vỡ cam kết.<br>
+            • <strong>Task:</strong> Thiết lập lại kỷ luật làm việc của Scrum mà không tạo ra xung đột với khách hàng.<br>
+            • <strong>Action:</strong> Trong buổi họp cải tiến (Sprint Retrospective), tôi đã phân tích số liệu cho PO thấy việc thay đổi giữa sprint làm giảm 40% vận tốc (Velocity) và tăng 300% tỷ lệ lỗi lọt qua kiểm thử. Tôi đưa ra thỏa thuận <strong>"Nguyên tắc Đổi 1 - Lấy 1" (Trade-off Exchange Rule)</strong>: Sprint Backlog sau khi đã chốt ở Sprint Planning sẽ được khóa lại. Nếu PO muốn đưa vào một yêu cầu mới trị giá 5 Story Points, PO bắt buộc phải rút ra một yêu cầu cũ có độ phức tạp tương đương 5 Story Points khỏi Sprint hiện tại. Nếu không thể rút, yêu cầu mới sẽ được ưu tiên xếp đầu bảng Backlog cho Sprint tiếp theo.<br>
+            • <strong>Result:</strong> Khách hàng hoàn toàn ủng hộ vì họ vẫn có quyền kiểm soát linh hoạt; đội dev được bảo vệ khỏi bị quá tải, và tỷ lệ hoàn thành Sprint cam kết tăng từ 60% lên 95%.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> In a 2-week Fintech Scrum project, the client Product Owner continuously injected new fields and altered commission logic on day 6 of active sprints, causing burnout and missed sprint goals.<br>
+            • <strong>Task:</strong> Restore Scrum discipline without alienating the client.<br>
+            • <strong>Action:</strong> At the retrospective, I presented empirical velocity charts showing mid-sprint churn decreased throughput by 40% and tripled escaped defect rates. I instituted the <strong>"1-for-1 Scope Trade-Off Rule"</strong>: The Sprint Goal is locked post-planning. If the PO introduces an urgent 5-point story, an existing 5-point story must be deprioritized back to the product backlog. If nothing can be dropped, the new requirement is groomed for top priority in the very next sprint.<br>
+            • <strong>Result:</strong> The client embraced the model because they retained agile prioritization power; engineering was shielded from chaotic churn, and sprint commitment predictability rose from 60% to 95%.
+          </p>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 2: Hãy mô tả một tình huống bạn thực hiện Phân Tích Tác Động (Impact Analysis) và phát hiện ra một rủi ro kỹ thuật ngầm mà trước đó chưa ai lường tới?</span>
+            <span class="lang-en">Question 2: Describe an instance where your 360-Degree Impact Analysis uncovered a critical hidden technical risk that everyone else overlooked.</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Khách hàng đề xuất một yêu cầu thay đổi tưởng chừng rất nhỏ: <em>"Cho phép nhân viên bán hàng hủy đơn hàng đã đặt trong vòng 60 phút thay vì 5 phút như trước"</em>. Tech Lead sơ bộ đánh giá chỉ cần sửa 1 biến cấu hình <code>CANCEL_WINDOW_MINUTES = 60</code>.<br>
+            • <strong>Task:</strong> Với vai trò Lead BA, tôi phải thực hiện phân tích tác động 360 độ trên toàn bộ chuỗi giá trị trước khi trình CCB phê duyệt.<br>
+            • <strong>Action:</strong> Khi đối chiếu quy trình kho, tôi phát hiện ra hệ thống tự động đẩy dữ liệu sang hệ thống Quản lý Kho tự động (Automated WMS) sau đúng 10 phút để robot tự động lấy hàng trên giá kệ. Nếu nới thời gian hủy lên 60 phút mà không đồng bộ WMS, robot đã đóng gói xong kiện hàng và xe tải vận chuyển đã nhận hàng, trong khi trên ứng dụng khách hàng lại báo "Hủy đơn thành công". Tôi đã chỉ ra lỗ hổng này và thiết kế lại luồng: Nếu hủy sau 10 phút, hệ thống phải gọi API kiểm tra trạng thái WMS xem kiện hàng đã đóng gói hay chưa trước khi cho phép hủy.<br>
+            • <strong>Result:</strong> Ngăn chặn nguy cơ thất thoát hàng triệu đồng tiền hàng bị vận chuyển sai sót mỗi ngày và bảo vệ tính toàn vẹn của chu trình logistics.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> A client requested a seemingly trivial change: <em>"Extend order cancellation windows from 5 minutes to 60 minutes"</em>. The Tech Lead estimated it as a 1-minute config change: <code>CANCEL_WINDOW_MINUTES = 60</code>.<br>
+            • <strong>Task:</strong> Conduct an exhaustive 360-degree impact assessment across the fulfillment pipeline before endorsing the change to the CCB.<br>
+            • <strong>Action:</strong> Tracing the downstream warehouse workflow, I discovered that our ERP automatically dispatched orders to robotic automated sortation facilities (WMS) at exactly minute 10. If orders were cancelled at minute 45, robotic cranes had already picked and palletized the goods onto outbound delivery trucks while the app showed "Cancelled". I flagged this massive discrepancy and redesigned the integration contract: cancellations beyond minute 10 trigger a synchronous WMS query to verify if parcel sortation has commenced before issuing cancellation approvals.<br>
+            • <strong>Result:</strong> Averted daily operational chaos and tens of thousands of dollars in wasted logistics fulfillment and lost inventory.
+          </p>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 3: Bạn làm gì khi Hội đồng CCB bác bỏ một yêu cầu thay đổi (Reject CR) mà một Stakeholder rất quyền lực khăng khăng đòi thực hiện?</span>
+            <span class="lang-en">Question 3: How do you handle a scenario where the CCB formally rejects a Change Request championed by an influential executive stakeholder?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Giám đốc Marketing yêu cầu bổ sung tính năng tích hợp AI gợi ý sản phẩm ngay trước ngày Go-live 3 tuần. Hội đồng CCB đã bỏ phiếu Bác bỏ (Reject) vì rủi ro vỡ tiến độ ra mắt toàn quốc.<br>
+            • <strong>Task:</strong> Xoa dịu sự thất vọng của Giám đốc Marketing, duy trì sự gắn kết và định hướng năng lượng vào lộ trình phát triển dài hạn.<br>
+            • <strong>Action:</strong> Tôi đã chủ động đặt lịch họp riêng 1-1 với Giám đốc Marketing. Tôi không nói <em>"Hội đồng từ chối yêu cầu của anh"</em>, mà dùng tư duy giá trị: <em>"Hội đồng đánh giá tính năng AI của anh là vũ khí chiến lược tạo đột phá cạnh tranh. Tuy nhiên, nếu vội vã đưa vào trong 3 tuần này, tỷ lệ lỗi mô hình gợi ý sai sẽ phá hỏng chiến dịch truyền thông ra mắt của anh. Em đã lập một sáng kiến độc lập và đưa vào vị trí ưu tiên số 1 của Phase 2 (khởi động ngay sau Go-live 1 tháng) để có đủ 2 tháng huấn luyện mô hình chuẩn xác nhất."</em><br>
+            • <strong>Result:</strong> Giám đốc Marketing hoàn toàn đồng thuận, chuyển từ tâm lý đối đầu sang hợp tác chuẩn bị dữ liệu mồi cho Phase 2; dự án Phase 1 ra mắt đúng hạn và thành công mỹ mãn.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> The Chief Marketing Officer requested an AI recommendation module 3 weeks prior to national launch. The CCB voted to Reject the CR due to critical launch date risks.<br>
+            • <strong>Task:</strong> Manage the CMO's disappointment and pivot their focus toward sustainable long-term value.<br>
+            • <strong>Action:</strong> I scheduled a 1-on-1 session with the CMO. Rather than saying <em>"The board rejected your request"</em>, I reframed the discussion around brand equity: <em>"The CCB recognized your AI proposal as a game-changing strategic differentiator. However, cramming it into 3 weeks risks erratic recommendations that could damage your launch campaign. I have framed this as a dedicated flagship initiative for Phase 2, positioned as the top item starting 30 days post-launch, allowing adequate data model training."</em><br>
+            • <strong>Result:</strong> The CMO enthusiastically pivoted from confrontation to partnership, championing Phase 2 data preparation; Phase 1 launched on schedule with zero executive friction.
+          </p>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 4: Thế nào là "Đóng băng yêu cầu" (Requirements Freeze) và "Tái lập đường cơ sở" (Baseline Re-versioning)?</span>
+            <span class="lang-en">Question 4: What constitutes a "Requirements Freeze" and how do you execute "Baseline Re-versioning"?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Khái niệm cốt lõi:</strong><br>
+            - <strong>Requirements Freeze (Đóng băng yêu cầu):</strong> Thời điểm đã thỏa thuận trước trong kế hoạch dự án, khi mà toàn bộ việc chỉnh sửa yêu cầu kinh doanh phải dừng lại để đội ngũ kỹ sư tập trung hoàn thiện mã nguồn và kiểm thử nghiệm thu. Sau thời điểm đóng băng, mọi phát sinh bắt buộc phải đi qua quy trình CR nghiêm ngặt.<br>
+            - <strong>Baseline Re-versioning (Tái lập đường cơ sở):</strong> Khi một CR được CCB phê duyệt, tài liệu không được sửa đè một cách tùy tiện mà phải được thăng hạng phiên bản (Major: v1.0 &rarr; v2.0 cho thay đổi kiến trúc lớn; Minor: v1.0 &rarr; v1.1 cho thay đổi tính năng). Bảng Lịch sử Phiên bản (Version History) phải ghi rõ số tham chiếu CR, ngày sửa, người sửa, và các phần nội dung thay đổi được đánh dấu highlight để phục vụ kiểm toán.<br>
+            • <strong>Ví dụ thực tế:</strong> Trong dự án OmniLogix, sau khi CR-003 được duyệt, SFS được cập nhật từ v1.0 lên v1.1, đồng thời cập nhật tương ứng ma trận RTM để đảm bảo các bài test mới được liên kết chặt chẽ.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Core Discipline:</strong><br>
+            - <strong>Requirements Freeze:</strong> An agreed milestone in the project calendar beyond which feature discovery ceases, allowing engineering to focus on development and stabilization. Any modifications post-freeze must pass formal CCB scrutiny.<br>
+            - <strong>Baseline Re-versioning:</strong> When a CR is approved, specifications must not be casually overwritten. They undergo formal version increments (Major: v1.0 &rarr; v2.0 for structural changes; Minor: v1.0 &rarr; v1.1 for incremental rules). The Document Revision Table must document CR ticket IDs, modification dates, author credentials, and diff annotations for audit compliance.<br>
+            • <strong>Concrete Application:</strong> In the OmniLogix rollout, upon CR-003 approval, SFS was bumped from v1.0 to v1.1, concurrently updating the RTM matrix to ensure newly authored split-delivery test cases enjoyed full bidirectional traceability.
+          </p>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="qa-block" style="margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+          <h3 style="font-size: 1.05rem; color: var(--brand-primary); margin-bottom: 0.5rem;">
+            <span class="lang-vi">Câu hỏi 5: Làm thế nào để ước tính số ngày công (Man-Days) cho một Yêu cầu Thay đổi khi công nghệ hoàn toàn mới với đội dự án?</span>
+            <span class="lang-en">Question 5: How do you estimate engineering Man-Days for a Change Request involving unfamiliar technologies?</span>
+          </h3>
+          <p class="lang-vi" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Mô hình STAR chuẩn quốc tế:</strong><br>
+            • <strong>Situation:</strong> Khách hàng yêu cầu tích hợp giải pháp Nhận diện Căn cước công dân gắn chip qua NFC trên thiết bị di động — một công nghệ mà đội ngũ dự án chưa từng triển khai.<br>
+            • <strong>Task:</strong> Đưa ra ước tính nỗ lực khả thi cho hồ sơ CR mà không bị rơi vào bẫy "đoán mò" gây rủi ro ngân sách.<br>
+            • <strong>Action:</strong> Tôi đã đề xuất áp dụng cơ chế <strong>"Research Spike" (Khoảng thời gian nghiên cứu thử nghiệm)</strong> kéo dài 3 ngày công dành riêng cho 1 Senior Mobile Dev. Mục tiêu của Spike là dựng một Proof-of-Concept (PoC) nhỏ để đọc thẻ chip thử nghiệm, từ đó đo lường chính xác các rào cản kỹ thuật. Sau khi hoàn thành PoC, tôi cùng Tech Lead áp dụng kỹ thuật <strong>Ước tính 3 điểm (Three-Point Estimating per PERT)</strong>: $E = (O + 4M + P) / 6$, trong đó tính toán kịch bản Lạc quan ($O$), Phổ biến ($M$), và Bi quan ($P$), cộng thêm 20% chi phí dự phòng rủi ro công nghệ mới.<br>
+            • <strong>Result:</strong> Bản ước tính 16 Man-Days được CCB chấp thuận; khi triển khai thực tế dự án hoàn thành sau 15.5 ngày công, sai số chưa tới 4%.
+          </p>
+          <p class="lang-en" style="font-size: 0.95rem; line-height: 1.6;">
+            <strong>Calibrated STAR Response:</strong><br>
+            • <strong>Situation:</strong> A banking client requested mobile NFC reading of biometric citizen ID chip cards — a technology entirely unfamiliar to our engineering team.<br>
+            • <strong>Task:</strong> Produce a defensible effort estimation for the CR dossier without resorting to reckless guesswork.<br>
+            • <strong>Action:</strong> I structured a time-boxed 3-day <strong>"Research Spike"</strong> for a Senior Mobile Engineer to build an isolated Proof-of-Concept (PoC). The PoC validated OS-level NFC permissions and raw chip payload extraction. With empirical baseline data, I applied <strong>Three-Point PERT Estimation</strong>: $E = (O + 4M + P) / 6$, modeling Optimistic ($O$), Most Likely ($M$), and Pessimistic ($P$) assumptions, coupled with a 20% innovation contingency buffer.<br>
+            • <strong>Result:</strong> The resulting 16 Man-Day estimation was approved by the CCB; actual delivery was finalized in 15.5 person-days, achieving less than a 4% estimation variance.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION H: GLOSSARY & REFERENCES -->
+      <section id="sec-references" class="lesson-section">
+        <div class="lesson-section-header">
+          <span class="section-num-badge">H</span>
+          <h2>
+            <span class="lang-vi">Thuật Ngữ Chuyên Ngành & Nguồn Tài Liệu Uy Tín</span>
+            <span class="lang-en">Bilingual Change Governance Glossary & Authoritative References</span>
+          </h2>
+        </div>
+
+        <h3 style="margin-bottom: 0.75rem;"><span class="lang-vi">Thuật Ngữ Song Ngữ (Bilingual Quality Glossary)</span><span class="lang-en">Bilingual Quality Glossary</span></h3>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><span class="lang-vi">Thuật ngữ Tiếng Anh</span><span class="lang-en">English Term</span></th>
+                <th><span class="lang-vi">Thuật ngữ Tiếng Việt</span><span class="lang-en">Vietnamese Equivalent</span></th>
+                <th><span class="lang-vi">Định nghĩa Nghiệp vụ & Quản trị</span><span class="lang-en">Technical & Governance Definition</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Scope Creep</strong></td>
+                <td>Phình to phạm vi ngầm</td>
+                <td><span class="lang-vi">Hiện tượng phạm vi dự án liên tục mở rộng ngoài tầm kiểm soát mà không được điều chỉnh ngân sách và tiến độ.</span><span class="lang-en">The uncontrolled expansion of product scope without adjustments to time, cost, and resources.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Change Request (CR)</strong></td>
+                <td>Yêu cầu thay đổi</td>
+                <td><span class="lang-vi">Tài liệu pháp lý chính thức đề xuất điều chỉnh phạm vi, yêu cầu hoặc đường cơ sở đã được phê duyệt.</span><span class="lang-en">A formal proposal to modify any project artifact, deliverable, or baselined requirement.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Change Control Board (CCB)</strong></td>
+                <td>Hội đồng kiểm soát thay đổi</td>
+                <td><span class="lang-vi">Ủy ban liên bộ phận chịu trách nhiệm đánh giá, thẩm định và ra quyết định phê duyệt hoặc từ chối các CR.</span><span class="lang-en">A formally constituted group of stakeholders responsible for reviewing, evaluating, and approving/rejecting changes.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Requirements Baseline</strong></td>
+                <td>Đường cơ sở yêu cầu</td>
+                <td><span class="lang-vi">Tập hợp các yêu cầu đã được các bên liên quan chính thức ký duyệt và đóng băng làm căn cứ phát triển.</span><span class="lang-en">A signed-off, frozen specification that serves as the basis for subsequent development and audit.</span></td>
+              </tr>
+              <tr>
+                <td><strong>360-Degree Impact Analysis</strong></td>
+                <td>Phân tích tác động 360 độ</td>
+                <td><span class="lang-vi">Đánh giá toàn diện ảnh hưởng của thay đổi trên mọi khía cạnh: Quy trình, CSDL, API, Ngân sách, Tiến độ và Rủi ro.</span><span class="lang-en">Holistic evaluation assessing change consequences across processes, schemas, APIs, budgets, and schedules.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Iron Triangle</strong></td>
+                <td>Tam giác sắt quản lý dự án</td>
+                <td><span class="lang-vi">Mô hình ràng buộc ba chiều giữa Phạm vi (Scope), Thời gian (Schedule), và Chi phí (Cost) quanh trục Chất lượng.</span><span class="lang-en">The fundamental constraint model balancing Scope, Schedule, and Cost centered upon Quality.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Trade-off Matrix</strong></td>
+                <td>Ma trận đánh đổi</td>
+                <td><span class="lang-vi">Bảng đối chiếu ưu nhược điểm, chi phí và rủi ro giữa các phương án xử lý thay đổi để hỗ trợ ra quyết định.</span><span class="lang-en">A comparative decision grid balancing benefits, costs, and risks among competing alternatives.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Research Spike</strong></td>
+                <td>Thời gian thử nghiệm kỹ thuật</td>
+                <td><span class="lang-vi">Khoảng thời gian ngắn time-box để đội ngũ kỹ sư nghiên cứu một giải pháp hoặc công nghệ mới phục vụ ước tính.</span><span class="lang-en">A time-boxed research period aimed at gathering knowledge to resolve technical uncertainty.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Timeboxing</strong></td>
+                <td>Định khung thời gian</td>
+                <td><span class="lang-vi">Kỹ thuật phân bổ một khoảng thời gian cố định tối đa cho một hoạt động (như ra quyết định CR) để tránh đình trệ.</span><span class="lang-en">Allocating a strict maximum fixed period of time to an activity to prevent analysis paralysis.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Audit Trail</strong></td>
+                <td>Nhật ký kiểm toán thay đổi</td>
+                <td><span class="lang-vi">Bản ghi lịch sử chi tiết từng lần sửa đổi tài liệu (ai sửa, ngày nào, số CR phê duyệt, nội dung trước và sau khi sửa).</span><span class="lang-en">A chronological step-by-step record providing documentary evidence of the sequence of activities modifying an artifact.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top: 1.5rem; margin-bottom: 0.75rem;"><span class="lang-vi">Nguồn Tài Liệu Uy Tín & Chuẩn Mực Quốc Tế</span><span class="lang-en">Authoritative Standards & References</span></h3>
+        <ul style="line-height: 1.8; color: var(--text-secondary); font-size: 0.95rem;">
+          <li>
+            <strong>IIBA BABOK Guide v3 (A Guide to the Business Analysis Body of Knowledge)</strong> — Chapter 5: Requirements Life Cycle Management.<br>
+            <em>Phạm vi:</em> Cung cấp chuẩn mực quốc tế về bảo trì khả năng truy vết (Traceability), duy trì yêu cầu (Maintain Requirements), ưu tiên hóa (Prioritize), và đánh giá thay đổi yêu cầu (Assess Requirements Changes).<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Commercial Standard / IIBA Member</span> • <a href="https://www.iiba.org/babok-guide/" target="_blank" rel="noopener noreferrer">iiba.org</a>
+          </li>
+          <li>
+            <strong>PMBOK Guide (A Guide to the Project Management Body of Knowledge) 7th Edition</strong> — Project Management Institute (PMI).<br>
+            <em>Phạm vi:</em> Chuẩn mực quản lý quy trình kiểm soát thay đổi tích hợp (Perform Integrated Change Control) và quản trị rủi ro phạm vi trong các mô hình phát triển phần mềm kết hợp (Hybrid/Agile).<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Commercial Standard / PMI Member</span> • <a href="https://www.pmi.org/pmbok-guide-standards" target="_blank" rel="noopener noreferrer">pmi.org</a>
+          </li>
+          <li>
+            <strong>ISO/IEC/IEEE 29148:2018 Systems and software engineering — Life cycle processes — Requirements engineering</strong> — Section 6.5: Requirements Management & Baseline Governance.<br>
+            <em>Phạm vi:</em> Tiêu chuẩn kỹ thuật định nghĩa các trạng thái đường cơ sở (Baselines), kiểm soát cấu hình yêu cầu và quy trình đánh giá tác động kỹ thuật.<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">International Standard</span> • <a href="https://www.iso.org/standard/72089.html" target="_blank" rel="noopener noreferrer">iso.org / ieee.org</a>
+          </li>
+          <li>
+            <strong>Software Requirements (3rd Edition)</strong> — Karl Wiegers & Joy Beatty (Microsoft Press).<br>
+            <em>Phạm vi:</em> Hướng dẫn thực chiến về quản trị thay đổi yêu cầu phần mềm, biểu mẫu Change Request chuẩn công nghiệp và cách vận hành Hội đồng CCB hiệu quả.<br>
+            <span class="badge" style="background: #eff6ff; color: #1d4ed8; font-size: 0.75rem; border: 1px solid #bfdbfe;">Published Reference Book</span> • ISBN 978-0735679665
+          </li>
+        </ul>
+      </section>
+
+      
+        <!-- NAVIGATION FOOTER -->
+        <nav class="lesson-footer-nav" style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-warm); flex-wrap: wrap;">
+          <a href="../test-case-uat-specification/" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span>&larr;</span>
+            <span><span class="lang-vi">Bài Trước: Test Case & UAT Form</span><span class="lang-en">Prev: Test Case & UAT Form</span></span>
+          </a>
+          <a href="../../study-guide/" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span><span class="lang-vi">Quay Về: Thư Viện Tài Liệu & Template</span><span class="lang-en">Return: Templates & Guide Hub</span></span>
+            <span>&rarr;</span>
+          </a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">Thẻ ghi nhớ (48 thẻ)</span><span class="lang-en">Flashcards (48 Cards)</span></a></li>
+          <li><a href="../../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay & Biểu mẫu</span><span class="lang-en">Handbook & Templates</span></a></li>
+          <li><a href="../../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Kho Tải về</span><span class="lang-en">Downloads Hub</span></a></li>
+          <li><a href="../../about/" style="color: var(--text-muted);"><span class="lang-vi">Giới thiệu tác giả</span><span class="lang-en">About Author</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Chuẩn mực tham chiếu</span>
+          <span class="lang-en">Standard Frameworks</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          BABOK® Guide v3 (IIBA) • OMG BPMN™ 2.0 • OMG UML® 2.5 • Agile Alliance • ANSI/ISO SQL • IETF RFC Standards • ISTQB® Testing Principles.
+        </p>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        © 2026 <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>. All rights reserved.
+      </div>
+      <div>
+        <span class="lang-vi">Trang web cá nhân độc lập phục vụ học tập và nghiên cứu chuyên môn.</span>
+        <span class="lang-en">Independent personal knowledge platform for professional study and practice.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

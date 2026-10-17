@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="vi" class="lang-vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="lang-vi">Viết User Story & Tiêu chí Chấp nhận với Gherkin | Hazel BA Hub</title>
+  <title class="lang-en">Writing User Stories & Acceptance Criteria with Gherkin | Hazel BA Hub</title>
+  <meta name="description" content="Chuyên khảo sâu về kỹ thuật viết Agile User Story và đặc tả tiêu chí chấp nhận với cú pháp Gherkin - Tác giả Nguyễn Đăng Cẩm Tú (Hazel).">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/lesson.css">
+  <!-- Core i18n -->
+  <script src="../../assets/js/i18n.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../" class="brand-link">
+        <div class="brand-badge">BA</div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Hazel BA Hub</span>
+          <span class="brand-author">
+            <span class="lang-vi">Biên soạn: <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+            <span class="lang-en">Curated by <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong></span>
+          </span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="../../" class="nav-link"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a></li>
+          <li><a href="../../knowledge-map/" class="nav-link"><span class="lang-vi">Bản đồ Tri thức</span><span class="lang-en">Knowledge Map</span></a></li>
+          <li><a href="../../flashcards/" class="nav-link"><span class="lang-vi">Thẻ ghi nhớ</span><span class="lang-en">Flashcards</span></a></li>
+          <li><a href="../../study-guide/" class="nav-link active"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a></li>
+          <li><a href="../../downloads/" class="nav-link"><span class="lang-vi">Tải về</span><span class="lang-en">Downloads</span></a></li>
+          <li><a href="../../about/" class="nav-link"><span class="lang-vi">Giới thiệu & Tiêu chuẩn</span><span class="lang-en">About & Standards</span></a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button type="button" class="lang-toggle-btn" title="Chuyển đổi ngôn ngữ / Switch Language" aria-label="Toggle language">
+          <span class="lang-pill" data-lang="vi">🇻🇳 VI</span>
+          <span style="opacity: 0.4;">|</span>
+          <span class="lang-pill" data-lang="en">🇬🇧 EN</span>
+        </button>
+        <button type="button" class="mobile-nav-toggle" aria-label="Open mobile navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container lesson-page">
+    <!-- Breadcrumb & Hero -->
+    <div class="lesson-hero">
+      <div class="lesson-breadcrumb">
+        <a href="../../"><span class="lang-vi">Trang chủ</span><span class="lang-en">Home</span></a>
+        <span>/</span>
+        <a href="../../study-guide/"><span class="lang-vi">Sổ tay Hướng dẫn</span><span class="lang-en">Study Guide</span></a>
+        <span>/</span>
+        <span class="lang-vi">Miền 5: Đặc tả Yêu cầu & Agile User Stories</span>
+        <span class="lang-en">Domain 5: Requirements Documentation & Agile Stories</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-explicit">Domain 5 • Masterclass</span>
+        <span class="badge badge-inferred">Agile / Scrum / BDD</span>
+        <span class="badge badge-illustrative">Author: Nguyễn Đăng Cẩm Tú (Hazel)</span>
+      </div>
+
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">
+        <span class="lang-vi">Kỹ thuật Viết User Story & Tiêu chí Chấp nhận với Cú pháp Gherkin</span>
+        <span class="lang-en">Authoring Effective User Stories & Acceptance Criteria with Gherkin BDD</span>
+      </h1>
+      <p style="font-size: 1.05rem; max-width: 860px; color: var(--text-muted); margin-bottom: 0;">
+        <span class="lang-vi">Chuyên khảo thực hành toàn diện: Từ bóc tách nhu cầu kinh doanh, áp dụng bộ tiêu chí INVEST, chuyển đổi logic nghiệp vụ thành kịch bản Given-When-Then, đến thiết kế bộ test case và giải quyết các câu hỏi phỏng vấn hóc búa.</span>
+        <span class="lang-en">A substantive, practical masterclass: Deconstructing ambiguous business needs, applying INVEST heuristics, translating business logic into robust Given-When-Then scenarios, and mastering technical interview scenarios.</span>
+      </p>
+    </div>
+
+    <!-- Lesson Layout Grid: Sidebar + Main Content -->
+    <div class="lesson-layout">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="lesson-sidebar">
+        <div class="sidebar-title">
+          <span class="lang-vi">Mục lục chuyên khảo</span>
+          <span class="lang-en">Lesson Contents</span>
+        </div>
+        <ul class="toc-list">
+          <li><a href="#sec-objectives" class="toc-link"><span class="lang-vi">A. Mục tiêu học tập</span><span class="lang-en">A. Learning Objectives</span></a></li>
+          <li><a href="#sec-concepts" class="toc-link"><span class="lang-vi">B. Bản chất Khái niệm</span><span class="lang-en">B. Conceptual Foundations</span></a></li>
+          <li><a href="#sec-worked-example" class="toc-link"><span class="lang-vi">C. Tình huống Thực tế (Checkout)</span><span class="lang-en">C. Worked E-Commerce Case</span></a></li>
+          <li><a href="#sec-specification" class="toc-link"><span class="lang-vi">D. Hồ sơ Đặc tả Sẵn sàng Thực chiến</span><span class="lang-en">D. Field-Ready Specification</span></a></li>
+          <li><a href="#sec-exercises" class="toc-link"><span class="lang-vi">E. Bài tập Thực hành & Lời giải</span><span class="lang-en">E. Practice Exercises</span></a></li>
+          <li><a href="#sec-interviews" class="toc-link"><span class="lang-vi">F. Bộ Câu hỏi Phỏng vấn Kỹ thuật</span><span class="lang-en">F. Interview Preparation</span></a></li>
+          <li><a href="#sec-glossary-references" class="toc-link"><span class="lang-vi">G. Thuật ngữ & Tài liệu Tham chiếu</span><span class="lang-en">G. Glossary & References</span></a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Lesson Content Area -->
+      <article class="lesson-content">
+
+        <!-- SECTION A: LEARNING OBJECTIVES -->
+        <section id="sec-objectives" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">A</span>
+            <h2>
+              <span class="lang-vi">Mục tiêu Học tập (Learning Objectives)</span>
+              <span class="lang-en">Learning Objectives</span>
+            </h2>
+          </div>
+          <p class="lang-vi">Sau khi hoàn thành chuyên khảo này, người học sẽ có khả năng làm chủ các kỹ năng phân tích và đặc tả thực chiến sau:</p>
+          <p class="lang-en">Upon completing this masterclass, learners will be equipped to execute the following production-grade competencies:</p>
+          
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">
+                    <span class="lang-vi">Cấp độ Năng lực (Bloom)</span>
+                    <span class="lang-en">Competency Level</span>
+                  </th>
+                  <th>
+                    <span class="lang-vi">Kết quả Đầu ra Đo lường được (Measurable Learning Outcomes)</span>
+                    <span class="lang-en">Measurable Learning Outcomes</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Phân tích (Analyze)</strong></td>
+                  <td>
+                    <span class="lang-vi">Bóc tách một phát biểu bài toán kinh doanh mơ hồ từ các bên liên quan thành một chuỗi truy vết rõ ràng: <em>Mục tiêu kinh doanh &rarr; Tính năng &rarr; User Story &rarr; Tiêu chí chấp nhận</em>.</span>
+                    <span class="lang-en">Deconstruct an ambiguous stakeholder problem statement into a clear traceability chain: <em>Business Objective &rarr; Feature &rarr; User Story &rarr; Acceptance Criteria</em>.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Đánh giá (Evaluate)</strong></td>
+                  <td>
+                    <span class="lang-vi">Phê bình và kiểm chứng chất lượng của một User Story theo bộ tiêu chí <strong>INVEST</strong> (Independent, Negotiable, Valuable, Estimable, Small, Testable), nhận diện chính xác các ràng buộc kiến trúc và kỹ thuật làm hạn chế tính độc lập.</span>
+                    <span class="lang-en">Critique and validate user story quality using the <strong>INVEST</strong> heuristics, identifying architectural and technical dependencies that constrain independence in practice.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Sáng tạo & Đặc tả (Create)</strong></td>
+                  <td>
+                    <span class="lang-vi">Soạn thảo các kịch bản tiêu chí chấp nhận chuẩn mực bằng cú pháp <strong>Gherkin BDD (Given-When-Then-And-But)</strong>, bao phủ cả luồng thành công chính (Happy Path), các luồng phụ và luồng ngoại lệ/lỗi nghiệp vụ (Alternative & Exception Paths).</span>
+                    <span class="lang-en">Author deterministic acceptance criteria using <strong>Gherkin BDD syntax (Given-When-Then-And-But)</strong>, comprehensively covering primary happy paths, alternative flows, and exception edge cases.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Phân định Quản trị (Govern)</strong></td>
+                  <td>
+                    <span class="lang-vi">Phân biệt rạch ròi ranh giới giữa <em>Tiêu chí chấp nhận (AC)</em> của từng User Story và <em>Tiêu chuẩn hoàn thành (Definition of Done - DoD)</em> chung của toàn đội ngũ Scrum.</span>
+                    <span class="lang-en">Rigourously demarcate the boundary between story-specific <em>Acceptance Criteria (AC)</em> and team-wide <em>Definition of Done (DoD)</em> quality gates.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Ứng dụng Phỏng vấn (Interview Mastery)</strong></td>
+                  <td>
+                    <span class="lang-vi">Bảo vệ cấu trúc đặc tả yêu cầu và giải thích các quyết định đánh đổi kỹ thuật (Trade-offs) trước hội đồng phỏng vấn tuyển dụng BA thông qua mô hình phản hồi STAR chuẩn mực.</span>
+                    <span class="lang-en">Articulate specification decisions, trade-offs, and edge-case handling in senior technical BA interviews using structured STAR model responses.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION B: CONCEPTUAL FOUNDATIONS -->
+        <section id="sec-concepts" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">B</span>
+            <h2>
+              <span class="lang-vi">Bản chất Khái niệm & Cơ sở Lý luận (Conceptual Foundations)</span>
+              <span class="lang-en">Conceptual Foundations & Core Principles</span>
+            </h2>
+          </div>
+
+          <!-- B.1 What is and isn't a User Story -->
+          <h3>
+            <span class="lang-vi">1. Bản chất của User Story: Nó là gì và Không phải là gì?</span>
+            <span class="lang-en">1. What a User Story Is — And What It Is Not</span>
+          </h3>
+          <p class="lang-vi">
+            Một trong những sai lầm phổ biến nhất của các BA mới vào nghề trong môi trường Agile là coi <strong>User Story</strong> như một "bản đặc tả yêu cầu thu nhỏ" (Mini-SRS). Thực tế, theo định nghĩa kinh điển của <em>Ron Jeffries</em>, một User Story chuẩn mực được cấu thành từ nguyên lý <strong>3Cs: Card (Tấm thẻ), Conversation (Cuộc đối thoại), và Confirmation (Sự xác nhận)</strong>:
+          </p>
+          <p class="lang-en">
+            One of the most widespread misunderstandings among junior business analysts in Agile environments is treating a <strong>User Story</strong> as a miniature Software Requirements Specification (Mini-SRS). In reality, as originally conceptualized by <em>Ron Jeffries</em>, a genuine User Story is anchored by the <strong>3Cs framework: Card, Conversation, and Confirmation</strong>:
+          </p>
+
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin: 1.5rem 0;">
+            <div style="background: var(--bg-surface-warm); padding: 1.25rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-primary);">
+              <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">1. The Card (Tấm thẻ)</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
+                <span class="lang-vi">Một bản ghi ngắn gọn thể hiện mong muốn và giá trị nghiệp vụ theo khuôn mẫu chuẩn: <em>"As a... I want... So that..."</em>. Tấm thẻ đóng vai trò là lời nhắc nhở (token) về một nhu cầu, chứ không chứa toàn bộ chi tiết triển khai.</span>
+                <span class="lang-en">A concise physical or digital token capturing intent: <em>"As a... I want... So that..."</em>. The card represents a promise for a conversation, not an exhaustive technical manual.</span>
+              </p>
+            </div>
+            <div style="background: var(--bg-surface-warm); padding: 1.25rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-primary);">
+              <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">2. The Conversation (Cuộc đối thoại)</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
+                <span class="lang-vi">Quá trình trao đổi liên tục giữa BA, Product Owner, Lập trình viên và Tester trong các buổi Backlog Refinement nhằm làm rõ bối cảnh, giải pháp kỹ thuật, ràng buộc và rủi ro tiềm ẩn.</span>
+                <span class="lang-en">The dynamic, continuous dialogue between BA, Product Owner, developers, and QA during backlog refinement to explore context, technical options, constraints, and operational risks.</span>
+              </p>
+            </div>
+            <div style="background: var(--bg-surface-warm); padding: 1.25rem; border-radius: var(--radius-md); border-left: 3px solid var(--color-primary);">
+              <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 0.25rem;">3. The Confirmation (Sự xác nhận)</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">
+                <span class="lang-vi">Các tiêu chí chấp nhận (Acceptance Criteria) cụ thể, đo lường được, xác định chính xác thời điểm mà tính năng được coi là thỏa mãn nhu cầu người dùng và sẵn sàng nghiệm thu.</span>
+                <span class="lang-en">The explicit, verifiable Acceptance Criteria that establish unambiguous conditions under which the story is accepted as satisfying customer requirements.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-card good">
+              <div class="comparison-header">
+                <span>✅</span>
+                <span class="lang-vi">User Story LÀ:</span>
+                <span class="lang-en">A User Story IS:</span>
+              </div>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #14532D; line-height: 1.6;">
+                <li><span class="lang-vi">Một lát cắt chức năng hoàn chỉnh từ đầu đến cuối (Vertical Slice) mang lại giá trị độc lập cho người dùng.</span><span class="lang-en">An end-to-end vertical functional slice delivering independent, observable user value.</span></li>
+                <li><span class="lang-vi">Tập trung vào <strong>Ai (Who)</strong>, <strong>Cái gì (What)</strong> và <strong>Tại sao (Why)</strong>.</span><span class="lang-en">Focused on <strong>Who</strong>, <strong>What</strong>, and <strong>Why</strong>.</span></li>
+                <li><span class="lang-vi">Mở ra không gian để kỹ sư đề xuất phương án kỹ thuật tối ưu nhất.</span><span class="lang-en">An invitation for engineers to collaborate on the optimal technical implementation.</span></li>
+              </ul>
+            </div>
+            <div class="comparison-card bad">
+              <div class="comparison-header">
+                <span>❌</span>
+                <span class="lang-vi">User Story KHÔNG PHẢI LÀ:</span>
+                <span class="lang-en">A User Story IS NOT:</span>
+              </div>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #7F1D1D; line-height: 1.6;">
+                <li><span class="lang-vi">Một tác vụ kỹ thuật riêng lẻ (ví dụ: "Tạo bảng Database", "Viết API login").</span><span class="lang-en">An isolated architectural task (e.g., "Create database schema", "Build login API").</span></li>
+                <li><span class="lang-vi">Bản hướng dẫn click chuột từng bước trên giao diện người dùng (UI script).</span><span class="lang-en">A step-by-step UI script ("Click the blue button, then select dropdown item 2").</span></li>
+                <li><span class="lang-vi">Một tài liệu đóng băng bất biến ngăn cản sự thay đổi khi có thông tin mới.</span><span class="lang-en">An unalterable, frozen contractual statement immune to new learnings.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- B.2 The Traceability Chain -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">2. Chuỗi Truy vết Yêu cầu: Từ Nhu cầu Kinh doanh đến Kịch bản Kiểm thử</span>
+            <span class="lang-en">2. The End-to-End Requirements Traceability Chain</span>
+          </h3>
+          <p class="lang-vi">
+            Một User Story không bao giờ tồn tại trong chân không. Để một giải pháp phần mềm mang lại giá trị ROI thực sự, BA phải bảo đảm tính toàn vẹn của chuỗi truy vết 5 cấp bậc:
+          </p>
+          <p class="lang-en">
+            A user story never exists in isolation. For software capabilities to yield measurable business returns, a BA must maintain bidirectional integrity across a 5-tier traceability chain:
+          </p>
+
+          <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.5rem; margin: 1.5rem 0;">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge badge-explicit" style="min-width: 130px; justify-content: center;">1. Business Need</span>
+                <span style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">
+                  <span class="lang-vi">Nhu cầu Chiến lược Tổ chức (Ví dụ: Giảm tỷ lệ bỏ giỏ hàng từ 28% xuống 15%)</span>
+                  <span class="lang-en">Strategic Enterprise Need (e.g., Reduce checkout drop-off rate from 28% to 15%)</span>
+                </span>
+              </div>
+              <div style="padding-left: 2rem; color: var(--color-primary-dark); font-weight: 800;">&darr;</div>
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge badge-inferred" style="min-width: 130px; justify-content: center;">2. Epic / Feature</span>
+                <span style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">
+                  <span class="lang-vi">Khối Tính năng Lớn (Ví dụ: Khung Thanh toán Tinh gọn Tích hợp Voucher & Cổng Thanh toán)</span>
+                  <span class="lang-en">High-Level Capability (e.g., Streamlined Checkout with Voucher & Payment Gateways)</span>
+                </span>
+              </div>
+              <div style="padding-left: 2rem; color: var(--color-primary-dark); font-weight: 800;">&darr;</div>
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge badge-illustrative" style="min-width: 130px; justify-content: center;">3. User Story</span>
+                <span style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">
+                  <span class="lang-vi">Lát cắt Giá trị Khách hàng (Ví dụ: US-CHK-042: Áp dụng mã giảm giá khi thanh toán giỏ hàng)</span>
+                  <span class="lang-en">Vertical Value Slice (e.g., US-CHK-042: Apply promotional voucher during checkout)</span>
+                </span>
+              </div>
+              <div style="padding-left: 2rem; color: var(--color-primary-dark); font-weight: 800;">&darr;</div>
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge badge-supplementary" style="min-width: 130px; justify-content: center;">4. Acceptance Criteria</span>
+                <span style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">
+                  <span class="lang-vi">Tiêu chí Chấp nhận Gherkin (Các kịch bản Given-When-Then bao phủ thành công & ngoại lệ)</span>
+                  <span class="lang-en">Gherkin Acceptance Criteria (Given-When-Then scenarios covering happy & exception paths)</span>
+                </span>
+              </div>
+              <div style="padding-left: 2rem; color: var(--color-primary-dark); font-weight: 800;">&darr;</div>
+              <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <span class="badge badge-explicit" style="min-width: 130px; justify-content: center; background: #E0E7FF; color: #3730A3;">5. Test Cases</span>
+                <span style="font-size: 0.9rem; color: var(--text-main); font-weight: 600;">
+                  <span class="lang-vi">Bộ Kịch bản Kiểm thử Tự động & Thủ công của QA (Dữ liệu thử nghiệm, Assertions, Logging)</span>
+                  <span class="lang-en">QA Test Cases & Automated Scripts (Test data fixtures, assertions, audit logs)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- B.3 INVEST Heuristics & Practical Limitations -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">3. Bộ Tiêu chí INVEST & Các Giới hạn Thực tế trong Dự án</span>
+            <span class="lang-en">3. The INVEST Heuristics & Practical Enterprise Limitations</span>
+          </h3>
+          <p class="lang-vi">
+            Được phát triển bởi <em>Bill Wake (2003)</em>, <strong>INVEST</strong> là chuẩn mực vàng để đánh giá chất lượng của một User Story trong Product Backlog. Tuy nhiên, trong môi trường doanh nghiệp thực tế, mỗi tiêu chí đều có những giới hạn thực hành mà BA cần thấu hiểu:
+          </p>
+          <p class="lang-en">
+            Formulated by <em>Bill Wake (2003)</em>, the <strong>INVEST</strong> acronym provides the gold standard for evaluating backlog story quality. However, in complex enterprise projects, each heuristic encounters practical trade-offs:
+          </p>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Tiêu chí</th>
+                  <th style="width: 40%;">Nguyên lý Chuẩn mực (Principle)</th>
+                  <th style="width: 45%;">Rào cản & Giới hạn Thực tế (Real-world Limitations)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>I — Independent</strong></td>
+                  <td>
+                    <span class="lang-vi">Các câu chuyện cần độc lập tối đa để có thể sắp xếp thứ tự ưu tiên và phát triển theo bất kỳ trình tự nào.</span>
+                    <span class="lang-en">Stories should be decoupled so they can be prioritized and delivered in any sequence without blocking.</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Các phụ thuộc kỹ thuật cốt lõi (như schema cơ sở dữ liệu chung, phiên bản API của đối tác, microservices dùng chung) luôn tồn tại. BA cần sử dụng <strong>Architectural Enablers</strong> hoặc kỹ thuật chia nhỏ theo luồng dữ liệu thay vì cố gắng triệt tiêu phụ thuộc một cách phi thực tế.</span>
+                    <span class="lang-en"><em>Limitation:</em> Shared databases, third-party API contracts, and infrastructure primitives inherently create technical coupling. BAs must manage dependencies via Enabler stories rather than denying technical realities.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>N — Negotiable</strong></td>
+                  <td>
+                    <span class="lang-vi">Câu chuyện không phải là bản hợp đồng cố định; nó là cơ sở để thương lượng giải pháp giữa BA, PO và nhóm kỹ sư.</span>
+                    <span class="lang-en">Not a rigid contract; an open invitation for trade-off negotiation between business and engineering.</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Các yêu cầu tuân thủ pháp lý (GDPR, PCI-DSS, quy định bảo vệ dữ liệu cá nhân) có các điều khoản bắt buộc không thể đàm phán giảm bớt. Sự thương lượng ở đây chỉ nằm ở <em>cách thức hiện thực hóa kỹ thuật</em>, chứ không thể bỏ qua quy định.</span>
+                    <span class="lang-en"><em>Limitation:</em> Statutory regulations (GDPR, PCI-DSS, AML) impose non-negotiable constraints. Negotiation applies solely to implementation mechanics, not regulatory mandates.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>V — Valuable</strong></td>
+                  <td>
+                    <span class="lang-vi">Mỗi câu chuyện phải mang lại giá trị có thể quan sát được cho khách hàng hoặc doanh nghiệp.</span>
+                    <span class="lang-en">Every story must yield discernible, measurable value to end-users or enterprise stakeholders.</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Các công việc tái cấu trúc (Refactoring), nâng cấp thư viện bảo mật hay tối ưu hóa chỉ mục SQL không mang lại tính năng mới cho người dùng cuối. BA phải diễn giải giá trị của chúng dưới dạng: <em>giảm thiểu rủi ro bảo mật</em>, <em>giảm độ trễ hệ thống (Latency)</em>, hoặc <em>hạ chi phí vận hành hạ tầng</em>.</span>
+                    <span class="lang-en"><em>Limitation:</em> Refactoring, library patching, and database indexing offer no direct user-visible features. BAs must articulate value through reduced latency, lower operational cost, or security risk mitigation.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>E — Estimable</strong></td>
+                  <td>
+                    <span class="lang-vi">Đội ngũ kỹ thuật phải hiểu rõ yêu cầu đến mức có thể ước lượng được độ phức tạp hoặc kích thước (Story Points).</span>
+                    <span class="lang-en">The team must understand scope sufficiently to estimate effort and complexity in story points.</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Khi tích hợp với một hệ thống kế thừa (Legacy System) hoặc công nghệ mới chưa có tài liệu, việc ước lượng sẽ chỉ là phỏng đoán. Giải pháp: BA cần đề xuất một <strong>Spike Story</strong> (nghiên cứu giới hạn thời gian - Timeboxed) trước khi ước lượng story chính thức.</span>
+                    <span class="lang-en"><em>Limitation:</em> Legacy integration or unproven technology renders direct estimation speculative. Solution: Propose a timeboxed research Spike story first to eliminate architectural unknowns.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>S — Small</strong></td>
+                  <td>
+                    <span class="lang-vi">Câu chuyện phải đủ nhỏ để hoàn thành trọn vẹn trong một Sprint (thông thường từ 1 đến 3 ngày làm việc của nhóm).</span>
+                    <span class="lang-en">Stories must be appropriately sized to complete cleanly within a single sprint iteration (ideally 1–3 days).</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Nguy cơ chia nhỏ theo "lớp kỹ thuật nằm ngang" (Horizontal Slicing - ví dụ: 1 story làm UI, 1 story làm Backend API, 1 story làm DB). Đây là phản mẫu (anti-pattern) làm mất tính Valuable. BA phải chia theo <strong>Lát cắt Dọc (Vertical Slicing)</strong>: đi xuyên qua tất cả các lớp kỹ thuật nhưng chỉ phục vụ một kịch bản hẹp (ví dụ: chỉ xử lý thanh toán thẻ Visa thành công trước).</span>
+                    <span class="lang-en"><em>Limitation:</em> Teams frequently succumb to Horizontal Slicing (UI story, API story, DB story), violating value delivery. BAs must enforce <strong>Vertical Slicing</strong>: cutting across all tiers for a single narrow scenario (e.g., Visa-only happy path).</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>T — Testable</strong></td>
+                  <td>
+                    <span class="lang-vi">Phải có tiêu chí chấp nhận cụ thể để kiểm thử viên xác minh tính Đạt / Không Đạt (Pass / Fail).</span>
+                    <span class="lang-en">Must possess explicit, unambiguous acceptance criteria so QA can verify Pass/Fail status.</span>
+                  </td>
+                  <td>
+                    <span class="lang-vi"><em>Rào cản:</em> Các yêu cầu định tính chủ quan (như "Giao diện phải thân thiện", "Tốc độ tải trang nhanh") là không thể kiểm thử. BA bắt buộc phải lượng hóa chúng (ví dụ: "Thời gian tải trang hoàn tất &le; 1.8 giây tại mạng 4G với kích thước DOM &le; 1.5MB").</span>
+                    <span class="lang-en"><em>Limitation:</em> Subjective qualitative descriptions ("intuitive interface", "fast checkout") cannot be verified. BAs must establish deterministic thresholds (e.g., "Full DOM render &le; 1.8s over 4G connection").</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- B.4 The Gherkin Clauses -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">4. Ý nghĩa Ngữ nghĩa & Quy tắc Sử dụng Cú pháp Gherkin</span>
+            <span class="lang-en">4. Semantic Grammar & Operational Rules of Gherkin Syntax</span>
+          </h3>
+          <p class="lang-vi">
+            Cú pháp Gherkin (vốn xuất phát từ phong trào Phát triển Hướng Hành vi - <em>Behavior-Driven Development / BDD</em> của Dan North) sử dụng ngôn ngữ tự nhiên có cấu trúc để mô tả hành vi của hệ thống mà không cần đi sâu vào chi tiết mã nguồn:
+          </p>
+          <p class="lang-en">
+            Gherkin syntax (originating from Dan North's Behavior-Driven Development / BDD movement) employs structured natural language to describe system behaviors deterministically without exposing implementation internals:
+          </p>
+
+          <div class="callout" style="background: #FFFFFF;">
+            <div class="callout-header">
+              <span>📐</span>
+              <span class="lang-vi">Bộ Quy tắc Vàng khi Soạn thảo Mệnh đề Gherkin:</span>
+              <span class="lang-en">Golden Rules for Authoring Gherkin Clauses:</span>
+            </div>
+            <div class="callout-body" style="line-height: 1.8;">
+              <ol style="padding-left: 1.25rem;">
+                <li>
+                  <strong>GIVEN (Tiền điều kiện / Bối cảnh):</strong> Mô tả trạng thái đã thiết lập sẵn của hệ thống hoặc dữ liệu nền tảng trước khi người dùng thực hiện bất kỳ tương tác nào.<br>
+                  <em style="color: #991B1B;">⚠️ Quy tắc cấm: Tuyệt đối không đặt hành động click chuột hoặc nhập liệu của người dùng vào mệnh đề Given.</em>
+                </li>
+                <li>
+                  <strong>WHEN (Hành động Kích hoạt):</strong> Hành động chính, cụ thể và đơn lẻ của tác nhân (người dùng hoặc sự kiện hệ thống bên ngoài) làm thay đổi trạng thái.<br>
+                  <em style="color: #166534;">💡 Quy tắc chuẩn: Mỗi kịch bản chỉ nên có duy nhất MỘT hành động cốt lõi ở When. Nếu có nhiều When, kịch bản đó đang bị ôm đồm và cần tách ra thành các kịch bản độc lập.</em>
+                </li>
+                <li>
+                  <strong>THEN (Kết quả Quan sát được):</strong> Sự thay đổi trạng thái của hệ thống và phản hồi có thể kiểm chứng được (dữ liệu biến đổi, thông báo hiển thị, email gửi đi, trạng thái giao dịch cập nhật).
+                </li>
+                <li>
+                  <strong>AND / BUT (Liên từ Mở rộng):</strong> Sử dụng <code>And</code> để liên kết thêm các điều kiện cùng chiều, và <code>But</code> để nhấn mạnh một sự phủ định quan trọng (Ví dụ: <em>"Then đơn hàng bị hủy And thông báo lỗi hiển thị But tài khoản ngân hàng KHÔNG bị trừ tiền"</em>).
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- B.5 AC vs DoD -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">5. Phân định Ranh giới: Tiêu chí Chấp nhận (AC) vs. Tiêu chuẩn Hoàn thành (DoD)</span>
+            <span class="lang-en">5. Acceptance Criteria (AC) vs. Definition of Done (DoD)</span>
+          </h3>
+          <p class="lang-vi">
+            Một sự nhầm lẫn tai hại trong quản trị dự án là gộp chung các yêu cầu kỹ thuật toàn cục vào Acceptance Criteria của từng User Story. Bảng phân định sau đây làm rõ ranh giới kiến trúc:
+          </p>
+          <p class="lang-en">
+            A critical failure mode in Agile delivery is dumping global engineering standards into individual story acceptance criteria. The following matrix delineates operational boundaries:
+          </p>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 20%;">Chiều Đánh giá</th>
+                  <th style="width: 40%;">Tiêu chí Chấp nhận (Acceptance Criteria - AC)</th>
+                  <th style="width: 40%;">Tiêu chuẩn Hoàn thành (Definition of Done - DoD)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Phạm vi Áp dụng (Scope)</strong></td>
+                  <td>Đặc thù và <strong>riêng biệt cho từng User Story</strong>. Thay đổi theo từng tính năng cụ thể.</td>
+                  <td><strong>Toàn cục (Global)</strong>. Áp dụng đồng nhất cho mọi User Story, mọi Sprint và toàn bộ Product Increment.</td>
+                </tr>
+                <tr>
+                  <td><strong>Chủ thể Thiết lập (Owner)</strong></td>
+                  <td>Do <strong>Business Analyst / Product Owner</strong> soạn thảo, làm rõ và thống nhất cùng nhóm phát triển.</td>
+                  <td>Do <strong>toàn bộ Nhóm Scrum</strong> (Developers, QA, PO, BA, Scrum Master) cùng thống nhất xây dựng.</td>
+                </tr>
+                <tr>
+                  <td><strong>Trọng tâm Bản chất (Focus)</strong></td>
+                  <td>Tập trung vào <strong>Giá trị Nghiệp vụ & Hành vi Chức năng</strong> (Business logic, User workflow, Error messages).</td>
+                  <td>Tập trung vào <strong>Chất lượng Kỹ thuật & Độ Sẵn sàng Triển khai</strong> (Code review, Unit test coverage &ge; 80%, Zero critical security bugs, CI/CD pass, Release notes).</td>
+                </tr>
+                <tr>
+                  <td><strong>Hậu quả khi Thất bại (Impact)</strong></td>
+                  <td>Không thỏa mãn AC nghĩa là tính năng <em>chưa giải quyết đúng bài toán của người dùng</em>. Story tiếp tục ở trạng thái In-Progress.</td>
+                  <td>Không thỏa mãn DoD nghĩa là sản phẩm <em>chưa đạt chất lượng sản xuất</em> và không được phép đưa vào bản phát hành (Increment không thể ship).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- B.6 When to use Gherkin vs Structured Bullets -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">6. Khi nào nên dùng Gherkin và Khi nào Danh sách Có cấu trúc là Đủ?</span>
+            <span class="lang-en">6. When Gherkin Is Useful vs. When Structured Bullets Suffice</span>
+          </h3>
+          <p class="lang-vi">
+            Gherkin là một công cụ mạnh mẽ nhưng <strong>không phải là chiếc đũa thần cho mọi trường hợp</strong>. Áp dụng Gherkin cho các thay đổi giao diện đơn giản sẽ gây lãng phí thời gian và làm tài liệu trở nên cồng kềnh:
+          </p>
+          <p class="lang-en">
+            Gherkin is a potent communication tool, but <strong>it is not a universal panacea</strong>. Mandating Gherkin for trivial cosmetic changes introduces needless ceremony and verbosity:
+          </p>
+
+          <div class="comparison-grid">
+            <div class="comparison-card good">
+              <div class="comparison-header">
+                <span>🎯</span>
+                <span class="lang-vi">NÊN SỬ DỤNG GHERKIN KHI:</span>
+                <span class="lang-en">USE GHERKIN WHEN:</span>
+              </div>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #166534; line-height: 1.6;">
+                <li>Tính năng có <strong>logic nghiệp vụ phức tạp</strong> với nhiều điều kiện rẽ nhánh và chuyển đổi trạng thái (State transitions).</li>
+                <li>Dự án áp dụng quy trình kiểm thử tự động BDD (Cucumber, SpecFlow, Behave) trực tiếp từ kịch bản đặc tả.</li>
+                <li>Cần sự rõ ràng tuyệt đối giữa tiền điều kiện dữ liệu và kết quả kỳ vọng để tránh tranh cãi giữa BA và QA.</li>
+                <li>Các quy trình tài chính, thanh toán, tính toán hoa hồng, hoặc thẩm định tín dụng.</li>
+              </ul>
+            </div>
+            <div class="comparison-card bad">
+              <div class="comparison-header">
+                <span>📋</span>
+                <span class="lang-vi">DÙNG DANH SÁCH / BẢNG THƯỜNG KHI:</span>
+                <span class="lang-en">USE STRUCTURED BULLETS / TABLES WHEN:</span>
+              </div>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #7F1D1D; line-height: 1.6;">
+                <li>Màn hình CRUD cơ bản (Thêm, Sửa, Xóa thông tin cá nhân đơn giản).</li>
+                <li>Thay đổi văn bản (Copywriting), nhãn màn hình, màu sắc hoặc căn chỉnh giao diện UI.</li>
+                <li>Các quy tắc validation độ dài trường tĩnh (tốt nhất nên trình bày bằng Bảng Từ điển Dữ liệu - Field Dictionary).</li>
+                <li>Đội ngũ phát triển không sử dụng automation BDD và việc viết Given-When-Then làm giảm tốc độ đọc hiểu của kỹ sư.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION C: WORKED E-COMMERCE EXAMPLE -->
+        <section id="sec-worked-example" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">C</span>
+            <h2>
+              <span class="lang-vi">Tình huống Dự án Thực chiến: Tính năng Thanh toán Giỏ hàng Trực tuyến</span>
+              <span class="lang-en">Worked Real-World Case Study: E-Commerce Checkout with Promotional Voucher</span>
+            </h2>
+          </div>
+
+          <!-- C.1 The Vague Request -->
+          <h3>
+            <span class="lang-vi">1. Xuất phát điểm: Yêu cầu Mơ hồ từ Stakeholder</span>
+            <span class="lang-en">1. Starting Point: The Ambiguous Stakeholder Request</span>
+          </h3>
+          <p class="lang-vi">
+            Trong một cuộc họp định kỳ của nền tảng bán lẻ trực tuyến giả định <em>NovaMart</em>, Giám đốc Kinh doanh phát biểu:
+          </p>
+          <p class="lang-en">
+            During a product steering meeting for fictional retail platform <em>NovaMart</em>, the Commercial Director stated:
+          </p>
+          
+          <div class="callout" style="background: #FFFBEB; border-color: #F59E0B;">
+            <div class="callout-header" style="color: #B45309;">
+              <span>💬</span>
+              <span class="lang-vi">Lời yêu cầu nguyên văn:</span>
+              <span class="lang-en">Verbatim Stakeholder Statement:</span>
+            </div>
+            <div class="callout-body" style="font-style: italic; color: #78350F; font-size: 0.95rem;">
+              <span class="lang-vi">"Khách hàng phàn nàn là thanh toán khó quá và không nhập được mã giảm giá như bên Shopee hay Lazada. Đội IT làm giúp tôi tính năng thanh toán thật nhanh, cho khách nhập voucher giảm giá và thanh toán thẻ là xong, làm gấp trong sprint tới nhé!"</span>
+              <span class="lang-en">"Customers are complaining that our checkout is clunky and they cannot enter discount vouchers like on Shopee or Lazada. IT needs to build a super-fast checkout where customers can apply a promo voucher and pay with credit card immediately. Let's deliver this in the next sprint!"</span>
+            </div>
+          </div>
+
+          <!-- C.2 BA Clarification & Discovery Questions -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">2. Quá trình BA Khơi gợi & Làm rõ Phạm vi (The Discovery Process)</span>
+            <span class="lang-en">2. How the BA Clarifies Underlying Scope & Business Rules</span>
+          </h3>
+          <p class="lang-vi">
+            Nếu BA lập tức viết User Story theo nguyên văn trên, nhóm phát triển sẽ gặp bế tắc vì vô số câu hỏi chưa có lời giải. Một BA có năng lực sẽ điều phối cuộc đối thoại thông qua 4 câu hỏi định hình phạm vi:
+          </p>
+          <p class="lang-en">
+            If the BA immediately transcribed that request, engineering would stall on dozens of unhandled edge cases. A disciplined BA facilitates discovery through 4 structural inquiry vectors:
+          </p>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Câu hỏi của BA (BA Discovery Vector)</th>
+                  <th style="width: 40%;">Phản hồi từ Stakeholder & Kỹ sư</th>
+                  <th style="width: 35%;">Kết luận Ranh giới Phạm vi (Scope Boundary)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Mục tiêu kinh doanh cốt lõi là gì?</strong></td>
+                  <td>Tỷ lệ bỏ giỏ hàng tại bước thanh toán đang là 28%. Doanh nghiệp muốn giảm xuống dưới 18% và tăng giá trị đơn hàng trung bình (AOV).</td>
+                  <td>Đo lường thành công bằng <strong>Tỷ lệ Chuyển đổi Thanh toán (Checkout Conversion Rate)</strong> và <strong>AOV</strong>, không chỉ là "xây tính năng".</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Quy tắc áp dụng voucher là gì? Có cho phép cộng dồn (Stacking) không?</strong></td>
+                  <td>Marketing chỉ muốn cho phép áp dụng tối đa <strong>1 voucher duy nhất</strong> trên mỗi đơn hàng. Voucher áp dụng trên giá trị hàng, không giảm tiền phí vận chuyển.</td>
+                  <td>Thiết lập quy tắc nghiệp vụ <strong>BR-01</strong> (Chống cộng dồn) và <strong>BR-02</strong> (Giá trị tối thiểu tính trên Subtotal).</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Cơ chế giữ tồn kho (Inventory Reservation) diễn ra khi nào?</strong></td>
+                  <td>Kho cảnh báo: Nếu giữ hàng ngay khi thêm vào giỏ, khách giữ ảo sẽ làm cạn tồn kho. Nếu không giữ hàng, khách thanh toán xong lại bị báo hết hàng.</td>
+                  <td>Giải pháp thỏa hiệp: <strong>Giữ hàng tạm thời (Soft-reserve) trong 15 phút</strong> kể từ khi khách bấm xác nhận đơn hàng sang cổng thanh toán (<strong>BR-03</strong>).</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Khi cổng thanh toán bị treo hoặc quá hạn (Timeout) thì xử lý thế nào?</strong></td>
+                  <td>Khách hàng rất sợ bị trừ tiền hai lần. Kỹ sư thanh toán xác nhận SLA của cổng thanh toán là 60 giây.</td>
+                  <td>Nếu quá 60s không có phản hồi, hệ thống chuyển sang trạng thái <em>PENDING_CONFIRMATION</em>, không trừ tiền lại, gửi email tra soát (<strong>BR-04</strong>).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- C.3 The Well-Formed User Story -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">3. Bản User Story Chuẩn mực (The Refined User Story)</span>
+            <span class="lang-en">3. The Refined, Production-Grade User Story</span>
+          </h3>
+
+          <div style="background: var(--bg-surface); border: 2px solid var(--color-primary); border-radius: var(--radius-md); padding: 1.5rem; margin: 1.25rem 0;">
+            <div style="font-weight: 800; font-size: 1.1rem; color: var(--color-primary-dark); margin-bottom: 0.75rem;">
+              US-CHK-042: Apply Promotional Voucher and Complete Order Payment
+            </div>
+            <div style="font-size: 1rem; line-height: 1.8; color: var(--text-main);">
+              <p>
+                <strong>As an</strong> authenticated retail customer on NovaMart,<br>
+                <strong>I want to</strong> apply an eligible promotional voucher and pay for my cart items via credit/debit card,<br>
+                <strong>So that</strong> I can secure the discounted price and complete my purchase reliably without payment duplication.
+              </p>
+              <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-warm); font-size: 0.9rem; color: var(--text-muted);">
+                <strong>Bản dịch tiếng Việt:</strong><br>
+                <em>Là một khách hàng bán lẻ đã đăng nhập trên NovaMart,<br>
+                Tôi muốn áp dụng mã giảm giá hợp lệ và thanh toán tiền hàng trong giỏ bằng thẻ tín dụng/ghi nợ,<br>
+                Để tôi nhận được mức giá ưu đãi và hoàn tất đơn hàng an toàn mà không bị trừ tiền trùng lặp.</em>
+              </div>
+            </div>
+          </div>
+
+          <!-- C.4 Business Rules -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">4. Giả định & Quy tắc Nghiệp vụ Minh bạch (Business Rules)</span>
+            <span class="lang-en">4. Explicit Assumptions & Business Rules</span>
+          </h3>
+          <ul style="padding-left: 1.25rem; line-height: 1.8; font-size: 0.9rem; color: var(--text-main);">
+            <li><strong>Giả định môi trường (Assumptions):</strong> Đơn vị tiền tệ chuẩn là Đồng Việt Nam (VND). Khách hàng đã hoàn tất đăng nhập và đã có sẵn địa chỉ giao hàng hợp lệ.</li>
+            <li><strong>BR-01 (Chống Cộng dồn Voucher):</strong> Mỗi đơn hàng chỉ được áp dụng tối đa 01 mã voucher khuyến mại. Nếu nhập mã mới, hệ thống sẽ thay thế mã cũ sau khi người dùng xác nhận.</li>
+            <li><strong>BR-02 (Ngưỡng Giá trị Đơn hàng Tối thiểu):</strong> Điều kiện giá trị giỏ hàng tối thiểu (Minimum Basket Subtotal) chỉ tính trên tổng giá trị hàng hóa sau thuế, tuyệt đối không tính phí vận chuyển vào ngưỡng này.</li>
+            <li><strong>BR-03 (Cơ chế Giữ Hàng Tạm thời - Soft Inventory Hold):</strong> Khi người dùng bấm "Tiến hành Thanh toán", các mặt hàng trong giỏ sẽ được giữ trạng thái bảo lưu tồn kho trong <strong>15 phút</strong>. Sau 15 phút nếu thanh toán chưa hoàn tất, kho sẽ tự động giải phóng hàng trở lại cho thị trường.</li>
+            <li><strong>BR-04 (Xử lý Quá hạn Cổng Thanh toán - Gateway Timeout):</strong> Thời gian chờ tối đa cho phản hồi từ cổng thanh toán là <strong>60 giây</strong>. Quá 60 giây mà không nhận được Webhook/IPN xác nhận, hệ thống không coi đơn hàng thất bại ngay mà chuyển sang trạng thái <code>PENDING_PAYMENT_VERIFICATION</code> và hiển thị thông báo hướng dẫn tra soát.</li>
+          </ul>
+
+          <!-- C.5 Gherkin Scenarios -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">5. Kịch bản Tiêu chí Chấp nhận Chuẩn Gherkin (Acceptance Criteria)</span>
+            <span class="lang-en">5. Formal Gherkin Acceptance Criteria Scenarios</span>
+          </h3>
+
+          <!-- Scenario 1: Happy Path -->
+          <div class="gherkin-container">
+            <span class="gh-keyword">Feature:</span> E-Commerce Checkout with Promotional Voucher<br>
+            <br>
+            <span class="gh-keyword">Scenario 1:</span> Successful checkout with valid percentage voucher and card payment (Happy Path)<br>
+            &nbsp;&nbsp;<span class="gh-clause">Given</span> customer <span class="gh-string">"huong.tran"</span> is authenticated and on the checkout page<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> the cart contains eligible products with subtotal <span class="gh-param">1,200,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> shipping fee is calculated as <span class="gh-param">40,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> promotional voucher <span class="gh-string">"SALE10"</span> is active with <span class="gh-param">10% discount</span> (min spend: <span class="gh-param">500,000 VND</span>)<br>
+            &nbsp;&nbsp;<span class="gh-clause">When</span> customer applies voucher code <span class="gh-string">"SALE10"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> submits payment via valid credit card ending in <span class="gh-string">"4242"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">Then</span> system discounts <span class="gh-param">120,000 VND</span> from the subtotal<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> total payable amount is calculated as <span class="gh-param">1,120,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> payment gateway returns approval status <span class="gh-string">"PAID"</span> within <span class="gh-param">15 seconds</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> system creates order with status <span class="gh-string">"ORDER_CONFIRMED"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer sees the Order Confirmation screen with a valid Order ID.
+          </div>
+
+          <!-- Scenario 2: Expired Voucher -->
+          <div class="gherkin-container">
+            <span class="gh-keyword">Scenario 2:</span> Rejection of expired promotional voucher (Exception Flow 1)<br>
+            &nbsp;&nbsp;<span class="gh-clause">Given</span> customer has a cart subtotal of <span class="gh-param">800,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> voucher <span class="gh-string">"SUMMER2025"</span> expired at <span class="gh-string">"2025-08-31 23:59:59 UTC"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">When</span> customer enters code <span class="gh-string">"SUMMER2025"</span> and clicks <span class="gh-string">"Apply"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">Then</span> system rejects the voucher without deducting any amount<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer sees an inline error message: <span class="gh-string">"Mã ưu đãi đã hết hạn sử dụng. Vui lòng thử mã khác."</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> cart payable amount remains unchanged at <span class="gh-param">800,000 VND</span> plus shipping.
+          </div>
+
+          <!-- Scenario 3: Minimum Basket Value Not Met -->
+          <div class="gherkin-container">
+            <span class="gh-keyword">Scenario 3:</span> Rejection when minimum basket threshold is not reached (Exception Flow 2)<br>
+            &nbsp;&nbsp;<span class="gh-clause">Given</span> voucher <span class="gh-string">"VIP50K"</span> requires a minimum merchandise subtotal of <span class="gh-param">500,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer's cart contains merchandise subtotal of <span class="gh-param">450,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> shipping fee is <span class="gh-param">60,000 VND</span> (total display is 510,000 VND)<br>
+            &nbsp;&nbsp;<span class="gh-clause">When</span> customer applies voucher code <span class="gh-string">"VIP50K"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">Then</span> system evaluates eligibility against subtotal <span class="gh-param">450,000 VND</span> excluding shipping fee<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> system rejects the voucher application<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer sees an inline message: <span class="gh-string">"Đơn hàng cần tối thiểu 500.000đ tiền hàng để sử dụng mã này (Còn thiếu 50.000đ)."</span>
+          </div>
+
+          <!-- Scenario 4: Inventory Stockout During Checkout -->
+          <div class="gherkin-container">
+            <span class="gh-keyword">Scenario 4:</span> Item inventory exhausted before payment confirmation (Exception Flow 3)<br>
+            &nbsp;&nbsp;<span class="gh-clause">Given</span> customer is on the payment screen with 1 unit of product <span class="gh-string">"Mechanical Keyboard X1"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> the 15-minute soft reservation timer has expired<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> available warehouse stock for <span class="gh-string">"Mechanical Keyboard X1"</span> drops to <span class="gh-param">0</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">When</span> customer clicks <span class="gh-string">"Pay Now"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">Then</span> system halts transaction before making payment gateway charge API call<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer's card is <span class="gh-keyword">NOT</span> charged<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer is redirected back to cart with notification: <span class="gh-string">"Sản phẩm 'Mechanical Keyboard X1' vừa hết hàng. Vui lòng cập nhật lại giỏ hàng."</span>
+          </div>
+
+          <!-- Scenario 5: Payment Gateway Timeout -->
+          <div class="gherkin-container">
+            <span class="gh-keyword">Scenario 5:</span> Payment gateway timeout beyond 60 seconds (Exception Flow 4)<br>
+            &nbsp;&nbsp;<span class="gh-clause">Given</span> customer has submitted valid payment details for total amount <span class="gh-param">1,120,000 VND</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> system sent authorization request to payment gateway partner<br>
+            &nbsp;&nbsp;<span class="gh-clause">When</span> payment gateway does not return any HTTP response within <span class="gh-param">60 seconds</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">Then</span> system terminates the client HTTP wait connection<br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> system assigns order status <span class="gh-string">"PENDING_PAYMENT_VERIFICATION"</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> customer sees safety guidance: <span class="gh-string">"Giao dịch đang được xác thực với ngân hàng. Vui lòng không thực hiện thanh toán lại để tránh trừ tiền 2 lần."</span><br>
+            &nbsp;&nbsp;<span class="gh-clause">And</span> system initiates background asynchronous polling job every <span class="gh-param">2 minutes</span> for up to <span class="gh-param">30 minutes</span>.
+          </div>
+
+          <!-- C.6 Business Outcomes Table -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">6. Tổng kết Kết quả Nghiệp vụ theo Từng Kịch bản</span>
+            <span class="lang-en">6. Expected Business & Technical Outcomes by Scenario</span>
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Kịch bản (Scenario)</th>
+                  <th>Trải nghiệm Người dùng (UX)</th>
+                  <th>Tác động Tài chính (Financial)</th>
+                  <th>Tồn kho (Inventory)</th>
+                  <th>Hệ thống Lưu vết (Audit Trail)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Scenario 1: Happy Path</strong></td>
+                  <td>Hiển thị màn hình thành công kèm mã đơn, gửi email hóa đơn.</td>
+                  <td>Khách bị trừ đúng 1.120.000đ; Cổng thanh toán ghi nhận thành công.</td>
+                  <td>Chuyển từ Soft-hold sang Hard-deduct (Trừ tồn kho vật lý).</td>
+                  <td>Ghi nhận log giao dịch kèm Voucher ID và Payment Auth ID.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scenario 2: Expired Voucher</strong></td>
+                  <td>Báo lỗi màu đỏ ngay dưới ô nhập mã, giữ nguyên giỏ hàng.</td>
+                  <td>Không có giao dịch thanh toán; giá trị đơn hàng không đổi.</td>
+                  <td>Không ảnh hưởng đến tồn kho.</td>
+                  <td>Ghi nhận mã lỗi <code>VOUCHER_EXPIRED</code> trong access log.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scenario 3: Below Basket Min</strong></td>
+                  <td>Báo lỗi chỉ rõ số tiền còn thiếu để kích thích mua thêm.</td>
+                  <td>Không giảm giá, khuyến khích Upselling.</td>
+                  <td>Không ảnh hưởng đến tồn kho.</td>
+                  <td>Ghi nhận mã lỗi <code>VOUCHER_MIN_THRESHOLD_NOT_MET</code>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scenario 4: Stockout</strong></td>
+                  <td>Điều hướng về giỏ hàng, đánh dấu đỏ sản phẩm hết hàng.</td>
+                  <td>Không gọi API trừ tiền; đảm bảo an toàn ví tiền khách hàng.</td>
+                  <td>Hàng đã thuộc về người dùng khác; hệ thống cập nhật 0.</td>
+                  <td>Ghi nhận lỗi <code>INVENTORY_RESERVATION_EXPIRED</code>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Scenario 5: Timeout</strong></td>
+                  <td>Thông báo trấn an tra soát; khóa nút thanh toán tránh duplicate.</td>
+                  <td>Treo giao dịch tạm thời; tuyệt đối không kích hoạt hoàn tiền vội.</td>
+                  <td>Kéo dài soft-reserve thêm 30 phút để chờ xác nhận ngân hàng.</td>
+                  <td>Tạo sự kiện Webhook Polling Worker theo dõi giao dịch.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- C.7 Weak vs Strong AC -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">7. Phân tích So sánh: Tiêu chí Chấp nhận Kém vs. Chuẩn mực</span>
+            <span class="lang-en">7. Concrete Comparison: Flawed Acceptance Criterion vs. Rigorous Rewrite</span>
+          </h3>
+
+          <div class="comparison-grid">
+            <div class="comparison-card bad">
+              <div class="comparison-header">
+                <span>❌</span>
+                <span>Tiêu chí Kém (Flawed Criterion - Thường thấy ở Junior BA):</span>
+              </div>
+              <p style="color: #7F1D1D; font-size: 0.85rem; line-height: 1.6;">
+                <em>"Hệ thống phải kiểm tra mã voucher hợp lệ khi khách hàng nhập và thanh toán. Nếu mã sai hoặc có lỗi thanh toán thì hiện thông báo lỗi phù hợp."</em>
+              </p>
+              <div style="margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px dashed #FCA5A5; font-size: 0.8rem; color: #991B1B;">
+                <strong>Tại sao thất bại:</strong>
+                <ul style="padding-left: 1rem; margin-top: 0.25rem;">
+                  <li>Từ ngữ mơ hồ: Thế nào là "hợp lệ"? Thế nào là "thông báo phù hợp"?</li>
+                  <li>Không chỉ rõ điều kiện tiền đề: Khách vãng lai hay đã đăng nhập? Giỏ hàng bao nhiêu tiền?</li>
+                  <li>Lập trình viên và Tester sẽ tự phỏng đoán thông báo lỗi, dẫn đến việc Dev viết một kiểu, QA test một kiểu.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="comparison-card good">
+              <div class="comparison-header">
+                <span>✅</span>
+                <span>Bản Viết lại Chuẩn mực (Rigorous Rewrite):</span>
+              </div>
+              <p style="color: #14532D; font-size: 0.85rem; line-height: 1.6;">
+                <strong>Scenario:</strong> Reject invalid voucher format with specific feedback<br>
+                <strong>Given</strong> customer is on the checkout screen<br>
+                <strong>When</strong> customer enters voucher code containing special characters <span style="background: #DCFCE7; padding: 1px 4px;">"SALE@#$"</span><br>
+                <strong>Then</strong> system rejects the input before calling voucher validation API<br>
+                <strong>And</strong> displays inline message: <span style="background: #DCFCE7; padding: 1px 4px;">"Mã giảm giá chỉ được chứa chữ cái và số."</span><br>
+                <strong>And</strong> the Apply button remains enabled for re-entry.
+              </p>
+              <div style="margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px dashed #86EFAC; font-size: 0.8rem; color: #166534;">
+                <strong>Tại sao vượt trội:</strong>
+                <ul style="padding-left: 1rem; margin-top: 0.25rem;">
+                  <li>Xác định chính xác dữ liệu đầu vào (Ký tự đặc biệt).</li>
+                  <li>Tối ưu hiệu năng: Validation tại client, không gọi API vô ích.</li>
+                  <li>Quy định rõ câu chữ thông báo người dùng và trạng thái nút bấm.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION D: FIELD-READY SPECIFICATION -->
+        <section id="sec-specification" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">D</span>
+            <h2>
+              <span class="lang-vi">Hồ sơ Đặc tả Sẵn sàng Thực chiến (Field-Ready Specification Module)</span>
+              <span class="lang-en">Production Field-Ready Functional Specification Packet</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Dưới đây là cấu trúc module đặc tả hoàn chỉnh mà một Business Analyst bàn giao cho nhóm Scrum trong buổi Sprint Planning hoặc Backlog Refinement:
+          </p>
+          <p class="lang-en">
+            The following artifacts represent a complete, production-grade functional specification packet handed over by a BA to the Scrum engineering team during backlog refinement:
+          </p>
+
+          <!-- D.1 Story Metadata Card -->
+          <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); border-radius: var(--radius-md); padding: 1.5rem; margin: 1.5rem 0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; font-size: 0.875rem;">
+              <div><strong>Story ID:</strong> <code>US-CHK-042</code></div>
+              <div><strong>Feature Epic:</strong> <code>EPIC-03: Checkout & Payments</code></div>
+              <div><strong>Author / Curator:</strong> Nguyễn Đăng Cẩm Tú (Hazel)</div>
+              <div><strong>Target Sprint:</strong> Sprint 14 (Release 2.4)</div>
+              <div><strong>Story Points:</strong> 5 Points (Estimated)</div>
+              <div><strong>Priority (MoSCoW):</strong> <span class="badge badge-explicit">MUST HAVE</span></div>
+            </div>
+            <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-card); font-size: 0.9rem;">
+              <strong>Mục tiêu Kinh doanh & KPI Đo lường (Business Objective & KPIs):</strong><br>
+              <span class="lang-vi">Giảm tỷ lệ bỏ giỏ hàng (Cart Abandonment Rate) từ 28% xuống &le; 18% sau 30 ngày triển khai; nâng cao Tỷ lệ Chuyển đổi Thanh toán (Checkout Conversion Rate) thêm 3.5 điểm phần trăm.</span>
+              <span class="lang-en">Reduce checkout drop-off rate from 28% to &le; 18% within 30 days post-launch; increase checkout conversion by +3.5 percentage points.</span>
+            </div>
+          </div>
+
+          <!-- D.2 Validation & Error Message Table -->
+          <h3>
+            <span class="lang-vi">Bảng Ma trận Kiểm tra Dữ liệu & Thông báo Lỗi (Validation & Error Matrix)</span>
+            <span class="lang-en">Data Validation Rules & Error Messages Matrix</span>
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Trường / Tương tác</th>
+                  <th>Điều kiện Kích hoạt Lỗi</th>
+                  <th>Mã Lỗi Hệ thống</th>
+                  <th>Thông báo Người dùng (Tiếng Việt)</th>
+                  <th>User Message (English)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>voucher_code</code></td>
+                  <td>Độ dài chuỗi = 0 hoặc toàn khoảng trắng khi bấm Áp dụng.</td>
+                  <td><code>ERR_VAL_01</code></td>
+                  <td>Vui lòng nhập mã giảm giá.</td>
+                  <td>Please enter a discount code.</td>
+                </tr>
+                <tr>
+                  <td><code>voucher_code</code></td>
+                  <td>Chuỗi chứa ký tự đặc biệt (chỉ cho phép A-Z, 0-9).</td>
+                  <td><code>ERR_VAL_02</code></td>
+                  <td>Mã giảm giá chỉ được bao gồm chữ cái và số.</td>
+                  <td>Voucher code must contain only letters and numbers.</td>
+                </tr>
+                <tr>
+                  <td><code>voucher_code</code></td>
+                  <td>Mã không tồn tại trong cơ sở dữ liệu.</td>
+                  <td><code>VOUCHER_NOT_FOUND</code></td>
+                  <td>Mã giảm giá không tồn tại hoặc không hợp lệ.</td>
+                  <td>Voucher code does not exist or is invalid.</td>
+                </tr>
+                <tr>
+                  <td><code>voucher_code</code></td>
+                  <td>Mã đã vượt quá ngày hết hạn (UTC timestamp).</td>
+                  <td><code>VOUCHER_EXPIRED</code></td>
+                  <td>Mã ưu đãi đã hết hạn sử dụng. Vui lòng thử mã khác.</td>
+                  <td>This voucher has expired. Please try another code.</td>
+                </tr>
+                <tr>
+                  <td><code>voucher_code</code></td>
+                  <td>Giá trị giỏ hàng (Subtotal) nhỏ hơn ngưỡng tối thiểu.</td>
+                  <td><code>VOUCHER_BELOW_MIN</code></td>
+                  <td>Đơn hàng cần tối thiểu {min_amount}đ để áp dụng mã này.</td>
+                  <td>Minimum order subtotal of {min_amount} required for this voucher.</td>
+                </tr>
+                <tr>
+                  <td><code>payment_status</code></td>
+                  <td>Cổng thanh toán phản hồi lỗi từ chối thẻ (Thẻ hết tiền/khóa).</td>
+                  <td><code>PAYMENT_DECLINED</code></td>
+                  <td>Giao dịch bị ngân hàng từ chối. Vui lòng kiểm tra lại thẻ hoặc chọn phương thức khác.</td>
+                  <td>Card was declined by issuing bank. Please verify funds or select another method.</td>
+                </tr>
+                <tr>
+                  <td><code>payment_status</code></td>
+                  <td>Không nhận được phản hồi trong vòng 60 giây.</td>
+                  <td><code>GATEWAY_TIMEOUT</code></td>
+                  <td>Giao dịch đang được xác thực với ngân hàng. Vui lòng kiểm tra email xác nhận.</td>
+                  <td>Transaction is undergoing bank verification. Please check your confirmation email.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- D.3 Dependencies & Unresolved Questions -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">Phụ thuộc Kỹ thuật & Các Câu hỏi Mở Cần Theo dõi</span>
+            <span class="lang-en">Technical Dependencies & Open Assumptions</span>
+          </h3>
+
+          <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin: 1.25rem 0;">
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="margin-top: 0; color: var(--color-primary-dark);">
+                <span class="lang-vi">🔗 Phụ thuộc Kỹ thuật (Dependencies)</span>
+                <span class="lang-en">🔗 Technical Dependencies</span>
+              </h4>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <li><strong>Promo Engine API (v2.1):</strong> Cần endpoint <code>POST /api/v2/vouchers/validate</code> phản hồi trong &le; 200ms.</li>
+                <li><strong>Payment Gateway Webhook:</strong> Cần máy chủ webhook nhận bản tin IPN bất đồng bộ khi mạng người dùng bị đứt.</li>
+                <li><strong>Redis Inventory Lock:</strong> Dịch vụ lưu trữ phân tán để khóa tồn kho tạm thời (15-min soft reservation).</li>
+              </ul>
+            </div>
+
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <h4 style="margin-top: 0; color: #B45309;">
+                <span class="lang-vi">❓ Giả định & Câu hỏi Mở (Open Assumptions)</span>
+                <span class="lang-en">❓ Assumptions & Open Questions</span>
+              </h4>
+              <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                <li><em>Giả định minh họa:</em> Các con số 15 phút giữ hàng và 60 giây timeout là tham số giả định phục vụ bài học (trong dự án thực cần căn cứ theo SLA thực tế).</li>
+                <li><em>Câu hỏi mở:</em> Nếu khách hàng dùng đồng thời tiền tích lũy Loyalty Points và Voucher thì thứ tự trừ tiền nào được ưu tiên để tính thuế VAT? (Đang chờ phòng Kế toán duyệt).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- D.4 Traceability Matrix -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">Ma trận Truy vết Hai chiều (Bidirectional Traceability Matrix)</span>
+            <span class="lang-en">Bidirectional Traceability Mapping</span>
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mục tiêu Kinh doanh</th>
+                  <th>Mã User Story</th>
+                  <th>Quy tắc Nghiệp vụ</th>
+                  <th>Kịch bản Gherkin</th>
+                  <th>Mã Test Case QA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="3"><strong>OBJ-REV-01:</strong> Tăng tỷ lệ hoàn tất đơn hàng và AOV</td>
+                  <td rowspan="3"><code>US-CHK-042</code></td>
+                  <td><code>BR-01, BR-02</code></td>
+                  <td>Scenario 1 (Happy Path)</td>
+                  <td><code>TC-CHK-001, TC-CHK-002</code></td>
+                </tr>
+                <tr>
+                  <td><code>BR-02</code></td>
+                  <td>Scenario 2 (Expired), Scenario 3 (Below Min)</td>
+                  <td><code>TC-CHK-003, TC-CHK-004</code></td>
+                </tr>
+                <tr>
+                  <td><code>BR-03, BR-04</code></td>
+                  <td>Scenario 4 (Stockout), Scenario 5 (Timeout)</td>
+                  <td><code>TC-CHK-005, TC-CHK-006</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- SECTION E: PRACTICE EXERCISES -->
+        <section id="sec-exercises" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">E</span>
+            <h2>
+              <span class="lang-vi">Bài tập Thực hành & Lời giải Chi tiết (Practice Exercises with Solutions)</span>
+              <span class="lang-en">Practice Exercises & Detailed Explanatory Solutions</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Để củng cố năng lực phân tích, hãy tự giải quyết 3 bài tập tình huống dưới đây trước khi mở xem lời giải và phần lập luận của chuyên gia:
+          </p>
+          <p class="lang-en">
+            To cement your requirements engineering competencies, work through the following 3 scenario challenges before reviewing the model answers and explanatory rationale:
+          </p>
+
+          <!-- Exercise 1 -->
+          <div class="exercise-card">
+            <div class="exercise-prompt">
+              <span class="badge badge-explicit" style="margin-bottom: 0.5rem;">Bài tập 1 • Viết lại User Story theo chuẩn INVEST</span>
+              <h4 style="margin: 0; color: var(--text-main);">
+                <span class="lang-vi">Đề bài: Hãy viết lại câu chuyện người dùng quá mơ hồ sau đây</span>
+                <span class="lang-en">Prompt: Refactor the following severely flawed user story</span>
+              </h4>
+              <div style="background: #FFF1F2; border: 1px solid #FECDD3; padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-top: 0.75rem; font-family: monospace; font-size: 0.9rem; color: #9F1239;">
+                "As an admin, I want reports so that I can see sales."
+              </div>
+            </div>
+            <div class="exercise-solution">
+              <div class="accordion-item" style="border: none; margin: 0; box-shadow: none;">
+                <button type="button" class="accordion-trigger" style="padding: 0.5rem 0; color: var(--color-primary-dark);">
+                  <span>💡 <span class="lang-vi">Xem Lời giải & Phân tích Chuyên gia</span><span class="lang-en">View Solution & Expert Critique</span></span>
+                  <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-body" style="background: #FFFFFF; padding: 1rem 0 0 0; border-top: 1px dashed var(--border-warm); display: none;">
+                  <p><strong>1. Phân tích Khuyết tật (Defect Analysis):</strong></p>
+                  <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                    <li><strong>Persona mơ hồ:</strong> "Admin" là ai? Quản trị viên kỹ thuật hay Giám đốc kinh doanh hay Kế toán trưởng? Mỗi vai trò có nhu cầu báo cáo hoàn toàn khác nhau.</li>
+                    <li><strong>Feature vô định:</strong> "Reports" là báo cáo gì? Định dạng gì? Xuất PDF, Excel hay xem Dashboard thời gian thực?</li>
+                    <li><strong>Value hời hợt:</strong> "See sales" chỉ là hành động tò mò xem dữ liệu, không thể hiện quyết định kinh doanh cụ thể nào.</li>
+                  </ul>
+
+                  <p style="margin-top: 0.75rem;"><strong>2. Bản viết lại Chuẩn mực (Model Rewrite):</strong></p>
+                  <div style="background: #F0FDF4; border: 1px solid #86EFAC; padding: 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; color: #14532D; line-height: 1.6;">
+                    <strong>As a</strong> Regional Sales Operations Manager,<br>
+                    <strong>I want to</strong> export monthly net sales revenue reports broken down by product category into CSV format,<br>
+                    <strong>So that</strong> I can reconcile sales commission payouts for the regional sales team and identify underperforming product lines.
+                  </div>
+                  <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                    <em>Bản dịch:</em> "Là Trưởng bộ phận Vận hành Kinh doanh Khu vực, Tôi muốn xuất báo cáo doanh thu thuần hàng tháng theo từng danh mục sản phẩm dưới định dạng CSV, Để tôi có thể đối soát hoa hồng cho đội ngũ bán hàng và nhận diện các dòng sản phẩm có doanh số thấp."
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 2 -->
+          <div class="exercise-card">
+            <div class="exercise-prompt">
+              <span class="badge badge-inferred" style="margin-bottom: 0.5rem;">Bài tập 2 • Rà soát Lỗ hổng Tiêu chí Chấp nhận</span>
+              <h4 style="margin: 0; color: var(--text-main);">
+                <span class="lang-vi">Đề bài: Nhận diện 3 lỗ hổng và trường hợp biên (Edge Cases) bị bỏ sót trong đặc tả sau</span>
+                <span class="lang-en">Prompt: Identify 3 critical omissions and unhandled boundary cases</span>
+              </h4>
+              <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-main); line-height: 1.6;">
+                <em>"Khi khách hàng đăng ký tài khoản mới bằng số điện thoại, hệ thống sẽ gửi một mã OTP gồm 6 chữ số qua SMS. Khách hàng nhập đúng mã OTP thì tài khoản được kích hoạt thành công."</em>
+              </div>
+            </div>
+            <div class="exercise-solution">
+              <div class="accordion-item" style="border: none; margin: 0; box-shadow: none;">
+                <button type="button" class="accordion-trigger" style="padding: 0.5rem 0; color: var(--color-primary-dark);">
+                  <span>💡 <span class="lang-vi">Xem Lời giải & 3 Lỗ hổng Cần Bổ sung</span><span class="lang-en">View Solution & 3 Missing Edge Cases</span></span>
+                  <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-body" style="background: #FFFFFF; padding: 1rem 0 0 0; border-top: 1px dashed var(--border-warm); display: none;">
+                  <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.8;">
+                    <li>
+                      <strong>Lỗ hổng 1: Thời hạn hiệu lực của OTP (Time-to-Live / Expiry):</strong><br>
+                      Mã OTP có giá trị trong bao lâu? (Thực tiễn chuẩn: 60 giây hoặc 120 giây). Sau thời gian này, nếu người dùng mới nhập mã thì hệ thống phản hồi như thế nào? Cần kịch bản lỗi: <code>OTP_EXPIRED</code>.
+                    </li>
+                    <li>
+                      <strong>Lỗ hổng 2: Giới hạn số lần nhập sai liên tiếp (Rate Limiting & Brute-force Protection):</strong><br>
+                      Nếu hacker dùng bot tự động thử các số từ 000000 đến 999999 thì sao? Cần quy định: Sau <strong>5 lần nhập sai liên tiếp</strong>, mã OTP lập tức bị vô hiệu hóa và số điện thoại bị khóa tạm thời 15 phút.
+                    </li>
+                    <li>
+                      <strong>Lỗ hổng 3: Giới hạn tần suất yêu cầu gửi lại OTP (Spam SMS Protection):</strong><br>
+                      Nếu người dùng bấm liên tục vào nút "Gửi lại mã OTP" sẽ làm phát sinh chi phí SMS Brandname rất lớn cho doanh nghiệp. Cần quy định: Nút "Gửi lại mã" bị đếm ngược (cooldown timer) <strong>60 giây</strong> trước khi cho phép bấm lần tiếp theo; tối đa 3 lần/ngày.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercise 3 -->
+          <div class="exercise-card">
+            <div class="exercise-prompt">
+              <span class="badge badge-technical" style="margin-bottom: 0.5rem;">Bài tập 3 • Chuyển đổi Quy tắc Nghiệp vụ sang Kịch bản Gherkin</span>
+              <h4 style="margin: 0; color: var(--text-main);">
+                <span class="lang-vi">Đề bài: Viết kịch bản Gherkin hoàn chỉnh cho quy tắc Đổi điểm thưởng (Loyalty Points)</span>
+                <span class="lang-en">Prompt: Write a robust Gherkin scenario for a Tiered Loyalty Points Redemption Rule</span>
+              </h4>
+              <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-main); line-height: 1.6;">
+                <strong>Quy tắc nghiệp vụ:</strong> Khách hàng thành viên có thể dùng điểm thưởng để thanh toán (tỷ lệ: 1.000 điểm = 10.000 VND). Khách chỉ được dùng điểm khi số dư điểm đạt tối thiểu <strong>5.000 điểm</strong>, và số tiền giảm trừ từ điểm <strong>không được vượt quá 50%</strong> tổng giá trị đơn hàng.
+              </div>
+            </div>
+            <div class="exercise-solution">
+              <div class="accordion-item" style="border: none; margin: 0; box-shadow: none;">
+                <button type="button" class="accordion-trigger" style="padding: 0.5rem 0; color: var(--color-primary-dark);">
+                  <span>💡 <span class="lang-vi">Xem Kịch bản Gherkin Mẫu</span><span class="lang-en">View Model Gherkin Solution</span></span>
+                  <span class="accordion-arrow">▼</span>
+                </button>
+                <div class="accordion-body" style="background: #FFFFFF; padding: 1rem 0 0 0; border-top: 1px dashed var(--border-warm); display: none;">
+                  <div class="gherkin-container" style="margin-top: 0.5rem;">
+                    <span class="gh-keyword">Scenario:</span> Cap points redemption at 50% of order value when points balance is sufficient<br>
+                    &nbsp;&nbsp;<span class="gh-clause">Given</span> member <span class="gh-string">"anh.le"</span> has an available loyalty balance of <span class="gh-param">8,000 points</span> (equivalent to 80,000 VND)<br>
+                    &nbsp;&nbsp;<span class="gh-clause">And</span> the cart merchandise subtotal is <span class="gh-param">100,000 VND</span><br>
+                    &nbsp;&nbsp;<span class="gh-clause">When</span> member selects <span class="gh-string">"Redeem Maximum Eligible Points"</span><br>
+                    &nbsp;&nbsp;<span class="gh-clause">Then</span> system caps maximum allowable discount at <span class="gh-param">50,000 VND</span> (50% of 100,000 VND)<br>
+                    &nbsp;&nbsp;<span class="gh-clause">And</span> system deducts exactly <span class="gh-param">5,000 points</span> from member's balance<br>
+                    &nbsp;&nbsp;<span class="gh-clause">And</span> remaining loyalty balance becomes <span class="gh-param">3,000 points</span><br>
+                    &nbsp;&nbsp;<span class="gh-clause">And</span> final payable amount is updated to <span class="gh-param">50,000 VND</span><br>
+                    &nbsp;&nbsp;<span class="gh-clause">And</span> an explanatory note displays: <span class="gh-string">"Đã áp dụng tối đa 5.000 điểm (50% giá trị đơn hàng)."</span>
+                  </div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    <strong>Phân tích điểm sáng:</strong> Kịch bản này kiểm chứng trường hợp biên quan trọng: Dù khách hàng có đủ 8.000 điểm (tương đương 80.000đ), hệ thống vẫn tự động chặn trần ở mức 50.000đ theo đúng giới hạn 50% của chính sách tài chính.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION F: INTERVIEW PREPARATION -->
+        <section id="sec-interviews" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">F</span>
+            <h2>
+              <span class="lang-vi">Bộ Câu hỏi Phỏng vấn Kỹ thuật Thực chiến (Interview Preparation)</span>
+              <span class="lang-en">Realistic Technical BA Interview Questions & Model Answers</span>
+            </h2>
+          </div>
+          <p class="lang-vi">
+            Dưới đây là 5 câu hỏi phỏng vấn thực tế ở cấp độ Senior/Mid-level ITBA, phân tích chi tiết câu trả lời mạnh (Strong Answer), câu trả lời yếu cần tránh (Weak Answer), và dụng ý đánh giá của Nhà tuyển dụng:
+          </p>
+          <p class="lang-en">
+            The following 5 technical interview scenarios reflect real-world evaluations for Mid-to-Senior ITBAs, contrasting strong answers against common junior pitfalls alongside evaluator intent:
+          </p>
+
+          <!-- Question 1 -->
+          <div class="qa-card">
+            <div class="qa-question">
+              <span class="qa-role-badge">Q1 • Stakeholder Coaching</span>
+              <span class="lang-vi">"Nếu một Stakeholder kinh doanh kiên quyết đòi viết User Story thành các bước bấm nút chi tiết trên giao diện (UI click-by-click), bạn sẽ xử lý thế nào?"</span>
+              <span class="lang-en">"How do you handle a business stakeholder who insists on writing user stories as detailed UI click-by-click instructions?"</span>
+            </div>
+
+            <div class="qa-strong-answer">
+              <strong style="color: #166534;">✅ Câu trả lời Xuất sắc (Strong Answer):</strong>
+              <p style="margin-top: 0.4rem; color: #14532D; line-height: 1.6;">
+                "Trước hết, tôi đồng cảm với mong muốn của Stakeholder vì họ muốn chắc chắn sản phẩm cuối cùng dễ dùng và đúng ý họ. Thay vì đối đầu trực tiếp, tôi sẽ áp dụng phương pháp <strong>phân tách giữa Nhu cầu Nghiệp vụ (Problem Space) và Giải pháp Giao diện (Solution Space)</strong>.<br>
+                Tôi sẽ giải thích nhẹ nhàng rằng nếu chúng ta 'khóa cứng' từng thao tác click nút vào User Story ngay từ đầu, chúng ta sẽ làm mất đi khả năng sáng tạo của các UI/UX Designer và Lập trình viên trong việc tìm ra trải nghiệm tốt hơn; đồng thời mỗi lần đổi màu nút hay đổi bố cục, toàn bộ User Story sẽ bị coi là 'vi phạm yêu cầu'.<br>
+                Hành động thực tế: Tôi giữ lại tài liệu mô tả thao tác của họ dưới dạng <em>Wireframe tham chiếu</em> hoặc <em>User Flow đính kèm</em>, nhưng ở phần User Story và Acceptance Criteria chính, tôi sẽ chuyển ngữ về hành vi và kết quả mong đợi (Outcome-focused). Tôi sẽ mời họ tham gia phiên review Prototype tương tác để họ an tâm rằng trải nghiệm mong muốn của họ vẫn được bảo toàn trọn vẹn."
+              </p>
+            </div>
+
+            <div class="qa-weak-answer">
+              <strong style="color: #991B1B;">❌ Câu trả lời Yếu cần tránh (Weak Answer):</strong>
+              <p style="margin-top: 0.25rem;">
+                <em>"Tôi sẽ nói với họ là Agile không cho phép làm như thế, sách Scrum dạy là User Story không được viết UI, nếu họ thích viết UI thì họ nên dùng mô hình Waterfall chứ đừng làm Agile."</em><br>
+                ➔ <strong>Lý do trượt:</strong> Cứng nhắc, giáo điều, thể hiện kỹ năng giao tiếp và thuyết phục bên liên quan kém.
+              </p>
+            </div>
+
+            <div class="qa-rationale">
+              <strong>Dụng ý của Nhà tuyển dụng (Evaluator Intent):</strong> Đánh giá kỹ năng mềm (Soft Skills), năng lực điều phối (Facilitation), và khả năng bảo vệ nguyên lý Agile mà không tạo xung đột tiêu cực với khách hàng.
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="qa-card">
+            <div class="qa-question">
+              <span class="qa-role-badge">Q2 • AC vs DoD Boundary</span>
+              <span class="lang-vi">"Một User Story có thể vượt qua 100% Tiêu chí Chấp nhận (AC) nhưng vẫn bị từ chối đưa vào bản phát hành không? Tại sao?"</span>
+              <span class="lang-en">"Can a user story pass 100% of its Acceptance Criteria but still be rejected from the shippable release increment? Explain why."</span>
+            </div>
+
+            <div class="qa-strong-answer">
+              <strong style="color: #166534;">✅ Câu trả lời Xuất sắc (Strong Answer):</strong>
+              <p style="margin-top: 0.4rem; color: #14532D; line-height: 1.6;">
+                "Có, hoàn toàn có thể xảy ra và điều này xảy ra khá thường xuyên. Đó chính là lý do vì sao trong Scrum bắt buộc phải có cả <strong>Acceptance Criteria (AC)</strong> và <strong>Definition of Done (DoD)</strong>.<br>
+                AC chỉ xác nhận tính đúng đắn về mặt <em>chức năng và nghiệp vụ</em> của riêng câu chuyện đó. Nhưng để một sản phẩm được coi là 'Potentially Shippable', nó phải thỏa mãn bộ tiêu chuẩn kỹ thuật toàn cục của DoD.<br>
+                Ví dụ: Tính năng thanh toán của Story đã trừ đúng số tiền và hiển thị đúng thông báo lỗi (Pass 100% AC), nhưng trong quá trình phát triển, nhóm chưa viết Unit Test đạt độ phủ 80%, mã nguồn chưa vượt qua bài quét bảo mật tự động SonarQube (còn lỗ hổng SQL Injection), hoặc chưa có tài liệu hướng dẫn vận hành cho đội Support. Khi đó, câu chuyện vi phạm Definition of Done và Product Owner có toàn quyền từ chối đưa tính năng này vào bản phát hành chính thức."
+              </p>
+            </div>
+
+            <div class="qa-weak-answer">
+              <strong style="color: #991B1B;">❌ Câu trả lời Yếu cần tránh (Weak Answer):</strong>
+              <p style="margin-top: 0.25rem;">
+                <em>"Không thể nào. Nếu story đã pass hết Acceptance Criteria do BA và PO viết ra thì coi như xong việc rồi, Developer và Tester đã làm đúng theo yêu cầu."</em><br>
+                ➔ <strong>Lý do trượt:</strong> Chứng tỏ ứng viên chưa từng làm việc thực tế trong môi trường CI/CD chuyên nghiệp hoặc không hiểu vai trò của Definition of Done.
+              </p>
+            </div>
+
+            <div class="qa-rationale">
+              <strong>Dụng ý của Nhà tuyển dụng:</strong> Kiểm tra mức độ am hiểu về quản trị chất lượng kỹ thuật (Engineering Quality Governance) và các tiêu chuẩn kiểm thử tự động.
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="qa-card">
+            <div class="qa-question">
+              <span class="qa-role-badge">Q3 • Vertical Slicing</span>
+              <span class="lang-vi">"Khi một User Story quá lớn (Epic) mà nhóm ước lượng 13 hay 20 Story Points, bạn sẽ chia nhỏ (Story Slicing) như thế nào mà không tạo ra các story lớp kỹ thuật nằm ngang?"</span>
+              <span class="lang-en">"When a user story is too large (Epic) sized at 13 or 20 story points, how do you slice it without producing horizontal architectural layers?"</span>
+            </div>
+
+            <div class="qa-strong-answer">
+              <strong style="color: #166534;">✅ Câu trả lời Xuất sắc (Strong Answer):</strong>
+              <p style="margin-top: 0.4rem; color: #14532D; line-height: 1.6;">
+                "Tôi kiên quyết tuân thủ nguyên tắc <strong>Vertical Slicing (Cắt dọc theo giá trị)</strong> thay vì Horizontal Slicing (chia thành story Frontend, Backend, Database). Tôi áp dụng 4 mẫu kỹ thuật cắt lát phổ biến của <em>Richard Lawrence</em>:<br>
+                1. <strong>Cắt theo Luồng Nghiệp vụ (Happy Path vs. Alternative Paths):</strong> Story đầu tiên chỉ làm duy nhất luồng thành công cơ bản nhất (ví dụ: Thanh toán thẻ Visa nội địa thành công). Các story tiếp theo sẽ bổ sung xử lý thẻ quốc tế, thẻ hết hạn, và thanh toán ví điện tử.<br>
+                2. <strong>Cắt theo Biến thể Dữ liệu (Data Variations):</strong> Bắt đầu với đơn hàng chỉ chứa 1 sản phẩm không áp mã giảm giá; sau đó làm story cho đơn hàng nhiều sản phẩm và giỏ hàng có voucher phức tạp.<br>
+                3. <strong>Cắt theo Giao diện Đơn giản trước, Tối ưu sau (Simple UI to Rich UI):</strong> Ban đầu chấp nhận nhập mã voucher dạng text box đơn giản; sprint sau mới nâng cấp thành giao diện chọn voucher từ danh sách kèm bộ lọc thông minh.<br>
+                4. <strong>Cắt theo Quy tắc Nghiệp vụ (Business Rule Slicing):</strong> Tách các quy tắc phức tạp (như hoàn tiền tự động khi lỗi mạng) thành câu chuyện độc lập, sprint đầu chấp nhận xử lý hoàn tiền thủ công qua tool nội bộ của CSKH."
+              </p>
+            </div>
+
+            <div class="qa-weak-answer">
+              <strong style="color: #991B1B;">❌ Câu trả lời Yếu cần tránh (Weak Answer):</strong>
+              <p style="margin-top: 0.25rem;">
+                <em>"Tôi sẽ chia thành 3 task: Task 1 cho bạn Backend thiết kế Database và viết API (5 điểm), Task 2 cho bạn Frontend ghép giao diện (5 điểm), Task 3 cho bạn QA test (3 điểm)."</em><br>
+                ➔ <strong>Lý do trượt:</strong> Đây là phân rã công việc kỹ thuật (Technical Tasks) theo tư duy Waterfall thu nhỏ, không phải là User Story trong Agile vì các phần này đứng riêng lẻ không mang lại giá trị độc lập nào cho người dùng.
+              </p>
+            </div>
+
+            <div class="qa-rationale">
+              <strong>Dụng ý của Nhà tuyển dụng:</strong> Thẩm định kỹ năng tư duy sản phẩm (Product Thinking) và khả năng tạo ra các gói công việc bàn giao giá trị liên tục (Continuous Value Delivery).
+            </div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="qa-card">
+            <div class="qa-question">
+              <span class="qa-role-badge">Q4 • When NOT to Use Gherkin</span>
+              <span class="lang-vi">"Trong dự án của bạn, có trường hợp nào bạn KHUYÊN KHÔNG NÊN dùng cú pháp Gherkin không? Tại sao?"</span>
+              <span class="lang-en">"In your project experience, when would you recommend NOT using Gherkin syntax, and why?"</span>
+            </div>
+
+            <div class="qa-strong-answer">
+              <strong style="color: #166534;">✅ Câu trả lời Xuất sắc (Strong Answer):</strong>
+              <p style="margin-top: 0.4rem; color: #14532D; line-height: 1.6;">
+                "Có, tôi sẽ chủ động không dùng Gherkin trong 3 trường hợp cụ thể:<br>
+                1. <strong>Các thay đổi thuần túy về giao diện hoặc nội dung hiển thị (Static UI / Copywriting):</strong> Ví dụ, thay đổi nội dung văn bản điều khoản sử dụng, điều chỉnh vị trí logo hay đổi màu nền. Cố ép Given-When-Then vào đây (như 'Given user on page, When user looks at logo, Then logo is blue') chỉ làm rối tài liệu và tốn thời gian vô ích. Trường hợp này dùng Bullet checklist hoặc hình ảnh đính kèm là tối ưu nhất.<br>
+                2. <strong>Quy định kiểm tra dữ liệu trường tĩnh (Field-level Validation Rules):</strong> Một form đăng ký có 20 trường thông tin (Họ tên, ngày sinh, email, căn cước...). Nếu viết 20 kịch bản Gherkin cho từng trường hợp bỏ trống, nhập chữ vào ô số... sẽ tạo ra hàng chục trang tài liệu dư thừa. Tôi sẽ sử dụng <em>Bảng Từ điển Dữ liệu (Data Dictionary Table)</em> với các cột: Tên trường, Kiểu dữ liệu, Bắt buộc, Regex, Thông báo lỗi.<br>
+                3. <strong>Khi dự án không có kế hoạch làm Test Automation bằng BDD:</strong> Nếu nhóm phát triển chỉ test thủ công và các kỹ sư thấy cấu trúc Gherkin khó đọc hơn một checklist nghiệp vụ mạch lạc, BA cần linh hoạt dùng Bullet points có cấu trúc để phục vụ mục tiêu tối thượng là: <em>Giao tiếp thông suốt, không hiểu lầm</em>."
+              </p>
+            </div>
+
+            <div class="qa-weak-answer">
+              <strong style="color: #991B1B;">❌ Câu trả lời Yếu cần tránh (Weak Answer):</strong>
+              <p style="margin-top: 0.25rem;">
+                <em>"Lúc nào cũng phải dùng Gherkin chứ, vì Gherkin là chuẩn của BDD rồi, không dùng Gherkin thì làm sao mà gọi là BA chuyên nghiệp được."</em><br>
+                ➔ <strong>Lý do trượt:</strong> Rập khuôn, thiếu trải nghiệm thực tế về chi phí bảo trì tài liệu và tính hiệu quả trong giao tiếp nhóm.
+              </p>
+            </div>
+
+            <div class="qa-rationale">
+              <strong>Dụng ý của Nhà tuyển dụng:</strong> Đo lường tính thực tế (Pragmatism) và khả năng lựa chọn công cụ đúng mục đích (Fitness for Purpose) thay vì chạy theo hình thức.
+            </div>
+          </div>
+
+          <!-- Question 5 -->
+          <div class="qa-card">
+            <div class="qa-question">
+              <span class="qa-role-badge">Q5 • Conflict Resolution</span>
+              <span class="lang-vi">"Trong buổi Sprint Review, Product Owner phát hiện một trường hợp ngoại lệ (Edge Case) chưa được viết trong kịch bản Gherkin và từ chối nghiệm thu story. Bạn xử lý khủng hoảng này thế nào?"</span>
+              <span class="lang-en">"During the sprint review, the PO discovers an edge case omitted from the Gherkin criteria and rejects the story. How do you resolve this and prevent recurrence?"</span>
+            </div>
+
+            <div class="qa-strong-answer">
+              <strong style="color: #166534;">✅ Câu trả lời Xuất sắc (Strong Answer):</strong>
+              <p style="margin-top: 0.4rem; color: #14532D; line-height: 1.6;">
+                "Đây là tình huống điển hình kiểm tra năng lực quản trị phạm vi và xử lý khủng hoảng của một BA:<br>
+                1. <strong>Xử lý ngay tại chỗ (Immediate Action):</strong> Tôi tuyệt đối không tranh cãi hay đổ lỗi xem 'ai quên trường hợp này'. Tôi cùng PO và Tech Lead đánh giá mức độ nghiêm trọng (Severity) của edge case này:<br>
+                - Nếu đây là lỗi rủi ro cao ảnh hưởng đến tính toàn vẹn dữ liệu hoặc tiền bạc: Tôi đồng thuận việc chưa thể phát hành tính năng ra môi trường Production.<br>
+                - Đánh giá trạng thái Story: Nếu phần cốt lõi của Story đã chạy ổn định theo đúng các tiêu chí AC đã thỏa thuận trước đó, tôi sẽ đề xuất PO nghiệm thu phạm vi ban đầu và <strong>lập ngay một User Story mới (hoặc Bug/Defect ticket)</strong> ghi nhận trường hợp ngoại lệ này để ưu tiên xử lý ngay trong Sprint tiếp theo, tránh làm nghẽn tiến độ chung của nhóm.<br>
+                2. <strong>Biện pháp phòng ngừa dài hạn (Prevention):</strong> Trong buổi Sprint Retrospective, tôi sẽ đưa vấn đề này ra phân tích nguyên nhân gốc rễ. Tôi sẽ cải tiến buổi <em>Three Amigos</em> (cuộc họp 3 bên gồm BA, Developer và Tester trước khi dev) bằng cách áp dụng kỹ thuật <strong>Example Mapping</strong> hoặc checklist các trường hợp biên kinh điển (Boundary Value Checklist) để phát hiện sớm các lỗ hổng logic trước khi viết mã."
+              </p>
+            </div>
+
+            <div class="qa-weak-answer">
+              <strong style="color: #991B1B;">❌ Câu trả lời Yếu cần tránh (Weak Answer):</strong>
+              <p style="margin-top: 0.25rem;">
+                <em>"Tôi sẽ mở lại Jira và cãi lại rằng trong AC lúc đầu đâu có ghi cái này, do PO không nói từ đầu thì PO phải chịu trách nhiệm chứ sao lại từ chối story của nhóm."</em><br>
+                ➔ <strong>Lý do trượt:</strong> Tư duy ăn thua, phòng thủ cá nhân, thiếu tinh thần hợp tác đồng sở hữu sản phẩm (Collective Ownership).
+              </p>
+            </div>
+
+            <div class="qa-rationale">
+              <strong>Dụng ý của Nhà tuyển dụng:</strong> Đánh giá trí tuệ cảm xúc (EQ), kỹ năng giải quyết khủng hoảng, và khả năng cải tiến quy trình học tập liên tục (Continuous Improvement).
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION G: GLOSSARY & REFERENCES -->
+        <section id="sec-glossary-references" class="lesson-section">
+          <div class="lesson-section-header">
+            <span class="section-num-badge">G</span>
+            <h2>
+              <span class="lang-vi">Thuật ngữ & Tài liệu Tham chiếu Đã Kiểm chứng (Glossary & References)</span>
+              <span class="lang-en">Bilingual Glossary & Verified Authoritative References</span>
+            </h2>
+          </div>
+
+          <!-- G.1 Glossary -->
+          <h3>
+            <span class="lang-vi">1. Bảng Thuật ngữ Chuyên ngành Song ngữ (Bilingual Glossary)</span>
+            <span class="lang-en">1. Key Domain Terminology</span>
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Thuật ngữ (Tiếng Anh)</th>
+                  <th style="width: 25%;">Thuật ngữ (Tiếng Việt)</th>
+                  <th style="width: 50%;">Định nghĩa Chuẩn mực (Standard Definition)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>User Story</strong></td>
+                  <td>Câu chuyện Người dùng</td>
+                  <td>Một mô tả ngắn gọn, không chính thức về một tính năng phần mềm được viết dưới góc nhìn của người dùng cuối để kích hoạt cuộc đối thoại trao đổi giá trị.</td>
+                </tr>
+                <tr>
+                  <td><strong>Acceptance Criteria (AC)</strong></td>
+                  <td>Tiêu chí Chấp nhận</td>
+                  <td>Tập hợp các điều kiện và ranh giới cụ thể mà một giải pháp phần mềm bắt buộc phải đáp ứng để được Product Owner nghiệm thu là hoàn thành.</td>
+                </tr>
+                <tr>
+                  <td><strong>Gherkin Syntax</strong></td>
+                  <td>Cú pháp Gherkin</td>
+                  <td>Ngôn ngữ tự nhiên có cấu trúc sử dụng các từ khóa <code>Given-When-Then</code> để diễn giải hành vi hệ thống mà cả chuyên viên nghiệp vụ lẫn máy tính đều đọc hiểu được.</td>
+                </tr>
+                <tr>
+                  <td><strong>Behavior-Driven Development (BDD)</strong></td>
+                  <td>Phát triển Hướng Hành vi</td>
+                  <td>Một phương pháp luận phát triển phần mềm mở rộng từ TDD, khuyến khích sự cộng tác giữa BA, Dev và QA thông qua việc viết kịch bản hành vi trước khi viết mã nguồn.</td>
+                </tr>
+                <tr>
+                  <td><strong>INVEST Heuristics</strong></td>
+                  <td>Bộ Tiêu chí INVEST</td>
+                  <td>Bộ 6 chỉ dẫn (Independent, Negotiable, Valuable, Estimable, Small, Testable) do Bill Wake đề xướng nhằm đo lường chất lượng của một User Story trong Product Backlog.</td>
+                </tr>
+                <tr>
+                  <td><strong>Definition of Done (DoD)</strong></td>
+                  <td>Tiêu chuẩn Hoàn thành</td>
+                  <td>Bản danh mục kiểm tra chất lượng kỹ thuật toàn cục được toàn đội ngũ Scrum thỏa thuận nhằm xác định một Increment có đủ điều kiện phát hành ra thị trường hay không.</td>
+                </tr>
+                <tr>
+                  <td><strong>Spike Story</strong></td>
+                  <td>Câu chuyện Thăm dò Kỹ thuật</td>
+                  <td>Một hoạt động nghiên cứu có giới hạn thời gian (Timeboxed) nhằm trả lời một câu hỏi kiến trúc, thử nghiệm công nghệ mới hoặc giảm thiểu rủi ro ước lượng trước khi làm story chính.</td>
+                </tr>
+                <tr>
+                  <td><strong>Vertical Slicing</strong></td>
+                  <td>Kỹ thuật Cắt lát Dọc</td>
+                  <td>Kỹ thuật phân chia yêu cầu lớn đi xuyên suốt tất cả các tầng kiến trúc (UI, Backend, Database) để bàn giao một chức năng hẹp nhưng hoàn chỉnh và dùng được ngay.</td>
+                </tr>
+                <tr>
+                  <td><strong>Happy Path</strong></td>
+                  <td>Luồng Thành công Chính</td>
+                  <td>Kịch bản mặc định trong đó mọi thao tác của người dùng và phản hồi của hệ thống đều diễn ra thuận lợi, không gặp bất kỳ lỗi dữ liệu hay ngoại lệ nào.</td>
+                </tr>
+                <tr>
+                  <td><strong>Idempotency</strong></td>
+                  <td>Tính Bất biến Thao tác</td>
+                  <td>Thuộc tính của một thao tác hoặc API trong đó việc thực thi nhiều lần liên tiếp với cùng dữ liệu đầu vào vẫn tạo ra cùng một kết quả trạng thái duy nhất (ngăn ngừa trừ tiền trùng lặp).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- G.2 Verified References -->
+          <h3 style="margin-top: 2rem;">
+            <span class="lang-vi">2. Danh mục Tài liệu Tham chiếu Đã Được Xác minh Nguồn gốc</span>
+            <span class="lang-en">2. Verified External Standards & Literature</span>
+          </h3>
+          <p class="lang-vi">
+            Tất cả các tài liệu dưới đây đều được dẫn chiếu trung thực theo đúng trạng thái truy cập và quyền sở hữu trí tuệ của tổ chức ban hành:
+          </p>
+          <p class="lang-en">
+            The following authoritative references are indexed with exact verified access statuses and intellectual property disclosures:
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">Official Cucumber Gherkin Reference</strong>
+                <span class="badge badge-explicit">Public & Freely Accessible</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Tài liệu đặc tả ngữ pháp chính thức của cú pháp Gherkin, từ khóa và các quy ước quốc tế về BDD do Cucumber duy trì.
+              </p>
+              <a href="https://cucumber.io/docs/gherkin/reference/" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; font-family: monospace;">
+                https://cucumber.io/docs/gherkin/reference/ &rarr;
+              </a>
+            </div>
+
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">The Agile Manifesto & 12 Principles</strong>
+                <span class="badge badge-explicit">Public & Freely Accessible</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Tuyên ngôn Phát triển Phần mềm Linh hoạt (2001) của Kent Beck, Martin Fowler, Ron Jeffries và các cộng sự. Nền tảng triết lý của việc ưu tiên con người và sự tương tác hơn là quy trình cứng nhắc.
+              </p>
+              <a href="https://agilemanifesto.org/" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; font-family: monospace;">
+                https://agilemanifesto.org/ &rarr;
+              </a>
+            </div>
+
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">Bill Wake — INVEST in Good Stories, and SMART Tasks (2003)</strong>
+                <span class="badge badge-explicit">Public & Freely Accessible</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Bài viết gốc khởi xướng từ viết tắt INVEST định nghĩa các thuộc tính cốt lõi của một User Story chất lượng cao.
+              </p>
+              <a href="https://xp123.com/articles/invest-in-good-stories-and-smart-tasks/" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; font-family: monospace;">
+                https://xp123.com/articles/invest-in-good-stories-and-smart-tasks/ &rarr;
+              </a>
+            </div>
+
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">Martin Fowler — GivenWhenThen (2013)</strong>
+                <span class="badge badge-explicit">Public & Freely Accessible</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Bài luận chuyên sâu phân tích cấu trúc tư duy Given-When-Then trong phát triển phần mềm hiện đại và ranh giới với unit testing.
+              </p>
+              <a href="https://martinfowler.com/bliki/GivenWhenThen.html" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; font-family: monospace;">
+                https://martinfowler.com/bliki/GivenWhenThen.html &rarr;
+              </a>
+            </div>
+
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">Mike Cohn — User Stories Applied: For Agile Software Development</strong>
+                <span class="badge badge-supplementary">Book / Requires Purchase</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Tác phẩm kinh điển (Addison-Wesley Professional, 2004) đặt nền móng cho kỹ thuật xây dựng User Story, User Role Modeling và phân rã Epic.
+              </p>
+              <span style="font-size: 0.85rem; color: var(--text-light); font-family: monospace;">ISBN: 978-0321205681 (Tài liệu bản quyền có phí)</span>
+            </div>
+
+            <div style="background: var(--bg-surface-warm); border: 1px solid var(--border-warm); padding: 1.25rem; border-radius: var(--radius-md);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+                <strong style="color: var(--text-main);">ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Requirements engineering</strong>
+                <span class="badge badge-supplementary">Formal Standard / Requires Purchase</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0.4rem 0;">
+                Tiêu chuẩn quốc tế chính thức về quy trình kỹ nghệ yêu cầu phần mềm và hệ thống, thay thế các tiêu chuẩn cũ IEEE Std 830 và IEEE Std 1233.
+              </p>
+              <span style="font-size: 0.85rem; color: var(--text-light); font-family: monospace;">ISO Standard Store (Tài liệu tiêu chuẩn có phí)</span>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <div class="brand-badge" style="width: 28px; height: 28px; font-size: 0.75rem;">BA</div>
+          <span style="font-weight: 700; color: var(--text-heading);">Hazel BA Hub</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; max-width: 380px;">
+          <span class="lang-vi">Hệ thống tri thức, phương pháp luận và cẩm nang thực hành IT Business Analyst độc lập, xây dựng theo chuẩn mực công nghiệp quốc tế mở.</span>
+          <span class="lang-en">An independent IT Business Analysis knowledge hub and practical handbook built upon open international industry standards.</span>
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Điều hướng nhanh</span>
+          <span class="lang-en">Quick Links</span>
+        </h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><a href="../../knowledge-map/" style="color: var(--text-muted);"><span class="lang-vi">Bản đồ 8 Miền Tri thức</span><span class="lang-en">8 Knowledge Domains</span></a></li>
+          <li><a href="../../flashcards/" style="color: var(--text-muted);"><span class="lang-vi">Thẻ ghi nhớ (48 thẻ)</span><span class="lang-en">Flashcards (48 Cards)</span></a></li>
+          <li><a href="../../study-guide/" style="color: var(--text-muted);"><span class="lang-vi">Sổ tay & Biểu mẫu</span><span class="lang-en">Handbook & Templates</span></a></li>
+          <li><a href="../../downloads/" style="color: var(--text-muted);"><span class="lang-vi">Kho Tải về</span><span class="lang-en">Downloads Hub</span></a></li>
+          <li><a href="../../about/" style="color: var(--text-muted);"><span class="lang-vi">Giới thiệu tác giả</span><span class="lang-en">About Author</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 style="font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--text-heading);">
+          <span class="lang-vi">Chuẩn mực tham chiếu</span>
+          <span class="lang-en">Standard Frameworks</span>
+        </h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+          BABOK® Guide v3 (IIBA) • OMG BPMN™ 2.0 • OMG UML® 2.5 • Agile Alliance • ANSI/ISO SQL • IETF RFC Standards • ISTQB® Testing Principles.
+        </p>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        © 2026 <strong>Nguyễn Đăng Cẩm Tú (Hazel)</strong>. All rights reserved.
+      </div>
+      <div>
+        <span class="lang-vi">Trang web cá nhân độc lập phục vụ học tập và nghiên cứu chuyên môn.</span>
+        <span class="lang-en">Independent personal knowledge platform for professional study and practice.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

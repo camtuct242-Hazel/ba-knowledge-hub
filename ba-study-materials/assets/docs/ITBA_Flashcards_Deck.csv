@@ -1,0 +1,133 @@
+﻿Card_ID,Category,Question_Type,Front_Prompt,Back_Answer,Source_Standard
+BA-001,BA Fundamentals & SDLC,Conceptual,What is the core role and value proposition of an IT Business Analyst (ITBA)?,"The ITBA acts as the communication bridge between business stakeholders and technical engineering teams, ensuring software solutions address genuine business problems, meet quality standards, and deliver measurable value.",[BABOK v3 / Industry Standard]
+BA-002,BA Fundamentals & SDLC,Conceptual,What are the 6 core concepts comprising the BABOK Core Concept Model (BACCM)?,"1. Change: The transformation in response to a need
+2. Need: The business problem or opportunity
+3. Solution: The specific way of satisfying needs
+4. Stakeholder: Individuals or groups with an interest
+5. Value: The worth, importance, or usefulness
+6. Context: The environment influencing change.",[IIBA BABOK v3 Framework]
+BA-003,BA Fundamentals & SDLC,Comparative,How does the BA role in traditional Waterfall compare with the BA role in Agile delivery?,"In Waterfall, the BA acts as an upfront specification author producing exhaustive documentation (BRD, SRS) before development starts. In Agile, the BA is an embedded collaborator who continuously refines backlogs, user stories, and acceptance criteria sprint-by-sprint.",[Agile Alliance / Software Engineering]
+BA-004,BA Fundamentals & SDLC,Procedural,What are the primary phases of the Software Development Life Cycle (SDLC) where a BA operates?,"1. Inception & Planning (feasibility analysis)
+2. Requirements Analysis (discovery, elicitation & modeling)
+3. Design (functional layout & wireframes)
+4. Implementation (clarifying logic to engineers)
+5. Testing (supporting QA & UAT)
+6. Deployment & Post-launch Maintenance.",[IEEE / ISO SDLC Standards]
+BA-005,Stakeholder Engagement & Elicitation,Comparative,How does a BA use the Power-Interest Grid to determine stakeholder communication strategies?,"• High Power, High Interest: Manage Closely (collaborate frequently)
+• High Power, Low Interest: Keep Satisfied (ensure business expectations met)
+• Low Power, High Interest: Keep Informed (regular status updates)
+• Low Power, Low Interest: Monitor (minimal communication).",[PMI / Stakeholder Theory]
+BA-006,Stakeholder Engagement & Elicitation,Comparative,What are the comparative strengths and trade-offs of Interviews versus Requirements Workshops?,"• Interviews: Provide deep individual insights into sensitive or complex workflows, but are time-consuming and can capture biased viewpoints.
+• Workshops: Foster cross-functional alignment and rapid consensus, but risk being dominated by vocal participants or falling into groupthink.",[BABOK v3 Elicitation Techniques]
+BA-007,Stakeholder Engagement & Elicitation,Procedural,When should a BA use Job Shadowing / Observation during discovery?,"When operational users perform complex, repetitive, or physical tasks (e.g., warehouse logistics, healthcare, teller operations) where tacit knowledge and undocumented workarounds exist that users might forget to describe in an interview.",[BABOK v3 Observation Standard]
+BA-008,Problem-Solving & Root Cause Analysis,Procedural,How does a BA execute the 5 Whys root cause analysis technique?,"State the observed problem clearly, then iteratively ask 'Why?' (typically 5 times) to drill past surface symptoms until the fundamental systemic or process defect is exposed.",[Lean / Six Sigma Methodologies]
+BA-009,Problem-Solving & Root Cause Analysis,Conceptual,"What is an Ishikawa (Fishbone) Diagram, and what are its standard cause categories in software?","A cause-and-effect visualization mapping potential root causes of a problem. Standard software categories include: People (skills, training), Process (workflows, rules), Technology (infrastructure, code), Environment (culture, dependencies), and Measurement (metrics, criteria).",[Total Quality Management / Ishikawa]
+BA-010,Requirements Engineering & Governance,Comparative,What is the essential distinction between Functional Requirements (FR) and Non-Functional Requirements (NFR)?,"• Functional Requirements specify WHAT the system must do (actions, features, workflows, data transformations).
+• Non-Functional Requirements specify HOW WELL the system executes its functions (performance latency, security encryption, availability uptime, scalability).",[ISO/IEC 25010 Quality Model]
+BA-011,Requirements Engineering & Governance,Comparative,What is the operational difference between Requirements Verification and Requirements Validation?,"• Verification ('Are we building the product right?'): Quality check ensuring specifications are clear, testable, complete, consistent, and adhere to documentation standards.
+• Validation ('Are we building the right product?'): Business alignment check confirming that requirements truly solve the stakeholder's problem and deliver value.",[IEEE Software Engineering Standards]
+BA-012,Requirements Engineering & Governance,Conceptual,How does the MoSCoW prioritization technique categorize project scope?,"• Must-have: Mandatory for release; critical to legal, security, or core business viability.
+• Should-have: Important capability with significant value; can be satisfied via workarounds if deferred.
+• Could-have: Desirable enhancement implemented only if extra time/budget permits.
+• Won't-have (this time): Agreed out of scope for the current delivery cycle.",[Agile Project Management (DSDM)]
+BA-013,Requirements Engineering & Governance,Procedural,What are the core steps in an end-to-end Change Request (CR) management workflow?,"1. Change Intake: Formal logging of the requested change and business rationale
+2. Impact Analysis: Evaluating impact on scope, budget, schedule, and technical architecture
+3. Review & Approval: Decision by Change Advisory Board (CAB) or Product Owner
+4. Backlog Updating: Modifying specifications, user stories, and acceptance criteria
+5. Verification & Closure: Testing and confirming the change in production.",[ITIL / Requirements Governance Standards]
+BA-014,Requirements Engineering & Governance,Conceptual,"What is a 5x5 Risk Matrix, and how is Risk Severity calculated?","A 2D grid evaluating project threats along two dimensions: Likelihood / Probability (1 to 5) and Impact / Consequence (1 to 5). Risk Severity Score = Likelihood x Impact, categorizing risks into Low (Green), Medium (Yellow), High (Orange), or Critical (Red).",[ISO 31000 Risk Management]
+BA-015,Requirements Documentation,Comparative,How do a Business Requirements Document (BRD) and a Software Requirements Specification (SRS) differ in audience and scope?,"• BRD: Written for business executives, sponsors, and PMs; focuses on commercial goals, business context, ROI, and high-level scope.
+• SRS: Written for system architects, engineering leads, and QA; focuses on detailed system behavior, functional capabilities, external interfaces, and technical constraints.",[Software Engineering Standards]
+BA-016,Requirements Documentation,Conceptual,What does the INVEST mnemonic stand for when validating Agile User Stories?,"• I - Independent: Can be developed and released separately
+• N - Negotiable: Open to discussion and collaborative refinement
+• V - Valuable: Delivers tangible value to users or stakeholders
+• E - Estimable: Team can estimate effort and complexity
+• S - Small: Sized to fit comfortably within a single sprint
+• T - Testable: Verifiable via clear Acceptance Criteria.",[Agile Alliance / Bill Wake]
+BA-017,Requirements Documentation,Conceptual,"What is Gherkin syntax for Acceptance Criteria, and what are its three keywords?","Given [initial system context / precondition],
+When [user performs an action or an event triggers],
+Then [expected observable outcome or system state change].",[Behavior-Driven Development (BDD)]
+BA-018,Requirements Documentation,Comparative,"In a detailed Use Case specification, what is the difference between an Alternative Flow and an Exception Flow?","• Alternative Flow: A valid secondary path where the user successfully achieves their goal through an alternative option (e.g., paying via Digital Wallet instead of Credit Card).
+• Exception Flow: An error path triggered by a defect, timeout, or invalid condition that prevents the user from achieving their goal (e.g., payment rejected, server unavailable).",[UML / Alistair Cockburn Use Case Standard]
+BA-019,Process & System Modeling,Comparative,"In BPMN 2.0, what is the behavioral difference between an Exclusive Gateway (XOR) and a Parallel Gateway (AND)?","• Exclusive Gateway (XOR): Evaluates data conditions and directs the sequence token down exactly ONE outgoing branch.
+• Parallel Gateway (AND): Does not evaluate conditions; when splitting, it fires ALL outgoing branches concurrently; when joining, it waits until all incoming concurrent paths arrive before continuing.",[OMG BPMN 2.0 Specification]
+BA-020,Process & System Modeling,Comparative,"In a UML Use Case Diagram, when must a BA use <<include>> versus <<extend>>?","• <<include>>: Mandatory relationship; the base use case ALWAYS executes the behavior of the included use case (common reusable subroutine).
+• <<extend>>: Optional/conditional relationship; the extending use case executes ONLY IF specific conditions are satisfied at a designated extension point.",[OMG UML 2.5 Specification]
+BA-021,Process & System Modeling,Conceptual,"What is Role-Based Access Control (RBAC), and how does a BA document permission structures?","RBAC is an access security model assigning system permissions to organizational Roles rather than individuals. BAs document it using an Access Control Matrix (Roles x Features/Entities) specifying CRUD permissions (Create, Read, Update, Delete).",[NIST RBAC Standard]
+BA-022,Process & System Modeling,Conceptual,What are the core elements of a UML Sequence Diagram?,"1. Lifelines: Vertical dashed lines representing system components or actors
+2. Activation Bars: Narrow rectangles showing execution processing time
+3. Synchronous Messages: Solid lines with filled arrowheads
+4. Return Messages: Dashed lines with open arrowheads
+5. Combined Fragments: Interaction frames (alt for conditional branches, loop for iterations).",[OMG UML 2.5 Specification]
+BA-023,Data Architecture & SQL,Comparative,What is the structural difference between a Primary Key (PK) and a Foreign Key (FK)?,"• Primary Key: A unique, non-nullable attribute identifying every record in its own table.
+• Foreign Key: An attribute referencing the Primary Key of another table, enforcing referential integrity between related entities.",[Relational Database Theory / Codd]
+BA-024,Data Architecture & SQL,Comparative,What is the difference between an INNER JOIN and a LEFT JOIN in SQL?,"• INNER JOIN: Returns only rows that have matching values in both joined tables.
+• LEFT JOIN: Returns all rows from the left table, plus matched rows from the right table (unmatched right columns return NULL).",[ANSI SQL Standard]
+BA-025,Data Architecture & SQL,Technical / Syntax,"Why can aggregate functions (e.g., COUNT, SUM, AVG) NOT be placed inside an SQL WHERE clause?","The WHERE clause filters individual rows BEFORE data is grouped and aggregated. To filter aggregated grouped results, the HAVING clause must be placed AFTER the GROUP BY clause.",[ANSI SQL Query Execution Order]
+BA-026,Data Architecture & SQL,Procedural,What are the rules of Database Normalization from 1NF to 3NF?,"• 1NF: Atomic values only (no repeating groups or comma-separated lists in cells)
+• 2NF: In 1NF and no partial dependencies (all non-key columns depend on the full primary key)
+• 3NF: In 2NF and no transitive dependencies (non-key columns depend only on the primary key).",[Relational Database Normalization Rules]
+BA-027,REST APIs & Software QA,Conceptual,What are the four core components comprising a RESTful API request?,"1. Endpoint (URI / Path to the resource)
+2. HTTP Method (Verb: GET, POST, PUT, DELETE, PATCH)
+3. Headers (Metadata: Content-Type, Authorization tokens)
+4. Payload (Request Body data in JSON/XML).",[IETF RFC 9110 HTTP Semantics]
+BA-028,REST APIs & Software QA,Comparative,What does each standard HTTP Status Code range signify to an ITBA?,"• 2xx (Success): Request processed successfully (e.g., 200 OK, 201 Created)
+• 3xx (Redirection): Additional routing required (e.g., 301 Moved Permanently)
+• 4xx (Client Error): Problem on the caller's side (e.g., 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found)
+• 5xx (Server Error): Server crashed processing valid request (e.g., 500 Internal Error, 502 Bad Gateway).",[IANA HTTP Status Code Registry]
+BA-029,REST APIs & Software QA,Comparative,What is the crucial difference between HTTP Status Code 401 Unauthorized and 403 Forbidden?,"• 401 Unauthorized: The request lacks valid authentication credentials (user is unauthenticated or token expired).
+• 403 Forbidden: The user's identity is authenticated and verified, but their assigned Role lacks permissions (RBAC) to access the resource.",[IETF RFC 9110 HTTP Status Standards]
+BA-030,REST APIs & Software QA,Comparative,What is the difference between User Acceptance Testing (UAT) and Regression Testing?,"• UAT: Validates that the system satisfies business goals from the perspective of real business users before production launch.
+• Regression Testing: Verifies that newly committed code, features, or bug fixes have not broken existing, previously working capabilities.",[ISTQB Software Testing Standards]
+BA-031,BA Fundamentals & SDLC,Conceptual,What is the difference between Business Analysis and Systems Analysis?,"Business Analysis focuses on business problems, organizational value, process optimization, and stakeholder goals (the 'WHAT' and 'WHY'). Systems Analysis focuses on translating those business requirements into specific software architectures, data flows, and technical designs (the 'HOW').",[IIBA BABOK v3 Standards]
+BA-032,Stakeholder Engagement & Elicitation,Conceptual,What is a RACI Matrix and how does it prevent accountability confusion in software projects?,"RACI clarifies team roles for project deliverables:
+• R - Responsible: The doer who completes the task
+• A - Accountable: The sole owner with decision/approval authority
+• C - Consulted: Subject matter experts providing input
+• I - Informed: Stakeholders kept updated on progress.",[Project Management Body of Knowledge (PMBOK)]
+BA-033,Requirements Engineering & Governance,Comparative,What is the difference between the Definition of Ready (DoR) and the Definition of Done (DoD) in Agile?,"• Definition of Ready (DoR): Criteria a User Story must meet BEFORE being accepted into a Sprint (e.g., clear AC, dependencies resolved, estimated).
+• Definition of Done (DoD): Criteria a developed increment must satisfy BEFORE being released to production (e.g., code reviewed, tests passing, UAT sign-off).",[Scrum Guide / Agile Alliance]
+BA-034,Requirements Engineering & Governance,Procedural,"What are the four formal Scrum ceremonies, and what is the BA's role in each?","1. Sprint Planning: Clarifies User Stories and Acceptance Criteria to developers
+2. Daily Scrum: Flags requirement blockers or scope questions
+3. Sprint Review: Validates delivered increments against Acceptance Criteria with stakeholders
+4. Sprint Retrospective: Proposes improvements to requirement analysis workflows.",[Scrum Alliance Standards]
+BA-035,Requirements Documentation,Comparative,How does a Software Functional Specification (SFS) differ from an SRS?,"An SRS defines system-level capabilities, interfaces, and quality attributes for architects and leads. An SFS provides granular, developer-facing technical functional logic, exact data dictionary field validations, calculation algorithms, and UI element error behaviors.",[Software Engineering Documentation]
+BA-036,Requirements Documentation,Comparative,"What are the key differences between a Wireframe, a Mockup, and an Interactive Prototype?","• Wireframe (Low-fi): Grayscale layout sketches defining structural content hierarchy and field placement.
+• Mockup (Mid/High-fi): Static visual design incorporating typography, brand colors, and aesthetic styling.
+• Prototype (Interactive): Clickable simulation demonstrating live navigation flows and user interactions.",[UI/UX Design Standards / Nielsen Norman Group]
+BA-037,Process & System Modeling,Conceptual,"What is a Subprocess in BPMN 2.0, and what is the difference between an Embedded and a Call Activity Subprocess?",A Subprocess collapses complex internal workflows into a single activity symbol. An Embedded Subprocess belongs strictly to its parent process and cannot be reused elsewhere. A Call Activity (Reusable Subprocess) references a globally defined independent process that can be called across multiple parent workflows.,[OMG BPMN 2.0 Specification]
+BA-038,Process & System Modeling,Comparative,What is the difference between a BPMN Diagram and a UML Activity Diagram?,"BPMN focuses on business-level process participants (Pools/Lanes) and workflow events executable by BPM engines. UML Activity Diagrams focus on object-oriented system behavior, computational steps, and object token flows inside software systems.",[OMG Modeling Standards]
+BA-039,Process & System Modeling,Conceptual,What are the core components of a UML State Machine Diagram?,"1. States: Conditions or situations in the life of an object (e.g., Pending, Active, Suspended)
+2. Transitions: Directed arrows indicating state changes
+3. Event Triggers: Stimuli that cause a transition
+4. Guards: Boolean conditions `[condition]` that must be true for the transition to occur
+5. Actions: Behaviors executed during transition.",[OMG UML 2.5 Specification]
+BA-040,Data Architecture & SQL,Conceptual,"What is an Entity-Relationship Diagram (ERD), and what does Cardinality represent?","An ERD models relational database architecture using Entities (tables), Attributes (columns), and Relationships. Cardinality defines the numerical relationship between entity occurrences: One-to-One (1:1), One-to-Many (1:N), or Many-to-Many (M:N).",[Peter Chen ER Model / Database Standards]
+BA-041,Data Architecture & SQL,Comparative,What is the difference between a Correlated and a Non-Correlated SQL Subquery?,"• Non-Correlated Subquery: Executes independently of the outer query once, returning a constant value or dataset used by the outer query.
+• Correlated Subquery: Evaluated repeatedly, once for every single row processed by the outer query, referencing columns from the outer query.",[ANSI SQL Standards]
+BA-042,REST APIs & Software QA,Comparative,What is the difference between the HTTP PUT and PATCH methods in RESTful API design?,"• PUT: Replaces the ENTIRE resource with the payload data (requires sending all attributes, even unmodified ones).
+• PATCH: Applies a PARTIAL update, modifying only the specific fields included in the request payload.",[IETF RFC 5789 PATCH Method]
+BA-043,REST APIs & Software QA,Conceptual,What are common API Authentication mechanisms encountered by an ITBA?,"1. Basic Auth: Base64-encoded username and password sent in Authorization header
+2. API Key: Unique string identifier passed via header or query parameter
+3. Bearer Token (JWT): Cryptographically signed token containing user claims
+4. OAuth 2.0: Delegated authorization framework issuing scoped access tokens.",[IETF OAuth 2.0 / RFC 6749]
+BA-044,REST APIs & Software QA,Comparative,How do Defect Severity and Defect Priority differ in software quality assurance?,"• Severity: Technical impact of the defect on system stability (Critical, Major, Minor).
+• Priority: Business urgency indicating how quickly the defect must be resolved (P1-Urgent, P2-High, P3-Normal). Example: A broken corporate logo has Low Severity but High Priority.",[ISTQB Software Quality Guidelines]
+BA-045,REST APIs & Software QA,Procedural,What are the essential components of a formal Functional Test Case?,"1. Test Case ID & Title
+2. Preconditions (starting system state)
+3. Step-by-Step Test Actions
+4. Test Data inputs
+5. Expected Result (observable outcome)
+6. Actual Result & Execution Status (Pass/Fail).",[IEEE 829 Software Test Documentation]
+BA-046,BA Fundamentals & SDLC,Procedural,"What is the STAR framework, and how does a BA use it during behavioral job interviews?","• S - Situation: Context of the project or business challenge
+• T - Task: Your specific responsibility as a BA
+• A - Action: Exact techniques, tools, and analysis steps you took
+• R - Result: Measurable outcome, stakeholder value delivered, or key lesson learned.",[Professional Behavioral Interviewing]
+BA-047,Stakeholder Engagement & Elicitation,Scenario,Interview Scenario: What should a BA do when two senior stakeholders submit conflicting requirements?,"1. Use 5 Whys to uncover the root business goals behind each request.
+2. Facilitate an objective alignment workshop focused on shared business value.
+3. Present data-backed impact analysis comparing cost, complexity, and architectural feasibility.
+4. If consensus fails, escalate the evaluated options to the Product Owner or Sponsor for final decision.",[BA Conflict Resolution Best Practices]
+BA-048,Requirements Engineering & Governance,Scenario,Interview Scenario: How should an Agile BA handle a stakeholder demanding an urgent new feature mid-sprint?,"1. Protect the sprint goal and explain the team's commitment to the active sprint scope.
+2. Log the request as a new User Story in the Product Backlog.
+3. Perform rapid preliminary impact analysis on architecture and dependencies.
+4. Coordinate with the Product Owner during the next Refinement session to prioritize it for upcoming sprints.",[Agile Scope Governance Best Practices]
